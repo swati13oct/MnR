@@ -94,6 +94,7 @@ public class GlobalComponentsCommonStepDefinition {
 			scenario.log(aquisitionhomepage.returnCookieValue());
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		String testSiteUrl = aquisitionhomepage.getTestSiteUrl();
+		aquisitionhomepage.checkForSecurityPage();
 		getLoginScenario().saveBean(PageConstants.TEST_SITE_URL, testSiteUrl);
 		
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);

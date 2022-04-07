@@ -199,7 +199,7 @@ public class PersonalInformationPageMobile extends UhcDriver {
 	@FindBy(xpath = "(//div[contains(@id,'enroll-cancel-profile')])[1]")
 	private WebElement CancellationModalOLE;
 
-	@FindBy(xpath = "(//a[contains(text(),'Create a Profile')])[2]")
+	@FindBy(xpath = "(//a[contains(text(),'Create a Profile')])[1]")
 	private WebElement CreateProfile;
 
 	@FindBy(xpath = "(//a[contains(text(),'Sign In')])[2]")
@@ -241,7 +241,7 @@ public class PersonalInformationPageMobile extends UhcDriver {
 
 		String FirstName = memberDetailsMap.get("First Name");
 		String MiddleName = memberDetailsMap.get("Middle Name");
-		String LastName = memberDetailsMap.get("Last Name");
+		String LastName = memberDetailsMap.get("Last Name");	
 		String DOB = memberDetailsMap.get("DOB");
 		String Gender = memberDetailsMap.get("Gender");
 		String Perm_Street = memberDetailsMap.get("Perm_Street");
@@ -257,83 +257,103 @@ public class PersonalInformationPageMobile extends UhcDriver {
 		String emailConfirmation = memberDetailsMap.get("Email Confirmation");
 		String goGreen = memberDetailsMap.get("Go Green");
 		String HomeNumber = memberDetailsMap.get("Home Number");
-		String MobileNumber = memberDetailsMap.get("Mobile Number");
-
+		String MobileNumber =memberDetailsMap.get("Mobile Number");
+		
+		CheckPageLoad();
+		CheckiPerseptions();
+		
 		sendkeysMobile(firstNameField, FirstName);
 		sendkeysMobile(MiddleNameField, MiddleName);
 		sendkeysMobile(lastNameField, LastName);
-
-		sendKeysByCharacter(DOBtxtFld, DOB);
-		if (Gender.contains("Male")) {
+		
+		sendkeysMobile(DOBtxtFld,DOB);
+		if(Gender.contains("Male")){
 			jsClickNew(GenderSelectMale);
-		} else {
-
-			jsClickNew(GenderSelectFemale);
 		}
-
-		boolean result = false;
-		result = Clickoncontinuebutton("/mailing-address");
-
-		if (result) {
-			// Code for Personal Information page 2 begin
-			sendkeysMobile(PermanentAdd_Street, Perm_Street);
-			sendkeysMobile(PermanentAdd_Aptno, Perm_Aptno);
-			sendkeysMobile(PermanentAdd_City, Perm_city);
-			System.out.println("Mailing Question : " + MailingQuestion);
-			if (MailingQuestion.equalsIgnoreCase("no")) {
+		else{
+			
+			jsClickNew(GenderSelectFemale);
+		}	
+				
+		//call method click on CONTINUE BUtton
+		
+		boolean result = false; 
+		 result= Clickoncontinuebutton("/mailing-address");
+		
+		if(result) {
+		//Code for Personal Information page 2 begin
+			sendkeysMobile(PermanentAdd_Street,Perm_Street);
+			sendkeysMobile(PermanentAdd_Aptno,Perm_Aptno);
+			sendkeysMobile(PermanentAdd_City,Perm_city);
+			System.out.println("Mailing Question : "+MailingQuestion);
+			if(MailingQuestion.equalsIgnoreCase("no")){
 				jsClickNew(SameMailingAddressNo);
-
-				sendkeysMobile(MailingAdd_Street, Mailing_Street);
-				sendkeysMobile(MailingAdd_Aptno, "301");
-				sendkeysMobile(MailingAdd_City, Mailing_City);
-
-				// Select SelectState = new Select(MailingAdd_State_DropDown);
-				// SelectState.selectByValue(Mailing_State);
-
-				if (driver.getClass().toString().toUpperCase().contains("IOS")) {
-
+				scrollToView(MailingAdd_Street);
+				sendkeysMobile(MailingAdd_Street,Mailing_Street);
+				sendkeysMobile(MailingAdd_Aptno,Mailing_Aptno);
+				sendkeysMobile(MailingAdd_City,Mailing_City);
+				
+				if(!(driver.toString().toUpperCase().contains("IOS"))) {
+					Select SelectState = new Select(MailingAdd_State_DropDown);
+					SelectState.selectByValue(Mailing_State);
+				}
+				else {
 					WebElement stateLable = driver.findElement(By.xpath("//*[@id='state0']"));
 					jsClickNew(stateLable);
-
+					MailingAdd_State_DropDown.click();
+					if(Mailing_State.equalsIgnoreCase("VA"))
+						mobileSelectOption(MailingAdd_State_DropDown,"VIRGINIA",true);
+					else if(Mailing_State.equalsIgnoreCase("MN"))
+						mobileSelectOption(MailingAdd_State_DropDown,"MINNESOTA",true);
+					else if(Mailing_State.equalsIgnoreCase("NJ"))
+						mobileSelectOption(MailingAdd_State_DropDown,"NEW JERSEY",true);
+					else if(Mailing_State.equalsIgnoreCase("NY"))
+						mobileSelectOption(MailingAdd_State_DropDown,"NEW YORK",true);
+					else if(Mailing_State.equalsIgnoreCase("WA"))
+						mobileSelectOption(MailingAdd_State_DropDown,"WASHINGTON",true);
+					else if(Mailing_State.equalsIgnoreCase("CA"))
+						mobileSelectOption(MailingAdd_State_DropDown,"CALIFORNIA",true);
+					else if(Mailing_State.equalsIgnoreCase("FL"))
+						mobileSelectOption(MailingAdd_State_DropDown,"FLORIDA",true);
+					else if(Mailing_State.equalsIgnoreCase("CO"))
+						mobileSelectOption(MailingAdd_State_DropDown,"COLORADO",true);
+					else if(Mailing_State.equalsIgnoreCase("MO"))
+						mobileSelectOption(MailingAdd_State_DropDown,"MISSOURI",true);
+					else if(Mailing_State.equalsIgnoreCase("TX"))
+						mobileSelectOption(MailingAdd_State_DropDown,"TEXAS",true);
+					else if(Mailing_State.equalsIgnoreCase("KS"))
+						mobileSelectOption(MailingAdd_State_DropDown,"KANSAS",true);
 				}
-				
-		//checkElementisEnabled(MailingAdd_State_DropDown);
-			//	selectFromDropDownByValue(MailingAdd_State_DropDown, Mailing_State);
-				MailingAdd_State_DropDown.click();
-				mobileSelectOption(MailingAdd_State_DropDown,"ALASKA",true);
-
-
-				sendkeysMobile(MailingAdd_Zip, Mailing_Zip);
+				sendkeysMobile(MailingAdd_Zip,Mailing_Zip);
 			}
-		}
-		result = Clickoncontinuebutton("phone-number");
-		// Code for Personal Information page 3 begin
-		if (result) {
+		}		
+		result= Clickoncontinuebutton("phone-number");
+		//Code for Personal Information page 3 begin
+		if(result) {
 			validateNew(HomephoneNumberField);
 			sendkeysMobile(HomephoneNumberField, HomeNumber);
 			validateNew(MobileNumberField);
 			sendkeysMobile(MobileNumberField, MobileNumber);
 
-			if (emailConfirmation.equalsIgnoreCase("YES")) {
-				jsClickNew(emailConfirmationYesBtn);
-			} else
-				jsClickNew(emailConfirmationNoBtn);
-			if (goGreen.equalsIgnoreCase("YES")) {
-				// goGreenYesBtn.click();
+			if(emailConfirmation.equalsIgnoreCase("YES")){
+				jsClickNew(emailConfirmationYesBtn);	
+			}else
+				jsClickNew(emailConfirmationNoBtn); 
+			if(goGreen.equalsIgnoreCase("YES")){
+				//goGreenYesBtn.click();
 				jsClickNew(goGreenYesBtn);
-			} else
-				// goGreenNoBtn.click();
-				jsClickNew(goGreenNoBtn);
-			scrollToView(Email);
-			sendkeysMobile(Email, EmailAddress);
-		}
-		result = Clickoncontinuebutton("language-preference");
+			}else
+			//	goGreenNoBtn.click();
+			jsClickNew(goGreenNoBtn);
 
-		if (result) {
-			System.out.println(
-					"Continue Button is Enabled : All Required Details are entered in personal Information page and navigating to next OLE Pages");
+			sendkeysMobile(Email,EmailAddress);
 		}
-
+		result= Clickoncontinuebutton("language-preference");
+		
+		if(result) {
+			System.out.println("Continue Button is Enabled : All Required Details are entered in personal Information page and navigating to next OLE Pages");
+		}
+		
 		return result;
 	}
 
@@ -343,6 +363,13 @@ public class PersonalInformationPageMobile extends UhcDriver {
 		if (NextBtn.isEnabled()) {
 			System.out.println("Conitnue Button is Enabled : All Required Details are entered");
 			jsClickNew(NextBtn);
+	/*		try {
+				sleepBySec(2);
+				NextBtn.click();
+			}
+			catch (Exception e) {
+				// TODO: handle exception
+			} */
 			String ActualPageURL = driver.getCurrentUrl();
 			if (ActualPageURL.contains(expectedPageURL)) {
 
@@ -876,7 +903,12 @@ public class PersonalInformationPageMobile extends UhcDriver {
 			LeaveOnlineApplicationforLogo.isDisplayed();
 			String TFNNoNeedHelp_OLE = TFNNoNeedHelp.getText();
 			System.out.println("TFN in OLE ExitModels : " + TFNNoNeedHelp_OLE);
-			closepopup.click();
+			try {
+				closepopup.click();
+			}
+			catch (Exception ElementNotInteractableException) {
+				jsClickNew(closepopup);
+			}
 			return new CancelOLEModalMobile(driver);
 		}
 		return null;

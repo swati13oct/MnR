@@ -3058,8 +3058,8 @@ public class DCEStepDefinitionAARP {
 
     @Then("the user clicks on Edit Drug list link on View Drug pricing modal")
     public void the_user_clicks_on_edit_drug_list_link_on_view_drug_pricing_modal() {
-        scenario.log("Sneha Dwarakanath - Change made for July Release - F603797: DCE | Mobile First Optimization | Edit Drug List from Summary | Desktop & Mobile");
-        scenario.log("Sneha Dwarakanath - Change made for July Release - F603797: step added to @dce_DrugSummary_Page or @dce_MedEdPage_E2E_Scenario4_UAT");
+        scenario.log("Sneha Dwarakanath - Change made for July Release - F603797:ï¿½DCE | Mobile First Optimization | Edit Drug List from Summary | Desktop & Mobile");
+        scenario.log("Sneha Dwarakanath - Change made for July Release - F603797:ï¿½step added to @dce_DrugSummary_Page or @dce_MedEdPage_E2E_Scenario4_UAT");
 
         DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
         BuildYourDrugList buildDrugListPage = drugSummaryPage.clickEditDrugs_DrugPricingModal();
@@ -3068,8 +3068,8 @@ public class DCEStepDefinitionAARP {
 
     @Then("the user clicks on Review Button on Build Drug Page to land on DCE Summary page")
     public void the_user_clicks_on_review_button_on_build_drug_page_to_land_on_dce_summary_page() {
-        scenario.log("Sneha Dwarakanath - Change made for July Release - F603797: DCE | Mobile First Optimization | Edit Drug List from Summary | Desktop & Mobile");
-        scenario.log("Sneha Dwarakanath - Change made for July Release - F603797: step added to @dce_DrugSummary_Page or @dce_MedEdPage_E2E_Scenario4_UAT");
+        scenario.log("Sneha Dwarakanath - Change made for July Release - F603797:ï¿½DCE | Mobile First Optimization | Edit Drug List from Summary | Desktop & Mobile");
+        scenario.log("Sneha Dwarakanath - Change made for July Release - F603797:ï¿½step added to @dce_DrugSummary_Page or @dce_MedEdPage_E2E_Scenario4_UAT");
         BuildYourDrugList buildDrugListPage = (BuildYourDrugList) getLoginScenario().getBean(PageConstants.DCE_Redesign_BuildDrugList);
         DrugSummaryPage drugSummaryPage = buildDrugListPage.navigateToDrugSummaryPage();
         drugSummaryPage.validateDrugSummaryPage();
@@ -3334,4 +3334,32 @@ public class DCEStepDefinitionAARP {
 		drugSummaryPage.validateDynamicErrorMessageDisplay(pharmacyErrorType);
 	}
 
+	//This Method is used to validate sort by under your drug section on Detail page
+	@And("the user selects the sort by under your drugs")
+	public void the_user_selects_the_sort_by_under_your_drugs(DataTable givenAttributes){
+		Map<String, String> givenAttributesMap = new LinkedHashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		String sortBy = givenAttributesMap.get("Sort By");
+		System.out.println("Sort by to Select : "+sortBy);
+		 DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
+	                .getBean(PageConstants.DCE_Redesign_DrugDetails);
+		 drugDetailsPage.validateDrugSortBy(sortBy);
+		 getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
+	}
+
+     @When("user clicks on Return to profile link on summary page")
+     public void user_clicks_on_return_to_profile_link_on_summary_page() {
+    	 DrugSummaryPage drugSummaryPage = (DrugSummaryPage) getLoginScenario()
+                 .getBean(PageConstants.DCE_Redesign_DrugSummary);
+    	 drugSummaryPage.clickReturnToProfile();
+      }
+
+     @And("user verify the drug details page")
+     public void user_verify_the_drug_details_page() {
+    	 DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+         drugDetailsPage.validateDrugDetailsPage();
+         getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
+
+        
+     }
 }

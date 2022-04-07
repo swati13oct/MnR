@@ -184,6 +184,13 @@ public class DCEStepDefinitionAARPMobile {
 		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, druglist);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, buildDrugList);
 	}
+	
+	@Then("^the user validates 100-day Supply Messaging for Eligible Plan$")
+    public void the_user_validates_100_day_Supply_Messaging_for_Eligible_Plan() throws Throwable {
+        DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario()
+                .getBean(PageConstants.DCE_Redesign_DrugDetails);
+        drugDetailsPage.validate100DayInYourDrugs();
+    }
 
 	@Then("^the user validates qty, frequency and Supply Length for following drug in DrugList Page$")
 	public void the_user_validates_qty_frequency_and_Supply_Length_for_following_drug_in_DrugList_Page(
@@ -246,6 +253,18 @@ public class DCEStepDefinitionAARPMobile {
 				.getBean(PageConstants.DCE_Redesign_DrugSummary);
 		drugSummaryPage.validateOptumRxConsistentDisplay_PharmacyPage();
 
+	}
+	
+	@And("the user selects the sort by under your drugs")
+	public void the_user_selects_the_sort_by_under_your_drugs(DataTable givenAttributes){
+		Map<String, String> givenAttributesMap = new LinkedHashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		String sortBy = givenAttributesMap.get("Sort By");
+		System.out.println("Sort by to Select : "+sortBy);
+		 DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario()
+	                .getBean(PageConstants.DCE_Redesign_DrugDetails);
+		 drugDetailsPage.validateDrugSortBy(sortBy);
+		 getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
 
 	@Then("^the user verifies NBA modal for creating profile on drug summary page$")
@@ -352,5 +371,19 @@ public class DCEStepDefinitionAARPMobile {
 	                .getBean(PageConstants.DCE_Redesign_DrugDetails);
 	        drugDetailsPage.ApplyPharmacyFilter(FilterText);
 	    }
+	 
+	 @And("user verify the drug details page")
+     public void user_verify_the_drug_details_page() {
+    	 DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+         drugDetailsPage.validateDrugDetailsPage();
+         getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
+     }
+	 
+	 @When("user clicks on Return to profile link on summary page")
+     public void user_clicks_on_return_to_profile_link_on_summary_page() {
+    	 DrugSummaryPageMobile drugSummaryPage = (DrugSummaryPageMobile) getLoginScenario()
+                 .getBean(PageConstants.DCE_Redesign_DrugSummary);
+    	 drugSummaryPage.clickReturnToProfile();
+      }
 
 }

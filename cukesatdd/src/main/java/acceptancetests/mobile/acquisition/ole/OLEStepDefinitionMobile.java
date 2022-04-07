@@ -30,6 +30,7 @@ import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.ComparePlansPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.ole.MedicareInformationPage;
+import pages.acquisition.ole.OLECommonPages;
 import pages.acquisition.ole.OLEconfirmationPage;
 import pages.acquisition.ole.PersonalInformationPage;
 import pages.acquisition.ole.PlanPremiumPage;
@@ -50,6 +51,7 @@ import pages.mobile.acquisition.ole.CoverageInformationPageMobile;
 import pages.mobile.acquisition.ole.LearnMoreModalMobile;
 import pages.mobile.acquisition.ole.LeavingOLEmodalMobile;
 import pages.mobile.acquisition.ole.MedicareInformationPageMobile;
+import pages.mobile.acquisition.ole.OLECommonPagesMobile;
 import pages.mobile.acquisition.ole.OLETestHarnessPageMobile;
 import pages.mobile.acquisition.ole.OLEconfirmationPageMobile;
 import pages.mobile.acquisition.ole.PersonalInformationPageMobile;
@@ -1250,6 +1252,33 @@ public class OLEStepDefinitionMobile {
 			Assertion.fail("OLE Personal Information Page - Adding Member Details Failed");
 		// }
 	}
+	
+	@Then("^the user click on continue enrollment in visitor profile and navigate for OLE Page$")
+	public void the_user_validates_continue_enrollment_navigate_for_OLE_pages() throws Throwable {
+		scenario.log("Sai - Change made 03/21- Validate to save return  continue enrollment--");
+	//	PersonalInformationPage personalInformationPage = (PersonalInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		OLECommonPagesMobile ContinueEnrollment=new OLECommonPagesMobile(wd);
+
+		Map<String, String> PlanDetailsMap = new HashMap<String, String>();
+		PlanDetailsMap.put("Plan Name", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME));
+		PlanDetailsMap.put("Plan Year", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR));
+		PlanDetailsMap.put("Zip Code", (String) getLoginScenario().getBean(oleCommonConstants.OLE_ZIPCODE));
+		PlanDetailsMap.put("Plan Premium", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM));
+		if (!(MRScenario.environment.equalsIgnoreCase("offline")
+				|| MRScenario.environment.equalsIgnoreCase("prod"))) {
+			boolean Validation_Status = ContinueEnrollment.validateVPOLEDetails(PlanDetailsMap);
+			if (Validation_Status) {
+				System.out.println("Visitor Profile OLE Details are Validation in Visitor Profile PAGE : " + Validation_Status + " - Validation Passed");
+				Assertion.assertTrue(true);
+			} else {
+				System.out.println("Visitor Profile OLE Details are Validation in Visitor Profile PAGE : " + Validation_Status);
+				Assertion.fail();
+			}
+			System.out.println("continue enrollment on OLE Pages");
+		}
+
+	}
 
 	@Then("^the user enters following information in Personal Information Page SNP Plans$")
 	public void the_user_enters_following__information_in_Personal_Information_Page_SNP_plans(DataTable arg1)
@@ -1482,6 +1511,21 @@ public class OLEStepDefinitionMobile {
 			Assertion.fail();
 		}
 		// }
+	}
+	
+	@Then("^the user validates Save and Return Later modal for OLE Page$")
+	public void the_user_save_and_return_later_OLE_pages() throws Throwable {
+		scenario.log("Sai - Change made 03/21- Validate to save return --");
+		//PersonalInformationPage personalInformationPage = (PersonalInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
+	//	OLECommonPages saveAndReturnLater = (OLECommonPages) getLoginScenario().getBean(OLE_PageConstants.OLE_COMMONPAGES);
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		OLECommonPagesMobile saveAndReturnLater=new OLECommonPagesMobile(wd);
+
+		if (!(MRScenario.environment.equalsIgnoreCase("offline")
+				|| MRScenario.environment.equalsIgnoreCase("prod"))) {
+			saveAndReturnLater.OpensavereturnOLEPages();
+			System.out.println("OLE Save Return Later modal on OLE Pages");
+		}
 	}
 
 	@Then("^the user validates Leave OLE modal for SEP Page$")

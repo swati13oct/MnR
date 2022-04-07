@@ -74,7 +74,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//span[@class='uhc-button__text view-btn-ie']")
 	private WebElement viewSavedPlansBtn;
 
-	@FindBy(xpath = "//h2[text()='Your Guest Profile']")
+	@FindBy(xpath="(//*[contains(text(),'Your Guest Profile')])[2]")
 	private WebElement shopperProfilePageHeader;
 
 	@FindBy(xpath = "(//input[@id='updates-email'])")
@@ -133,6 +133,9 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	// (contains(@class,'active'))]//span[@id='maviewplans']/following-sibling::a")
 	@FindBy(css = "a[dtmname$='MA:View Plans']")
 	private WebElement maPlansViewLink;
+	
+	@FindBy(xpath = "(//span[contains(@class,'cart-plans-count')])[1]")
+	private WebElement savedPlanHeaderCount;
 	
 	@FindBy(xpath = "(//*[@class='uhc-card']//button[contains(@class,'compare-plans-btn')]//label)[1]")
 	private WebElement firstComparePlanButtonForMS;
@@ -406,6 +409,9 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = "//*[contains(@class,'container plans-section')]//*[contains(@class,'col-md-3')]")
 	public WebElement RightRailSection;
+	
+	@FindBy(xpath = "(//button[contains(@class,'back-to-plans')])[1]")
+	private WebElement closebBtnMSApplication;
 
 	@FindBy(xpath = "//*[contains(@class,'container plans-section')]//*[contains(@class,'col-md-3')]//*[contains(@class,'module module-aside rigntrailwidget')]//*[contains(text(),'Need Help')]")
 	public WebElement needHelpRightRail;
@@ -427,6 +433,9 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = "//*[contains (@class ,'rightrail')]//*[contains(@class,'uhc-container')]//*[contains(@dtmname,'Plan Selector')]")
 	public WebElement PlanSelectorToolRightRail;
+	
+	@FindBy(xpath = "(//*[contains(text(),'UnitedHealthcare Group Medicare Advantage (PPO)')]//following::div//ul[@class='highlight-list'])[1]")
+	private WebElement groupPlanMarkettingBullets;
 
 	@FindBy(xpath = "//*[contains(@id , 'selector')]")
 	public WebElement StartPlanSelector;
@@ -581,6 +590,12 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	
 	@FindBy(xpath = "(//*[contains(text(),'Compare AARP® Medicare Supplement')])[1]")
 	private WebElement comparePageHeader;
+	
+	@FindBy(xpath = "(//*[contains(@class,'swiper-slide plan-card-component shopper-profile-card my-10 med-supp-profile-card')]//*[text()='Plan Details'])[1]")
+	WebElement VisitorProfilePlanDetailsBtn;
+	
+	@FindBy(xpath = "(//*[contains(@class,'uhc-tempo-header_')])[1]")
+	WebElement planNameOnPlanDetails;
 	
 	@FindBy(xpath = "(//*[contains(@class,'unliked button')])[1]")
 	private WebElement savePlanButton;
@@ -887,6 +902,12 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	
 	@FindBy(xpath = "(//*[contains(@class,'uhc-radio__visual')])[1]")
 	private WebElement femaleGender1;
+	
+	@FindBy(xpath = "//span[@class='globalTitle']")
+	WebElement insuredStatusHeader;
+	
+	@FindBy(xpath = "//*[contains(text(),'Continue Application')]")
+	private WebElement ContinueApplication;
 
 	@FindBy(xpath = "(//*[contains(@for,'Gender_1')])[1]")
 	private WebElement MaleGender;
@@ -1027,10 +1048,6 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	
 	public ComparePlansPageMobile clickCompareButton() {
 		
-		if(validate(pdpPlansViewLink)) {
-			jsClickNew(pdpPlansViewLink);
-			waitForPlanSummaryPageLoad();
-		}
 		validateNew(compareButton);
 		jsClickNew(compareButton);
 		CommonUtility.waitForPageLoad(driver, backToPlanComparePage, 30);
@@ -2201,6 +2218,38 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		}
 		return plansForCompare;
 	}
+	
+	public boolean verifyPlanCount(int savedPlan) throws InterruptedException {
+		boolean flag = false;
+		Thread.sleep(2000);
+
+	//	List<WebElement> unsavedPlanButton = driver.findElements(By.xpath("//span[@class='unliked buttonIntoText']"));
+		List<WebElement> unsavedPlanButton = driver.findElements(By.xpath("//*[contains(@class,'unliked button')]"));
+
+		int planToSaveCount = unsavedPlanButton.size();
+		int totalNoOfPlans = planToSaveCount;
+		int alreadySavedPlanOnComparePage = savedPlan;
+
+		while (planToSaveCount > 0) {
+			Thread.sleep(2000);
+		/*	WebElement planToSave = driver
+					.findElement(By.xpath("(//span[@class='unliked buttonIntoText'])[" + planToSaveCount + "]"));*/
+			WebElement planToSave = driver
+					.findElement(By.xpath("(//*[contains(@class,'unliked button')])[" + planToSaveCount + "]"));
+			jsClickNew(planToSave);
+			Thread.sleep(10000);
+			planToSaveCount = planToSaveCount - 1;
+		}
+
+		int noOfSavedPlansOnPlanCart = totalNoOfPlans - alreadySavedPlanOnComparePage;
+		int noOfPlansOnHeartIcon = Integer.parseInt(savedPlanHeaderCount.getText());
+
+		if (noOfSavedPlansOnPlanCart == noOfPlansOnHeartIcon) {
+			flag = true;
+		}
+
+		return flag;
+	}
 
 	public boolean validateAllPlansChecked(String plansForCompare) {
 		try {
@@ -2756,6 +2805,41 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		 * +planName );
 		 */
 	}
+	
+	public boolean clickOnSavedPlansAndNavigateToShopperProfile() throws InterruptedException {
+		boolean flag = false;
+		Thread.sleep(2000);
+		jsClickNew(viewSavedPlansBtn);
+		waitForPageLoadSafari();
+		Thread.sleep(2000);
+		if (shopperProfilePageHeader.isDisplayed()) {
+			flag = true;
+		}
+
+		return flag;
+	}
+	
+	public boolean savePlansOnSummaryPage(int noOfPlansToSave) throws InterruptedException {
+		boolean flag = false;
+		Thread.sleep(2000);
+
+		int i = 1;
+		while (i <= noOfPlansToSave) {
+			Thread.sleep(2000);
+			WebElement planToSave = driver
+					.findElement(By.xpath("(//*[contains(@class,'unliked button')])[" + i + "]"));
+			jsClickNew(planToSave);
+			Thread.sleep(2000);
+			WebElement heartIcon = driver
+				//	.findElement(By.xpath("(//div[contains(@class,'save-icon pull-right')]/div/div)[" + i + "]"));
+			.findElement(By.xpath("(//span[contains(@class,'save-box')])[" + i + "]"));
+			//flag = heartIcon.getAttribute("class").equalsIgnoreCase("save-favorite-plan added");
+			flag = heartIcon.getAttribute("class").equalsIgnoreCase("save-box");
+
+			i = i + 1;
+		}
+		return flag;
+	}
 
 	public void validatesOutOfPocketMaximum(String planName, String outOfPocketMaximum) {
 		WebElement outOfPocketForPlan = null;
@@ -2883,6 +2967,11 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		} else
 			Assertion.fail("Tool Tip is not working");
 	}
+	
+	public void clickCloseMSApplication() {
+		jsClickNew(closebBtnMSApplication);
+		//waitforElementNew(addMSPlans);
+	}
 
 	public void toolTipForAnnualDeductible(String planName) {
 		WebElement toolTip = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
@@ -3008,6 +3097,17 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	public void validatePlanSelectorToolRightRail() {
 		validateNew(PlanSelectorToolRightRail);
 		System.out.println("Plan Selector Tool Section is present");
+	}
+	
+	public void validateGroupPlanMArkettingBullets() {
+		ArrayList<String> tabs_windows = new ArrayList<String>(driver.getWindowHandles());
+		Iterator<String> itr = tabs_windows.iterator();
+		while (itr.hasNext()) {
+			String window = itr.next();
+			driver.switchTo().window(window);
+			System.out.println(driver.getTitle());
+		}
+		validateNew(groupPlanMarkettingBullets);
 	}
 
 	public List<String> getAllPlanNames() {
@@ -5886,6 +5986,9 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = "//a[contains(text(),'Guide to Health Insurance for People with Medicare')]")
 	private WebElement RightRail_Guidetoyourhealth;
+	
+	@FindBy(xpath = "(//*[contains(text(),'Start Application')])[1]")
+	WebElement startApplicationBtnonPlanDetails;
 
 	public void medsuppOLERightRailGuideourhealth() throws InterruptedException {
 		validateNew(RightRail_Guidetoyourhealth);
@@ -6689,6 +6792,70 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 			}
 
 		}
+		return flag;
+	}
+	
+	public boolean validateFieldsOnPlanDetails() throws InterruptedException {
+		String planName = "Plan F";
+		boolean flag = false;
+		Thread.sleep(2000);
+
+		//jsClickNew(viewPlanDetailsBtn);
+		jsClickNew(VisitorProfilePlanDetailsBtn);
+		waitForPageLoadSafari();
+		Thread.sleep(2000);
+
+		System.out.println("Validating user navigated to plan details----------");
+		String url = driver.getCurrentUrl();
+		flag = url.contains("planDetails");
+		if (flag) {
+			System.out.println("---------user navigated to plan details----------");
+		} else {
+			System.out.println("---------user not navigated to plan details----------");
+		}
+
+		if (flag) {
+			System.out.println("Validating plan name on plan details----------");
+
+			flag = planNameOnPlanDetails.getText().contains(planName);
+			if (flag) {
+				System.out.println("---------plan name on plan details is correct----------");
+			} else {
+				System.out.println("---------plan name on plan details is incorrect----------");
+			}
+		}
+
+		//if (flag) {
+			System.out.println("Validating start application button on plan details----------");
+
+			jsClickNew(startApplicationBtnonPlanDetails);
+			Thread.sleep(2000);
+			if (DOB1.isDisplayed()) {
+
+				Thread.sleep(2000);
+				DOB1.sendKeys("01111951");
+
+				Thread.sleep(7000);
+				jsMouseOver(femaleGender1);
+				jsClickNew(femaleGender1);
+				Thread.sleep(7000);
+				jsMouseOver(ContinueApplication);
+				jsClickNew(ContinueApplication);
+				Thread.sleep(5000);
+
+			}
+			else {
+				System.out.println("DOB is not displayed and User clicked on Start Application to land on IS OLE Page");
+			}
+			flag = insuredStatusHeader.isDisplayed();
+
+			if (flag) {
+				System.out.println("---------start application button on plan details is working----------");
+			} else {
+				System.out.println("---------start application button on plan details is not working----------");
+			}
+
+
 		return flag;
 	}
 }

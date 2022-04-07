@@ -44,7 +44,7 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 	@FindBy(css = "div[class*='get-started-main-inner'] button")
 	private WebElement getStartedBtn1;
 
-	@FindBy(xpath = "//h1[contains(@class,'text-display')]")
+	@FindBy(css = "text-display")
 	private WebElement landingpageHeader;
 
 	@FindBy(css = "div[class*='get-started-banner'] img")
@@ -140,7 +140,8 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 	}
 
 	public void quizStartAndRunQuestionnaire(String zipcode) throws InterruptedException {
-		waitTillElementClickableInTime(getStartedBtn, 45);
+		//waitTillElementClickableInTime(getStartedBtn, 45);
+		waitforElement(getStartedBtn);
 		System.out.println("Before clicking GetStarted");
 		threadsleep(5000);
 		waitforElementVisibilityInTime(zipCode, 45);

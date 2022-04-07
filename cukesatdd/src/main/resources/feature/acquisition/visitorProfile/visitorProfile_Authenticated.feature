@@ -67,13 +67,13 @@ Feature: 1.09. UAT - Visitor profile Authenticated
 
     @visitorProfile_AARP @regressionAARP @sanity @authenticatedAARP
     Examples:
-      | UID                                   | site | state   | userName  | password     | drug1   | zipCode |
-      | Visitor Profile - E2E Scenario 6 _AMP | AARP | Alabama | vdatdd_02 | Password@123 | Lipitor | 90210   |
+      | UID                                   | site | state   | userName  | password       | drug1   | zipCode |
+      | Visitor Profile - E2E Scenario 6 _AMP | AARP | Alabama | vdatdd_02 | Password@12345 | Lipitor | 90210   |
 
     @visitorProfile_UHC @regressionUHC @featureGate
     Examples:
-      | UID                                   | site | state   | userName      | password     | drug1   | zipCode |
-      | Visitor Profile - E2E Scenario 6 _UHC | UHC  | Alabama | vdatdd_02_uhc | Password@123 | Lipitor | 90210   |
+      | UID                                   | site | state   | userName      | password       | drug1   | zipCode |
+      | Visitor Profile - E2E Scenario 6 _UHC | UHC  | Alabama | vdatdd_02_uhc | Password@12345 | Lipitor | 90210   |
 
   @providerFlowAuthenticated @authenticated
   Scenario Outline: Verify Provider Search functional flow for authenticated Visitor Profile page on <site> site
@@ -99,13 +99,13 @@ Feature: 1.09. UAT - Visitor profile Authenticated
 
     @visitorProfile_AARP @regressionAARP @vbfGate1 @authenticatedAARP
     Examples:
-      | site | state    | zipcode | isMultutiCounty | county          | userName  | password     | plantype | planname                             |
-      | AARP | New York | 10010   | NO              | New York County | vdatdd_13 | Password@123 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) |
+      | site | state    | zipcode | isMultutiCounty | county          | userName  | password       | plantype | planname                             |
+      | AARP | New York | 10010   | NO              | New York County | vdatdd_13 | Password@12345 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) |
 
     @visitorProfile_UHC @regressionUHC @featureGate
     Examples:
-      | site | state    | zipcode | isMultutiCounty | county          | userName      | password     | plantype | planname                             |
-      | UHC  | New York | 10010   | NO              | New York County | vdatdd_13_uhc | Password@123 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) |
+      | site | state    | zipcode | isMultutiCounty | county          | userName      | password       | plantype | planname                             |
+      | UHC  | New York | 10010   | NO              | New York County | vdatdd_13_uhc | Password@12345 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) |
 
   @oleAuthenticatedValidations @authenticatedd
   Scenario Outline: Verify OLE validations for authenticated Visitor Profile page on <site> site
@@ -123,13 +123,13 @@ Feature: 1.09. UAT - Visitor profile Authenticated
 
     @visitorProfile_AARP @regressionAARP @authenticatedAARP
     Examples:
-      | site | state    | zipcode | isMultutiCounty | county          | userName  | password     | plantype | planname                             | status      | monthlyPremium |
-      | AARP | New York | 10010   | NO              | New York County | vdatdd_14 | Password@123 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | In Progress | $34            |
+      | site | state    | zipcode | isMultutiCounty | county          | userName  | password       | plantype | planname                             | status      | monthlyPremium |
+      | AARP | New York | 10010   | NO              | New York County | vdatdd_14 | Password@12345 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | In Progress | $34            |
 
-    @visitorProfile_UHC @regressionUHC @featureGate
+    @visitorProfile_UHC @regressionUHC @featureGate 
     Examples:
-      | site | state    | zipcode | isMultutiCounty | county          | userName  | password     | plantype | planname                             | status      | monthlyPremium |
-      | UHC  | New York | 10010   | NO              | New York County | vdatdd_14 | Password@123 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | In Progress | $34            |
+      | site | state    | zipcode | isMultutiCounty | county          | userName  | password       | plantype | planname                             | status      | monthlyPremium |
+      | UHC  | New York | 10010   | NO              | New York County | vdatdd_14 | Password@12345 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | In Progress | $34            |
 
   @vppartialOLEAndRemove @authenticated
   Scenario Outline: <UID>: Verify Partial enrollment and cancel or remove the enrollment from profile page on <site> site
@@ -181,8 +181,8 @@ Feature: 1.09. UAT - Visitor profile Authenticated
 
     @visitorProfile_AARP @regressionAARP @vbfGate1 @authenticatedAARP @featureGate
     Examples:
-      | UID                                   | site | state    | userName  | password     | zipcode | isMultiCounty | county          | planyear | PlanType | plantype | planName                              | cardtype | firstname | lastname | middlename | dob      | gender | permstreet    | permcity | mailingaptno | mailingstate | mailingzip | email         | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | status      | monthlyPremium | homeNumber | emailConfirmation | goGreen |
-      | Visitor Profile - E2E Scenario 4 _AMP | AARP | New York | vdatdd_15 | Password@123 | 10010   | NO            | New York County | Next     | MA-MBI   | MA       | AARP Medicare Advantage Patriot (HMO) | MBI      | John      | Doe      | test       | 01011903 | Male   | 003 Morris Rd | NY       | test         | NY           | 10001      | test@test.com | 2n22C33YK33    | false   | 09011997  | 11012002  | 431665465      | In Progress | $0             | 1111111111 | No                | No      |
+      | UID                                   | site | state    | userName  | password       | zipcode | isMultiCounty | county          | planyear | PlanType | plantype | planName                              | cardtype | firstname | lastname | middlename | dob      | gender | permstreet    | permcity | mailingaptno | mailingstate | mailingzip | email         | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | status      | monthlyPremium | homeNumber | emailConfirmation | goGreen |
+      | Visitor Profile - E2E Scenario 4 _AMP | AARP | New York | vdatdd_15 | Password@12345 | 10010   | NO            | New York County | Next     | MA-MBI   | MA       | AARP Medicare Advantage Patriot (HMO) | MBI      | John      | Doe      | test       | 01011903 | Male   | 003 Morris Rd | NY       | test         | NY           | 10001      | test@test.com | 2n22C33YK33    | false   | 09011997  | 11012002  | 431665465      | In Progress | $0             | 1111111111 | No                | No      |
 
   @prePopulateEmailFieldPlanSummaryAuthenticated @authenticated
   Scenario Outline: Verify email prepopulate flow for authenticated profile on plan summary page on <site> site
@@ -330,8 +330,8 @@ Feature: 1.09. UAT - Visitor profile Authenticated
       | site | member | firstName | lastName | dob        | zipcode | mbi         | userName               | password     |
       | UHC  | UHC    | JONETTE   | ESCUTIA  | 03/27/1936 | 06902   | 3PW3A88CU71 | jonette@getairmail.com | Password@123 |
 
-
-  Scenario Outline: User validate PRE flow for MS from Visitor Profile on <site> site for zipcode -<zipcode> for plan <testPlan>
+  @SavePlanPRE
+  Scenario Outline: User validate PRE flow for MS from Visitor Profile on <site> site for zipcode -<Zipcode> for plan <testPlan>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     And the user clicks on the shopping cart icon
@@ -371,13 +371,13 @@ Feature: 1.09. UAT - Visitor profile Authenticated
     Then user validate view Plan details on PRE plan card and check enroll or start application button
       | PlanType | <plantype> |
 
-    @SavePlanPRE_AARP
+    @SavePlanPRE_AARP @regressionAARP
     Examples:
       | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                   | testPlan                             | userName              | password     | Premium | plantype |
       | AARP | 07303   | NO            | New York | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | No             | No,No,No,No                   | Lower                | [blank]        | [blank]                      | AARP Medicare Advantage Choice (PPO) | vdatdd_18@getnada.com | Password@123 | $0      | MAPD     |
       | AARP | 19901   | NO            | New York | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | No             | No,No,No,No                   | Higher               | 1st            | Health Care Premium, Doctors | Plan F                               | vdatdd_19@getnada.com | Password@123 | [blank] | MS       |
 
-    @SavePlanPRE_UHC
+    @SavePlanPRE_UHC @regressionUHC
     Examples:
       | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                   | testPlan                             | userName                  | password     | Premium | plantype |
       | UHC  | 07303   | NO            | New York | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | No             | No,No,No,No                   | Lower                | [blank]        | [blank]                      | AARP Medicare Advantage Choice (PPO) | vdatdd_18_uhc@getnada.com | Password@123 | $0      | MAPD     |
