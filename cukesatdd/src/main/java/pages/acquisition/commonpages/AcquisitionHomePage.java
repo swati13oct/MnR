@@ -1085,7 +1085,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 																									// part of AARP/UHC
 																									// cleanup
 		}
-
+		checkForSecurityPage();
 		/*
 		 * if (!(site.equalsIgnoreCase("PRE") || site.equalsIgnoreCase("ARE"))) { //
 		 * adding this condition temporarily to // bypass PRE/ARE flows
