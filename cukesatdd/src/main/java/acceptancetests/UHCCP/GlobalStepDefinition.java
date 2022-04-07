@@ -6,6 +6,7 @@ import java.util.Map;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.DataTableParser;
@@ -34,6 +35,7 @@ public class GlobalStepDefinition {
 		AcquisitionHomePage uhccpHomePage = (AcquisitionHomePage) getLoginScenario().openApplicationURL(wd, "UHCCP");
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.UHCCP_HOME_PAGE, uhccpHomePage);
+		getLoginScenario().saveBean(oleCommonConstants.SITE_NAME, "UHCCP");
 	}
 	
 	@When("the user selects language")

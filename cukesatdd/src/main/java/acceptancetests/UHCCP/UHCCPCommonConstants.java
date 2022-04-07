@@ -6,6 +6,7 @@ public class UHCCPCommonConstants {
 	public static final String COUNTY = "county";
 	public static final String IS_MULTICOUNTY = "isMultutiCounty";
 	public static final String PLAN_NAME = "planName";
+	public static final String PLAN_TYPE = "planType";
 	
 	/*public static final String COUNTY_DROP_DOWN = "countyDropDwn";
 

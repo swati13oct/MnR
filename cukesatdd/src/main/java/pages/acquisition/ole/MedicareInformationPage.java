@@ -196,7 +196,7 @@ public class MedicareInformationPage extends UhcDriver {
 	@FindBy(id = "hasHealthInsuranceYes")
 	private WebElement LongTerm_Question_Yes;
 
-	@FindBy(xpath = "//*[contains(@id,'hasHealthInsuranceYes')]")
+	@FindBy(xpath = "//*[contains(@id,'hasHealthInsuranceYes') or contains(@id,'hasHealthInsuranceSí')]")
 	private WebElement LongTermQuestionFlagYes;
 
 	@FindBy(xpath = "//*[contains(@id,'hasHealthInsuranceNo')]")
@@ -214,7 +214,7 @@ public class MedicareInformationPage extends UhcDriver {
 	@FindBy(id = "hasPrescriptionDrugCoverageYes")
 	private WebElement PDPQuestion_Yes;
 
-	@FindBy(xpath = "//*[contains(@id,'hasPrescriptionDrugCoverageYes')]")
+	@FindBy(xpath = "//*[contains(@id,'hasPrescriptionDrugCoverageYes')or contains(@id,'hasPrescriptionDrugCoverageSí')]")
 	private WebElement PrescriptionCoverageQuestionFlagYes;
 
 	@FindBy(xpath = "//*[contains(@id,'hasPrescriptionDrugCoverageNo')]")

@@ -50,7 +50,7 @@ import pages.acquisition.pharmacyLocator.PharmacySearchPageNew;
 public class AcquisitionHomePage extends GlobalWebElements {
 
 //	@FindBy(xpath = "//*[contains(@id,'zipcodemeded') or contains(@id,'cta-zipcode')]")
-	@FindBy(xpath = "//*[contains(@id,'zipcodemeded') or contains(@id,'cta-zipcode') or @id='zipcode']")
+	@FindBy(xpath = "//*[contains(@id,'zipcodemeded-0')]")
 	private WebElement zipCodeField;
 
 	@FindBy(xpath = "//*[contains(@id,'zipcodemeded-0')]")
@@ -951,6 +951,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(xpath = "//a[contains(@dtmid,'cta_acq_county_modal')]")
 	public WebElement selectCounty;
+	
+	//UHCCP elements
+	@FindBy(xpath = "//a[contains(@class,'c-navigation__logo')]")
+	public WebElement uhccpLogo;
 
 	String ChatSamText = "Chat with a Licensed Insurance Agent";
 
@@ -967,6 +971,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private static String UMS_ACQISITION_CHARGERS_UHC_URL = MRConstants.CHARGERS_UHC_URL;
 	private static String UMS_ACQISITION_UHC_TEST2_URL = MRConstants.UHC_TEST2_URL;
 	private static String UMS_ACQISITION_UHC_STAGE_URL = MRConstants.UHC_STAGE_URL;
+	private static String UHCCP_PROD_URL=MRConstants.UHCCP_URL_PROD;
+	private static String UHCCP_STAGE_URL=MRConstants.UHCCP_URL_STAGE;
+	
 	private PageData globalFooter;
 
 	public boolean isHealthPlan = false;
@@ -1084,6 +1091,18 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			System.out.println("Temporary condition added to bypass openAndValidate for PRE/ARE"); // added on 3/3/21 as
 																									// part of AARP/UHC
 																									// cleanup
+		}
+		else if (site.equalsIgnoreCase("UHCCP")) {
+			if (MRScenario.environment.equals("prod")) {
+				startNew(UHCCP_PROD_URL);
+			} else if (MRScenario.environment.equals("stage")) {
+				startNew(UHCCP_STAGE_URL);
+			}
+			CommonUtility.checkPageIsReadyNew(driver);
+			CommonUtility.waitForPageLoadNew(driver, uhccpLogo, 20);
+			System.out.println("Current page URL: " + driver.getCurrentUrl());
+			checkModelPopup(driver, 20);
+			testSiteUrl = driver.getCurrentUrl();
 		}
 
 		/*
@@ -1530,7 +1549,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public VPPPlanSummaryPage searchPlansWithOutCounty(String zipcode) throws InterruptedException {
 
 		waitForPageLoadSafari();
-		pageloadcomplete();
+		//pageloadcomplete();
 		validateNew(zipCodeField);
 		// CommonUtility.waitForPageLoadNew(driver, zipCodeField, 30);
 		// sendkeys(zipCodeField, zipcode);
@@ -1542,7 +1561,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		// while(validate(overlayFilm, 10)) {/**wait*/}
 		// CommonUtility.waitForElementToDisappear(driver, overlayFilm, 75);
 		waitForPageLoadSafari();
-		pageloadcomplete();
+		//pageloadcomplete();
 		// CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
 		validateNew(vppTop, 30);
 		ArrayList<String> tabs_windows = new ArrayList<String>(driver.getWindowHandles());

@@ -25,12 +25,12 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
     @visitorProfile_AARP @regressionAARP @VP_ProdRegression_AARP @prodRegression @sanity @vbfGate
     Examples:
       | state   | drug1   | zipCode | site |
-      | Alabama | Lipitor | 90210   | AARP |
+      | Wyoming | Lipitor | 82071   | AARP |
 
     @visitorProfile_UHC @regressionUHC @VP_ProdRegression_UHC @featureGate
     Examples:
       | state   | drug1   | zipCode | site |
-      | Alabama | Lipitor | 90210   | UHC  |
+      | Wyoming | Lipitor | 82071   | UHC  |
 
   @addDrugsDCE1
   Scenario Outline: Verify user is able to add drug from DCE to the unauthenticated visitor profile in <site> site - zip -<zipCode>
@@ -343,13 +343,13 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
 
     @visitorProfile_AARP @VP_ProdRegression_AARP @regressionAARP
     Examples:
-      | site | state    | zipcode | isMultutiCounty | county          | plantype | planyear | planname                             | testPlans                                                                 |
-      | AARP | New York | 10001   | NO              | New York County | MAPD     | future   | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |
+      | site | state    | zipcode | isMultutiCounty | county          | plantype | planyear | planname                             | testPlans                                                                  |
+      | AARP | Colorado | 80012   | NO              | Arapahoe County | MAPD     | future   | AARP Medicare Advantage Plan 1 (HMO) | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Patriot (HMO) |
 
     @visitorProfile_UHC @VP_ProdRegression_UHC @regressionUHC @featureGate
     Examples:
-      | site | state    | zipcode | isMultutiCounty | county          | plantype | planyear | planname                             | testPlans                                                                 |
-      | UHC  | New York | 10001   | NO              | New York County | MAPD     | future   | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |
+      | site | state    | zipcode | isMultutiCounty | county          | plantype | planyear | planname                             | testPlans                                                                  |
+      | UHC  | Colorado | 80012   | NO              | Arapahoe County | MAPD     | future   | AARP Medicare Advantage Plan 1 (HMO) | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Patriot (HMO) |
 
   @planCompareTest @planCompareULayerSmoke @visitorProfileRegressionAARP
   Scenario Outline:<UID> : Verify user is able to Plan compare to the unauthenticated visitor profile in <site> site - zip -<zipcode> for <plantype> plantype
@@ -377,17 +377,17 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
 
     @visitorProfile_AARP @VP_ProdRegression_AARP @prodRegression_AARP_04 @prodRegression @regressionAARP @vbfGate
     Examples:
-      | UID                                   | site | state   | UID       | zipcode | isMultiCounty | county             | plantype | planyear | testPlans                                                                                                                                                                                   |
-      | Visitor Profile - E2E Scenario 3 _AMP | AARP | Alabama | US1770330 | 90210   | NO            | Jefferson County   | MAPD     | next     | AARP Medicare Advantage Freedom Plus (HMO-POS),AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage Harmony (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
-      | Visitor Profile - E2E Scenario 3 _AMP | AARP | Alabama | US1770330 | 90210   | NO            | Los Angeles County | PDP      | next     | AARP MedicareRx Walgreens (PDP),AARP MedicareRx Preferred (PDP)                                                                                                                             |
-      | Visitor Profile - E2E Scenario 3 _AMP | AARP | Florida | US1770330 | 33433   | NO            | Palm Beach County  | SNP      | next     | Preferred Medicare Assist Palm Beach (HMO D-SNP),UnitedHealthcare Dual Complete Choice (PPO D-SNP)                                                                                          |
+      | UID                                   | site | state   | UID       | zipcode | isMultiCounty | county            | plantype | planyear | testPlans                                                                                                                                                                                   |
+      | Visitor Profile - E2E Scenario 3 _AMP | AARP | Alabama | US1770330 | 90210   | NO            | Jefferson County  | MAPD     | next     | AARP Medicare Advantage Freedom Plus (HMO-POS),AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage Harmony (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
+      | Visitor Profile - E2E Scenario 3 _AMP | AARP | Alabama | US1770330 | 58103   | NO            | Cass County       | PDP      | next     | AARP MedicareRx Walgreens (PDP),AARP MedicareRx Preferred (PDP)                                                                                                                             |
+      | Visitor Profile - E2E Scenario 3 _AMP | AARP | Florida | US1770330 | 33433   | NO            | Palm Beach County | SNP      | next     | Preferred Medicare Assist Palm Beach (HMO D-SNP),UnitedHealthcare Dual Complete Choice (PPO D-SNP)                                                                                          |
 
     @visitorProfile_UHC @VP_ProdRegression_UHC @prodRegression_UHC_04 @regressionUHC @featureGate @prodRegression
     Examples:
-      | UID                                   | site | state   | UID       | zipcode | isMultiCounty | county             | plantype | planyear | testPlans                                                                                                                                                                                   |
-      | Visitor Profile - E2E Scenario 3 _UHC | UHC  | Alabama | US1770330 | 90210   | NO            | Jefferson County   | MAPD     | next     | AARP Medicare Advantage Freedom Plus (HMO-POS),AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage Harmony (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
-      | Visitor Profile - E2E Scenario 3 _UHC | UHC  | Alabama | US1770330 | 90210   | NO            | Los Angeles County | PDP      | next     | AARP MedicareRx Walgreens (PDP),AARP MedicareRx Preferred (PDP)                                                                                                                             |
-      | Visitor Profile - E2E Scenario 3 _UHC | UHC  | Florida | US1770330 | 33433   | NO            | Palm Beach County  | SNP      | next     | Preferred Medicare Assist Palm Beach (HMO D-SNP),UnitedHealthcare Dual Complete Choice (PPO D-SNP)                                                                                          |
+      | UID                                   | site | state   | UID       | zipcode | isMultiCounty | county            | plantype | planyear | testPlans                                                                                                                                                                                   |
+      | Visitor Profile - E2E Scenario 3 _UHC | UHC  | Alabama | US1770330 | 90210   | NO            | Jefferson County  | MAPD     | next     | AARP Medicare Advantage Freedom Plus (HMO-POS),AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage Harmony (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
+      | Visitor Profile - E2E Scenario 3 _UHC | UHC  | Alabama | US1770330 | 58103   | NO            | Cass County       | PDP      | next     | AARP MedicareRx Walgreens (PDP),AARP MedicareRx Preferred (PDP)                                                                                                                             |
+      | Visitor Profile - E2E Scenario 3 _UHC | UHC  | Florida | US1770330 | 33433   | NO            | Palm Beach County | SNP      | next     | Preferred Medicare Assist Palm Beach (HMO D-SNP),UnitedHealthcare Dual Complete Choice (PPO D-SNP)                                                                                          |
 
   @importDrugsDocs @nonProd
   Scenario Outline: Verify user is able to import drugs and doctors for unauthenticated visitor profile in <site> site - member -<member>
@@ -601,12 +601,12 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
     @LTCPharmacyVPAARP @regressionAARP
     Examples:
       | site | state | planyear | zipcode | isMultiCounty | county       | plantype | testPlans                            | drug1   | SelectPharmacy    | SelectPharmacy1 | tfnXpath                                      | tfnFlag |
-      | AARP | Miama | future   | 45373   | NO            | Miami County | MAPD     | AARP Medicare Advantage Plan 6 (HMO) | Lipitor | REMEDI SENIORCARE | CVS PHARMACY    | (//a[contains(@class,'toll-free-number')])[1] | true    |
+      | AARP | Miama | future   | 45373   | NO            | Miami County | MAPD     | AARP Medicare Advantage Plan 6 (HMO) | Aricept | REMEDI SENIORCARE | CVS PHARMACY    | (//a[contains(@class,'toll-free-number')])[1] | true    |
 
     @LTCPharmacyVPUHC @regressionUHC
     Examples:
       | site | state | planyear | zipcode | isMultiCounty | county       | plantype | testPlans                            | drug1   | SelectPharmacy    | SelectPharmacy1 | tfnXpath                                      | tfnFlag |
-      | UHC  | Miama | future   | 45373   | NO            | Miami County | MAPD     | AARP Medicare Advantage Plan 6 (HMO) | Lipitor | REMEDI SENIORCARE | CVS PHARMACY    | (//a[contains(@class,'toll-free-number')])[1] | true    |
+      | UHC  | Miama | future   | 45373   | NO            | Miami County | MAPD     | AARP Medicare Advantage Plan 6 (HMO) | Aricept | REMEDI SENIORCARE | CVS PHARMACY    | (//a[contains(@class,'toll-free-number')])[1] | true    |
 
   @prodRegression
   Scenario Outline: User verify LTC pharmacy scenario in <site> site for no drug coverage message- zipcode - <zipcode>
@@ -746,13 +746,19 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
 
     @SavePlanPRE_AARP @regressionAARP
     Examples:
-      | site | Zipcode | isMultiCounty | state      | county        | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | testPlans     | 1stRecommendation | 2ndRecommendation | UserType      | userName  | password    |
-      | AARP | 07303   | NO            | New Jersey | Hudson County | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | No             | No,No,No,No                   | Higher               | Plan F,Plan G | SNP               | MA                | Authenticated | DDProfile | Test@123456 |
+      | site | Zipcode | isMultiCounty | state         | county             | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | testPlans                              | 1stRecommendation | 2ndRecommendation | UserType      | userName  | password    |
+      | AARP | 07303   | NO            | New Jersey    | Hudson County      | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | No             | No,No,No,No                   | Higher               | Plan F,Plan G                          | SNP               | MA                | Authenticated | DDProfile | Test@123456 |
+      | AARP | 55416   | NO            | Minnesota     | Hennepin County    | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | No             | No,No,No,No                   | Higher               | Extended Basic Plan,Basic Plan         | SNP               | MA                | Authenticated | DDProfile | Test@123456 |
+      | AARP | 53006   | YES           | Wisconsin     | Fond du Lac County | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | No             | No,No,No,No                   | Higher               | Basic Plan,Basic Plan with Co-Payments | SNP               | MA                | Authenticated | DDProfile | Test@123456 |
+      | AARP | 02532   | YES           | Massachusetts | Plymouth County    | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | No             | No,No,No,No                   | Higher               | Supplement 1 Plan,Supplement 1A Plan   | SNP               | MA                | Authenticated | DDProfile | Test@123456 |
 
     @SavePlanPRE_UHC @regressionUHC
     Examples:
-      | site | Zipcode | isMultiCounty | state      | county        | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | testPlans     | 1stRecommendation | 2ndRecommendation | UserType      | userName  | password    |
-      | UHC  | 07303   | NO            | New Jersey | Hudson County | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | No             | No,No,No,No                   | Higher               | Plan F,Plan G | SNP               | MA                | Authenticated | DDProfile | Test@123456 |
+      | site | Zipcode | isMultiCounty | state         | county             | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | testPlans                              | 1stRecommendation | 2ndRecommendation | UserType      | userName  | password    |
+      | UHC  | 07303   | NO            | New Jersey    | Hudson County      | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | No             | No,No,No,No                   | Higher               | Plan F,Plan G                          | SNP               | MA                | Authenticated | DDProfile | Test@123456 |
+      | UHC  | 55416   | NO            | Minnesota     | Hennepin County    | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | No             | No,No,No,No                   | Higher               | Extended Basic Plan,Basic Plan         | SNP               | MA                | Authenticated | DDProfile | Test@123456 |
+      | UHC  | 53006   | YES           | Wisconsin     | Fond du Lac County | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | No             | No,No,No,No                   | Higher               | Basic Plan,Basic Plan with Co-Payments | SNP               | MA                | Authenticated | DDProfile | Test@123456 |
+      | UHC  | 02532   | YES           | Massachusetts | Plymouth County    | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | No             | No,No,No,No                   | Higher               | Supplement 1 Plan,Supplement 1A Plan   | SNP               | MA                | Authenticated | DDProfile | Test@123456 |
 
   @SavePlanPRE @prodRegression
   Scenario Outline: User validate PRE flow for and validate create Account link from Visitor Profile on <site> site for zipcode -<Zipcode> for plan <testPlan>
@@ -789,10 +795,10 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
 
     @SavePlanPRE_AARP @regressionAARP
     Examples:
-      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities | testPlan                             | userName              | password     | Premium |
-      | AARP | 07303   | NO            | New York | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | No             | No,No,No,No                   | Lower                | [blank]        | [blank]    | AARP Medicare Advantage Choice (PPO) | vdatdd_18@getnada.com | Password@123 | $0      |
+      | site | Zipcode | isMultiCounty | state      | county        | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities |
+      | AARP | 07303   | NO            | New Jersey | Hudson County | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | No             | No,No,No,No                   | Lower                | [blank]        | [blank]    |
 
     @SavePlanPRE_UHC @regressionUHC
     Examples:
-      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities | testPlan                             | userName              | password     | Premium |
-      | UHC  | 07303   | NO            | New York | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | No             | No,No,No,No                   | Lower                | [blank]        | [blank]    | AARP Medicare Advantage Choice (PPO) | vdatdd_18@getnada.com | Password@123 | $0      |
+      | site | Zipcode | isMultiCounty | state      | county        | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities |
+      | UHC  | 07303   | NO            | New Jersey | Hudson County | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | No             | No,No,No,No                   | Lower                | [blank]        | [blank]    |
