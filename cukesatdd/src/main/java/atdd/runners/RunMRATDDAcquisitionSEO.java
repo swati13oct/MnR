@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
                 "html:reports/test-report.html",
                 "json:target/cucumber-RunMRATDDAcquisitionSEO.json",
                 "timeline:target"},
-        tags = "@checkSEO")
+        tags = "@SEO")
 
 @RetryCountIfFailed(0)
 public class RunMRATDDAcquisitionSEO extends BaseTestConfig {
