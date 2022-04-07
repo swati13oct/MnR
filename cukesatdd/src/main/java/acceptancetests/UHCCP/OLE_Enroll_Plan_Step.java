@@ -46,7 +46,8 @@ public class OLE_Enroll_Plan_Step {
 	public void the_user_clicks_on_enroll_in_plan_and_validates_welcome_to_ole_page() {
 		String planName = (String) getLoginScenario().getBean(UHCCPCommonConstants.PLAN_NAME);
 		String zipcode = (String) getLoginScenario().getBean(UHCCPCommonConstants.ZIPCODE);
-		String county =(String) getLoginScenario().getBean(VPPCommonConstants.COUNTY);
+		String county =(String) getLoginScenario().getBean(UHCCPCommonConstants.COUNTY);
+		String planType =(String) getLoginScenario().getBean(UHCCPCommonConstants.PLAN_TYPE);
 		
 		PlanDetailsPage planDetailsPage = (PlanDetailsPage) getLoginScenario()
 				.getBean(PageConstants.UHCCP_PLAN_DETAILS_PAGE);
@@ -55,6 +56,7 @@ public class OLE_Enroll_Plan_Step {
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, planName);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_ZIPCODE, zipcode);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_COUNTY, county);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, planType);
 		
 		if (welcomePage != null) {
 

@@ -64,7 +64,7 @@ public class AuthorizationPage extends UhcDriver{
 	//@FindBy(css = ".ng-untouched > .field > .field:nth-child(1)")
 	private WebElement ApplicantRadio;
 
-	@FindBy(xpath = "//*[contains(text(), 'I am the authorized representative of the applicant')]/preceding-sibling::input")
+	@FindBy(xpath = "(//label[@class= 'ng-star-inserted'])[2]//preceding-sibling::input")
 	private WebElement AuthorizedRepresentativeRadio;
 
 	//Authorized Representative Details
@@ -97,13 +97,13 @@ public class AuthorizationPage extends UhcDriver{
 	private WebElement Authorized_PhNo;
 
 	//Read and Agree to the Statement of Understanding
-	@FindBy(xpath= "//input[contains(@id,'Agree')]")
+	@FindBy(xpath = "//input[contains(@id,'Agree')or contains(@id,'Acepto')]")
 	private WebElement SoU_AgreeRadio;
 
-	@FindBy(xpath = "//input[contains(@id,'Disagree')]")
+	@FindBy(xpath = "//input[contains(@id,'Disagree') or contains(@id,'No')]")
 	private WebElement SoU_DisagreeRadio;
-	
-	@FindBy(xpath= "//*[contains(@id,'icon-alert-sign')]")
+
+	@FindBy(xpath = "//*[contains(@id,'icon-alert-sign')]")
 	private WebElement SoU_DisagreeError;
 	
 	@FindBy(xpath = "//*[contains(@id,'cancel-button')]")
@@ -119,7 +119,7 @@ public class AuthorizationPage extends UhcDriver{
 	@Override
 	public void openAndValidate() {
 		CommonUtility.waitForPageLoadNew(driver, PageHeader,30);
-		if(PageHeader.getText().contains("Authorization"))
+		if(driver.getCurrentUrl().contains("authorization"))
 			System.out.println("Page header is Displayed : "+PageHeader.getText());
 		else
 			Assertion.fail("Error in validating the Authorization page loaded");

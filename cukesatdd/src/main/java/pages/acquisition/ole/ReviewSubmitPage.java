@@ -78,27 +78,27 @@ public class ReviewSubmitPage extends UhcDriver{
 
 	//Member Details Display
 //	@FindBy(xpath = "//*[contains(text(), 'First Name')]//following-sibling::*")
-	@FindBy(xpath = "//*[contains(text(), 'Personal Information')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'First Name')]//following-sibling::*")
+	@FindBy(xpath = "//*[contains(text(), 'Personal Information') or contains(text(), 'Información personal')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'First Name') or contains(text(), 'Nombre')]//following-sibling::*")
 	private WebElement FirstNameDisplay;
 	
-	@FindBy(xpath = "//*[contains(text(), 'Personal Information')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'Middle Name')]//following-sibling::*")
+	@FindBy(xpath = "//*[contains(text(), 'Personal Information') or contains(text(), 'Información personal')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'Middle Name') or contains(text(), 'Segundo nombre')]//following-sibling::*")
 	private WebElement MiddleNameDisplay;
 	
 	//@FindBy(xpath = "//*[contains(text(), 'Last Name')]//following-sibling::*")
-	@FindBy(xpath = "//*[contains(text(), 'Personal Information')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'Last Name')]//following-sibling::*")
+	@FindBy(xpath = "//*[contains(text(), 'Personal Information') or contains(text(), 'Información personal')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'Last Name') or contains(text(), 'Apellido')]//following-sibling::*")
 	private WebElement LastNameDisplay;
 
-	@FindBy(xpath = "//*[contains(text(), 'Medicare Number') or contains(text(), 'Medicare (Claim) Number')]//following-sibling::*")
+	@FindBy(xpath = "//*[contains(text(), 'Medicare Number') or contains(text(), 'Medicare (Claim) Number') or contains(text(), 'Número de Medicare')]//following-sibling::*")
 	//@FindBy(xpath = "//*[contains(text(), 'Medicare Claim Number') or contains(text(), 'Medicare (Claim) Number')]//following-sibling::*")
 	private WebElement MedicareClaimNumberDisplay;
 	
 	@FindBy(xpath = "//*[contains(text(), 'Medicare Number')]//following-sibling::*")
 	private WebElement MedicareNumberDisplay;
 	
-	@FindBy(xpath = "//*[contains(text(), 'Hospital (Part A) Effective Date')]//following-sibling::*")
+	@FindBy(xpath = "//*[contains(text(), 'Hospital (Part A) Effective Date')or contains(text(), 'hospital')]//following-sibling::*")
 	private WebElement PartADisplay;
 	
-	@FindBy(xpath = "//*[contains(text(), 'Medical (Part B) Effective Date')]//following-sibling::*")
+	@FindBy(xpath = "//*[contains(text(), 'Medical (Part B) Effective Date') or contains(text(), 'servicios médicos')]//following-sibling::*")
 	private WebElement PartBDisplay;
 	
 	@FindBy(xpath = "//*[contains(text(), 'Have you ever been told by a doctor or clinic that you have diabetes (too much sugar in')]//following-sibling::*")
@@ -155,10 +155,10 @@ public class ReviewSubmitPage extends UhcDriver{
 	@FindBy(xpath = "//*[contains(text(), 'Provider Phone Number')]//following-sibling::*")
 	private WebElement DisclosureProviderPhoneNumber;
 			
-	@FindBy(xpath = "//*[contains(text(), 'Birth Date')]//following-sibling::*")
+	@FindBy(xpath = "//*[contains(text(), 'Birth Date')or contains(text(), 'de nacimiento')]//following-sibling::*")
 	private WebElement DOBDisplay;
 
-	@FindBy(xpath = "//*[contains(text(), 'Gender') or contains(text(),'gender')]//following-sibling::*")
+	@FindBy(xpath = "//*[contains(text(), 'Gender') or contains(text(),'gender')or contains(text(),'Sexo')]//following-sibling::*")
 	private WebElement GenderDisplay;
 
 	//Permanent Address Display
@@ -171,7 +171,7 @@ public class ReviewSubmitPage extends UhcDriver{
 	private List <WebElement> CityDisplays;
 
 	
-	@FindBy(xpath = "(//*[contains(text(), 'Street Address')])[1]//following-sibling::*")
+	@FindBy(xpath = "(//*[contains(text(), 'Street Address')or contains(text(), 'Direcc')])[1]//following-sibling::*")
 	//@FindBy(xpath = "//*[contains(text(), 'mailing address')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'Street Address')]//following-sibling::*")
 	private WebElement StreetDisplay;
 
@@ -180,38 +180,38 @@ public class ReviewSubmitPage extends UhcDriver{
 	private WebElement ApartmentDisplay;
 	
 	//@FindBy(xpath = "//*[contains(text(), 'City')]//following-sibling::*")
-	@FindBy(xpath = "(//*[contains(text(), 'City')])[1]//following-sibling::*")
+	@FindBy(xpath = "(//*[contains(text(), 'City') or contains(text(), 'Ciudad')])[1]//following-sibling::*")
 	//@FindBy(xpath = "//*[contains(text(), 'mailing address')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'City')]//following-sibling::*")
 	//private List <WebElement> CityDisplays;
 	private WebElement CityDisplay;
 
 	//Mailing Address Display
-	@FindBy(xpath = "//*[contains(text(), 'Is your mailing address the same as')]//following-sibling::*")
+	@FindBy(xpath = "//*[contains(text(), 'Is your mailing address the same as') or contains(text(), 'su domicilio principal?')]//following-sibling::*")
 	private WebElement MailingQiuestionDisplay;
 	
-	@FindBy(xpath = "(//*[contains(text(), 'Street Address')])[2]//following-sibling::*")
+	@FindBy(xpath = "(//*[contains(text(), 'Street Address') or contains(text(), 'Direcci')])[2]//following-sibling::*")
 	private WebElement MailStreetDisplays;
 	
 	@FindBy(xpath = "(//*[contains(text(), 'Apartment/Suite')])[2]//following-sibling::*")
 	private WebElement MailApartmentSuite;
 
 
-	@FindBy(xpath = "(//*[contains(text(), 'City')])[2]//following-sibling::*")
+	@FindBy(xpath = "(//*[contains(text(), 'City')or contains(text(), 'Ciudad')])[2]//following-sibling::*")
 	private WebElement MailCityDisplay;
 	
 	//@FindBy(xpath = "//*[contains(text(), 'mailing address')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'State')]//following-sibling::*")
 	
-	@FindBy(xpath = "//*[contains(text(), 'mailing address')]//..//following-sibling::*//*[contains(text(), 'State')]//following-sibling::*")
+	@FindBy(xpath = "//*[contains(text(), 'mailing address') or contains(text(), 'domicilio principal?')]//..//following-sibling::*//*[contains(text(), 'State') or contains(text(), 'Estado')]//following-sibling::*")
 	private WebElement MailStateDisplay;
 	
 //	@FindBy(xpath = "//*[contains(text(), 'Zip Code')]//following-sibling::*")
-	@FindBy(xpath = "//*[contains(text(), 'ZIP Code')]//following-sibling::*")
+	@FindBy(xpath = "//*[contains(text(), 'ZIP Code') or contains(text(), 'digo postal')]//following-sibling::span")
 	private WebElement MailZipDisplay;
 
-	@FindBy(xpath = "//*[contains(text(), 'Primary Phone Number') or contains(text(), 'Main Phone Number') or contains(text(), 'Home Phone Number')]//following-sibling::*")
+	@FindBy(xpath = "//*[contains(text(), 'Primary Phone Number') or contains(text(), 'Main Phone Number') or contains(text(), 'Home Phone Number') or contains(text(), 'de teléfono principal')]//following-sibling::*")
 	private WebElement PrimaryPhoneNo;
 	
-	@FindBy(xpath = "//*[contains(text(), 'Mobile Phone Number')]//following-sibling::*")
+	@FindBy(xpath = "//*[contains(text(), 'Mobile Phone Number') or contains(text(), 'de teléfono celular')]//following-sibling::*")
 	private WebElement MobilePhoneNo;
 	
 	@FindBy(xpath ="//*[contains(text(), 'Would you like to receive an email confirmation')]//following-sibling::*")
@@ -220,7 +220,7 @@ public class ReviewSubmitPage extends UhcDriver{
 	@FindBy(xpath ="//*[contains(text(), 'Would you like to receive paperless delivery of your plan materials?') or contains(text(), 'Would you like to sign up for paperless delivery of your plan materials?')]/following-sibling::*")
 	private WebElement PaperlessDelivery;
 	
-	@FindBy(xpath ="//*[contains(text(),'Email Address') or contains(text(),'Primary Email Address')]//following-sibling::*")
+	@FindBy(xpath ="//*[contains(text(),'Email Address') or contains(text(),'Primary Email Address') or contains(text(),'Dirección de correo electrónico principal')]//following-sibling::*")
 	private WebElement EmailAddress;
 	
 	//Submit Application Disclaimer
@@ -233,33 +233,33 @@ public class ReviewSubmitPage extends UhcDriver{
 	@FindBy(xpath = "//*[@id = 'ole-form-submitted']")
 	private WebElement Form_Sumbitted_ConfirmationPage;
 	
-	@FindBy(xpath = "//*[contains(text(), 'Do you or your spouse have other health insurance')]//following-sibling::*")
+	@FindBy(xpath = "//*[contains(text(), 'Do you or your spouse have other health insurance') or contains(text(), 'otro seguro de salud que')]//following-sibling::*")
 	private WebElement HealthInsuranceRadio;
 	
-	@FindBy(xpath = "//*[contains(text(), 'Do you have other insurance that will cover your prescription')]//following-sibling::*")
+	@FindBy(xpath = "//*[contains(text(), 'Do you have other insurance that will cover your prescription') or contains(text(), 'otro seguro que cubra sus medicamentos recetados')]//following-sibling::*")
 	private WebElement PrescriptionDrugRadio;
 	
 	
-	@FindBy(xpath = "//*[contains(text(), 'Name of Health Insurance Company')]//following-sibling::*")
+	@FindBy(xpath = "//*[contains(text(), 'Name of Health Insurance Company') or contains(text(), 'Nombre de la')]//following-sibling::*")
 	private WebElement HealthInsuranceName;
 	
-	@FindBy(xpath = "//*[text()= 'Group Number' or text()= 'Group ID' ]//following-sibling::*")
+	@FindBy(xpath = "//*[text()= 'Group Number' or text()= 'Group ID' or contains(text(),'Identificación de grupo')]//following-sibling::*")
 	private WebElement HealthInsuranceGroupNo;
 	
 	//@FindBy(xpath = "//*[contains(text(), 'Member Number')]//following-sibling::*")
-	@FindBy(xpath = "//*[text()= 'Member Number' or text()= 'Member ID' ]//following-sibling::*")
+	@FindBy(xpath = "//*[text()= 'Member Number' or text()= 'Member ID' or contains(text(),'Identificación del miembro')]//following-sibling::*")
 	private WebElement HealthInsuranceMemberNo;
 	
-	@FindBy(xpath = "//*[contains(text(), 'Name of Insurance')]//following-sibling::*")
+	@FindBy(xpath = "//*[contains(text(), 'Name of Insurance') or contains(text(), 'Nombre del seguro')]//following-sibling::*")
 	private WebElement PrescriptionDrugName;
 	
-	@FindBy(xpath = "//*[contains(text(), 'Group ID Number')]//following-sibling::*")
+	@FindBy(xpath = "//*[contains(text(), 'Group ID Number') or contains(text(), 'de identificación de grupo')]//following-sibling::*")
 	private WebElement PrescriptionDrugGroupNo;
 	
-	@FindBy(xpath = "//*[contains(text(), 'Member ID Number')]//following-sibling::*")
+	@FindBy(xpath = "//*[contains(text(), 'Member ID Number') or contains(text(), 'de identificación de miembro')]//following-sibling::*")
 	private WebElement PrescriptionDrugMemberNo;
 	
-	@FindBy(xpath = "//*[contains(text(), 'Rx BIN')]//following-sibling::*")
+	@FindBy(xpath = "//*[contains(text(), 'BIN')]//following-sibling::*")
 	private WebElement PrescriptionRXBINMemberNo;
 	
 
@@ -272,41 +272,41 @@ public class ReviewSubmitPage extends UhcDriver{
 	@FindBy(xpath = "//*[contains(text(), 'Are you now seeing')]//following-sibling::*")
 	private WebElement PCPRecentlyVisited;
 	
-	@FindBy(xpath = "//*[contains(text(), 'Proposed Effective Date')]//following-sibling::*")
+	@FindBy(xpath = "//*[contains(text(), 'Proposed Effective Date') or contains(text(), 'propuesta')]//following-sibling::p")
 	private WebElement ProposedEffectiveDate;
 			
-	@FindBy(xpath = "//*[contains(text(), 'Medicaid Member Number')]//following-sibling::*")
+	@FindBy(xpath = "//*[contains(text(), 'Medicaid Member Number') or contains(text(), 'Número de miembro de Medicaid')]//following-sibling::*")
 	private WebElement MedicaidNo;
 	
-	@FindBy(xpath = "//*[contains(text(), 'Authorizations and Approvals')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'First Name')]//following-sibling::*")
+	@FindBy(xpath = "//*[contains(text(), 'Authorizations and Approvals') or contains(text(), 'Autorizaciones y aprobaciones')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'First Name')  or contains(text(), 'Nombre')]//following-sibling::*")
 	private WebElement AuthFirstName;
 	
-	@FindBy(xpath = "//*[contains(text(), 'Authorizations and Approvals')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'Last Name')]//following-sibling::*")
+	@FindBy(xpath = "//*[contains(text(), 'Authorizations and Approvals') or contains(text(), 'Autorizaciones y aprobaciones')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'Last Name') or contains(text(), 'Apellido')]//following-sibling::*")
 	private WebElement AuthLastName;
 	
-	@FindBy(xpath = "//*[contains(text(), 'Authorizations and Approvals')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'Address')]//following-sibling::*")
+	@FindBy(xpath = "//*[contains(text(), 'Authorizations and Approvals') or contains(text(), 'Autorizaciones y aprobaciones')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'Address') or contains(text(), 'Dirección')]//following-sibling::*")
 	private WebElement AuthAddress;
 	
-	@FindBy(xpath = "//*[contains(text(), 'Authorizations and Approvals')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'Apartment/Suite #')]//following-sibling::*")
+	@FindBy(xpath = "//*[contains(text(), 'Authorizations and Approvals') or contains(text(), 'Autorizaciones y aprobaciones')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'Apartment/Suite #') or contains(text(), 'de departamento o suite')]//following-sibling::*")
 	private WebElement AuthApartmentSuite;
 
 
-	@FindBy(xpath = "//*[contains(text(), 'Authorizations and Approvals')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'City')]//following-sibling::*")
+	@FindBy(xpath = "//*[contains(text(), 'Authorizations and Approvals') or contains(text(), 'Autorizaciones y aprobaciones')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'City') or contains(text(), 'Ciudad')]//following-sibling::*")
 	private WebElement AuthCity;
 	
-	@FindBy(xpath = "(//*[contains(text(), 'Authorizations and Approvals')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'State')])[1]//following-sibling::*")
+	@FindBy(xpath = "(//*[contains(text(), 'Authorizations and Approvals') or contains(text(), 'Autorizaciones y aprobaciones')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'State') or contains(text(), 'Estado')])[1]//following-sibling::*")
 	private WebElement AuthState;
 	
-	@FindBy(xpath = "//*[contains(text(), 'Authorizations and Approvals')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'Zip') or contains(text(), 'ZIP Code')]//following-sibling::*")
+	@FindBy(xpath = "//*[contains(text(), 'Authorizations and Approvals') or contains(text(), 'Autorizaciones y aprobaciones')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'Zip') or contains(text(), 'ZIP Code') or contains(text(), 'postal')]//following-sibling::*")
 	private WebElement AuthZip;
 	
-	@FindBy(xpath = "//*[contains(text(), 'Authorizations and Approvals')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'Phone Number') or contains(text(), 'Phone number')]//following-sibling::*")
+	@FindBy(xpath = "//*[contains(text(), 'Authorizations and Approvals') or contains(text(), 'Autorizaciones y aprobaciones')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'Phone Number') or contains(text(), 'Phone number') or contains(text(), 'Número de teléfono')]//following-sibling::*")
 	private WebElement AuthPhoneNo;
 	
 	@FindBy(xpath = "//*[contains(text(), 'Statement of Understanding')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'Have you read and do you agree to the ') or contains(text(), 'Have you read, and do you agree to the Statement')]//following-sibling::*")
 	private WebElement AuthAgree;
 	
-	@FindBy(xpath = "//*[contains(text(), 'Relationship to Applicant') or contains(text(), 'Relationship to Enrollee')]//following-sibling::*")
+	@FindBy(xpath = "//*[contains(text(), 'Relationship to Applicant') or contains(text(), 'Relationship to Enrollee')  or contains(text(), 'con el inscrito')]//following-sibling::*")
 	private WebElement AuthRelationship;
 	
 	@FindBy(xpath="//a[contains(@aria-label,'Edit Medicare Insurance Information')]")
@@ -507,7 +507,7 @@ public class ReviewSubmitPage extends UhcDriver{
 				flag&=validateText(MobilePhoneNo,MobilePhoneNumber);
 				flag&=validateText(PrimaryPhoneNo,PrimaryPhoneNumber);
 				//flag&=validateText(EmailConfirmationNo,EmailConfirmationNumber);
-				flag&=validateText(PaperlessDelivery,Paperless_Delivery);
+				//flag&=validateText(PaperlessDelivery,Paperless_Delivery);
 				flag&=validateText(EmailAddress,Email_Address);
 				flag&=validateText(DOBDisplay,DOB);
 				flag&=validateText(GenderDisplay,Gender);
@@ -519,7 +519,7 @@ public class ReviewSubmitPage extends UhcDriver{
 				flag&=validateText(AuthState,AuthStateDisplay);
 				flag&=validateText(AuthZip,AuthZipDisplay);
 				flag&=validateText(AuthPhoneNo,AuthPhoneNumberDisplay);
-				flag&=validateText(AuthAgree,AuthAgreeDisplay);
+				//flag&=validateText(AuthAgree,AuthAgreeDisplay);
 				flag&=validateText(AuthRelationship,AuthRelationshipDisplay);
 				flag&=validateText(PrescriptionDrugRadio,prescriptionDrug);
 				if(!Expected_PlanName.contains("PDP")) {
@@ -534,11 +534,11 @@ public class ReviewSubmitPage extends UhcDriver{
 				flag&=validateText(PrescriptionDrugMemberNo,prescriptionMemberNumber);
 				flag&=validateText(PrescriptionRXBINMemberNo,rxBINNumber);
 				
-				if(!Expected_PlanName.contains("PDP") && !Expected_PlanYear.contains("future")) {
+				/*if(!Expected_PlanName.contains("PDP") && !Expected_PlanYear.contains("future")) {
 				flag&=validateText(PCPName,PCP_Name);		
 				flag&=validateText(PCPNumber,PCP_Number);
 				flag&=validateText(PCPRecentlyVisited,PCP_recently_visited);
-				}
+				}*/
 				flag&=validateText(ProposedEffectiveDate,Proposed_Effective_date);
 				flag&=validateText(StreetDisplay,Perm_Street);
 				//flag&=validateText(ApartmentDisplay,Perm_Aptno);
