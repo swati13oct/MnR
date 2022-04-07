@@ -21,11 +21,13 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineLandingAndZipcodePages;
 import pages.acquisition.vpp.VPPTestHarnessPage;
 import pages.mobile.acquisition.dceredesign.BuildYourDrugListMobile;
 import pages.mobile.acquisition.dceredesign.DrugDetailsPageMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
+import pages.mobile.acquisition.planrecommendationengine.LandingAndZipcodeMobilePage;
 
 public class VisitorProfilePageMobile extends UhcDriver {
 
@@ -813,6 +815,23 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		} else
 			return null;
 	}
+	
+	public LandingAndZipcodeMobilePage clickGetStartedPRE() {
+        CommonUtility.checkPageIsReadyNew(driver);
+        sleepBySec(3);
+        validateNew(btnPREGetStarted);
+        scrollToView(btnPREGetStarted);
+        jsClickNew(btnPREGetStarted);
+        sleepBySec(3);
+        CommonUtility.checkPageIsReadyNew(driver);
+        if (driver.getCurrentUrl().contains("plan-recommendation-engine")) {
+            System.out.println("Navigation to PRE from VP successful");
+            return new LandingAndZipcodeMobilePage(driver);
+        } else {
+            Assert.fail("Navigation to PRE from VP successful");
+            return null;
+        }
+    }
 
 	public void deleteAllDrugs(String drugList) {
 		if (validate(savedDrug, 45)) {
@@ -1029,6 +1048,9 @@ public class VisitorProfilePageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//div[contains(@id,'DrugName')]")
 	private WebElement savedDrug;
+	
+	@FindBy(xpath = "//span[contains(text(),'Get')]")
+    private WebElement btnPREGetStarted;
 
 	@FindAll({ @FindBy(xpath = "//div[contains(@id,'DrugName')]") })
 	private List<WebElement> savedDrugsList;
