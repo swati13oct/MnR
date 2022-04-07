@@ -951,6 +951,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(xpath = "//a[contains(@dtmid,'cta_acq_county_modal')]")
 	public WebElement selectCounty;
+	
+	//UHCCP elements
+	@FindBy(xpath = "//a[contains(@class,'c-navigation__logo')]")
+	public WebElement uhccpLogo;
 
 	String ChatSamText = "Chat with a Licensed Insurance Agent";
 
@@ -967,6 +971,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private static String UMS_ACQISITION_CHARGERS_UHC_URL = MRConstants.CHARGERS_UHC_URL;
 	private static String UMS_ACQISITION_UHC_TEST2_URL = MRConstants.UHC_TEST2_URL;
 	private static String UMS_ACQISITION_UHC_STAGE_URL = MRConstants.UHC_STAGE_URL;
+	private static String UHCCP_PROD_URL=MRConstants.UHCCP_URL_PROD;
+	private static String UHCCP_STAGE_URL=MRConstants.UHCCP_URL_STAGE;
+	
 	private PageData globalFooter;
 
 	public boolean isHealthPlan = false;
@@ -1084,6 +1091,18 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			System.out.println("Temporary condition added to bypass openAndValidate for PRE/ARE"); // added on 3/3/21 as
 																									// part of AARP/UHC
 																									// cleanup
+		}
+		else if (site.equalsIgnoreCase("UHCCP")) {
+			if (MRScenario.environment.equals("prod")) {
+				startNew(UHCCP_PROD_URL);
+			} else if (MRScenario.environment.equals("stage")) {
+				startNew(UHCCP_STAGE_URL);
+			}
+			CommonUtility.checkPageIsReadyNew(driver);
+			CommonUtility.waitForPageLoadNew(driver, uhccpLogo, 20);
+			System.out.println("Current page URL: " + driver.getCurrentUrl());
+			checkModelPopup(driver, 20);
+			testSiteUrl = driver.getCurrentUrl();
 		}
 
 		/*
