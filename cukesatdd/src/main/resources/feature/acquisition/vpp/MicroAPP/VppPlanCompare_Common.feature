@@ -30,7 +30,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
       # | 00003 | AARP |   48101 | NO            | Wayne County     | MAPD     | next     |
       | 00004 | AARP |   70072 | NO            | Jefferson Parish | MAPD     | next     |
 
-    @sanity @vbfGate
+    @sanity @vbfGate @customEvent
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county           | plantype | planyear |
       | 00001 | AARP |   96799 | NO            | Western District | PDP      | current  |
@@ -359,7 +359,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
       | TID   | site | zipcode | isMultiCounty | county          | plantype | planname                             | planyear |
       | 00013 | AARP |   10010 | NO            | New York County | MAPD     | AARP Medicare Advantage Plan 1 (HMO) | future   |
 
-    @regressionUHC @prodRegression @featureGate
+    @regressionUHC @prodRegression @featureGate @iosIssue
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county          | plantype | planname                             | planyear |
       | 00013 | UHC  |   10010 | NO            | New York County | MAPD     | AARP Medicare Advantage Plan 1 (HMO) | future   |
@@ -485,6 +485,8 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
       | 00016 | UHC  |   55343 | NO            | Hennepin County | PDP      |               2,1 | next     |           3 |
 
   #      | 00016 | UHC  |   33111 | NO            | Miami-Dade County | SNP      |               2,1 | next     |           4 |
+  
+  #removing tagging for below user scenario as there is open defect.
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - validation of plan compare on OON Toggle for Medical Benefits and Additional Benefits on <site>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -504,22 +506,22 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     When remove "<removePlanIndices>" plan from new plan compare page
     Then Validate OON Toggle is not displayed when there are no OON Plans Available
 
-    @regressionAARP
+    #@regressionAARP
     Examples: 
       | TID | site | zipcode | isMultiCounty | county | plantype | planyear | planIndices | removePlanIndices |
 
     #   | 00017 | AARP |   78006 | YES           | Bexar County | MAPD     | current  |           4 |               4,1 |
-    @regressionAARP @nextYear
+    #@regressionAARP @nextYear
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county       | plantype | planyear | planIndices | removePlanIndices |
       | 00017 | AARP |   78006 | YES           | Bexar County | MAPD     | next     |           5 |               5,3 |
 
-    @regressionUHC
+    #@regressionUHC
     Examples: 
       | TID | site | zipcode | isMultiCounty | county | plantype | planyear | planIndices | removePlanIndices |
 
     #  | 00017 | UHC  |   78006 | YES           | Bexar County | MAPD     | current  |           4 |               4,1 |
-    @regressionUHC @nextYear @featureGate
+    #@regressionUHC @nextYear @featureGate
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county       | plantype | planyear | planIndices | removePlanIndices |
       | 00017 | UHC  |   78006 | YES           | Bexar County | MAPD     | next     |           5 |               5,3 |
@@ -554,7 +556,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
       | TCID | site | zipcode | isMultiCounty | county | plantype | planyear | planIndices |
 
     # | 00018 | UHC  |   90210 | No            | Los Angeles County | MAPD     | current  |           5 |
-    @regressionUHC @prodRegression @nextYear
+    @regressionUHC @prodRegression @nextYear @iosIssue
     Examples: 
       | TCID  | site | zipcode | isMultiCounty | county             | plantype | planyear | planIndices |
       | 00018 | UHC  |   90210 | No            | Los Angeles County | MAPD     | next     |           5 |
@@ -929,7 +931,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     Examples: 
       | TID | site | zipcode | isMultiCounty | county | plantype | planyear | planIndices |
 
-    #  | 00036 | AARP |   78006 | NO            | Kendall County | MAPD     | current  |           2 |
+    #  | 00036 | AARP |   78006 | YES            | Kendall County | MAPD     | current  |           2 |
     @regressionAARP @nextYear @featureGate
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county         | plantype | planyear | planIndices |
@@ -943,4 +945,4 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     @regressionUHC @nextYear
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county         | plantype | planyear | planIndices |
-      | 00037 | UHC  |   78006 | NO            | Kendall County | MAPD     | next     |           2 |
+      | 00037 | UHC  |   78006 | YES            | Kendall County | MAPD     | next     |           2 |

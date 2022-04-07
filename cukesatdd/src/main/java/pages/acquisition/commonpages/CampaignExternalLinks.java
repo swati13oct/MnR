@@ -1133,8 +1133,8 @@ public class CampaignExternalLinks extends UhcDriver {
 	}
 
 	public VPPPlanSummaryPage searchPlansWithOutCountyForPDPExternalPage(String zipcode) {
-		if (validate(countyModalVpp))
-			jsClickNew(cancelCountyModal);
+		/*if (validate(countyModalVpp))
+			jsClickNew(cancelCountyModal);*/
 		threadsleep(3);
 
 		validateNew(ZipCodeTxtBx);
@@ -1179,7 +1179,7 @@ public class CampaignExternalLinks extends UhcDriver {
 
 	public void updateHrefUrlVPP_Script1(String env) {
 		WebElement element = driver
-				.findElement(By.xpath("(//*[contains(@role,'button') and contains(@href,'available-plans')])[1]"));
+				.findElement(By.xpath("(//*[contains(@id,'button') and contains(@href,'available-plans')])[1]"));
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
 			if (env.equalsIgnoreCase("stage")) {

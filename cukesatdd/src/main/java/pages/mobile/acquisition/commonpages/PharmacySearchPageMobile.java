@@ -194,7 +194,7 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 				+ "Expected='6' | Actual='" + distanceOptions.size() + "'", distanceOptions.size() == 6);
 		Select select = new Select(distanceDropDownField);
 		String actualSelectedDistance = select.getFirstSelectedOption().getText();
-		String expectedSelectedDistance = "15 Miles";
+		String expectedSelectedDistance = "10 Miles";
 		Assertion.assertTrue(
 				"PROBLEM - default selected distance option is not as expected. " + "Expected='"
 						+ expectedSelectedDistance + "' | Actual='" + actualSelectedDistance + "'",
@@ -478,6 +478,7 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 			Assert.assertTrue(!driver.getCurrentUrl().contains("Pharmacy"), "PDF opened on iOS successfully..");
 
 			driver.navigate().back();
+			driver.navigate().back();
 
 //			String winHandleBefore = driver.getWindowHandle();
 //			ArrayList<String> beforeClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
@@ -727,7 +728,7 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 	 * Validate Widgets From copy deck: Preferred Retail Pharmacy Network Only
 	 * display the Preferred Retail Pharmacy Network tile for plans that have a
 	 * Preferred Retail Pharmacy benefit. Do not display for the AARP MedicareRx
-	 * Walgreens plan Walgreens â€“ Preferred Retail Pharmacy Only display the
+	 * Walgreens plan Walgreens – Preferred Retail Pharmacy Only display the
 	 * Walgreens tile for AARP MedicareRx Walgreens plan members Preferred Mail
 	 * Service Pharmacy Only display the Preferred Mail Service Pharmacy tile for
 	 * plans that have a Preferred Mail Service Pharmacy benefit. Do not display for
@@ -811,6 +812,8 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 		CommonUtility.waitForPageLoadNewForClick(driver, learnMoreElement, 60);
 		// learnMoreElement.click();
 		jsClickNew(learnMoreElement);
+		if(driver.toString().contains("IOS"))
+			sleepBySec(60);
 		sleepBySec(8);
 		CommonUtility.checkPageIsReady(driver);
 		ArrayList<String> newTb = new ArrayList<String>(driver.getWindowHandles());
@@ -920,6 +923,15 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 	/** Changing of pharmacyType filter */
 	public void validatePlanTypeFilter(String pharmacyType, String language) {
 		// CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
+		try {
+			if(driver.toString().contains("IOS")) {
+				searchbtn.click();
+				sleepBySec(60);
+			}
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
+		
 		String totalLine = PharmacyFoundCount.getText().trim();
 		String totalString = totalLine.contains(" ") ? totalLine.split(" ")[0] : totalLine;
 		int totalBefore = Integer.parseInt(totalString);
@@ -980,13 +992,13 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 					pharmacyValidate(pharmaciesAvailable));
 			System.out.println("\n\nTotal pharmacy count : " + totalAfter + "\n\n");
 			if (totalAfter > 10) {
-				WebElement contactUsLink = contactUnitedHealthCare;
-				if (!pharmacyValidate(contactUnitedHealthCare))
-					contactUsLink = contactUnitedHealthCare_ol;
-				scrollToView(contactUsLink);
+			//	WebElement contactUsLink = contactUnitedHealthCare;
+			//	if (!pharmacyValidate(contactUnitedHealthCare))
+			//		contactUsLink = contactUnitedHealthCare_ol;
+			//	scrollToView(contactUsLink);
 
 				// moveMouseToElement(contactUsLink);
-				jsMouseOver(contactUsLink);
+			//	jsMouseOver(contactUsLink);
 
 				sleepBySec(3);
 				Assertion.assertTrue("PROBLEM - unable to locate the pagination element", pharmacyValidate(pagination));
@@ -1057,7 +1069,7 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 		catch (Exception ex) {
 		}
 		if(indian_tribal_text.equalsIgnoreCase("Servicio de salud indígena, tribal o indígena urbano")){
-			indian_tribal_label_filter = driver.findElement(By.xpath("//span[text()='Servicio de salud indígena, tribal o indígena urbano']/.."));
+			indian_tribal_label_filter = driver.findElement(By.xpath("//span[text()='Servicio de salud indígena, tribal o indígena urbano']"));
 		}
 		CommonUtility.waitForPageLoadNewForClick(driver, indian_tribal_label_filter, 60);
 		jsClickNew(indian_tribal_label_filter);

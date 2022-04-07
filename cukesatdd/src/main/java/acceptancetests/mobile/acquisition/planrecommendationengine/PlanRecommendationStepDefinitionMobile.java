@@ -174,7 +174,7 @@ public class PlanRecommendationStepDefinitionMobile {
 		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
 		getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
 
-		LandingAndZipcodeMobilePage planSelectorhomepage = new LandingAndZipcodeMobilePage(wd);
+		LandingAndZipcodeMobilePage planSelectorhomepage = new LandingAndZipcodeMobilePage((AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		if (isMultiCounty.equalsIgnoreCase("NO")) {
 			planSelectorhomepage.quizStartAndRunQuestionnaire(zipcode);
 		} else {
@@ -214,7 +214,7 @@ public class PlanRecommendationStepDefinitionMobile {
 	@Then("^user selects plan type in coverage options page$")
 	public void select_plan_type_coverage_page_mobile(DataTable inputdata) throws Throwable {
 		readfeaturedataMobile(inputdata);
-		CoverageOptionsMobilePage coveragepage = new CoverageOptionsMobilePage(wd);
+		CoverageOptionsMobilePage coveragepage = new CoverageOptionsMobilePage((AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		String plantype = inputValues.get("Plan Type");
 		if (!(plantype.isEmpty())) {
 			coveragepage.coverageOptionpageFunctionalMobile(plantype, true);
@@ -835,6 +835,13 @@ public void sortBy_No() {
 		NewResultsMobilePage newResultpage = new NewResultsMobilePage(wd);
 		newResultpage.validateDrugInfo(inputValues.get("DrugInfo"), "show");
 	}
+	
+	@Then("^user validate WhySeparateModel plan in PRE results page$")
+   	public void WhySeparateModel_new_results_page(DataTable givenAttributes) {
+		readfeaturedataMobile(givenAttributes);
+		NewResultsMobilePage planSelectorNewResultspage =  new NewResultsMobilePage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorNewResultspage.validateDrugInfo(inputValues.get("DrugInfo"),"whyseparatemodel");
+   	}
 
 	@Then("^user validate showmoreDoctor in PRE results page$")
 	public void doctorShowMore_new_results_page_mobile(DataTable givenAttributes) {
