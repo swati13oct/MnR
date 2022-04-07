@@ -7386,7 +7386,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			System.out.println("@@@@@@@@@ Proactive Chat not available @@@@@@@@@");
 
 		Assertion.assertTrue("Proactive chat modal message not found",
-				proactiveChatMsg.getText().trim().contains("Message with UnitedHealthcare"));
+				proactiveChatMsg.getText().trim().contains("Need help with your enrollment"));
+		
+				//.contains("Message with UnitedHealthcare"));
 		validateNew(proactiveChatCloseIcon);
 		validateNew(proactiveChatBtn);
 	}
