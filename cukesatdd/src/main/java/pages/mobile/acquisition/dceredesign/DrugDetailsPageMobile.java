@@ -83,7 +83,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	@FindBy(css = "#edityourdrug")
 	public WebElement LinktoEditDrugList;
 
-	@FindBy(xpath = "//h2[contains(text(), 'Drug Cost Details')]")
+	@FindBy(xpath = "//span[contains(text(), 'Drug Cost Details')]")
 	public WebElement DrugDetails_DrugCostsHeading;
 
 	@FindBy(css = ".uhc-card__content")
@@ -1605,6 +1605,10 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		System.out.println(noResultsMessage.getText());
 		Assertion.assertTrue("No results message not displayed", noResultsMessage.getText().trim().equals(expectedMsg));
 	}
+	
+	public void validate100DayInYourDrugs() {
+		validateNew(_100DaysSupplyHeader);
+	}
 
 	public void validateDrugListYouPay_FromComparePage(String druglistObject, String drugYouPaylist) {
 		String[] Drugs = druglistObject.split("&");
@@ -2460,6 +2464,9 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@class,'uhc-button__text')][text()='Saved']")
 	public WebElement savedBtn;
 	
+	@FindBy(xpath = "//*[contains(text(), '100-day supply at a 90-day')]")
+	public WebElement _100DaysSupplyHeader;
+	
 	@FindBy(xpath = "//h2[contains(@class,'noborder text-blue-primary')]")
 	public WebElement planName;
 
@@ -2684,11 +2691,11 @@ public class DrugDetailsPageMobile extends UhcDriver {
 			String drugSupplyLen) {
 		System.out.println("Current Added Drug Name : " + drugName);
 		WebElement DrugName = driver.findElement(
-				By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//span[contains(text(), '" + drugName
+				By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::*//p[contains(text(), '" + drugName
 						+ "')]"));
 		WebElement DrugDetailsText = driver.findElement(By
 				.xpath("(//caption[contains(text(), 'Your Drugs')]/ancestor::table//span[contains(text(), '" + drugName
-						+ "')]//following::ul[contains(@class, 'yourdrugs')]//li[contains(text(), 'per') and contains(text(), 'refill')])[1]"));
+						+ "')]//following::ul[contains(@class, 'yourdrugs')]//li[contains(text(), 'per') and contains(text(), 'refill')])[2]"));
 		String DrugText = DrugDetailsText.getText();
 		if (validateNew(DrugName) && validateNew(DrugDetailsText) && DrugText.contains(drugQuantity)
 				&& DrugText.contains(drugFrequency) && DrugText.contains(drugSupplyLen)) {
@@ -2784,5 +2791,13 @@ public class DrugDetailsPageMobile extends UhcDriver {
 
 	public void clickSearch() {
 		jsClickNew(pharmacySearchBtn);
+	}
+	
+	public DrugDetailsPageMobile validateDrugDetailsPage(){
+		if (validateNew(DrugDetails_ChangePharmacyLnk) &&
+			validateNew(DrugCosts_PlanDetailsBtn) && validateNew(DrugDetails_DrugCostsHeading)) {
+			return new DrugDetailsPageMobile(driver);
+		}
+		return null;
 	}
 }
