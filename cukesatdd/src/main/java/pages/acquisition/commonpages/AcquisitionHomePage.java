@@ -1530,7 +1530,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public VPPPlanSummaryPage searchPlansWithOutCounty(String zipcode) throws InterruptedException {
 
 		waitForPageLoadSafari();
-		pageloadcomplete();
+		//pageloadcomplete();
 		validateNew(zipCodeField);
 		// CommonUtility.waitForPageLoadNew(driver, zipCodeField, 30);
 		// sendkeys(zipCodeField, zipcode);
@@ -1542,7 +1542,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		// while(validate(overlayFilm, 10)) {/**wait*/}
 		// CommonUtility.waitForElementToDisappear(driver, overlayFilm, 75);
 		waitForPageLoadSafari();
-		pageloadcomplete();
+		//pageloadcomplete();
 		// CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
 		validateNew(vppTop, 30);
 		ArrayList<String> tabs_windows = new ArrayList<String>(driver.getWindowHandles());
