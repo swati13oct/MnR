@@ -256,8 +256,8 @@ public class WelcomePage extends UhcDriver{
 					jsClickNew(enrollInPlan);
 				}
 				else{
-					String elementPath = "(//*[contains(text(), 'Enroll in plan')])[2]";
-
+					//String elementPath = "(//*[contains(text(), 'Enroll in plan')])[2]";
+					String elementPath ="(//*[contains(@data-ng-show, 'displayEnrollNow')])[2]";
 					WebElement enrollInPlan = driver.findElement(By.xpath(elementPath));
 					//	enrollInPlan.click();
 					validateNew(enrollInPlan);
