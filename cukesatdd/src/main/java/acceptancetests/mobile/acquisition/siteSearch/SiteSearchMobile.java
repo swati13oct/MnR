@@ -291,17 +291,8 @@ public class SiteSearchMobile {
 	public void user_selects_provider_and_return_vpp_page_ulayer() {
 		ProviderSearchPageMobile providerSearchPage = (ProviderSearchPageMobile) getLoginScenario()
 				.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
-		getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		String savedProvider = providerSearchPage.selectsProvider();
-		getLoginScenario().saveBean(VPPCommonConstants.SAVED_PROVIDER_RALLY, savedProvider);
-		
-		
-//		Assertion.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
-		
-//		ProviderSearchPageMobile providerSearchPage = (ProviderSearchPageMobile) getLoginScenario()
-//				.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
-//		VPPPlanSummaryPageMobile plansummaryPage = providerSearchPage.selectsProvider();
-//		Assertion.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
+		VPPPlanSummaryPageMobile plansummaryPage = providerSearchPage.selectsProvider();
+		Assertion.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
 	}
 
 
@@ -330,19 +321,17 @@ public class SiteSearchMobile {
 	public void verify_providers_covered_ulayer(DataTable Planname) {
 		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
 		plannameAttributesMap = DataTableParser.readDataTableAsMaps(Planname);
-		/*
-		 * List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows(); for
-		 * (int i = 0; i < plannameAttributesRow.size(); i++) {
-		 * 
-		 * plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
-		 * plannameAttributesRow.get(i).getCells().get(1)); }
-		 */
+		/*List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows();
+		for (int i = 0; i < plannameAttributesRow.size(); i++) {
+
+			plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+					plannameAttributesRow.get(i).getCells().get(1));
+		}*/
 		String planName = plannameAttributesMap.get("PlanName");
 
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		String providerFromRally = (String) getLoginScenario().getBean(VPPCommonConstants.SAVED_PROVIDER_RALLY);
-		plansummaryPage.verifyproviderName(planName, providerFromRally);
+		plansummaryPage.verifyproviderName(planName);
 	}
 
 	/**
@@ -353,19 +342,17 @@ public class SiteSearchMobile {
 
 		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
 		plannameAttributesMap = DataTableParser.readDataTableAsMaps(Planname);
-		/*
-		 * List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows(); for
-		 * (int i = 0; i < plannameAttributesRow.size(); i++) {
-		 * 
-		 * plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
-		 * plannameAttributesRow.get(i).getCells().get(1)); }
-		 */
+		/*List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows();
+		for (int i = 0; i < plannameAttributesRow.size(); i++) {
+
+			plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+					plannameAttributesRow.get(i).getCells().get(1));
+		}*/
 		String planName = plannameAttributesMap.get("PlanName");
 
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		String providerFromRally = (String) getLoginScenario().getBean(VPPCommonConstants.SAVED_PROVIDER_RALLY);
-		plansummaryPage.verifyproviderName(planName, providerFromRally);
+		plansummaryPage.verifyproviderName(planName);
 	}
 
 	@Then("^the user navigates to the plan details page$")

@@ -1128,12 +1128,15 @@ public void the_user_performs_plan_search_using_following_information_on_Morgan_
 		campaignExternalLinkspage.enterdetailstakeadvantage();
 
 	}
-
+	
 	@Then("user validates zipcode component and navigates to VPP")
-	public void user_validates_zipcode_component_and_navigates_to_vpp() {
+	public void user_validates_zipcode_component_and_navigates_to_vpp(DataTable givenAttributes) {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		String zipcode = memberAttributesMap.get("Zipcode");
 		CampaignExternalLinksMobile campaignExternalLinkspage = (CampaignExternalLinksMobile) getLoginScenario()
 				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
-		campaignExternalLinkspage.validatezipcodecomponent();
+		campaignExternalLinkspage.validatezipcodecomponent(zipcode);
 	}
 
 	@Then("user clicks on view plans and pricing and navigates to VPP")

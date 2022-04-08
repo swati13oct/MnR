@@ -2095,28 +2095,28 @@ public class CampaignExternalLinksMobile extends UhcDriver {
 			
 	}
 
-	public void validatezipcodecomponent() {
+	public void validatezipcodecomponent(String zipcode) {
 		// TODO Auto-generated method stub
-		
+
 		waitforElementNew(viewplanspricing);
-		viewplanspricing.click();
-		
-		waitforElementNew(ziperrorMsg);
-		System.out.println("@@Zip error Message@@@"+ziperrorMsg.getText());
-		Assert.assertEquals(ziperrorMsg.getText(), "Please enter a valid zip code");
-		
 		Zipinput.clear();
-		Zipinput.sendKeys("33111");
 		viewplanspricing.click();
-		
-		waitforElementNew(tfn);
-		
-		System.out.println("@@tfn@@"+tfn.getText());
-		Assert.assertEquals(tfn.getText(), "1-855-264-3792");
-		
-//		//driver.navigate().back();
-		
-		
+
+		waitforElementNew(ziperrorMsg);
+		System.out.println("@@Zip error Message@@@" + ziperrorMsg.getText());
+		Assert.assertEquals(ziperrorMsg.getText(), "Error: Please enter a valid ZIP Code");
+
+		Zipinput.clear();
+		Zipinput.sendKeys(zipcode);
+		viewplanspricing.click();
+		sleepBySec(4);
+		CommonUtility.checkPageIsReadyNew(driver);
+
+		if (!driver.getCurrentUrl().contains("/health-plans")) {
+			Assert.fail("VVP not opened");
+		}
+
+		// //driver.navigate().back();
 	}
 
 	public void clickFindPlansPricingtakeadvantage() {

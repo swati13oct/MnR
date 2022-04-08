@@ -20,6 +20,7 @@ import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.commonpages.PlanDetailsPage;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
 
 /**
  * @author pperugu
@@ -91,7 +92,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 	@FindBy(xpath = "(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]")
 	private WebElement Checkcoverage;
 
-	@FindBy(css = "button[data-test-id='MedicalDirectory']")
+	@FindBy(xpath="//*[contains(@data-test-id,'MedicalDirectory')]")
 	private WebElement MedicalDirectory;
 
 	@FindBy(css = "button[data-test-id='BehavioralHealthDirectory']")
@@ -355,34 +356,23 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		
 	}
 
-	public String selectsProvider() {
-		CommonUtility.checkPageIsReadyNew(driver);
-
+	public VPPPlanSummaryPageMobile selectsProvider() {
 		CommonUtility.waitForPageLoadNew(driver, GetStarted, 45);
-		jsClickNew(GetStarted);
+		GetStarted.click();
 
 		CommonUtility.waitForPageLoadNew(driver, MedicalDirectory, 30);
-		jsClickNew(MedicalDirectory);
+		MedicalDirectory.click();
 
 		CommonUtility.waitForPageLoadNew(driver, People, 30);
-		jsClickNew(People);
+		People.click();
 
 		CommonUtility.waitForPageLoadNew(driver, Primary, 30);
-		jsClickNew(Primary);
+		Primary.click();
 
-		CommonUtility.waitForPageLoadNew(driver, AllPrimaryCare, 30);
-		jsClickNew(AllPrimaryCare);
+		CommonUtility.waitForPageLoadNew(driver, Physician, 30);
 
+		Physician.click();
 		CommonUtility.waitForPageLoadNew(driver, selectProviderBtn, 30);
-		scrollToView(selectProviderBtn);
-		// CommonUtility.waitForPageLoadNew(driver, selectProviderBtn, 30);
-
-		WebElement providerNameLink = selectProviderBtn.findElement(By.xpath(
-				"./ancestor::div[contains(@data-test-id,'search-result')]//a[contains(@data-test-id,'provider-name')]"));
-		String providerSaved = providerNameLink.getText().trim();
-		System.out.println("Provider Name is : " + providerSaved);
-		MRConstants.PROV_NAME = providerSaved;
-
 		jsClickNew(selectProviderBtn);
 
 		if (validate(selectLocationOption, 10)) {
@@ -390,11 +380,11 @@ public class ProviderSearchPageMobile extends UhcDriver {
 			validateNew(saveBtn2);
 			jsClickNew(saveBtn2);
 		}
-		/*
-		 * threadsleep(10); validateNew(providerNameText); String providerSaved =
-		 * providerNameText.getText().trim(); System.out.println("Provider Name is : " +
-		 * providerSaved); MRConstants.PROV_NAME = providerSaved;
-		 */
+		threadsleep(10);
+		validateNew(providerNameText);
+		String providerSaved = providerNameText.getText().trim();
+		System.out.println("Provider Name is : " + providerSaved);
+		MRConstants.PROV_NAME = providerSaved;
 
 		/*
 		 * if(driver.findElements(By.xpath(
@@ -408,29 +398,28 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		 * 
 		 * }
 		 */
+		// note: setting the implicit wait to 0 as it fails because of TimeoutException
+		// while finding List<WebElement>
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 		if (driver.findElements(By.xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() > 0) {
 			System.out.println("OLD Rally page displayed");
 			jsClickNew(Checkcoverage);
-		}
-		/*
-		 * else if (driver.findElements(By.xpath(
-		 * "(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]"
-		 * )) .size() > 0) {
-		 */
-		else if (driver.findElements(By.cssSelector("#finishAndReturnButton")).size() > 0) {
+		} else if (driver.findElements(By.xpath("(//form[@data-ui-element-name='check-provider-coverage']"
+				+ "//button[contains(@class,'action-btn')])[1]")).size() > 0) {
 			System.out.println("NEW Rally page displayed");
 			jsClickNew(FinishButton);
 		} else
 			System.out.println("Issue with Xpath");
 
-		threadsleep(5);
-		// waitForCountDecrement(2);
-//		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
-		if (driver.getClass().toString().toUpperCase().contains("ANDROID")){
-		driver.switchTo().window(CommonConstants.getMainWindowHandle());}
-		validate(vppFirstPlanCard);
-//		return new VPPPlanSummaryPageMobile(driver);
-		return providerSaved;
+		threadsleep(3);
+		waitForCountDecrement(2);
+		// driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+		driver.switchTo().window(CommonConstants.getMainWindowHandle());
+
+		// note: setting the implicit wait back to default value - 10
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+		return new VPPPlanSummaryPageMobile(driver);
 	}
 
 	@FindBy(xpath = "//*[@data-test-id='button-view-saved-provider']")
