@@ -120,7 +120,7 @@ public class PlanRecommendationStepDefinitionMobile {
 
 	@When("^user navigate to Plan Recommendation Engine and Checking Breadcrumbs$")
 	public void user_navigates_to_zipcode_page_mobile() {
-		LandingAndZipcodeMobilePage planSelectorhomepage = new LandingAndZipcodeMobilePage(wd);
+		LandingAndZipcodeMobilePage planSelectorhomepage = new LandingAndZipcodeMobilePage((AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		planSelectorhomepage.landingpage();
 	}
 
@@ -240,7 +240,7 @@ public class PlanRecommendationStepDefinitionMobile {
 	@And("^user selects SNP options in Special Needs Page$")
 	public void select_special_page_mobile(DataTable givenAttributes) {
 		readfeaturedataMobile(givenAttributes);
-		SpecialNeedsMobilePage specialneedspage = new SpecialNeedsMobilePage(wd);
+		SpecialNeedsMobilePage specialneedspage = new SpecialNeedsMobilePage((AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		String status = "Positive";
 		specialneedspage.specialneedspage(inputValues.get("SNP Options"), status);
 	}
@@ -262,7 +262,7 @@ public class PlanRecommendationStepDefinitionMobile {
 	@Then("^user selects doctors in doctors page$")
 	public void select_doctors_page_mobile(DataTable givenAttributes) {
 		readfeaturedataMobile(givenAttributes);
-		DoctorsMobilePage doctorpage = new DoctorsMobilePage(wd);
+		DoctorsMobilePage doctorpage = new DoctorsMobilePage((AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		String status = "Positive_NextPageName";
 		doctorpage.doctorspage(inputValues.get("Doctors"), inputValues.get("Doctors Search Text"),
 				inputValues.get("Multi Doctor"), status);
@@ -284,7 +284,7 @@ public class PlanRecommendationStepDefinitionMobile {
 	@Then("^user selects skip option in Drug page$")
 	public void elements_drugskip_page_mobile(DataTable givenAttributes) {
 		readfeaturedataMobile(givenAttributes);
-		DrugMobilePage drugpage = new DrugMobilePage(wd);
+		DrugMobilePage drugpage = new DrugMobilePage((AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		drugpage.skipDrugs(inputValues.get("Drug Selection"));
 	}
 
@@ -347,7 +347,7 @@ public class PlanRecommendationStepDefinitionMobile {
 	@Then("^user selects additional services option in additional services page$")
 	public void select_additionalServiceOption_additional_page_mobile(DataTable givenAttributes) {
 		readfeaturedataMobile(givenAttributes);
-		AdditionalServicesMobilePage additionalpage = new AdditionalServicesMobilePage(wd);
+		AdditionalServicesMobilePage additionalpage = new AdditionalServicesMobilePage((AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		additionalpage.additionalpageFunctional(inputValues.get("Additional Option"));
 	}
 
@@ -367,7 +367,7 @@ public class PlanRecommendationStepDefinitionMobile {
 	@Then("^user selects cost preferences option in cost preferences page$")
 	public void select_costPreferenceOption_costpreferences_page_mobile(DataTable givenAttributes) {
 		readfeaturedataMobile(givenAttributes);
-		CostPreferencesMobilePage costpage = new CostPreferencesMobilePage(wd);
+		CostPreferencesMobilePage costpage = new CostPreferencesMobilePage((AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		costpage.costPreferencepageFunctional(inputValues.get("Preference Option"));
 	}
 
@@ -680,7 +680,7 @@ public class PlanRecommendationStepDefinitionMobile {
 	@Then("^user selects priority in priorities page$")
 	public void user_selects_priorities(DataTable givenAttributes) {
 		readfeaturedataMobile(givenAttributes);
-		PrioritiesMobilePage prioritiesMobile = new PrioritiesMobilePage(wd);
+		PrioritiesMobilePage prioritiesMobile = new PrioritiesMobilePage((AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		prioritiesMobile.prioritiesFunctional(inputValues.get("Priority Option"), inputValues.get("Priorities"));
 		prioritiesMobile.continuePriority();
 	}

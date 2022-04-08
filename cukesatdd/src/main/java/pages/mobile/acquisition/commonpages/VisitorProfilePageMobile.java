@@ -551,6 +551,28 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		CommonUtility.waitForPageLoadNew(driver, addrugs, 45);
 		Assertion.assertTrue(addrugs.isDisplayed());
 	}
+	
+	public void validateCreateAccountLinkPRE() {
+        CommonUtility.checkPageIsReadyNew(driver);
+        sleepBySec(2);
+        WebElement btnsaveResultPRE = driver.findElement(By.xpath("//*[contains(@class,'saveResText')]"));
+        jsClickNew(btnsaveResultPRE);
+        sleepBySec(2);
+        WebElement createAccountPRE = driver.findElement(By.xpath("(//button[contains(text(),'Create an Account')])"));
+        jsClickNew(createAccountPRE);
+        sleepBySec(5);
+        CommonUtility.checkPageIsReadyNew(driver);
+        sleepBySec(3);
+        if (validateNew(driver.findElement(By.xpath("//img[@alt='One Healthcare ID Logo']"))) ||
+                validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Create One Healthcare ID')]"))) ||
+                driver.getCurrentUrl().contains("onehealthcareid.com/app/index.html#/registration")
+        ) {
+            System.out.println("Create Account Page opened successfully");
+        } else {
+            Assert.fail("Create Account Page not opened successfully");
+        }
+
+    }
 
 	/**
 	 * Delete all the providers from the profile

@@ -524,6 +524,13 @@ public class VisitorProfileMobileStepDefinition {
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
 		Assertion.assertTrue(visitorProfile.validateEnrollInPlanIsClickable());
 	}
+	
+	@Then("^user click on save results option and click on create account link and validate the correct login page$")
+    public void user_click_on_save_results_option_and_click_on_create_account_link_and_validate_the_correct_login_page() {
+        VisitorProfilePageMobile visitorProfile = (VisitorProfilePageMobile) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+        visitorProfile.validateCreateAccountLinkPRE();
+
+    }
 
 	@And("^user verifies plan count on shopping cart Icon$")
 	public void user_validates_plan_count_on_shopping_cart_Icon_on_AARP_site(DataTable givenAttributes) {
