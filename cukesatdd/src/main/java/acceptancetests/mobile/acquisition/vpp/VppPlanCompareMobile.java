@@ -125,25 +125,18 @@ public class VppPlanCompareMobile {
 	 * @toDo:Verify X out of Y provider covered information is displayed on Plan
 	 *              Summary page
 	 */
-	@Then("^Verify X out of Y provider covered information is displayed on Plan Summary page Ulayer$")
+/*	@Then("^Verify X out of Y provider covered information is displayed on Plan Summary page Ulayer$")
 	public void verify_providers_covered_ulayer(DataTable Planname) {
 
 		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
 		plannameAttributesMap = DataTableParser.readDataTableAsMaps(Planname);
-		/*
-		 * List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows(); for
-		 * (int i = 0; i < plannameAttributesRow.size(); i++) {
-		 * 
-		 * plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
-		 * plannameAttributesRow.get(i).getCells().get(1)); }
-		 */
 		String planName = plannameAttributesMap.get("PlanName");
 
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		String providerFromRally = (String) getLoginScenario().getBean(VPPCommonConstants.SAVED_PROVIDER_RALLY);
 		plansummaryPage.verifyproviderName(planName, providerFromRally);
-	}
+	} */
 
 	@When("^user selects a Hospitals and retuns to VPP page in ulayer$")
 	public void user_selects_Hospitals_and_return_vpp_page_ulayer() {

@@ -754,18 +754,11 @@ public class VppPlanSummaryMobile {
 		Assertion.assertTrue("Provider coverage Info not updated", plansummaryPage.providerinfo(planName));
 	}
 
-	@Then("^Verify provider name is displayed on Plan Summary page ums$")
+/*	@Then("^Verify provider name is displayed on Plan Summary page ums$")
 	public void verify_provider_covered_ums(DataTable Planname) {
 
 		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
 		plannameAttributesMap = DataTableParser.readDataTableAsMaps(Planname);
-		/*
-		 * List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows(); for
-		 * (int i = 0; i < plannameAttributesRow.size(); i++) {
-		 * 
-		 * plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
-		 * plannameAttributesRow.get(i).getCells().get(1)); }
-		 */
 		String planName = plannameAttributesMap.get("PlanName");
 
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
@@ -773,7 +766,7 @@ public class VppPlanSummaryMobile {
 		String providerFromRally = (String) getLoginScenario().getBean(VPPCommonConstants.SAVED_PROVIDER_RALLY);
 		plansummaryPage.verifyproviderName(planName, providerFromRally);
 	}
-
+*/
 	@Given("^user is on blue layer landing page$")
 	public void user_on_UHC_Medicaresolutions_Site() {
 		AppiumDriver wd = (AppiumDriver) getLoginScenario().getMobileDriver();
