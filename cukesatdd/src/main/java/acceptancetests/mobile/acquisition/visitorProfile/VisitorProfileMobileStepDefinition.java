@@ -381,7 +381,7 @@ public class VisitorProfileMobileStepDefinition {
         memberAttributesMap = DataTableParser.readDataTableAsMaps(data);
         String planName = memberAttributesMap.get("PlanName");
         VisitorProfilePageMobile visitorProfile = (VisitorProfilePageMobile) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
-        AcquisitionHomePage acqHomePage = (AcquisitionHomePage) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
+        AcquisitionHomePageMobile acqHomePage = (AcquisitionHomePageMobile) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
         visitorProfile.savePlanOnPRE(planName);
         //visitorProfile.clickViewSavedPlansPRE();
         acqHomePage.navigateToVisitorProfilePage();
