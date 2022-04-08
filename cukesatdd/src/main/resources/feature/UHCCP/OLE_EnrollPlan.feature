@@ -10,7 +10,9 @@ Feature: OLE Enrol Pages
     	| Zip Code        | <zipcode>       |
       | Is Multi County | <isMultiCounty> |
       | County Name     | <county>        |
+      | Plan Type 			| <plantype> 			|
       | Plan Name				| <planname>			|
+      | Plan Year 			| <planyear> |
     And User views Plan Details of the below Plan
     	| Plan Name	| <planname>	|
     And the user clicks on Enroll in Plan and validates Welcome to OLE Page
@@ -43,15 +45,60 @@ Feature: OLE Enrol Pages
    	Then the user validates Medicaid Number in OLE Page
       | MedicaidNumber | <medicaidnumber> |
     Then the user navigates to Confirm your Eligibility Page
-      | Input Data     | <inputdataType>  |
       | PartA Date     | <partadate>      |
       | PartB Date     | <partbdate>      |
       | MedicaidNumber | <medicaidnumber> |
+    Then the user validates the long term questions in Medicare Information Page
+      | LongTerm Question 		| <longTermFlag> |
+      | Health Insurance Name | <healthinsurancename> |
+      | Group Number          | <groupnumber>         |
+      | Member Number         | <membernumber>        |
+    Then the user validates the Prescription drug coverage questions in Medicare Information Page
+      | PDP Question      | <pdpFlag>      |
+      | Prescription Name | <prescriptioncoveragename> |
+      | PD Group Number   | <pdgroupnumber>            |
+      | PD Member Number  | <pdmembernumber>           |
+      |RX BIN Number      |	<rxBinnumber>              |
+    Then the user navigates to SEP Page
+    Then the user selects the following options for SEP Page
+      | Select Options | <selectoptions> |
+      | Option Data    | <optiondata>    |
+    Then the user navigates to Proposed Effective Date Page
+    Then the user validates Proposed Effective Date is Displayed
+    Then the user navigates to PCP Page and validates PCP page is not displayed for PDP
+    Then the user validates PCP page for MA and MAPD PFFS plans
+    Then the user validates Look up Provider for MA MAPD and DSNP plans.
+    Then the user navigates to Monthly Plan Premium Page
+    Then the user selects payment type
+      | Payment Type           | <paymentType>         |
+      | Card No                | <cardno>              |
+      | Card Expiration Month  | <cardexpirationmonth> |
+      | Card Expiration Year   | <cardexpirationyear>  |
+      | Card Holder First Name | <firstname>           |
+      | Card Holder Last Name  | <lastname>            |
+    Then the user navigates to Authorization Page
+    Then the user validates required fields for Authorization Page Representative
+      | authorizationFirstname      | <authorizefirstN>       |
+      | authorizationLastname       | <authorizelastN>        |
+      | authorizationAddress        | <authorizeaddress>      |
+      | authorizationApartmentSuite | <authorizeapartment>    |
+      | authorizationCity           | <authorizecity>         |
+      | authorizationZip            | <authorizezip>          |
+      | authorizationPhoneNo        | <authorizephonenumber>  |
+      | authorizationRelationship   | <authorizeRelationship> |
+      | authorizationStateDisplay   | <authorizestate>        |
+    Then the user validates Statement of Understanding Page
+      | soAAgree          | <authorizationagree>    |
+    Then the user navigates to Review and Submit Page
+    Then the user validates the Online Enrollment details on Review and Submit Page
+    #Then the user clicks on Submit Enrollment to complete enrollment
+    #Then the user Validates Next Steps in Confirmation Page for the Plan Type
     
     
     Examples: 
-      | zipcode | isMultiCounty	|	county	|	lang		|	planname																						|	firstname       | middlename      | lastname        | dob        | gender	| permstreet    				| permcity    |	permaptno	| mailingaddressquestion| mailingstreet | mailingaptno	|	mailingcity 	| mailingstate	| mailingzip	| email         |	emailConfirmation | goGreen | phoneno				| mobileno   		|	medicarenumber	| ssnflag	|	cardtype	|	medicaidnumber	| partadate	|	partbdate	|       
-      | 35057   | No						|	Alabama	|	Es			|	UnitedHealthcare Dual Complete Plan 1 (HMO D-SNP)		|	Test_Portals_FN | Test_Portals_MN | Test_Portals_LN | 11-11-1993 | Female	|	12529 State Road 535 	| Ste   			| 566				|	No										|	802 MailingSt	|	566						|	Montgomery    | AL						| 35057				|	test@test.com	|	<blank>						|	<blank>	|	952-931-4701	| 837-625-4803	| 1EG4-TE5-MK99 	| false		|	MBI				|	1234567892 			| 05012015 	|	05012015	|
+      | zipcode | isMultiCounty	|	county					|	lang		|	plantype	|	planname																						|	firstname       | middlename      | lastname        | dob      | gender		| permstreet    				| permcity    |	permaptno	| mailingaddressquestion| mailingstreet | mailingaptno	|	mailingcity 	| mailingstate	| mailingzip	| email         |	emailConfirmation | goGreen | phoneno			| mobileno   		|	medicarenumber| ssnflag	|	cardtype	|	medicaidnumber	| partadate	|	partbdate	|	longTermFlag	|	healthinsurancename | groupnumber | membernumber	|	pdpFlag	|	prescriptioncoveragename | pdgroupnumber | pdmembernumber |	rxBinnumber	|	selectoptions           																																																																																									|	optiondata							|	paymentType | cardno  | cardexpirationmonth | cardexpirationyear	|	authorizefirstN | authorizelastN | authorizeaddress | authorizeapartment | authorizecity | authorizezip | authorizephonenumber | authorizeRelationship | authorizestate |
+      | 35057   | No						|	Cullman County	|	Es			|	DSNP			|	UnitedHealthcare Dual Complete Plan 1 (HMO D-SNP)		|	Test_Portals_FN | Test_Portals_MN | Test_Portals_LN | 11111993 | Femenino	|	12529 State Road 535 	| Ste   			| 566				|	No										|	802 MailingSt	|	566						|	Montgomery    | AL						| 35057				|	test@test.com	|	<blank>						|	<blank>	|	9529314701	| 837-625-4803	| 1EG4TE5MK99		| false		|	MBI				|	1234567892 			| 05012015 	|	05012015	|	Sí						|	HealthInsurance     | HI1562759   | ABC12345DEF		|	Sí			|	PrescriptionCoverage     | PD5646136     | BCD12345EFG    | 123456			|	Medicare Advantage (MA OEP en/Medicare (o mi estado)/(o mi estado me ayuda a pagar mis primas de Medicare)/lo declarado por la Agencia Federal para el Manejo de Emergencias [FEMA en											|	/12202018/ /12202018/ 	|	Pay By Mail | [blank] | [blank]             | [blank]							|	Test_K          | Test_M         | 122 2ND AVE      |                655 | MINNEAPOLIS   |        55455 |           1235678901 | FRIEND                | MN             |
+      | 35057   | No						|	Cullman County	|	En			|	DSNP			|	UnitedHealthcare Dual Complete Plan 1 (HMO D-SNP)		|	Test_Portals_FN | Test_Portals_MN | Test_Portals_LN | 11111993 | Femenino	|	12529 State Road 535 	| Ste   			| 566				|	No										|	802 MailingSt	|	566						|	Montgomery    | AL						| 35057				|	test@test.com	|	<blank>						|	<blank>	|	9529314701	| 837-625-4803	| 1EG4TE5MK99		| false		|	MBI				|	1234567892 			| 05012015 	|	05012015	|	yes						|	HealthInsurance     | HI1562759   | ABC12345DEF		|	yes			|	PrescriptionCoverage     | PD5646136     | BCD12345EFG    | 123456			|	Medicare Advantage Open Enrollment Period (MA OEP)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA)	|	/12202018/ /12202018/ 	|	Pay By Mail | [blank] | [blank]             | [blank]							|	Test_K          | Test_M         | 122 2ND AVE      |                655 | MINNEAPOLIS   |        55455 |           1235678901 | FRIEND                | MN             |
       #| 85925   | Test_Portals_FN | Test_Portals_MN | Test_Portals_LN | 11-11-1993 | 12529 State Road 535 | Ste   | Phoenix       | ARIZONA        | 952-931-4701 | 837-625-4803 | test@test.com | 1EG4-TE5-MK72 | 1234567892 | 07-30-2021 |
       #| 94501   | Test_Portals_FN | Test_Portals_MN | Test_Portals_LN | 11-11-1993 | 12529 State Road 535 | Ste   | San Francisco | CALIFORNIA     | 952-931-4701 | 837-625-4803 | test@test.com | 1EG4-TE5-MK72 | 1234567892 | 07-30-2021 |
       #| 14215   | Test_Portals_FN | Test_Portals_MN | Test_Portals_LN | 11-11-1993 | 12529 State Road 535 | Ste   | Yonkers       | NEW YORK       | 952-931-4701 | 837-625-4803 | test@test.com | 1EG4-TE5-MK72 | 1234567892 | 07-30-2021 |
@@ -61,39 +108,6 @@ Feature: OLE Enrol Pages
       #| 02809   | Test_Portals_FN | Test_Portals_MN | Test_Portals_LN | 11-11-1993 | 12529 State Road 535 | Ste   | War Wick      | RHODE ISLAND   | 952-931-4701 | 837-625-4803 | test@test.com | 1EG4-TE5-MK72 | 1234567892 | 07-30-2021 |
       #| 78520   | Test_Portals_FN | Test_Portals_MN | Test_Portals_LN | 11-11-1993 | 12529 State Road 535 | Ste   | Houston       | TEXAS          | 952-931-4701 | 837-625-4803 | test@test.com | 1EG4-TE5-MK72 | 1234567892 | 07-30-2021 |
       
- 
- #Then click on Next Page button for OLE form
-  #  And User enters First Name as "<fname>" for OLE form
-   # And User enters Middle Name as "<mname>" for OLE form
-    #And User enters Last Name as "<lname>" for OLE form
-   # And User enters Date of birth as "<dob>" for OLE form
-   # And User selects the gender for OLE form
-   # And User enters Street Address as "<adr1>" for OLE form
-   # And User enters Apartment/Suite as "<adr2>" for OLE form
-   # And User enters City as "<city>" for OLE form
-    #And User enters State as "<state>" for OLE form
-    #And User enters Zip Code as "<zipcode>" for OLE form
-  #  And User enters Main Phone Number as "<mnphnum>" for OLE form
-   # And User enters Mobile Phone Number as "<mbphnum>" for OLE form
-   # And User enters Primary Email Address as "<email>" click on next for OLE form
-   # Then click on Next Page button for OLE form
-   # And User enters Medicare number as "<mcnum>" for OLE form
-   # And User selects Medicaid number for OLE form
-   # And User enters Medicaid number as "<mdnum>" for OLE form
-   # And User enters Hospital (Part A) Effective Date as "<date>" for OLE form
-   # And User enters Medical (Part B) Effective Date  as "<date>" click on next for OLE form
-   # And User selects Other Health Insurance for OLE form
-   # And User selects Prescription Drug Coverage click on next for OLE form
-   # And User selects Special Election Period click on next for OLE form
-   # And User clicks next on provider search page for OLE form
-   # And User clicks next on Lookup your provider page for OLE form
-   # And User clicks next on Payement information page for OLE form   
-   # And User selects on Authorizations and Approvals for OLE form
-   # And User selects on Statement of Understanding clicks on next for OLE form
-   # Then User clicks on Submit Application for OLE form
-   # Then User Checks for confirmation message for OLE form
-   # And close browser for OLE form
- 
  
  
  

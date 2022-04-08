@@ -61,7 +61,7 @@ public class TellUsAboutDrugMobile extends UhcDriver {
 	public WebElement QuantityTxt;
 
 	// @FindBy(xpath = "//select[contains(@id, 'new-drug-frequency')]")
-	@FindBy(css = "#selectdosage")
+	@FindBy(xpath="//select[contains(@id, 'drugfrequency')]")
 	public WebElement FrequencyDrpDwn;
 
 	@FindBy(xpath = "//select[contains(@id, 'new-drug-refill')]")
@@ -160,24 +160,40 @@ public class TellUsAboutDrugMobile extends UhcDriver {
 
 	public void selectQuantity(String Quantity) {
 		validateNew(QuantityTxt);
-		sendkeysNew(QuantityTxt, Quantity);
+		sendkeysMobile(QuantityTxt, Quantity);
 
 	}
 
 	public void selectFrequency(String Frequency) {
 		validateNew(FrequencyDrpDwn);
-		jsClickNew(FrequencyDrpDwn);
+	/*	jsClickNew(FrequencyDrpDwn);
 		WebElement element = driver
 				.findElement(By.xpath("//select[@id='drugfrequency']//option[contains(text(), '" + Frequency + "')]"));
-		jsClickNew(element);
+		jsClickNew(element); */
+		try {
+			FrequencyDrpDwn.click();
+		}
+		catch (Exception e) {
+			jsClickNew(FrequencyDrpDwn);
+		}
+		mobileSelectOption(FrequencyDrpDwn, Frequency, true);
+		
 	}
 
 	public void selectSupplyLength(String SupplyLength) {
 		validateNew(supplyLengthDrpDwn);
-		jsClickNew(supplyLengthDrpDwn);
+	/*	jsClickNew(supplyLengthDrpDwn);
 		WebElement element = driver.findElement(
 				By.xpath("//select[@id='new-drug-refill']//option[contains(text(), '" + SupplyLength + "')]"));
-		jsClickNew(element);
+		jsClickNew(element);  */
+		
+		try {
+			supplyLengthDrpDwn.click();
+		}
+		catch (Exception e) {
+			jsClickNew(supplyLengthDrpDwn);
+		}
+		mobileSelectOption(supplyLengthDrpDwn, SupplyLength, true);
 
 	}
 }

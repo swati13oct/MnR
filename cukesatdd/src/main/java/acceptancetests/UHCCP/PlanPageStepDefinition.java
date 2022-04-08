@@ -6,6 +6,7 @@ import java.util.Map;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.Assertion;
@@ -40,11 +41,15 @@ public class PlanPageStepDefinition {
 		String county = memberAttributesMap.get("County Name");
 		String isMultiCounty = memberAttributesMap.get("Is Multi County");
 		String planName = memberAttributesMap.get("Plan Name");
+		String planType = memberAttributesMap.get("Plan Type");
+		String planYear = memberAttributesMap.get("Plan Year");
 
 		getLoginScenario().saveBean(UHCCPCommonConstants.ZIPCODE, zipcode);
 		getLoginScenario().saveBean(UHCCPCommonConstants.COUNTY, county);
 		getLoginScenario().saveBean(UHCCPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
 		getLoginScenario().saveBean(UHCCPCommonConstants.PLAN_NAME, planName);
+		getLoginScenario().saveBean(UHCCPCommonConstants.PLAN_TYPE, planType);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, planYear);
 
 		UHCCPHomePage uhccpHomePage = new UHCCPHomePage(driver);
 		PlanSummaryPage planSummaryPage = null;

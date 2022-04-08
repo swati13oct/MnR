@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
@@ -21,11 +22,13 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineLandingAndZipcodePages;
 import pages.acquisition.vpp.VPPTestHarnessPage;
 import pages.mobile.acquisition.dceredesign.BuildYourDrugListMobile;
 import pages.mobile.acquisition.dceredesign.DrugDetailsPageMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
+import pages.mobile.acquisition.planrecommendationengine.LandingAndZipcodeMobilePage;
 
 public class VisitorProfilePageMobile extends UhcDriver {
 
@@ -35,6 +38,12 @@ public class VisitorProfilePageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//span[text()='Status']/following-sibling::span")
 	public WebElement enrolledStatus;
+	
+	 @FindBy(xpath = "//div[@id='modal']//button[contains(@class,'close')]")
+	 private WebElement closeProfilePopupPRE;
+	 
+	 @FindBy(xpath = "//div[@id='modal']//button[contains(text(),'Keep')]")
+	 private WebElement createProfilePopupPRE;
 
 	@FindBy(xpath = "//span[text()='ZIP Code']/following-sibling::span")
 	public WebElement enrolledPlanZipcode;
@@ -549,6 +558,28 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		CommonUtility.waitForPageLoadNew(driver, addrugs, 45);
 		Assertion.assertTrue(addrugs.isDisplayed());
 	}
+	
+	public void validateCreateAccountLinkPRE() {
+        CommonUtility.checkPageIsReadyNew(driver);
+        sleepBySec(2);
+        WebElement btnsaveResultPRE = driver.findElement(By.xpath("//*[contains(@class,'saveResText')]"));
+        jsClickNew(btnsaveResultPRE);
+        sleepBySec(2);
+        WebElement createAccountPRE = driver.findElement(By.xpath("(//button[contains(text(),'Create an Account')])"));
+        jsClickNew(createAccountPRE);
+        sleepBySec(5);
+        CommonUtility.checkPageIsReadyNew(driver);
+        sleepBySec(3);
+        if (validateNew(driver.findElement(By.xpath("//img[@alt='One Healthcare ID Logo']"))) ||
+                validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Create One Healthcare ID')]"))) ||
+                driver.getCurrentUrl().contains("onehealthcareid.com/app/index.html#/registration")
+        ) {
+            System.out.println("Create Account Page opened successfully");
+        } else {
+            Assert.fail("Create Account Page not opened successfully");
+        }
+
+    }
 
 	/**
 	 * Delete all the providers from the profile
@@ -591,6 +622,26 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		Assertion.assertEquals(monthlyPremium, enrolledMonthlyPremium.getText().trim());
 
 	}
+	
+	public void savePlanOnPRE(String planName) {
+        try {
+            List<String> listOfTestPlans = Arrays.asList(planName.split(","));
+            System.out.println(
+                    "Going to mark the following " + listOfTestPlans.size() + " number of test plans as favorite");
+            Thread.sleep(5000);
+            for (String plan : listOfTestPlans) {
+                WebElement savePlan = driver.findElement(By.xpath("(//a[contains(text(),'" + plan + "')]/following::span[contains(@class,'save')])[1]"));
+                ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", savePlan);
+                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", savePlan);
+                Thread.sleep(5000);
+            }
+            if (createProfilePopupPRE.isDisplayed()) {
+                jsClickNew(closeProfilePopupPRE);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 	/**
 	 * Get the added provider information
@@ -803,6 +854,29 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		}
 
 	}
+	
+	public void validateChangedPharmacy(String pharmacy, String user_state) {
+        CommonUtility.checkPageIsReady(driver);
+        sleepBySec(2);
+        if (user_state.equalsIgnoreCase("auth")) {
+            System.out.println(drugHeader.getText().trim().replace("\n", " "));
+            Assertion.assertTrue(
+                    (drugHeader.getText().trim().replace("\n", " ").contains("Your Saved Drugs & Pharmacy (1)")));
+        } else if (user_state.equalsIgnoreCase("unauth")) {
+            System.out.println(drugHeader.getText());
+            Assertion.assertTrue(
+                    (drugHeader.getText().trim().replace("\n", " ").contains("Your Saved Drugs & Pharmacy (1)")));
+        }
+        //Assertion.assertEquals("Your Saved Drugs (1) & Pharmacy �", drugHeader.getText().trim());
+        jsClickNew(drugHeader);
+
+        WebElement changedPharmacy = driver.findElement(By.xpath("//ul[@class='drugs-list']//li//span[contains(text(),'" + pharmacy + "')]"));
+        if (validateNew(changedPharmacy)) {
+            System.out.println("Pharmacy added: " + pharmacy);
+        } else {
+            Assert.fail("Pharmacy not changed");
+        }
+    }
 
 	public DrugDetailsPageMobile clickBackToDCELink() {
 		jsClickNew(backToDrugCostEstimatorLink);
@@ -813,6 +887,23 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		} else
 			return null;
 	}
+	
+	public LandingAndZipcodeMobilePage clickGetStartedPRE() {
+        CommonUtility.checkPageIsReadyNew(driver);
+        sleepBySec(3);
+        validateNew(btnPREGetStarted);
+        scrollToView(btnPREGetStarted);
+        jsClickNew(btnPREGetStarted);
+        sleepBySec(3);
+        CommonUtility.checkPageIsReadyNew(driver);
+        if (driver.getCurrentUrl().contains("plan-recommendation-engine")) {
+            System.out.println("Navigation to PRE from VP successful");
+            return new LandingAndZipcodeMobilePage(driver);
+        } else {
+            Assert.fail("Navigation to PRE from VP successful");
+            return null;
+        }
+    }
 
 	public void deleteAllDrugs(String drugList) {
 		if (validate(savedDrug, 45)) {
@@ -1029,6 +1120,9 @@ public class VisitorProfilePageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//div[contains(@id,'DrugName')]")
 	private WebElement savedDrug;
+	
+	@FindBy(xpath = "//span[contains(text(),'Get')]")
+    private WebElement btnPREGetStarted;
 
 	@FindAll({ @FindBy(xpath = "//div[contains(@id,'DrugName')]") })
 	private List<WebElement> savedDrugsList;

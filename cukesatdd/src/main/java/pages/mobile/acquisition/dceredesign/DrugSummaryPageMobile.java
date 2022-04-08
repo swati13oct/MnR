@@ -1450,5 +1450,16 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		CommonUtility.checkPageIsReadyNew(driver);
 		waitForPageLoadSafari();
 	}
+	
+	public void clickReturnToProfile() {
+		try {
+			if (returnToProfileLink.isDisplayed()) {
+				System.out.println("Return to profile displayed");
+				jsClickNew(returnToProfileLink);
+			}
+		} catch (Exception e) {
+			Assertion.fail("Return to profile not displayed");
+		}
+	}
 
 }
