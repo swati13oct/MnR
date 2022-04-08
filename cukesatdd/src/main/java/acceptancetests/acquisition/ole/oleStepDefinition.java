@@ -1745,7 +1745,9 @@ public class oleStepDefinition {
 		String planType = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_TYPE);
 		PrimaryCarePhysicianPage pcpPage = (PrimaryCarePhysicianPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PRIMARY_CARE_PHYSICIAN_PAGE);
 		String planName = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME);
+		String site = (String) getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME);
 		if(!planType.contentEquals("PDP") && !planName.contains("PFFS")
+
 				//Amey: Adding the environment logic since gate is failing because of a Rally issue.
 				// An incident is logged with the external Rally team. Remove this condition once fixed.
 				&& !MRScenario.environment.contains("mnr-acq-ci")&& !MRScenario.environment.contains("stage-0")){
@@ -1755,14 +1757,16 @@ public class oleStepDefinition {
 				System.out.println("Provider Look Up : Validation Passed for PlanType - "+planType);
 				getLoginScenario().saveBean(OLE_PageConstants.OLE_PRIMARY_CARE_PHYSICIAN_PAGE,
 						pcpPage);
-				ArrayList<String> pcp_Info = pcpPage.getPCPInfo() ;
-				getLoginScenario().saveBean(oleCommonConstants.PCP_NAME,pcp_Info.get(0));
-				getLoginScenario().saveBean(oleCommonConstants.PCP_NUMBER,pcp_Info.get(1));
-				getLoginScenario().saveBean(oleCommonConstants.PCP_RECENTLY_VISITED,pcp_Info.get(2));
-				Assertion.assertTrue(true);
-			}
-			else{
-				System.out.println("Provider Look Up : Validation FAILED for PlanType - "+planType);
+
+				if (!site.equals("UHCCP")) {
+					ArrayList<String> pcp_Info = pcpPage.getPCPInfo();
+					getLoginScenario().saveBean(oleCommonConstants.PCP_NAME, pcp_Info.get(0));
+					getLoginScenario().saveBean(oleCommonConstants.PCP_NUMBER, pcp_Info.get(1));
+					getLoginScenario().saveBean(oleCommonConstants.PCP_RECENTLY_VISITED, pcp_Info.get(2));
+					Assertion.assertTrue(true);
+				}
+			} else {
+				System.out.println("Provider Look Up : Validation FAILED for PlanType - " + planType);
 				Assertion.fail();
 			}
 		}

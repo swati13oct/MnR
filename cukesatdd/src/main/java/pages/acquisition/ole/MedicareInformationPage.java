@@ -1048,7 +1048,7 @@ public class MedicareInformationPage extends UhcDriver {
 			PrescriptionCoverageQuestionFlagNo.isDisplayed();
 			jsClickNew(PrescriptionCoverageQuestionFlagNo);
 			System.out.println("Plantype is"+planType);
-			if(planType.contentEquals("MA")){
+		/*	if(planType.contentEquals("MA")){
 				String ActualPrescriptionText=PrescriptionDrugTextmesage_MAPlans_No.getText().replaceAll("[^a-zA-Z0-9\\s+]", " ").trim();
 				String ExpectedPrescriptionText="If you don't enroll in a Medicare plan with Part D prescription drug coverage when you are first eligible of have other credible prescription drug coverage or extra help, you may have to pay a late enrollment penalty if you join a plan later. The penalty is a fee set by Medicare that gets added to your premium, and you pay it for as long as you have Part D.";
 				ExpectedPrescriptionText=ExpectedPrescriptionText.replaceAll("[^a-zA-Z0-9\\s+]", " ").trim();
@@ -1073,7 +1073,7 @@ public class MedicareInformationPage extends UhcDriver {
 					System.out.println("Lprescription question Options  :Validation Failed");
 					Validation_Flag = false;
 				}
-		//	}
+		//	}*/
 
 			//if (PDPquestionFlag.equalsIgnoreCase("yes")) {
 			PrescriptionCoverageQuestionFlagYes.isDisplayed();
@@ -1322,7 +1322,7 @@ public class MedicareInformationPage extends UhcDriver {
 		PrescriptionCoverageQuestionFlagNo.isDisplayed();
 		jsClickNew(PrescriptionCoverageQuestionFlagNo);
 		System.out.println("Plantype is"+planType);
-		if(planType.contentEquals("MA")){
+		/*if(planType.contentEquals("MA")){
 			String ActualPrescriptionText=PrescriptionDrugTextmesage_MAPlans_No.getText().replaceAll("[^a-zA-Z0-9\\s+]", " ").trim();
 			String ExpectedPrescriptionText="If you don't enroll in a Medicare plan with Part D prescription drug coverage when you are first eligible of have other credible prescription drug coverage or extra help, you may have to pay a late enrollment penalty if you join a plan later. The penalty is a fee set by Medicare that gets added to your premium, and you pay it for as long as you have Part D.";
 			ExpectedPrescriptionText=ExpectedPrescriptionText.replaceAll("[^a-zA-Z0-9\\s+]", " ").trim();
@@ -1348,7 +1348,7 @@ public class MedicareInformationPage extends UhcDriver {
 			Validation_Flag = false;
 		}
 
-		//	}
+		//	}*/
 
 		//if (PDPquestionFlag.equalsIgnoreCase("yes")) {
 		PrescriptionCoverageQuestionFlagYes.isDisplayed();
