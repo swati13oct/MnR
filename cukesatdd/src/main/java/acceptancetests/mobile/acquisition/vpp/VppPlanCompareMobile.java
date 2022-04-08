@@ -109,7 +109,7 @@ public class VppPlanCompareMobile {
 	/**
 	 * @toDo:user user selects a provider
 	 */
-	@When("^user selects a provider and retuns to VPP page in ulayer$")
+/*	@When("^user selects a provider and retuns to VPP page in ulayer$")
 	public void user_selects_provider_and_return_vpp_page_ulayer() {
 		{
 			ProviderSearchPageMobile providerSearchPage = (ProviderSearchPageMobile) getLoginScenario()
@@ -119,7 +119,7 @@ public class VppPlanCompareMobile {
 //			Assertion.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
 
 		}
-	}
+	} */
 
 	/**
 	 * @toDo:Verify X out of Y provider covered information is displayed on Plan

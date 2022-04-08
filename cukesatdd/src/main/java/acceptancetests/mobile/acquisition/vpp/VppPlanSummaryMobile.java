@@ -723,7 +723,7 @@ public class VppPlanSummaryMobile {
 		}
 	}
 
-	@When("^user selects a provider and retuns to VPP page in ums$")
+/*	@When("^user selects a provider and retuns to VPP page in ums$")
 	public void user_selects_provider_and_return_vpp_page_ums() {
 		{
 			ProviderSearchPageMobile providerSearchPage = (ProviderSearchPageMobile) getLoginScenario()
@@ -734,7 +734,7 @@ public class VppPlanSummaryMobile {
 
 		}
 	}
-
+*/
 	@Then("^Verify X out of Y provider covered information is displayed on Plan Summary page ums$")
 	public void verify_providers_covered_ums(DataTable Planname) {
 
