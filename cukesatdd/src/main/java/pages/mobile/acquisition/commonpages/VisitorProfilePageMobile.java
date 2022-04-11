@@ -22,6 +22,7 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
+import pages.acquisition.commonpages.ComparePlansPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineLandingAndZipcodePages;
 import pages.acquisition.vpp.VPPTestHarnessPage;
 import pages.mobile.acquisition.dceredesign.BuildYourDrugListMobile;
@@ -1083,24 +1084,17 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	public ComparePlansPageMobile planCompare(String plans) {
 
 		jsClickNew(comparePlans);
-
-		waitforElementVisibilityInTime(comparePlansPageControl, 10);
-		/*
-		 * CommonUtility.waitForPageLoad(driver, comparePlansOnPopup, 20); String[] plan
-		 * = plans.split(","); for(int i=0;i<4;i++) {
-		 * driver.findElement(By.xpath("//label[text()='"+plan[i]+
-		 * "']/preceding-sibling::input")).click(); } comparePlansOnPopup.click();
-		 */
-
-		validateNew(enrollButton);
-		if (driver.getCurrentUrl().contains("/plan-compare")) {
-
-			System.out.println("Navigation to Plan Compare page is Passed");
-			return new ComparePlansPageMobile(driver);
-		} else {
-			Assertion.fail("Navigation to Plan Compare page is failed");
-		}
-		return null;
+        //validateNew(enrollBtn);
+        CommonUtility.checkPageIsReadyNew(driver);
+        validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Compare')]")), 45);
+        waitForPageLoadSafari();
+        if (driver.getCurrentUrl().contains("/plan-compare")) {
+            System.out.println("Navigation to Plan Compare page is Passed");
+            return new ComparePlansPageMobile(driver);
+        } else {
+            Assertion.fail("Navigation to Plan Compare page is failed");
+        }
+        return null;
 	}
 
 	/**

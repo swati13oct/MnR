@@ -2978,6 +2978,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public void validateTFNelement(String tfnXpath) {
 		List<WebElement> TFNelement = driver.findElements(By.xpath(tfnXpath));
 		boolean present = false;
+		pageloadcomplete();
+		sleepBySec(3);
 		for (WebElement tfn : TFNelement) {
 			if (validate(tfn)) {
 				System.out.println("TFN is Displayed on Page : " + tfn.getText());
@@ -5151,17 +5153,36 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 					driver.getCurrentUrl().contains("plan-recommendation-engine"));
 			break;
 
-		case "Drug Cost Estimator":
+		case "Estimate Drug Costs":
 			Assertion.assertTrue("Navigation to Drug Cost Estimator page failed",
-					driver.getCurrentUrl().contains("estimate-drug-costs"));
+					driver.getCurrentUrl().contains("drug-cost-estimator"));
 			break;
 
-		case "Pharmacy Search":
+		case "Search for a Pharmacy":
 			Assertion.assertTrue("Navigation to Pharmacy Search page failed",
 					driver.getCurrentUrl().contains("Pharmacy-Search"));
 			break;
 
-		case "Provider Search":
+		case "Search Doctors":
+			if(driver.toString().contains("IOS")) {
+				driver.navigate().back();
+			}
+			else {
+				for (String s : all) {
+					driver.switchTo().window(s);
+					// sleepBySec(5);
+					flag = driver.getCurrentUrl().contains("werally");
+					if (!base.equals(s)) {
+						driver.close();
+						break;
+					}
+				}
+				driver.switchTo().window(base);
+				Assertion.assertTrue("Navigation to Provider Search page failed", flag);
+			}			
+			break;
+
+		case "Search Dentists":
 			for (String s : all) {
 				driver.switchTo().window(s);
 				// sleepBySec(5);
@@ -5317,6 +5338,17 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		WebElement link = null;
 		String url = driver.getCurrentUrl();
 
+		if(linkName.equalsIgnoreCase("Plan Recommendation") || linkName.equalsIgnoreCase("Estimate Drug Costs") || linkName.equalsIgnoreCase("Search for a Pharmacy") || linkName.equalsIgnoreCase("Search Doctors") || linkName.equalsIgnoreCase("Search Dentists")) {
+			jsClickNew(toolsAndResources);
+		}
+		else if(linkName.equalsIgnoreCase("Introduction to Medicare") || linkName.equalsIgnoreCase("Eligibility") || linkName.equalsIgnoreCase("Coverage Choices") || linkName.equalsIgnoreCase("Medicare FAQ")) {
+			jsClickNew(learnAboutMedicareFooterButton);
+		}
+		else if(linkName.equalsIgnoreCase("Language Assistance") || linkName.equalsIgnoreCase("AARP.org") || linkName.equalsIgnoreCase("Coverage Choices") || linkName.equalsIgnoreCase("Medicare FAQ")) {
+			jsClickNew(more);
+		}
+		
+		
 		if (linkName.equals("Medicare Supplement Insurance Plans")) {
 			link = driver.findElement(
 					By.xpath("//*[@class='uhc-footer']//span[contains(text(),'Medicare Supplement Insurance Plans')]"));
@@ -5334,11 +5366,11 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 					Assert.assertFalse(size == 0);
 				}
 			} else {
-				link = driver.findElement(By.xpath("//*[@class='uhc-footer']//a[contains(text(),'" + linkName
-						+ "') and contains(@dtmname,'" + linkName
-						+ "')]|(//a[@dtmname='NavLinks:Medicare Education:Medicare FAQ'and @href='/medicare-education/medicare-faq.html'])[2]"));
+				link = driver.findElement(By.xpath("(//*[@class='uhc-footer']//a[contains(text(),'" + linkName + "')])[2]"));
 				waitforElement(link);
 				jsClickNew(link);
+				if(linkName.equalsIgnoreCase("Search Doctors") || linkName.equalsIgnoreCase("Search Dentists"))
+					sleepBySec(60);
 				CommonUtility.checkPageIsReadyNew(driver);
 			}
 		}

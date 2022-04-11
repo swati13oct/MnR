@@ -2697,6 +2697,10 @@ public class DrugDetailsPageMobile extends UhcDriver {
 				.xpath("(//caption[contains(text(), 'Your Drugs')]/ancestor::table//span[contains(text(), '" + drugName
 						+ "')]//following::ul[contains(@class, 'yourdrugs')]//li[contains(text(), 'per') and contains(text(), 'refill')])[2]"));
 		String DrugText = DrugDetailsText.getText();
+		
+		if(!(DrugText.length()>0))
+			DrugText = DrugDetailsText.getAttribute("innerHTML");
+		System.out.println("\n====="+ DrugText+"======\n");
 		if (validateNew(DrugName) && validateNew(DrugDetailsText) && DrugText.contains(drugQuantity)
 				&& DrugText.contains(drugFrequency) && DrugText.contains(drugSupplyLen)) {
 			System.out.println(
