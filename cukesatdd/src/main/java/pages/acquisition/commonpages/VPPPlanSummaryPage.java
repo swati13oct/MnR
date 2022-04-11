@@ -30,7 +30,6 @@ import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -395,7 +394,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	// MedSupp Resume application
 	
-	@FindBy(xpath = "(//*[contains(text(),'Start Application') or contains(text(),'Start application')])[1]")
+	@FindBy(xpath = "(//button[contains(text(),'Start Application') or contains(text(),'Start application')])[1]")
 
 	//@FindBy(xpath = "(//*[contains(text(),'Start Application')])[1]")
 	// @FindBy(xpath =
@@ -403,7 +402,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	// application')])[1]")
 	private WebElement Start_ApplicationBtn;
 
-    @FindBy(xpath = "(//*[contains(text(),'Start Application') or contains(text(),'Start application')])[1]")
+    @FindBy(xpath = "(//button[contains(text(),'Start Application') or contains(text(),'Start application')])[1]")
 	//@FindBy(xpath = "(//*[@id=\"responsiveplan\"]/div[4]/div/div[1]/div[2]/button")
 	// @FindBy(xpath =
 	// "(//*[contains(@class,'swiper-content')]//*[contains(text(),'Start
@@ -950,7 +949,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	private WebElement compareButton;
 
 	// @FindBy(xpath = "//span[@class='size36 semiBoldText colorPrimaryBlue']")
-	@FindBy(xpath = "(//*[contains(text(),'Compare AARP� Medicare Supplement')])[1]")
+	@FindBy(xpath = "(//*[contains(text(),'Compare AARPŽ Medicare Supplement')])[1]")
 	private WebElement comparePageHeader;
 
 //	@FindBy(xpath = "(//button[@class='unliked buttonIntoText'])[1]")
@@ -2137,12 +2136,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	 * @return
 	 */
 	public String GetTFNforPlanType() {
-
-		try {
-			Thread.sleep(7);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 		if (validateNew(RightRail_TFN, 45)) {
 			System.out.println("TFN is displayed in Right Rail");
 			String TFN_Number = RightRail_TFN.getText();
@@ -4183,8 +4176,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		jsClickNew(viewPlansBtnMedSupp);
 		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
-		//CommonUtility.waitForPageLoadNew(driver, Start_ApplicationBtn, 45);
-		CommonUtility.waitForPageLoadNew(driver, driver.findElement(By.xpath("(//button[contains(@class,'start') or contains(text(),'Start')])[1]")), 60);
+		CommonUtility.waitForPageLoadNew(driver, Start_ApplicationBtn, 45);
 		// Start_ApplicationBtn.click();
 		// if (driver.getCurrentUrl().contains("aarpsupplementalhealth"))
 		// return new MedSuppOLEPage(driver);
@@ -4995,14 +4987,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		jsClickNew(nextButton);
 
 		System.out.println("Eligibility Health Questions are displayed");
-		Thread.sleep(2000);
 		jsClickNew(Eligibility);
 		jsClickNew(NursingFacility);
 		jsClickNew(ESRD);
 		jsClickNew(EligibilitySurgery);
 
 		jsClickNew(nextButton);
-		Thread.sleep(2000);
+
 		jsClickNew(atrial);
 		jsClickNew(artery);
 		jsClickNew(peripheral);
@@ -7575,7 +7566,7 @@ public String GetMonthlyPremiumValue() {
 			Thread.sleep(5000);
 			for (String plan : listOfTestPlans) {
 				WebElement savePlan = driver.findElement(By.xpath("//h2[text()='" + plan
-						+ "']/following::*[contains(@class,'save-box')][1]"));
+						+ "']/following::div[contains(@class,'save-box')][1]"));
 				((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", savePlan);
 				((JavascriptExecutor) driver).executeScript("arguments[0].click();", savePlan);
 				threadsleep(2);
@@ -7851,7 +7842,7 @@ public String GetMonthlyPremiumValue() {
 			Assertion.fail("*****************TFN number was  not found macthing with the SAM call Popup ***************"
 					+ ExpectedCallSAMTFN);
 		}*/
-		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. ï¿½ 8 p.m., 7 days a week.*\n*Alaska and Hawaii: 8 a.m. ï¿½ 8 p.m. Monday ï¿½ Friday, 8 a.m. ï¿½ 5 p.m. Saturday and Sunday.";
+		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. ĂŻÂżÂ˝ 8 p.m., 7 days a week.*\n*Alaska and Hawaii: 8 a.m. ĂŻÂżÂ˝ 8 p.m. Monday ĂŻÂżÂ˝ Friday, 8 a.m. ĂŻÂżÂ˝ 5 p.m. Saturday and Sunday.";
 		validate(CallSamTFNtimezone);
 		String ActualCallSamTFNtimezone = CallSamTFNtimezone.getText();
 		System.out.println(ExpectedCallSamTFNtimezone);
@@ -7934,7 +7925,7 @@ public String GetMonthlyPremiumValue() {
 	@FindBy(xpath = "(//*[contains(text(),'Edit your information')])[1]")
 	private WebElement EditYourInformationLink;
 	
-	@FindBy(xpath="//*[@id='part-b-month']")
+	@FindBy(id = "part-b-month")
 	private WebElement partBDropdown;
 	
 	public boolean updatePersonalDetailsForMedsup() {
@@ -7946,11 +7937,7 @@ public String GetMonthlyPremiumValue() {
 		//partBDropdown.click();
 		jsClickNew(updateGenderDetailsForMedsup);
 		threadsleep(5);
-		//selectFromDropDownByText(driver, partBDropdown, "March");
-		partBDropdown.click();
-		Select dropdown = new Select(partBDropdown);
-		dropdown.selectByValue("05");
-		threadsleep(5);
+		selectFromDropDownByText(driver, partBDropdown, "May");
 		jsClickNew(saveAndUpdatePremiumsBtn);
 		threadsleep(5);
 		if(validate(EditYourInformationLink)) {
@@ -7959,13 +7946,10 @@ public String GetMonthlyPremiumValue() {
 		return false;
 	}
 	
-	@FindBy(xpath = "(//*[contains(@class,'uhc-card')]//*[contains(@class,'compare-plans-btn')]//label)[1]")
-	private WebElement firstComparePlanButtonForMS4;
+	@FindBy(xpath = "(//*[@class='uhc-card']//button[contains(@class,'compare-plans-btn')]//label)[1]")
+	private WebElement firstComparePlanButtonForMS;
 	
-	@FindBy(xpath = "(//*[contains(@class,'compare-box')]//button[contains(@class,'cta-button')])[1]")
-    private WebElement firstComparePlanButtonForMS3;
-	
-	public void compareAllMS4Plans() {
+	public void compareAllMSPlans() {
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
@@ -7973,7 +7957,7 @@ public String GetMonthlyPremiumValue() {
 			e.printStackTrace();
 		}
 		List<WebElement> allMSPlans = driver
-				.findElements(By.xpath("//*[contains(@class,'uhc-card')]//*[contains(@class,'compare-plans-btn')]//label"));
+				.findElements(By.xpath("//*[@class='uhc-card']//button[contains(@class,'compare-plans-btn')]//label"));
 		int plansForCompare = allMSPlans.size();
 		if (plansForCompare > 4) {
 			System.out.println("There are more than 4 plans, only first 4 will be compared");
@@ -7981,12 +7965,11 @@ public String GetMonthlyPremiumValue() {
 		}
 		if (allMSPlans != null) {
 			for (int i = 0; i < plansForCompare; i++) {
-				moveMouseToElement(allMSPlans.get(i));
 				jsClickNew(allMSPlans.get(i));
 				System.out.println("Plan added to compare : " + i);
 			}
 		}
-		jsClickNew(firstComparePlanButtonForMS4);
+		jsClickNew(firstComparePlanButtonForMS);
 	}
 	
 	@FindBy(xpath = "//div[contains(@class,'find-plans')]/button")
@@ -7997,30 +7980,7 @@ public String GetMonthlyPremiumValue() {
 
 	public void clickCloseMSApplication() {
 		jsClickNew(closebBtnMSApplication);
-		//waitforElementNew(addMSPlans);
+		waitforElementNew(addMSPlans);
 	}
 	
-	public void compareAllMS3Plans() {
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		List<WebElement> allMSPlans = driver
-				.findElements(By.xpath("//*[contains(@class,'compare-box')]//*[contains(@id,'compare-plan')]/../label"));
-		int plansForCompare = allMSPlans.size();
-		if (plansForCompare > 4) {
-			System.out.println("There are more than 4 plans, only first 4 will be compared");
-			plansForCompare = 4;
-		}
-		if (allMSPlans != null) {
-			for (int i = 0; i < plansForCompare; i++) {
-				moveMouseToElement(allMSPlans.get(i));
-				jsClickNew(allMSPlans.get(i));
-				System.out.println("Plan added to compare : " + i);
-			}
-		}
-		jsClickNew(firstComparePlanButtonForMS3);
-	}
 }
