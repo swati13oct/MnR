@@ -44,7 +44,7 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 	@FindBy(css = "div[class*='get-started-main-inner'] button")
 	private WebElement getStartedBtn1;
 
-	@FindBy(xpath = "//h1[contains(@class,'text-display')]")
+	@FindBy(css = "text-display")
 	private WebElement landingpageHeader;
 
 	@FindBy(css = "div[class*='get-started-banner'] img")
