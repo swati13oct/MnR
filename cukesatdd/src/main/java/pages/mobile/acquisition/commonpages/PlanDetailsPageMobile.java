@@ -1210,10 +1210,10 @@ public class PlanDetailsPageMobile extends UhcDriver {
 
 			for (int i = 0; i < additionalBenefits.size(); i = i + 2) {
 				if (additionalBenefits.get(i).get(1).contains("Fitness")) {
-					WebElement AdditionalBenefitType1 = driver
+					AdditionalBenefitType = driver
 							.findElement(By.xpath("//div[contains(text(), '" + additionalBenefits.get(i).get(1)
 									+ "')]/ancestor::td[(not (contains(@class, 'ng-hide')))]"));
-					System.out.println("The additional Benefit to Valuidate : " + AdditionalBenefitType1.getText());
+					System.out.println("The additional Benefit to Valuidate : " + AdditionalBenefitType.getText());
 					ActualTextforBenefit = driver.findElement(By.xpath("//div[contains(text(), '"
 							+ additionalBenefits.get(i).get(1)
 							+ "')]/ancestor::td[(not (contains(@class, 'ng-hide')))]/following-sibling::td[(not (contains(@class, 'ng-hide')))]"));
@@ -1224,12 +1224,13 @@ public class PlanDetailsPageMobile extends UhcDriver {
 						Assertion.fail("Proper value not found");
 					}
 				} else {
-					WebElement AdditionalBenefitType1 = driver.findElement(
-							By.xpath("//p[contains(text(), '" + additionalBenefits.get(i).get(1) + "')]/.."));
-					scrollToView(AdditionalBenefitType1);
-					// System.out.println("The additional Benefit to Valuidate : ");
-					ActualTextforBenefit = driver.findElement(
-							By.xpath("//p[contains(text(), '" + additionalBenefits.get(i).get(1) + "')]/.."));
+					AdditionalBenefitType = driver
+							.findElement(By.xpath("//p[contains(text(), '" + additionalBenefits.get(i).get(1)
+									+ "')]/ancestor::td[(not (contains(@class, 'ng-hide')))]"));
+					System.out.println("The additional Benefit to Valuidate : " + AdditionalBenefitType.getText());
+					ActualTextforBenefit = driver
+							.findElement(By.xpath("//p[contains(text(), '" + additionalBenefits.get(i).get(1)
+									+ "')]/ancestor::td[(not (contains(@class, 'ng-hide')))]/following-sibling::td"));
 					displayedText = ActualTextforBenefit.getText();
 					System.out.println("Text Displayed for the Additional Benefit on Plan Details : ");
 					System.out.println(displayedText);
