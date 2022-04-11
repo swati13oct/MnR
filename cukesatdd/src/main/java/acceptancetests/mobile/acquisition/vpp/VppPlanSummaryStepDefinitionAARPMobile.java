@@ -68,17 +68,11 @@ public class VppPlanSummaryStepDefinitionAARPMobile {
 	 * @toDo:Verify provider covered information is displayed on Plan
 	 *              Summary page
 	 */
-	@Then("^Verify provider name is displayed on Plan Summary page Ulayer$")
+/*	@Then("^Verify provider name is displayed on Plan Summary page Ulayer$")
 	public void verify_provider_covered_ulayer(DataTable Planname) {
 
 		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
 		plannameAttributesMap = DataTableParser.readDataTableAsMaps(Planname);
-		/*List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows();
-		for (int i = 0; i < plannameAttributesRow.size(); i++) {
-
-			plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
-					plannameAttributesRow.get(i).getCells().get(1));
-		}*/
 		String planName = plannameAttributesMap.get("PlanName");
 
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
@@ -86,7 +80,7 @@ public class VppPlanSummaryStepDefinitionAARPMobile {
 		String providerFromRally = (String) getLoginScenario().getBean(VPPCommonConstants.SAVED_PROVIDER_RALLY);
 		plansummaryPage.verifyproviderName(planName, providerFromRally);
 	}
-	
+*/
 	@Then("^the user validates the pharmacy drug cost on plan compare page for the selected plan$")
 	public void verify_Pharmacy_drug_cost_PlanCompare(DataTable Planname) {
 
