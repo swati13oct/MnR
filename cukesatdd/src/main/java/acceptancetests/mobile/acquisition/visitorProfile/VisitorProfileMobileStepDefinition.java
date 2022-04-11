@@ -291,6 +291,27 @@ public class VisitorProfileMobileStepDefinition {
 		visitorProfile.deleteAllDrugs(drugs);
 		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfile);
 	}
+	
+	@Then("^user validate no average cost is visible$")
+    public void user_validate_no_average_cost_is_visible() {
+        VisitorProfilePageMobile visitorProfile = (VisitorProfilePageMobile) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+        visitorProfile.validateNoAvgCostProfile();
+    }
+	
+	@Then("^the user select pharmacy and return to visitor profile$")
+    public void the_user_select_pharmacy_and_return_to_visitor_profile(DataTable givenAttributes) {
+        VisitorProfilePageMobile visitorProfile = (VisitorProfilePageMobile) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+        Map<String, String> memberAttributesMap = new HashMap<String, String>();
+        memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+        String pharmacyToSelect = memberAttributesMap.get("SelectPharmacy");
+        visitorProfile.selectPharmacyandBacktoProfile(pharmacyToSelect);
+    }
+	
+	@Then("^the user click on Change Pharmacy link on Visitor Profile Page$")
+    public void the_user_click_on_Change_Pharmacy_link_on_Visitor_Profile_Page() {
+        VisitorProfilePageMobile visitorProfile = (VisitorProfilePageMobile) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+        visitorProfile.validateChangePharmacyLink();
+    }
 
 	@And("^user validates the added plans on visitor profile page$")
 	public void user_validates_the_added_plans_on_visitor_profile_page_of_AARP_site(DataTable planNames) {
@@ -324,6 +345,15 @@ public class VisitorProfileMobileStepDefinition {
             user_state = "unauth";
         }
         visitorProfile.validateChangedPharmacy(pharmacy, user_state);
+    }
+	
+	@Then("^the user validate the show drug coverage message on visitor profile$")
+    public void the_user_validate_the_show_drug_coverage_message_on_visitor_profile(DataTable data) {
+        Map<String, String> memberAttributesMap = new HashMap<String, String>();
+        memberAttributesMap = DataTableParser.readDataTableAsMaps(data);
+        String pharmacy = memberAttributesMap.get("pharmacyName");
+        VisitorProfilePageMobile visitorProfile = (VisitorProfilePageMobile) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+        visitorProfile.validateDrugCoverageMessage(pharmacy);
     }
 
 	@And("^user validates the added Ms plans on visitor profile page$")
