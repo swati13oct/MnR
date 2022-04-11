@@ -6469,6 +6469,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		requestlastName.sendKeys(LastName);
 		validateNew(requestplaninformationsubmit);
 		jsClickNew(requestplaninformationsubmit);
+validateNew(requestplaninformationsubmitpopup);
 		if (requestplaninformationsubmitpopup.getText().contains(
 				"Your information has been submitted. You should start getting your Medicare updates soon.")) {
 			System.out.println("****************Request  information is displayed  ***************");
@@ -6477,7 +6478,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			validateNew(requestplaninformationclose);
 			jsClickNew(requestplaninformationclose);
 		} else {
-			System.out.println("****************Request information is displayed  ***************");
+			System.out.println("****************Request information is not displayed  ***************");
 		}
 		return RequestPlanIInformation_Validation;
 
