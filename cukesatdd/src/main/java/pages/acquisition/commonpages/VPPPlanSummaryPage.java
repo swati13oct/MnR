@@ -944,9 +944,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	// @FindBy(xpath = "(//*[contains(@class,'show
 	// active')]//*[contains(@class,'swiper-container')]//button[contains(text(),'Compare
 	// plans')])[1]")
-	//@FindBy(xpath = "//*[contains(text(),'Compare Plan')])[1]")
+	@FindBy(xpath = "(//button[contains(@class,'compare-plans-button uhc-button')])[2]")
 	
-	@FindBy(xpath = "//*[contains(@class,'show active')]//div[contains(@class,'module-plan-overview module swiper-slide')]//button[contains(text(),'Compare plans')][1]")
+	//@FindBy(xpath = "//*[contains(@class,'show active')]//div[contains(@class,'module-plan-overview module swiper-slide')]//button[contains(text(),'Compare plans')][1]")
 	private WebElement compareButton;
 
 	// @FindBy(xpath = "//span[@class='size36 semiBoldText colorPrimaryBlue']")
@@ -5805,9 +5805,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			if (navigateComparePage.equalsIgnoreCase("Yes")) {
 				// action.moveToElement(compareButton).build().perform(); //Does not work on
 				// Safari browser
-				jsMouseOver(compareButton);
+			//	jsMouseOver(compareButton);
+				scrollToView(compareButton);
 				compareButton.click();
-				Thread.sleep(2000);
+				Thread.sleep(5000);
 				// action.moveToElement(comparePageHeader).build().perform(); //Does not work on
 				// Safari browser
 				jsMouseOver(comparePageHeader);
