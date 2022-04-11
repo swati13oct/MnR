@@ -5002,7 +5002,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		jsClickNew(EligibilitySurgery);
 
 		jsClickNew(nextButton);
-
+		Thread.sleep(2000);
 		jsClickNew(atrial);
 		jsClickNew(artery);
 		jsClickNew(peripheral);
