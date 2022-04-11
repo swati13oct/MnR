@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
+import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.acquisition.dceredesign.DCERedesignCommonConstants;
@@ -121,8 +122,8 @@ public class DCEStepDefinitionAARPMobile {
 	
 	@When("^user toggle to PDP plan type on drug summary page$")
     public void user_toggle_to_PDP_plan_type_on_drug_summary_page() {
-		AppiumDriver wd = getLoginScenario().getMobileDriver();
-        DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
+		//AppiumDriver wd = getLoginScenario().getMobileDriver();
+        DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile((AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
         drugSummaryPage.verifyPDPPlanToggle();
     }
 	
@@ -135,8 +136,7 @@ public class DCEStepDefinitionAARPMobile {
 	
 	@When("^user toggle to SNP plan type on drug summary page$")
     public void user_toggle_to_SNP_plan_type_on_drug_summary_page() {
-		AppiumDriver wd = getLoginScenario().getMobileDriver();
-        DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
+        DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile((AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
         drugSummaryPage.verifySNPPlanToggle();
     }
 
@@ -208,8 +208,8 @@ public class DCEStepDefinitionAARPMobile {
 	
 	@When("^user should be able to toggle between plan types$")
     public void user_should_be_able_to_toggle_between_plan_types() throws InterruptedException {
-		AppiumDriver wd = getLoginScenario().getMobileDriver();
-        DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
+		//AppiumDriver wd = getLoginScenario().getMobileDriver();
+        DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile((AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
         drugSummaryPage.verifyPDPPlanToggle();
         drugSummaryPage.verifySNPPlanToggle();
         getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
@@ -225,9 +225,9 @@ public class DCEStepDefinitionAARPMobile {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
 		}*/
-        AppiumDriver wd = getLoginScenario().getMobileDriver();
+        //AppiumDriver wd = getLoginScenario().getMobileDriver();
         String pharmacyName = memberAttributesMap.get("DefaultPharmacy");
-        DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
+        DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile((AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
         drugSummaryPage.validateDefaultPharmacyName(pharmacyName);
     }
 

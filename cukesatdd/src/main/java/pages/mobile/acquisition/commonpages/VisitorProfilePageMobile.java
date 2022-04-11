@@ -387,6 +387,23 @@ public class VisitorProfilePageMobile extends UhcDriver {
 
 		return null;
 	}
+	
+	public void validateChangePharmacyLinkPricingModal() {
+        CommonUtility.checkPageIsReady(driver);
+        sleepBySec(2);
+        if (validateNew(changePharmacyLinkPricingModal)) {
+            System.out.println("Change pharmacy link on Drug Pricing Modal is present");
+            jsClickNew(changePharmacyLink);
+            sleepBySec(5);
+            if (driver.getCurrentUrl().contains("health-plans/estimate-drug-costs.html#/reviewdrugcosts") && validateNew(selectPharmacyHeader)) {
+                System.out.println("Redirect to Select Pharmacy on DCE");
+            } else {
+                Assert.fail("Not Redirected to Select Pharmacy on DCE");
+            }
+        } else {
+            Assert.fail("Change pharmacy link is present");
+        }
+    }
 
 	@FindBy(xpath = "//h3[contains(text(),'Save your information')]")
 	private WebElement saveYourInformation;
@@ -557,6 +574,50 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		});
 
 	}
+	
+	public void validateNoDrugCoverageMessage(String pharmacy) {
+        CommonUtility.checkPageIsReady(driver);
+        sleepBySec(3);
+        if (validateNew(pharmacyMessage) && validateNew(changePharmacyLink)) {
+            scrollToView(pharmacyMessage);
+            System.out.println("Pharmacy Message Visible");
+            String messageDisplayed = pharmacyMessage.getText().toLowerCase();
+            String noDrugCoverageMessage = "the pharmacy you selected, does not provide Prescription Drug Coverage under this plan. You may select a different pharmacy to see estimated drug costs";
+            if (messageDisplayed.contains(pharmacy.toLowerCase()) && messageDisplayed.contains(noDrugCoverageMessage.toLowerCase()) && (!messageDisplayed.contains("tty "))) {
+                System.out.println("Correct No Drugs Covered Message is displayed");
+            } else {
+                Assert.fail("Incorrect No Drugs Covered Message is displayed:\n" + messageDisplayed);
+            }
+
+        } else {
+            Assert.fail("Pharmacy Message Not Visible");
+        }
+    }
+	
+	 @FindBy(xpath = "//div[@role='dialog']//div[contains(@class,'pharmacy-msg')]//p")
+	 WebElement pharmacyMessagePricingModal;
+	 
+	 @FindBy(xpath = "//div[@role='dialog']//div[contains(@class,'pharmacy-msg')]//button[text()=' Change Pharmacy ']")
+	 WebElement changePharmacyLinkPricingModal;
+	
+	public void validateNoDrugCoverageMessageDrugPricingModal(String pharmacy) {
+        CommonUtility.checkPageIsReady(driver);
+        sleepBySec(3);
+        if (validateNew(pharmacyMessagePricingModal) && validateNew(changePharmacyLinkPricingModal)) {
+            scrollToView(pharmacyMessagePricingModal);
+            System.out.println("Pharmacy Message Visible");
+            String messageDisplayed = pharmacyMessagePricingModal.getText().toLowerCase();
+            String noDrugCoverageMessage = "the pharmacy you selected, does not provide Prescription Drug Coverage under this plan. You may select a different pharmacy to see estimated drug costs";
+            if (messageDisplayed.contains(pharmacy.toLowerCase()) && messageDisplayed.contains(noDrugCoverageMessage.toLowerCase()) && (!messageDisplayed.contains("tty "))) {
+                System.out.println("Correct No Drugs Covered Message is displayed on Drug Pricing Modal");
+            } else {
+                Assert.fail("Incorrect No Drugs Covered Message is displayed on Drug Pricing Modal:\n" + messageDisplayed);
+            }
+
+        } else {
+            Assert.fail("Pharmacy Message Not Visible on Drug Pricing Modal");
+        }
+    }
 
 	/**
 	 * Delete all the drugs from the profile
@@ -1239,28 +1300,24 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	}
 
 	public void validateAddedMsPlans(String planNames) {
-		List<String> listOfTestPlans = Arrays.asList(planNames.split(","));
-		CommonUtility.checkPageIsReadyNew(driver);
+		try {
+            String[] listOfTestPlans = planNames.split(",");
+            CommonUtility.checkPageIsReadyNew(driver);
+            Thread.sleep(20000);
+            for (String plan : listOfTestPlans) {
 
-		By medsupHeaderLocator = By.xpath("//h3[normalize-space()='Medicare Supplement Insurance Plans']");
-		WebElement medsupPlanHeader = CommonUtility.waitForPresenceOfElement(driver, medsupHeaderLocator, 20);
-
-		if (medsupPlanHeader != null) {
-			listOfTestPlans.stream().forEach(plan -> {
-				By planNameHeader = By.xpath(
-						"//div[contains(@class,'med-supp-profile-card') or contains(@class,'saved-plancard')]//h2[normalize-space()='"
-								+ plan + "']");
-				WebElement planName = CommonUtility.waitForPresenceOfElement(driver, planNameHeader, 5);
-				if (planName != null) {
-					scrollToView(planName);
-					Assertion.assertTrue("Unable to find MS plan " + plan + " under Saved Plans!", validate(planName));
-				} else {
-					Assertion.fail("Unable to find MS plan " + plan + " under Saved Plans!");
-				}
-			});
-		} else {
-			Assertion.fail("Medsupp saved plans may not be displayed on visitor profile page!");
-		}
+				/*if (StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Pennsylvania")
+						|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Puerto Rico")
+						|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) {*/
+//				if (StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) {
+                Assertion.assertEquals(plan, driver.findElement(By.xpath("//h2[text()='" + plan + "']")).getText());
+                // No pdf link is availbel now
+                // Assertion.assertTrue(driver.findElement(By.xpath("//div/a[contains(@aria-describedby,'"+plan+"')]
+                // [contains(@class,'pdf-link')]")).isDisplayed());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 	}
 
 	public VisitorProfilePageMobile clickOnShoppingCart() {

@@ -779,7 +779,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	@FindBy(css = "#MPAED")
 	private WebElement medSuppOleHospitalPartA;
 
-	@FindBy(xpath = "//input[@id='Gender_1']/following-sibling::label[text()='Male']")
+	@FindBy(xpath="//input[@id='Gender_11']/following-sibling::label[text()='Male']")
 	private WebElement medSuppOleMaleCheckbox;
 
 	@FindBy(xpath = "//input[@id='PartABActiveIndicator_1']/following-sibling::label")
@@ -4429,8 +4429,11 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		jsClickNew(medSuppOleMaleCheckbox);
 
 		CommonUtility.waitForPageLoadNewForClick(driver, monthDrpDwnPartA, 5);
-		Select partAMonth = new Select(monthDrpDwnPartA);
-		partAMonth.selectByIndex(1);
+		//Select partAMonth = new Select(monthDrpDwnPartA);
+		//partAMonth.selectByIndex(1);
+		
+		selectFromDropDownByValue(monthDrpDwnPartA, "01");
+		
 		System.out.println("Effective part a date- month value selected");
 
 		CommonUtility.waitForPageLoadNewForClick(driver, yearDrpDwnPartA, 5);
@@ -4439,8 +4442,10 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		System.out.println("Effective part a date- year value selected");
 
 		CommonUtility.waitForPageLoadNewForClick(driver, monthDrpDwnPartB, 5);
-		Select partBMonth = new Select(monthDrpDwnPartB);
-		partBMonth.selectByIndex(1);
+		//Select partBMonth = new Select(monthDrpDwnPartB);
+		//partBMonth.selectByIndex(1);
+		selectFromDropDownByValue(monthDrpDwnPartB, "01");
+		
 		System.out.println("Effective part b date- month value selected");
 
 		CommonUtility.waitForPageLoadNewForClick(driver, yearDrpDwnPartB, 5);

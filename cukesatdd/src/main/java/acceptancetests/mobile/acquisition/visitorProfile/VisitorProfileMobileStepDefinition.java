@@ -150,6 +150,30 @@ public class VisitorProfileMobileStepDefinition {
 		
 		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
 	}
+	
+	@Then("^the user validate the show no drug coverage message on visitor profile$")
+    public void the_user_validate_the_show_no_drug_coverage_message_on_visitor_profile(DataTable data) {
+        Map<String, String> memberAttributesMap = new HashMap<String, String>();
+        memberAttributesMap = DataTableParser.readDataTableAsMaps(data);
+        String pharmacy = memberAttributesMap.get("pharmacyName");
+        VisitorProfilePageMobile visitorProfile = (VisitorProfilePageMobile) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+        visitorProfile.validateNoDrugCoverageMessage(pharmacy);
+    }
+	
+	@Then("^the user validate the show no drug coverage message on visitor profile drug pricing modal$")
+    public void the_user_validate_the_show_no_drug_coverage_message_on_visitor_profile_drug_pricing_modal(DataTable data) {
+        Map<String, String> memberAttributesMap = new HashMap<String, String>();
+        memberAttributesMap = DataTableParser.readDataTableAsMaps(data);
+        String pharmacy = memberAttributesMap.get("pharmacyName");
+        VisitorProfilePageMobile visitorProfile = (VisitorProfilePageMobile) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+        visitorProfile.validateNoDrugCoverageMessageDrugPricingModal(pharmacy);
+    }
+	
+	@Then("^the user click on Change Pharmacy link on Visitor Profile Page Drug Pricing Modal$")
+    public void the_user_click_on_Change_Pharmacy_link_on_Visitor_Profile_Page_Drug_Pricing_Modal() {
+        VisitorProfilePageMobile visitorProfile = (VisitorProfilePageMobile) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+        visitorProfile.validateChangePharmacyLinkPricingModal();
+    }
 
 	@And("^the user clicks on the add drugs button to navigate to DCE Redesign on the profile page mobile$")
 	public void the_user_clicks_on_the_add_drugs_button_in_the_profile_to_DCE_Redesign_in_AARP_site1()
