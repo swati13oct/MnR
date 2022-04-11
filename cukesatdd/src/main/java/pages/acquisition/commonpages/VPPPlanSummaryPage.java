@@ -5980,7 +5980,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			Thread.sleep(2000);
 			WebElement heartIcon = driver
 				//	.findElement(By.xpath("(//div[contains(@class,'save-icon pull-right')]/div/div)[" + i + "]"));
-			.findElement(By.xpath("(//div[contains(@class,'save-box')])[" + i + "]"));
+			.findElement(By.xpath("(//*[contains(@class,'save-box')])[" + i + "]"));
 			//flag = heartIcon.getAttribute("class").equalsIgnoreCase("save-favorite-plan added");
 			flag = heartIcon.getAttribute("class").equalsIgnoreCase("save-box");
 
@@ -6275,7 +6275,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			System.out.println("Validating start application button on plan compare----------");
 */
 			jsClickNew(comparePageStartApplicationBtn);
-			if (DOB1.isDisplayed()) {
+
+			if (validateNew(DOB1) && DOB1.isDisplayed()) {
 
 				Thread.sleep(2000);
 				DOB1.sendKeys("01111951");
@@ -6287,8 +6288,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				jsMouseOver(ContinueApplication);
 				jsClickNew(ContinueApplication);
 				Thread.sleep(5000);
-				validateNew(comparePageStartApplicationBtn);
-				jsClickNew(comparePageStartApplicationBtn);
+			//	validateNew(comparePageStartApplicationBtn);
+			//	jsClickNew(comparePageStartApplicationBtn);
 			}
 			else {
 				System.out.println("DOB is not displayed and User clicked on Start Application to land on IS OLE Page");
