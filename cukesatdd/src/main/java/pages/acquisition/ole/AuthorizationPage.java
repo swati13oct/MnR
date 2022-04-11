@@ -64,7 +64,8 @@ public class AuthorizationPage extends UhcDriver{
 	//@FindBy(css = ".ng-untouched > .field > .field:nth-child(1)")
 	private WebElement ApplicantRadio;
 
-	@FindBy(xpath = "(//label[@class= 'ng-star-inserted'])[2]//preceding-sibling::input")
+	//@FindBy(xpath = "(//label[@class= 'ng-star-inserted'])[2]//preceding-sibling::input")
+	@FindBy(xpath = "//*[contains(@id,'auhtorizedCheckI am the authorized representative of the applicant listed on this enrollment application.')]")
 	private WebElement AuthorizedRepresentativeRadio;
 
 	//Authorized Representative Details
@@ -213,7 +214,8 @@ public class AuthorizationPage extends UhcDriver{
 		boolean validation_Flag = true;
 		if(NextBtn.isEnabled()){
 			
-			AuthorizedRepresentativeRadio.click();
+		//	AuthorizedRepresentativeRadio.click();
+			jsClickNew(AuthorizedRepresentativeRadio);
 			if(NextBtn.isEnabled() && validate(Authorized_FirstName) && validate(Authorized_LastName) 
 					&& validate(Authorized_Relation) && validate(Authorized_Address) && validate(Authorized_City) && validate(Authorized_State)
 					&& validate(Authorized_ZipCode) && validate(Authorized_PhNo)){
