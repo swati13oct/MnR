@@ -213,7 +213,8 @@ public class AuthorizationPage extends UhcDriver{
 		boolean validation_Flag = true;
 		if(NextBtn.isEnabled()){
 			
-			AuthorizedRepresentativeRadio.click();
+		//	AuthorizedRepresentativeRadio.click();
+			jsClickNew(AuthorizedRepresentativeRadio);
 			if(NextBtn.isEnabled() && validate(Authorized_FirstName) && validate(Authorized_LastName) 
 					&& validate(Authorized_Relation) && validate(Authorized_Address) && validate(Authorized_City) && validate(Authorized_State)
 					&& validate(Authorized_ZipCode) && validate(Authorized_PhNo)){
