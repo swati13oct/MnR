@@ -424,7 +424,7 @@ public class CampaignExternalLinksMobile extends UhcDriver {
 	@FindBy(xpath = "//a[@data-asset-name='View Plans & Pricing ']")
 	private WebElement viewPricingBtn;
 	
-	@FindBy(xpath = "//span[@class='sam__button__text desktop-tfn-text']")
+	@FindBy(xpath = "//p[contains(@class,'sam__button__text')][2]")
 	private WebElement samTfn;
 	
 	@FindBy(xpath = "//a[@data-asset-name='Estimate Your Prescription Drug Costs ']")
@@ -2202,7 +2202,8 @@ public class CampaignExternalLinksMobile extends UhcDriver {
 
 		public void clickonEstimateDrugCostBtnAndNavigatesToDCE() {
 			waitforElementNew(EstimateDrugCost);
-			EstimateDrugCost.click();
+			//EstimateDrugCost.click();
+			jsClickNew(EstimateDrugCost);
 			threadsleep(4);
 			waitforElementNew(samTfn);
 		}
@@ -2279,7 +2280,8 @@ public class CampaignExternalLinksMobile extends UhcDriver {
 		
 		public void validateDCEExternallinkMA() {
 			parentWindow = driver.getWindowHandle();
-			dceexternallinkMA.click();
+			//dceexternallinkMA.click();
+			jsClickNew(dceexternallinkMA);
 			Set<String> tabs_windows = driver.getWindowHandles();
 			Iterator<String> itr = tabs_windows.iterator();
 			while (itr.hasNext()) {

@@ -851,6 +851,11 @@ public class DrugSummaryPageMobile extends UhcDriver {
 
 		validate(alertTextImg);
 	}
+	
+	public void validateDefaultPharmacyName(String defaultPharmacy) {
+		validateNew(pharmacyName);
+		Assertion.assertTrue("Default pharmacy name is not displayed", pharmacyName.getText().trim().contains(defaultPharmacy));
+	}
 
 	public void vdrugPricingDeductText() {
 		if (drugPricingDeductText.getText().contains("$0 or $99")

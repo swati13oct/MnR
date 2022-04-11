@@ -2976,11 +2976,13 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public void validateTFNelement(String tfnXpath) {
+		if(tfnXpath.equals("(//a[contains(@href, 'tel')])[1]"))
+			tfnXpath = "(//a[contains(@href, 'tel')])[1]/../../../../../..";
 		List<WebElement> TFNelement = driver.findElements(By.xpath(tfnXpath));
 		boolean present = false;
 		pageloadcomplete();
-		sleepBySec(3);
 		for (WebElement tfn : TFNelement) {
+			scrollToView(tfn);
 			if (validate(tfn)) {
 				System.out.println("TFN is Displayed on Page : " + tfn.getText());
 				present = true;
