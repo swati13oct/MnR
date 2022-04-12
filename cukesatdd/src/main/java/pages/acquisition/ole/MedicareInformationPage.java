@@ -196,7 +196,7 @@ public class MedicareInformationPage extends UhcDriver {
 	@FindBy(id = "hasHealthInsuranceYes")
 	private WebElement LongTerm_Question_Yes;
 
-	@FindBy(xpath = "//*[contains(@id,'hasHealthInsuranceYes')]")
+	@FindBy(xpath = "//*[contains(@id,'hasHealthInsuranceYes') or contains(@id,'hasHealthInsuranceSí')]")
 	private WebElement LongTermQuestionFlagYes;
 
 	@FindBy(xpath = "//*[contains(@id,'hasHealthInsuranceNo')]")
@@ -214,7 +214,7 @@ public class MedicareInformationPage extends UhcDriver {
 	@FindBy(id = "hasPrescriptionDrugCoverageYes")
 	private WebElement PDPQuestion_Yes;
 
-	@FindBy(xpath = "//*[contains(@id,'hasPrescriptionDrugCoverageYes')]")
+	@FindBy(xpath = "//*[contains(@id,'hasPrescriptionDrugCoverageYes')or contains(@id,'hasPrescriptionDrugCoverageSí')]")
 	private WebElement PrescriptionCoverageQuestionFlagYes;
 
 	@FindBy(xpath = "//*[contains(@id,'hasPrescriptionDrugCoverageNo')]")
@@ -347,6 +347,12 @@ public class MedicareInformationPage extends UhcDriver {
 	
 	@FindBy(xpath = "//*[contains(@title,'Privacy Policy')]")
 	private WebElement PrivacyPolicy;
+
+	@FindBy(xpath = "//*[contains(text(),'enroll in a Medicare plan with Part D prescription drug coverage when you are first')]")
+	private WebElement PrescriptionDrugTextmesage_MAPlans_No;
+
+	@FindBy(xpath = "//*[contains(text(),'The plan you are enrolling')]")
+	private WebElement PrescriptionDrugTextmesage_No;
 	
 	public MedicareInformationPage(WebDriver driver) {
 		super(driver);
@@ -1027,33 +1033,49 @@ public class MedicareInformationPage extends UhcDriver {
 
 	}
 
-	public boolean answer_following_questions_PrescriptionCoverage(Map<String, String> memberDetailsMap) {
+	public boolean answer_following_questions_PrescriptionCoverage(Map<String, String> memberDetailsMap, String planType) {
 		boolean Validation_Flag = true;
-
 		validateNew(NextBtn);
 		jsClickNew(NextBtn);
 		
 		String PDPquestionFlag = memberDetailsMap.get("PDP Question");
 		
 			CommonUtility.checkPageIsReadyNew(driver);
-			// if(validateNew(driver.findElement(By.xpath("//h3[contains(text(),'Prescription
-			// Drug Coverage')]")))){
-		//	if (validateNew(driver.findElement(By.xpath("//h3/b[contains(text(),'Prescription')]")))) {
 			if (validateNew(driver.findElement(By.xpath("(//*[contains(@class,'form-row')]//*[contains(@class,'sub-header')])[1]")))){
-				System.out.println("OLE Medicare Information Page is Displayed");
+				System.out.println("OLE Prescription drug Page is Displayed");
 			}
-			if (PrescriptionCoverageQuestionFlagNo.isDisplayed()) {
-				jsClickNew(PrescriptionCoverageQuestionFlagNo);
+		//	if(	PrescriptionCoverageQuestionFlagNo.isDisplayed()){
+			PrescriptionCoverageQuestionFlagNo.isDisplayed();
+			jsClickNew(PrescriptionCoverageQuestionFlagNo);
+			System.out.println("Plantype is"+planType);
+		/*	if(planType.contentEquals("MA")){
+				String ActualPrescriptionText=PrescriptionDrugTextmesage_MAPlans_No.getText().replaceAll("[^a-zA-Z0-9\\s+]", " ").trim();
+				String ExpectedPrescriptionText="If you don't enroll in a Medicare plan with Part D prescription drug coverage when you are first eligible of have other credible prescription drug coverage or extra help, you may have to pay a late enrollment penalty if you join a plan later. The penalty is a fee set by Medicare that gets added to your premium, and you pay it for as long as you have Part D.";
+				ExpectedPrescriptionText=ExpectedPrescriptionText.replaceAll("[^a-zA-Z0-9\\s+]", " ").trim();
+				System.out.println("User Validate the  Actual prescription text message: " + ActualPrescriptionText);
+				System.out.println("User Validate the Expected prescription text message: " + ExpectedPrescriptionText);
+				Assert.assertTrue(ActualPrescriptionText.contains(ExpectedPrescriptionText));
+				System.out.println("For MA Plans content is displayed"+PrescriptionDrugTextmesage_MAPlans_No);
+				}else{
+				String ActualPrescriptionforallplansText=PrescriptionDrugTextmesage_No.getText().replaceAll("[^a-zA-Z0-9\\s+]", " ").trim();
+				String ExpectedPrescriptionforallplansText="Don't worry, you're covered. The plan you are enrolling in provides prescription drug coverage.";
+				ExpectedPrescriptionforallplansText=ExpectedPrescriptionforallplansText.replaceAll("[^a-zA-Z0-9\\s+]", " ").trim();
+				System.out.println("User Validate the  Actual prescription for all plan types text message: " + ActualPrescriptionforallplansText);
+				System.out.println("User Validate the Expected prescription for all plan types text message: " + ExpectedPrescriptionforallplansText);
+				Assert.assertTrue(ExpectedPrescriptionforallplansText.contains(ActualPrescriptionforallplansText));
+
+				System.out.println("For all other plan types including MAPD Plan content is displayed"+PrescriptionDrugTextmesage_No);
+			}
 				if (!validate(healthInsuranceNameField) && validate(groupNumberField)) {
-					System.out.println("LongTermQuestion Options is yes : Validation Passed");
+					System.out.println("prescription question Options is No : Validation Passed");
 					Validation_Flag = true;
 				} else {
-					System.out.println("LongTermQuestion Options  :Validation Failed");
+					System.out.println("Lprescription question Options  :Validation Failed");
 					Validation_Flag = false;
 				}
-			}
+		//	}*/
 
-			if (PDPquestionFlag.equalsIgnoreCase("yes")) {
+			//if (PDPquestionFlag.equalsIgnoreCase("yes")) {
 			PrescriptionCoverageQuestionFlagYes.isDisplayed();
 			jsClickNew(PrescriptionCoverageQuestionFlagYes);
 
@@ -1067,7 +1089,7 @@ public class MedicareInformationPage extends UhcDriver {
 			sendkeysNew(PrescriptionCoveragememberNumberField, PDMemberNumber);
 			sendkeysNew(PrescriptionCoveragerRXBINNumberField, RXBINNumber);
 
-			}
+			//}
 		if (NextBtn.isEnabled()) {
 			System.out.println("SEP options selected :  Next button is enabled");
 			// return new SpecialElectionPeriodPage(driver);
@@ -1287,39 +1309,60 @@ public class MedicareInformationPage extends UhcDriver {
 		}
 	}
 	
-	public boolean answer_following_questions_PrescriptionCoverage_PDP_Plans(Map<String, String> memberDetailsMap) {
+	public boolean answer_following_questions_PrescriptionCoverage_PDP_Plans(Map<String, String> memberDetailsMap, String planType) {
 		boolean Validation_Flag = true;
+		String PDPquestionFlag = memberDetailsMap.get("PDP Question");
 
-			CommonUtility.checkPageIsReadyNew(driver);
-			// if(validateNew(driver.findElement(By.xpath("//h3[contains(text(),'Prescription
-			// Drug Coverage')]")))){
-		//	if (validateNew(driver.findElement(By.xpath("//h3/b[contains(text(),'Prescription')]")))) {
-			if (validateNew(driver.findElement(By.xpath("(//*[contains(@class,'form-row')]//*[contains(@class,'sub-header')])[1]")))){
-				System.out.println("OLE Medicare Information Page is Displayed");
-			}
-			if (PrescriptionCoverageQuestionFlagNo.isDisplayed()) {
-				jsClickNew(PrescriptionCoverageQuestionFlagNo);
-				if (!validate(healthInsuranceNameField) && validate(groupNumberField)) {
-					System.out.println("LongTermQuestion Options is yes : Validation Passed");
-					Validation_Flag = true;
-				} else {
-					System.out.println("LongTermQuestion Options  :Validation Failed");
-					Validation_Flag = false;
-				}
-			}
+		CommonUtility.checkPageIsReadyNew(driver);
 
-			PrescriptionCoverageQuestionFlagYes.isDisplayed();
-			jsClickNew(PrescriptionCoverageQuestionFlagYes);
+		if (validateNew(driver.findElement(By.xpath("(//*[contains(@class,'form-row')]//*[contains(@class,'sub-header')])[1]")))){
+			System.out.println("OLE Prescription drug Page is Displayed");
+		}
+		//	if(	PrescriptionCoverageQuestionFlagNo.isDisplayed()){
+		PrescriptionCoverageQuestionFlagNo.isDisplayed();
+		jsClickNew(PrescriptionCoverageQuestionFlagNo);
+		System.out.println("Plantype is"+planType);
+		/*if(planType.contentEquals("MA")){
+			String ActualPrescriptionText=PrescriptionDrugTextmesage_MAPlans_No.getText().replaceAll("[^a-zA-Z0-9\\s+]", " ").trim();
+			String ExpectedPrescriptionText="If you don't enroll in a Medicare plan with Part D prescription drug coverage when you are first eligible of have other credible prescription drug coverage or extra help, you may have to pay a late enrollment penalty if you join a plan later. The penalty is a fee set by Medicare that gets added to your premium, and you pay it for as long as you have Part D.";
+			ExpectedPrescriptionText=ExpectedPrescriptionText.replaceAll("[^a-zA-Z0-9\\s+]", " ").trim();
+			System.out.println("User Validate the  Actual prescription text message: " + ActualPrescriptionText);
+			System.out.println("User Validate the Expected prescription text message: " + ExpectedPrescriptionText);
+			Assert.assertTrue(ActualPrescriptionText.contains(ExpectedPrescriptionText));
+			System.out.println("For MA Plans content is displayed"+PrescriptionDrugTextmesage_MAPlans_No);
+		}else{
+			String ActualPrescriptionforallplansText=PrescriptionDrugTextmesage_No.getText().replaceAll("[^a-zA-Z0-9\\s+]", " ").trim();
+			String ExpectedPrescriptionforallplansText="Don't worry, you're covered. The plan you are enrolling in provides prescription drug coverage.";
+			ExpectedPrescriptionforallplansText=ExpectedPrescriptionforallplansText.replaceAll("[^a-zA-Z0-9\\s+]", " ").trim();
+			System.out.println("User Validate the  Actual prescription for all plan types text message: " + ActualPrescriptionforallplansText);
+			System.out.println("User Validate the Expected prescription for all plan types text message: " + ExpectedPrescriptionforallplansText);
+			Assert.assertTrue(ExpectedPrescriptionforallplansText.contains(ActualPrescriptionforallplansText));
 
-			String PrescriptionName = memberDetailsMap.get("Prescription Name");
-			String PDGroupNumber = memberDetailsMap.get("PD Group Number");
-			String PDMemberNumber = memberDetailsMap.get("PD Member Number");
-			String RXBINNumber = memberDetailsMap.get("RX BIN Number");
+			System.out.println("For all other plan types including MAPD Plan content is displayed"+PrescriptionDrugTextmesage_No);
+		}
+		if (!validate(healthInsuranceNameField) && validate(groupNumberField)) {
+			System.out.println("prescription question Options is No : Validation Passed");
+			Validation_Flag = true;
+		} else {
+			System.out.println("Lprescription question Options  :Validation Failed");
+			Validation_Flag = false;
+		}
 
-			sendkeysNew(PrescriptionCoverageNameField, PrescriptionName);
-			sendkeysNew(PrescriptionCoveragegroupNumberField, PDGroupNumber);
-			sendkeysNew(PrescriptionCoveragememberNumberField, PDMemberNumber);
-			sendkeysNew(PrescriptionCoveragerRXBINNumberField, RXBINNumber);
+		//	}*/
+
+		//if (PDPquestionFlag.equalsIgnoreCase("yes")) {
+		PrescriptionCoverageQuestionFlagYes.isDisplayed();
+		jsClickNew(PrescriptionCoverageQuestionFlagYes);
+
+		String PrescriptionName = memberDetailsMap.get("Prescription Name");
+		String PDGroupNumber = memberDetailsMap.get("PD Group Number");
+		String PDMemberNumber = memberDetailsMap.get("PD Member Number");
+		String RXBINNumber = memberDetailsMap.get("RX BIN Number");
+
+		sendkeysNew(PrescriptionCoverageNameField, PrescriptionName);
+		sendkeysNew(PrescriptionCoveragegroupNumberField, PDGroupNumber);
+		sendkeysNew(PrescriptionCoveragememberNumberField, PDMemberNumber);
+		sendkeysNew(PrescriptionCoveragerRXBINNumberField, RXBINNumber);
 
 		
 		if (NextBtn.isEnabled()) {

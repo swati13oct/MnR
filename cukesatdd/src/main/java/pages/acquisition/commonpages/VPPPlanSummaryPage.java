@@ -944,9 +944,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	// @FindBy(xpath = "(//*[contains(@class,'show
 	// active')]//*[contains(@class,'swiper-container')]//button[contains(text(),'Compare
 	// plans')])[1]")
-	//@FindBy(xpath = "//*[contains(text(),'Compare Plan')])[1]")
+	@FindBy(xpath = "(//button[contains(@class,'compare-plans-button uhc-button')])[2]")
 	
-	@FindBy(xpath = "//*[contains(@class,'show active')]//div[contains(@class,'module-plan-overview module swiper-slide')]//button[contains(text(),'Compare plans')][1]")
+	//@FindBy(xpath = "//*[contains(@class,'show active')]//div[contains(@class,'module-plan-overview module swiper-slide')]//button[contains(text(),'Compare plans')][1]")
 	private WebElement compareButton;
 
 	// @FindBy(xpath = "//span[@class='size36 semiBoldText colorPrimaryBlue']")
@@ -5002,7 +5002,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		jsClickNew(EligibilitySurgery);
 
 		jsClickNew(nextButton);
-
+		Thread.sleep(2000);
 		jsClickNew(atrial);
 		jsClickNew(artery);
 		jsClickNew(peripheral);
@@ -5805,9 +5805,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			if (navigateComparePage.equalsIgnoreCase("Yes")) {
 				// action.moveToElement(compareButton).build().perform(); //Does not work on
 				// Safari browser
-				jsMouseOver(compareButton);
+			//	jsMouseOver(compareButton);
+				scrollToView(compareButton);
 				compareButton.click();
-				Thread.sleep(2000);
+				Thread.sleep(5000);
 				// action.moveToElement(comparePageHeader).build().perform(); //Does not work on
 				// Safari browser
 				jsMouseOver(comparePageHeader);
@@ -5979,7 +5980,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			Thread.sleep(2000);
 			WebElement heartIcon = driver
 				//	.findElement(By.xpath("(//div[contains(@class,'save-icon pull-right')]/div/div)[" + i + "]"));
-			.findElement(By.xpath("(//div[contains(@class,'save-box')])[" + i + "]"));
+			.findElement(By.xpath("(//*[contains(@class,'save-box')])[" + i + "]"));
 			//flag = heartIcon.getAttribute("class").equalsIgnoreCase("save-favorite-plan added");
 			flag = heartIcon.getAttribute("class").equalsIgnoreCase("save-box");
 
@@ -6274,7 +6275,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			System.out.println("Validating start application button on plan compare----------");
 */
 			jsClickNew(comparePageStartApplicationBtn);
-			if (DOB1.isDisplayed()) {
+
+			if (validateNew(DOB1) && DOB1.isDisplayed()) {
 
 				Thread.sleep(2000);
 				DOB1.sendKeys("01111951");
@@ -6286,8 +6288,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				jsMouseOver(ContinueApplication);
 				jsClickNew(ContinueApplication);
 				Thread.sleep(5000);
-				validateNew(comparePageStartApplicationBtn);
-				jsClickNew(comparePageStartApplicationBtn);
+			//	validateNew(comparePageStartApplicationBtn);
+			//	jsClickNew(comparePageStartApplicationBtn);
 			}
 			else {
 				System.out.println("DOB is not displayed and User clicked on Start Application to land on IS OLE Page");
@@ -6467,6 +6469,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		requestlastName.sendKeys(LastName);
 		validateNew(requestplaninformationsubmit);
 		jsClickNew(requestplaninformationsubmit);
+validateNew(requestplaninformationsubmitpopup);
 		if (requestplaninformationsubmitpopup.getText().contains(
 				"Your information has been submitted. You should start getting your Medicare updates soon.")) {
 			System.out.println("****************Request  information is displayed  ***************");
@@ -6475,7 +6478,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			validateNew(requestplaninformationclose);
 			jsClickNew(requestplaninformationclose);
 		} else {
-			System.out.println("****************Request information is displayed  ***************");
+			System.out.println("****************Request information is not displayed  ***************");
 		}
 		return RequestPlanIInformation_Validation;
 

@@ -1,7 +1,7 @@
 @UATRegression @F448210 @staticPages
 Feature: 1.13 UAT - Shop Blog Pages flows
 
-  
+
   Scenario Outline: <Scenario> : To verify Zip code and Agent link for the page mentioned of <site> site <pageName> : <path>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -23,48 +23,48 @@ Feature: 1.13 UAT - Shop Blog Pages flows
     @avengersRegressionAARP @vbfGate @regressionAARP
     Examples:
       | Scenario           | site | path                                                | pageName                | UHCUrl                      | tfnXpath                                                           | tfnFlag |
-      | E2E Scenario 3_AMP | AARP | shop/estimate/pdp-costs.html                        | Estimate PDP            | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true |
-      | E2E Scenario 4_AMP | AARP | shop/compare/compare-ms.html                        | ShopPlan: Compare       | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[4] | true |
-      | E2E Scenario 4_AMP | AARP | shop/compare/compare-ma-ms.html                     | ShopPlan: Compare MA MS | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true |
-      | E2E Scenario 4_AMP | AARP | safe-shopping.html                                  | ShopPlan: Shop          | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true |
-      | E2E Scenario 5_AMP | AARP | contact-us.html                                     | Request more help       | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true |
-      | E2E Scenario 5_AMP | AARP | shop/estimate/ma-costs.html                         | Estimate  MA            | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true |
-      | E2E Scenario 5_AMP | AARP | shop/renew-active.html                              | Renew Active            | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true |
-      | E2E Scenario 5_AMP | AARP | shop/medicare-advantage-plans/ma-plan-benefits.html | MA Plan benefits        | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true |
+      | E2E Scenario 3_AMP | AARP | shop/estimate/pdp-costs.html                        | Estimate PDP            | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
+      | E2E Scenario 4_AMP | AARP | shop/compare/compare-ms.html                        | ShopPlan: Compare       | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[4] | true    |
+      | E2E Scenario 4_AMP | AARP | shop/compare/compare-ma-ms.html                     | ShopPlan: Compare MA MS | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
+      | E2E Scenario 4_AMP | AARP | safe-shopping.html                                  | ShopPlan: Shop          | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
+      | E2E Scenario 5_AMP | AARP | contact-us.html                                     | Request more help       | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
+      | E2E Scenario 5_AMP | AARP | shop/estimate/ma-costs.html                         | Estimate  MA            | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
+      | E2E Scenario 5_AMP | AARP | shop/renew-active.html                              | Renew Active            | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
+      | E2E Scenario 5_AMP | AARP | shop/medicare-advantage-plans/ma-plan-benefits.html | MA Plan benefits        | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
 
     @avengersRegressionUHC @regressionUHC
     Examples:
       | Scenario           | site | path                                                | pageName                | UHCUrl                      | tfnXpath                                                           | tfnFlag |
-      | E2E Scenario 3_UMS | UHC  | shop/estimate/pdp-costs.html                        | Estimate PDP            | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true |
-      | E2E Scenario 5_UMS | UHC  | contact-us.html                                     | Request more help       | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[4] | true |
-      | E2E Scenario 5_UMS | UHC  | shop/medicare-advantage-plans/ma-plan-benefits.html | MA Plan benefits        | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true |
-      | E2E Scenario 5_UMS | UHC  | shop/renew-active.html                              | Renew Active            | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true |
-      | E2E Scenario 5_UMS | UHC  | shop/estimate/ma-costs.html                         | Estimate  MA            | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true |
-      | E2E Scenario 4_UMS | UHC  | shop/compare/compare-ms.html                        | ShopPlan: Compare       | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true |
-      | E2E Scenario 4_UMS | UHC  | shop/compare/compare-ma-ms.html                     | ShopPlan: Compare MA MS | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true |
-      | E2E Scenario 4_UMS | UHC  | safe-shopping.html                                  | ShopPlan: Shop          | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true |
+      | E2E Scenario 3_UMS | UHC  | shop/estimate/pdp-costs.html                        | Estimate PDP            | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
+      | E2E Scenario 5_UMS | UHC  | contact-us.html                                     | Request more help       | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[4] | true    |
+      | E2E Scenario 5_UMS | UHC  | shop/medicare-advantage-plans/ma-plan-benefits.html | MA Plan benefits        | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
+      | E2E Scenario 5_UMS | UHC  | shop/renew-active.html                              | Renew Active            | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
+      | E2E Scenario 5_UMS | UHC  | shop/estimate/ma-costs.html                         | Estimate  MA            | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
+      | E2E Scenario 4_UMS | UHC  | shop/compare/compare-ms.html                        | ShopPlan: Compare       | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
+      | E2E Scenario 4_UMS | UHC  | shop/compare/compare-ma-ms.html                     | ShopPlan: Compare MA MS | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
+      | E2E Scenario 4_UMS | UHC  | safe-shopping.html                                  | ShopPlan: Shop          | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
 
     @avengersRegressionAARP @regressionAARP
     Examples:
       | Scenario           | site | path                                      | pageName                | UHCUrl                      | tfnXpath                                                           | tfnFlag |
-      | E2E Scenario 5_AMP | AARP | shop/compare/compare-ma.html              | Compare MA              | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true |
-      | E2E Scenario 5_AMP | AARP | shop/compare/compare-pdp.html             | Compare PDP             | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true |
-      | E2E Scenario 5_AMP | AARP | shop/medicare-advantage-veteran-plan.html | MA Veteran Plan         | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true |
-      | E2E Scenario 5_AMP | AARP | enroll/ma-enrollment.html                 | MA Enrollment           | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true |
-      | E2E Scenario 5_AMP | AARP | enroll/pdp-enrollment.html                | PDP Enrollment          | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true |
-      | E2E Scenario 5_AMP | AARP | shop/compare.html                         | ShopPlan: Compare       | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[5] | true |
-      | E2E Scenario 5_AMP | AARP | enroll/ms-apply.html                      | ShopPlan: MS Enrollment | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[6] | true |
+      | E2E Scenario 5_AMP | AARP | shop/compare/compare-ma.html              | Compare MA              | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
+      | E2E Scenario 5_AMP | AARP | shop/compare/compare-pdp.html             | Compare PDP             | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
+      | E2E Scenario 5_AMP | AARP | shop/medicare-advantage-veteran-plan.html | MA Veteran Plan         | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
+      | E2E Scenario 5_AMP | AARP | enroll/ma-enrollment.html                 | MA Enrollment           | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
+      | E2E Scenario 5_AMP | AARP | enroll/pdp-enrollment.html                | PDP Enrollment          | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
+      | E2E Scenario 5_AMP | AARP | shop/compare.html                         | ShopPlan: Compare       | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[5] | true    |
+      | E2E Scenario 5_AMP | AARP | enroll/ms-apply.html                      | ShopPlan: MS Enrollment | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[6] | true    |
 
     @avengersRegressionUHC @regressionUHC @featureGate
     Examples:
       | Scenario           | site | path                                      | pageName                | UHCUrl                      | tfnXpath                                                           | tfnFlag |
-      | E2E Scenario 5_UMS | UHC  | shop/compare/compare-ma.html              | Compare MA              | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true |
-      | E2E Scenario 5_UMS | UHC  | shop/compare/compare-pdp.html             | Compare PDP             | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true |
-      | E2E Scenario 5_UMS | UHC  | shop/medicare-advantage-veteran-plan.html | MA Veteran Plan         | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true |
-      | E2E Scenario 5_UMS | UHC  | enroll/ma-enrollment.html                 | MA Enrollment           | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true |
-      | E2E Scenario 5_UMS | UHC  | enroll/pdp-enrollment.html                | PDP Enrollment          | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true |
-      | E2E Scenario 5_UMS | UHC  | shop/compare.html                         | ShopPlan: Compare       | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[5] | true |
-      | E2E Scenario 5_UMS | UHC  | enroll/ms-apply.html                      | ShopPlan: MS Enrollment | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[6] | true |
+      | E2E Scenario 5_UMS | UHC  | shop/compare/compare-ma.html              | Compare MA              | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
+      | E2E Scenario 5_UMS | UHC  | shop/compare/compare-pdp.html             | Compare PDP             | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
+      | E2E Scenario 5_UMS | UHC  | shop/medicare-advantage-veteran-plan.html | MA Veteran Plan         | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
+      | E2E Scenario 5_UMS | UHC  | enroll/ma-enrollment.html                 | MA Enrollment           | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
+      | E2E Scenario 5_UMS | UHC  | enroll/pdp-enrollment.html                | PDP Enrollment          | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
+      | E2E Scenario 5_UMS | UHC  | shop/compare.html                         | ShopPlan: Compare       | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[5] | true    |
+      | E2E Scenario 5_UMS | UHC  | enroll/ms-apply.html                      | ShopPlan: MS Enrollment | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[6] | true    |
 
     Examples:
       | Scenario           | site | path                                | pageName                     | tfnXpath                                                           | tfnFlag |
@@ -493,81 +493,81 @@ Feature: 1.13 UAT - Shop Blog Pages flows
 
     @avengersRegressionAARP @regressionAARP
     Examples:
-      | site | geoState    | path                                                                     | pageName                                      | tfnXpath                                                            | tfnFlag | UHCUrl                      |
-      | AARP | Puerto Rico | medicare-education-classic.html                                          | Understanding Medicare Classic                | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | AARP | Puerto Rico | medicare-education-classic/medicare-eligibility-classic.html             | Medicare Eligibility Classic                  | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | AARP | Puerto Rico | medicare-education-classic/medicare-parts-and-medigap-plans-classic.html | Medicare and Medigap Coverage Options Classic | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | AARP | Puerto Rico | medicare-education-classic/medicare-benefits-classic.html                | Prescriptions, Providers & Benefits Classic   | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | AARP | Puerto Rico | medicare-education-classic/medicare-advantage-plans-classic.html         | Learn about Medicare Advantage Plans Classic  | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | AARP | Puerto Rico | medicare-education-classic/medicare-supplement-plans-classic.html        | Learn about Medicare Supplement Plans Classic | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[4] | true    | https://www.myuhcagent.com/ |
-      | AARP | Puerto Rico | medicare-education-classic/medicare-part-d-classic.html                  | Medicare Prescription Drug Plans Classic      | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | AARP | Puerto Rico | medicare-education-classic/medicare-costs-classic.html                   | Medicare Cost Basics Classic                  | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | AARP | Alabama     | medicare-education/when-to-enroll.html                                   | When to Enroll                                | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | AARP | Puerto Rico | medicare-education-classic/medicare-faq-classic.html                     | Medicare FAQ Classic                          | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | AARP | Alabama     | shop/connect.html                                                        | ShopPlan: Request more Info                   | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | AARP | Alabama     | shop/compare.html                                                        | ShopPlan: Compare                             | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[5] | true    | https://www.myuhcagent.com/ |
-      | AARP | Alabama     | shop/compare/compare-ms.html                                             | ShopPlan: Compare MS                          | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[4] | true    | https://www.myuhcagent.com/ |
-      | AARP | Alabama     | shop/estimate/ms-costs.html                                              | ShopPlan: Estimate MS                         | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[4] | true    | https://www.myuhcagent.com/ |
-      | AARP | Alabama     | shop/compare/compare-ma-ms.html                                          | ShopPlan: Compare MA-MS                       | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | AARP | Alabama     | safe-shopping.html                                                       | ShopPlan: Safe Shopping                       | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | AARP | Alabama     | shop/medicare-advantage-plans.html                                       | ShopPlan: Shop MA Plan                        | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | AARP | Alabama     | shop/medicare-supplement-plans.html                                      | ShopPlan: Shop Med Supp Plan                  | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[4] | true    | https://www.myuhcagent.com/ |
-      | AARP | Alabama     | shop/prescription-drug-plans.html                                        | ShopPlan: Shop PDP Plan                       | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | AARP | Alabama     | shop/dual-special-needs-plans.html                                       | ShopPlan: Shop DSNP Plan                      | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | AARP | Alabama     | shop/compare/compare-pdp.html                                            | ShopPlan: Compare PDP Plan                    | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | AARP | Alabama     | shop/compare/compare-ma.html                                             | ShopPlan: Compare MA  Plan                    | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | AARP | Alabama     | shop/estimate/ma-costs.html                                              | ShopPlan: Estimate MA Plan                    | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | AARP | Alabama     | shop/estimate/pdp-costs.html                                             | ShopPlan: Estimate PDP Plan                   | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | AARP | Alabama     | shop/medicare-advantage-plans/wellness-discounts.html                    | ShopPlan: Welness Discount                    | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | AARP | Alabama     | shop/medicare-advantage-plans/health-care-management.html                | ShopPlan: Healthcare management               | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | AARP | Alabama     | shop/medicare-advantage-plans/ma-dental-benefits.html                    | ShopPlan: MA Dental Benefits                  | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | AARP | Alabama     | shop/renew-active.html                                                   | ShopPlan: Renew-Active                        | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | AARP | Alabama     | enroll.html                                                              | ShopPlan: Enroll                              | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[5] | true    | https://www.myuhcagent.com/ |
-      | AARP | Alabama     | enroll/ma-enrollment.html                                                | ShopPlan: Enroll MA Plans                     | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | AARP | Alabama     | enroll/pdp-enrollment.html                                               | ShopPlan: Enroll PDP Plans                    | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | AARP | Alabama     | enroll/ms-apply.html                                                     | ShopPlan: Enroll MS                           | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[6] | true    | https://www.myuhcagent.com/ |
+      | site | geoState            | path                                                                     | pageName                                      | tfnXpath                                                            | tfnFlag | UHCUrl                      |
+      | AARP | U.S. Virgin Islands | medicare-education-classic.html                                          | Understanding Medicare Classic                | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | AARP | U.S. Virgin Islands | medicare-education-classic/medicare-eligibility-classic.html             | Medicare Eligibility Classic                  | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | AARP | U.S. Virgin Islands | medicare-education-classic/medicare-parts-and-medigap-plans-classic.html | Medicare and Medigap Coverage Options Classic | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | AARP | U.S. Virgin Islands | medicare-education-classic/medicare-benefits-classic.html                | Prescriptions, Providers & Benefits Classic   | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | AARP | U.S. Virgin Islands | medicare-education-classic/medicare-advantage-plans-classic.html         | Learn about Medicare Advantage Plans Classic  | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | AARP | U.S. Virgin Islands | medicare-education-classic/medicare-supplement-plans-classic.html        | Learn about Medicare Supplement Plans Classic | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[4] | true    | https://www.myuhcagent.com/ |
+      | AARP | U.S. Virgin Islands | medicare-education-classic/medicare-part-d-classic.html                  | Medicare Prescription Drug Plans Classic      | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | AARP | U.S. Virgin Islands | medicare-education-classic/medicare-costs-classic.html                   | Medicare Cost Basics Classic                  | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | AARP | Alabama             | medicare-education/when-to-enroll.html                                   | When to Enroll                                | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | AARP | U.S. Virgin Islands | medicare-education-classic/medicare-faq-classic.html                     | Medicare FAQ Classic                          | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | AARP | Alabama             | shop/connect.html                                                        | ShopPlan: Request more Info                   | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | AARP | Alabama             | shop/compare.html                                                        | ShopPlan: Compare                             | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[5] | true    | https://www.myuhcagent.com/ |
+      | AARP | Alabama             | shop/compare/compare-ms.html                                             | ShopPlan: Compare MS                          | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[4] | true    | https://www.myuhcagent.com/ |
+      | AARP | Alabama             | shop/estimate/ms-costs.html                                              | ShopPlan: Estimate MS                         | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[4] | true    | https://www.myuhcagent.com/ |
+      | AARP | Alabama             | shop/compare/compare-ma-ms.html                                          | ShopPlan: Compare MA-MS                       | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | AARP | Alabama             | safe-shopping.html                                                       | ShopPlan: Safe Shopping                       | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | AARP | Alabama             | shop/medicare-advantage-plans.html                                       | ShopPlan: Shop MA Plan                        | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | AARP | Alabama             | shop/medicare-supplement-plans.html                                      | ShopPlan: Shop Med Supp Plan                  | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[4] | true    | https://www.myuhcagent.com/ |
+      | AARP | Alabama             | shop/prescription-drug-plans.html                                        | ShopPlan: Shop PDP Plan                       | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | AARP | Alabama             | shop/dual-special-needs-plans.html                                       | ShopPlan: Shop DSNP Plan                      | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | AARP | Alabama             | shop/compare/compare-pdp.html                                            | ShopPlan: Compare PDP Plan                    | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | AARP | Alabama             | shop/compare/compare-ma.html                                             | ShopPlan: Compare MA  Plan                    | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | AARP | Alabama             | shop/estimate/ma-costs.html                                              | ShopPlan: Estimate MA Plan                    | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | AARP | Alabama             | shop/estimate/pdp-costs.html                                             | ShopPlan: Estimate PDP Plan                   | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | AARP | Alabama             | shop/medicare-advantage-plans/wellness-discounts.html                    | ShopPlan: Welness Discount                    | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | AARP | Alabama             | shop/medicare-advantage-plans/health-care-management.html                | ShopPlan: Healthcare management               | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | AARP | Alabama             | shop/medicare-advantage-plans/ma-dental-benefits.html                    | ShopPlan: MA Dental Benefits                  | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | AARP | Alabama             | shop/renew-active.html                                                   | ShopPlan: Renew-Active                        | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | AARP | Alabama             | enroll.html                                                              | ShopPlan: Enroll                              | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[5] | true    | https://www.myuhcagent.com/ |
+      | AARP | Alabama             | enroll/ma-enrollment.html                                                | ShopPlan: Enroll MA Plans                     | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | AARP | Alabama             | enroll/pdp-enrollment.html                                               | ShopPlan: Enroll PDP Plans                    | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | AARP | Alabama             | enroll/ms-apply.html                                                     | ShopPlan: Enroll MS                           | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[6] | true    | https://www.myuhcagent.com/ |
       #| AARP | Alabama  | about-us.html                                                            | Footer: About Us                              | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | AARP | Alabama     | contact-us.html                                                          | Footer: Contact Us                            | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | AARP | Alabama     | medicare-education/keep-or-change-coverage.html                          | Medicare Education- Medicare Coverage         | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | AARP | Alabama             | contact-us.html                                                          | Footer: Contact Us                            | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | AARP | Alabama             | medicare-education/keep-or-change-coverage.html                          | Medicare Education- Medicare Coverage         | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
 
     @avengersRegressionUHC @regressionUHC
     Examples:
-      | site | geoState    | path                                                                     | pageName                                      | tfnXpath                                                            | tfnFlag | UHCUrl                      |
-      | UHC  | Puerto Rico | medicare-education-classic.html                                          | Understanding Medicare Classic                | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | UHC  | Puerto Rico | medicare-education-classic/medicare-eligibility-classic.html             | Medicare Eligibility Classic                  | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | UHC  | Puerto Rico | medicare-education-classic/medicare-parts-and-medigap-plans-classic.html | Medicare and Medigap Coverage Options Classic | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | UHC  | Puerto Rico | medicare-education-classic/medicare-benefits-classic.html                | Prescriptions, Providers & Benefits Classic   | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | UHC  | Puerto Rico | medicare-education-classic/medicare-advantage-plans-classic.html         | Learn about Medicare Advantage Plans Classic  | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | UHC  | Puerto Rico | medicare-education-classic/medicare-supplement-plans-classic.html        | Learn about Medicare Supplement Plans Classic | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[4] | true    | https://www.myuhcagent.com/ |
-      | UHC  | Puerto Rico | medicare-education-classic/medicare-part-d-classic.html                  | Medicare Prescription Drug Plans Classic      | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | UHC  | Puerto Rico | medicare-education-classic/medicare-costs-classic.html                   | Medicare Cost Basics Classic                  | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | UHC  | Alabama     | medicare-education/when-to-enroll.html                                   | When to Enroll                                | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | UHC  | Puerto Rico | medicare-education-classic/medicare-faq-classic.html                     | Medicare FAQ Classic                          | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | UHC  | Alabama     | shop/connect.html                                                        | ShopPlan: Request more Info                   | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | UHC  | Alabama     | shop/compare.html                                                        | ShopPlan: Compare                             | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[5] | true    | https://www.myuhcagent.com/ |
-      | UHC  | Alabama     | shop/compare/compare-ms.html                                             | ShopPlan: Compare MS                          | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[4] | true    | https://www.myuhcagent.com/ |
-      | UHC  | Alabama     | shop/estimate/ms-costs.html                                              | ShopPlan: Estimate MS                         | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[4] | true    | https://www.myuhcagent.com/ |
-      | UHC  | Alabama     | shop/compare/compare-ma-ms.html                                          | ShopPlan: Compare MA-MS                       | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | UHC  | Alabama     | safe-shopping.html                                                       | ShopPlan: Safe Shopping                       | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | UHC  | Alabama     | shop/medicare-advantage-plans.html                                       | ShopPlan: Shop MA Plan                        | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | UHC  | Alabama     | shop/medicare-supplement-plans.html                                      | ShopPlan: Shop Med Supp Plan                  | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[4] | true    | https://www.myuhcagent.com/ |
-      | UHC  | Alabama     | shop/prescription-drug-plans.html                                        | ShopPlan: Shop PDP Plan                       | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | UHC  | Alabama     | shop/dual-special-needs-plans.html                                       | ShopPlan: Shop DSNP Plan                      | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | UHC  | Alabama     | shop/compare/compare-pdp.html                                            | ShopPlan: Compare PDP Plan                    | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | UHC  | Alabama     | shop/compare/compare-ma.html                                             | ShopPlan: Compare MA  Plan                    | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | UHC  | Alabama     | shop/estimate/ma-costs.html                                              | ShopPlan: Estimate MA Plan                    | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | UHC  | Alabama     | shop/estimate/pdp-costs.html                                             | ShopPlan: Estimate PDP Plan                   | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | UHC  | Alabama     | shop/medicare-advantage-plans/wellness-discounts.html                    | ShopPlan: Welness Discount                    | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | UHC  | Alabama     | shop/medicare-advantage-plans/health-care-management.html                | ShopPlan: Healthcare management               | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | UHC  | Alabama     | shop/medicare-advantage-plans/ma-dental-benefits.html                    | ShopPlan: MA Dental Benefits                  | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | UHC  | Alabama     | shop/renew-active.html                                                   | ShopPlan: Renew-Active                        | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | UHC  | Alabama     | enroll.html                                                              | ShopPlan: Enroll                              | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[5] | true    | https://www.myuhcagent.com/ |
-      | UHC  | Alabama     | enroll/ma-enrollment.html                                                | ShopPlan: Enroll MA Plans                     | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | UHC  | Alabama     | enroll/pdp-enrollment.html                                               | ShopPlan: Enroll PDP Plans                    | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | UHC  | Alabama     | enroll/ms-apply.html                                                     | ShopPlan: Enroll MS                           | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[6] | true    | https://www.myuhcagent.com/ |
+      | site | geoState            | path                                                                     | pageName                                      | tfnXpath                                                            | tfnFlag | UHCUrl                      |
+      | UHC  | U.S. Virgin Islands | medicare-education-classic.html                                          | Understanding Medicare Classic                | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | UHC  | U.S. Virgin Islands | medicare-education-classic/medicare-eligibility-classic.html             | Medicare Eligibility Classic                  | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | UHC  | U.S. Virgin Islands | medicare-education-classic/medicare-parts-and-medigap-plans-classic.html | Medicare and Medigap Coverage Options Classic | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | UHC  | U.S. Virgin Islands | medicare-education-classic/medicare-benefits-classic.html                | Prescriptions, Providers & Benefits Classic   | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | UHC  | U.S. Virgin Islands | medicare-education-classic/medicare-advantage-plans-classic.html         | Learn about Medicare Advantage Plans Classic  | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | UHC  | U.S. Virgin Islands | medicare-education-classic/medicare-supplement-plans-classic.html        | Learn about Medicare Supplement Plans Classic | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[4] | true    | https://www.myuhcagent.com/ |
+      | UHC  | U.S. Virgin Islands | medicare-education-classic/medicare-part-d-classic.html                  | Medicare Prescription Drug Plans Classic      | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | UHC  | U.S. Virgin Islands | medicare-education-classic/medicare-costs-classic.html                   | Medicare Cost Basics Classic                  | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | UHC  | Alabama             | medicare-education/when-to-enroll.html                                   | When to Enroll                                | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | UHC  | U.S. Virgin Islands | medicare-education-classic/medicare-faq-classic.html                     | Medicare FAQ Classic                          | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | UHC  | Alabama             | shop/connect.html                                                        | ShopPlan: Request more Info                   | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | UHC  | Alabama             | shop/compare.html                                                        | ShopPlan: Compare                             | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[5] | true    | https://www.myuhcagent.com/ |
+      | UHC  | Alabama             | shop/compare/compare-ms.html                                             | ShopPlan: Compare MS                          | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[4] | true    | https://www.myuhcagent.com/ |
+      | UHC  | Alabama             | shop/estimate/ms-costs.html                                              | ShopPlan: Estimate MS                         | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[4] | true    | https://www.myuhcagent.com/ |
+      | UHC  | Alabama             | shop/compare/compare-ma-ms.html                                          | ShopPlan: Compare MA-MS                       | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | UHC  | Alabama             | safe-shopping.html                                                       | ShopPlan: Safe Shopping                       | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | UHC  | Alabama             | shop/medicare-advantage-plans.html                                       | ShopPlan: Shop MA Plan                        | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | UHC  | Alabama             | shop/medicare-supplement-plans.html                                      | ShopPlan: Shop Med Supp Plan                  | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[4] | true    | https://www.myuhcagent.com/ |
+      | UHC  | Alabama             | shop/prescription-drug-plans.html                                        | ShopPlan: Shop PDP Plan                       | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | UHC  | Alabama             | shop/dual-special-needs-plans.html                                       | ShopPlan: Shop DSNP Plan                      | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | UHC  | Alabama             | shop/compare/compare-pdp.html                                            | ShopPlan: Compare PDP Plan                    | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | UHC  | Alabama             | shop/compare/compare-ma.html                                             | ShopPlan: Compare MA  Plan                    | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | UHC  | Alabama             | shop/estimate/ma-costs.html                                              | ShopPlan: Estimate MA Plan                    | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | UHC  | Alabama             | shop/estimate/pdp-costs.html                                             | ShopPlan: Estimate PDP Plan                   | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | UHC  | Alabama             | shop/medicare-advantage-plans/wellness-discounts.html                    | ShopPlan: Welness Discount                    | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | UHC  | Alabama             | shop/medicare-advantage-plans/health-care-management.html                | ShopPlan: Healthcare management               | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | UHC  | Alabama             | shop/medicare-advantage-plans/ma-dental-benefits.html                    | ShopPlan: MA Dental Benefits                  | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | UHC  | Alabama             | shop/renew-active.html                                                   | ShopPlan: Renew-Active                        | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | UHC  | Alabama             | enroll.html                                                              | ShopPlan: Enroll                              | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[5] | true    | https://www.myuhcagent.com/ |
+      | UHC  | Alabama             | enroll/ma-enrollment.html                                                | ShopPlan: Enroll MA Plans                     | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | UHC  | Alabama             | enroll/pdp-enrollment.html                                               | ShopPlan: Enroll PDP Plans                    | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | UHC  | Alabama             | enroll/ms-apply.html                                                     | ShopPlan: Enroll MS                           | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[6] | true    | https://www.myuhcagent.com/ |
       #| UHC  | Alabama  | about-us.html                                                            | Footer: About Us                              | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | UHC  | Alabama     | contact-us.html                                                          | Footer: Contact Us                            | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | UHC  | Alabama     | medicare-education/keep-or-change-coverage.html                          | Medicare Education- Medicare Coverage         | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | UHC  | Alabama             | contact-us.html                                                          | Footer: Contact Us                            | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | UHC  | Alabama             | medicare-education/keep-or-change-coverage.html                          | Medicare Education- Medicare Coverage         | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
 
 
   Scenario Outline: To verify social share component on <site> site <pageName> : <path>
@@ -751,12 +751,12 @@ Feature: 1.13 UAT - Shop Blog Pages flows
 #      | AARP | Alabama  | medicare-articles/what-will-medicare-cost-in-2020.html                                                                     | Article Page  156 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | AARP | Alabama  | medicare-articles/hsas-and-medicare.html                                                                                   | Article Page  157 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | AARP | Alabama  | medicare-articles/are-medicare-premiums-based-on-income.html                                                               | Article Page  158 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | AARP  | Alabama  | medicare-articles/does-medicare-cover-you-on-a-cruise-ship.html                                                           | Article Page  159 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | AARP  | Alabama  | medicare-articles/when-to-apply-for-a-medigap-insurance-plan.html                                                         | Article Page  160 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | AARP  | Alabama  | medicare-articles/will-medicare-pay-for-assisted-living-care.html                                                         | Article Page  161 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | AARP  | Alabama  | medicare-articles/medicare-coverage-for-long-term-care.html                                                               | Article Page  162 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | AARP  | Alabama  | medicare-articles/does-medicare-cover-acupuncture.html				                                                             | Article Page  163 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      
+      | AARP | Alabama  | medicare-articles/does-medicare-cover-you-on-a-cruise-ship.html                                                            | Article Page  159 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | AARP | Alabama  | medicare-articles/when-to-apply-for-a-medigap-insurance-plan.html                                                          | Article Page  160 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | AARP | Alabama  | medicare-articles/will-medicare-pay-for-assisted-living-care.html                                                          | Article Page  161 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | AARP | Alabama  | medicare-articles/medicare-coverage-for-long-term-care.html                                                                | Article Page  162 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | AARP | Alabama  | medicare-articles/does-medicare-cover-acupuncture.html                                                                     | Article Page  163 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+
 
 
     @validateSocialShareComponentUHC @avengersRegressionUHC @Validate3packCTA_Article_UHC @regressionUHC
@@ -924,9 +924,9 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | UHC  | Alabama  | medicare-articles/when-to-apply-for-a-medigap-insurance-plan.html                                                          | Article Page  160 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | UHC  | Alabama  | medicare-articles/will-medicare-pay-for-assisted-living-care.html                                                          | Article Page  161 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | UHC  | Alabama  | medicare-articles/medicare-coverage-for-long-term-care.html                                                                | Article Page  162 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | UHC  | Alabama  | medicare-articles/does-medicare-cover-acupuncture.html				                                                             | Article Page  163 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-     
-     
+      | UHC  | Alabama  | medicare-articles/does-medicare-cover-acupuncture.html                                                                     | Article Page  163 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+
+
   Scenario Outline: To verify the components present on the Shop page on the <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -962,13 +962,13 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | TFNflag  | <tfnFlag>  |
     Then the user validates whether call icon is visible
 
-     @regressionAARP @avengersRegressionAARP @featureGate @check123
-    Examples: 
+    @regressionAARP @avengersRegressionAARP @featureGate @check123
+    Examples:
       | site | tfnXpath            | tfnFlag                                       |      | UHCUrl                      |
       | AARP | AARP Medicare Plans | //*[@class='amp']//a[contains(@class, 'tel')] | true | https://www.myuhcagent.com/ |
 
-     @regressionUHC @avengersRegressionUHC @uhcmedicare
-    Examples: 
+    @regressionUHC @avengersRegressionUHC @uhcmedicare
+    Examples:
       | site | tfnXpath            | tfnFlag                                       |      | UHCUrl                      |
       | UHC  | AARP Medicare Plans | //*[@class='amp']//a[contains(@class, 'tel')] | true | https://www.myuhcagent.com/ |
 
@@ -988,17 +988,17 @@ Feature: 1.13 UAT - Shop Blog Pages flows
     Then the user clicks on browser back button
     Then the user clicks on Learn About Enrollment link on Enroll Page
 
-     @avengersRegressionAARP @regressionAARP
-    Examples: 
+    @avengersRegressionAARP @regressionAARP
+    Examples:
       | site |
       | AARP |
 
-     @avengersRegressionUHC @uhcmedicare @regressionUHC
-    Examples: 
+    @avengersRegressionUHC @uhcmedicare @regressionUHC
+    Examples:
       | site |
       | UHC  |
 
-  
+
   Scenario Outline: To verify the components present on the Resources page on the <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -1019,12 +1019,12 @@ Feature: 1.13 UAT - Shop Blog Pages flows
     Then user click on Get Informed button for Preventing Medical Fraud link
     Then the user clicks on browser back button
 
-     @avengersRegressionAARP @regressionAARP
-    Examples: 
+    @avengersRegressionAARP @regressionAARP
+    Examples:
       | site |
       | AARP |
 
-     @avengersRegressionUHC @uhcmedicare @regressionUHC
-    Examples: 
+    @avengersRegressionUHC @uhcmedicare @regressionUHC
+    Examples:
       | site |
       | UHC  |   
