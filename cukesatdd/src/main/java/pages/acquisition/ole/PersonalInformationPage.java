@@ -325,6 +325,8 @@ public class PersonalInformationPage extends UhcDriver {
 		String HomeNumber = memberDetailsMap.get("Home Number");
 		String MobileNumber = memberDetailsMap.get("Mobile Number");
 
+		String AutoAddress = memberDetailsMap.get("Auto Address");
+
 		CheckPageLoad();
 		CheckiPerseptions();
 
@@ -347,7 +349,7 @@ public class PersonalInformationPage extends UhcDriver {
 
 		if (result) {
 			//Code for Personal Information page 2 begin
-		/*----------old Code for Address validation..........
+			if(AutoAddress.equalsIgnoreCase("no")) {
 			sendkeys(PermanentAdd_Street,Perm_Street);
 		sendkeys(PermanentAdd_Aptno,Perm_Aptno);
 		sendkeys(PermanentAdd_City,Perm_city);
@@ -362,9 +364,11 @@ public class PersonalInformationPage extends UhcDriver {
 			SelectState.selectByValue(Mailing_State);
 			sendkeysNew(MailingAdd_Zip,Mailing_Zip);
 					}
-				----------old Code for Address validation..........*/
-			Validate_OLE_addressAutoComplete(memberDetailsMap);
 
+			}
+			else {
+				Validate_OLE_addressAutoComplete(memberDetailsMap);
+			}
 		}
 		result = Clickoncontinuebutton("phone-number");
 		//Code for Personal Information page 3 begin
@@ -437,6 +441,7 @@ public class PersonalInformationPage extends UhcDriver {
 		String EmailAddress = memberDetailsMap.get("Email");
 		String HomeNumber = memberDetailsMap.get("Home Number");
 		String MobileNumber = memberDetailsMap.get("Mobile Number");
+		String AutoAddress = memberDetailsMap.get("Auto Address");
 
 		CheckPageLoad();
 		CheckiPerseptions();
@@ -458,23 +463,25 @@ public class PersonalInformationPage extends UhcDriver {
 		result = Clickoncontinuebutton("/mailing-address");
 
 		if (result) {
+			if(AutoAddress.equalsIgnoreCase("no")) {
+				sendkeys(PermanentAdd_Street, Perm_Street);
+				sendkeys(PermanentAdd_Aptno, Perm_Aptno);
+				sendkeys(PermanentAdd_City, Perm_city);
+				System.out.println("Mailing Question : " + MailingQuestion);
+				if (MailingQuestion.equalsIgnoreCase("no")) {
+					jsClickNew(SameMailingAddressNo);
+					scrollToView(MailingAdd_Street);
+					sendkeysNew(MailingAdd_Street, Mailing_Street);
+					sendkeysNew(MailingAdd_Aptno, Mailing_Aptno);
+					sendkeys(MailingAdd_City, Mailing_City);
+					Select SelectState = new Select(MailingAdd_State_DropDown);
+					SelectState.selectByValue(Mailing_State);
+					sendkeysNew(MailingAdd_Zip, Mailing_Zip);
+				}
+			}else {
 
-		/*	sendkeys(PermanentAdd_Street, Perm_Street);
-			sendkeys(PermanentAdd_Aptno, Perm_Aptno);
-			sendkeys(PermanentAdd_City, Perm_city);
-			System.out.println("Mailing Question : " + MailingQuestion);
-			if (MailingQuestion.equalsIgnoreCase("no")) {
-				jsClickNew(SameMailingAddressNo);
-				scrollToView(MailingAdd_Street);
-				sendkeysNew(MailingAdd_Street, Mailing_Street);
-				sendkeysNew(MailingAdd_Aptno, Mailing_Aptno);
-				sendkeys(MailingAdd_City, Mailing_City);
-				Select SelectState = new Select(MailingAdd_State_DropDown);
-				SelectState.selectByValue(Mailing_State);
-				sendkeysNew(MailingAdd_Zip, Mailing_Zip);
-			}*/
-
-			Validate_OLE_addressAutoComplete(memberDetailsMap);
+				Validate_OLE_addressAutoComplete(memberDetailsMap);
+			}
 		}
 		result = Clickoncontinuebutton("phone-number");
 		if (result) {
