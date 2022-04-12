@@ -1084,7 +1084,7 @@ public void the_user_performs_plan_search_using_following_information_on_Morgan_
 		CampaignExternalLinksMobile campaignExternalLinkspage = (CampaignExternalLinksMobile) getLoginScenario()
 				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
 		campaignExternalLinkspage.validateFindADoc();
-		campaignExternalLinkspage.naviagteBack();
+		//campaignExternalLinkspage.naviagteBack();
 	}
 
 	@Then("^user clicks on privacy policy link$")

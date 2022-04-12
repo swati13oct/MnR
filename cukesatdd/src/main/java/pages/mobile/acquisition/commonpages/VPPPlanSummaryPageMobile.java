@@ -582,7 +582,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	@FindBy(xpath = "(//label[text()='Add to Compare'])[1]")
 	private WebElement compareLink;
 	
-	@FindBy(xpath = "//*[contains(@class,'show active')]//div[contains(@class,'module-plan-overview module swiper-slide')]//button[contains(text(),'Compare plans')][1]")
+	@FindBy(xpath = "//span[contains(@class,'ng-binding show')]//button[contains(text(),'Compare plans')][1]")
 	private WebElement compareButton;
 	
 	@FindBy(css = "#back-to-plans")
@@ -779,7 +779,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	@FindBy(css = "#MPAED")
 	private WebElement medSuppOleHospitalPartA;
 
-	@FindBy(xpath = "//input[@id='Gender_1']/following-sibling::label[text()='Male']")
+	@FindBy(xpath="//input[@id='Gender_11']/following-sibling::label[text()='Male']")
 	private WebElement medSuppOleMaleCheckbox;
 
 	@FindBy(xpath = "//input[@id='PartABActiveIndicator_1']/following-sibling::label")
@@ -1135,6 +1135,17 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	}
 	
 	public void verifyPlanCompareCheckboxIsChecked(String planIndex, String plantype) {
+		sleepBySec(15);
+		try {
+			if(plantype.equalsIgnoreCase("MAPD") || plantype.equalsIgnoreCase("MA"))
+				jsClickNew(maPlansViewLink);
+			else if(plantype.equalsIgnoreCase("SNP"))
+				jsClickNew(snpPlansViewLink);
+			else if(plantype.equalsIgnoreCase("PDP"))
+				jsClickNew(pdpPlansViewLink);
+		}
+		catch (Exception e) {
+		}
 		validate(planCompareCheckBox);
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		System.out.println("Plan type" + plantype);
@@ -1533,7 +1544,8 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		String rallyProviderName = MRConstants.PROV_NAME;
 		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//h4[contains(@ng-keydown,'dropDownCollapseCheck')]"));
-		ProviderSearchLink.click();
+		//ProviderSearchLink.click();
+		jsClickNew(ProviderSearchLink);
 		WebElement ProviderName = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//div[contains(@id,'ProviderName')]"));
 
@@ -4417,8 +4429,11 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		jsClickNew(medSuppOleMaleCheckbox);
 
 		CommonUtility.waitForPageLoadNewForClick(driver, monthDrpDwnPartA, 5);
-		Select partAMonth = new Select(monthDrpDwnPartA);
-		partAMonth.selectByIndex(1);
+		//Select partAMonth = new Select(monthDrpDwnPartA);
+		//partAMonth.selectByIndex(1);
+		
+		selectFromDropDownByValue(monthDrpDwnPartA, "01");
+		
 		System.out.println("Effective part a date- month value selected");
 
 		CommonUtility.waitForPageLoadNewForClick(driver, yearDrpDwnPartA, 5);
@@ -4427,8 +4442,10 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		System.out.println("Effective part a date- year value selected");
 
 		CommonUtility.waitForPageLoadNewForClick(driver, monthDrpDwnPartB, 5);
-		Select partBMonth = new Select(monthDrpDwnPartB);
-		partBMonth.selectByIndex(1);
+		//Select partBMonth = new Select(monthDrpDwnPartB);
+		//partBMonth.selectByIndex(1);
+		selectFromDropDownByValue(monthDrpDwnPartB, "01");
+		
 		System.out.println("Effective part b date- month value selected");
 
 		CommonUtility.waitForPageLoadNewForClick(driver, yearDrpDwnPartB, 5);
@@ -5055,7 +5072,11 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 				// initial_savePlanIconXpath="//*[text(),'"+plan+"']/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@aria-selected,'false')]"+savePlanImgXpath;
 				initial_savePlanIconXpath = "//*[contains(@class,'save-favorite-plan')][contains(@aria-selected,'false')][@aria-describedby='"
 						+ plan + "']";
-			} else {
+			}else if(planType.equalsIgnoreCase("PDP")){
+				initial_savePlanIconXpath = "//*[contains(text(),'" + plan
+						+ "')]/following::a[contains(@aria-selected,'false')][1]" + savePlanImgXpath;
+			}
+			else {
 				initial_savePlanIconXpath = "//a[contains(text(),'" + plan
 						+ "')]/following::a[contains(@aria-selected,'false')][1]" + savePlanImgXpath;
 			}

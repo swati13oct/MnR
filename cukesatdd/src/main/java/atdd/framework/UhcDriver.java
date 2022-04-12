@@ -1138,7 +1138,7 @@ public abstract class UhcDriver {
 		checkModelPopup(driver, defaultTimeoutInSec);
 	}
 
-	@FindBy(xpath = ".//*[contains(@id,'singleLargeLayoutContainer')]")
+	@FindBy(xpath = ".//*[contains(@id,'singleLargeLayoutContainer') or @id='ip-no']")
 	public WebElement IPerceptionsPopup;
 
 	@FindBy(xpath = "//*[contains(@id,'ip-no')]")
@@ -1153,7 +1153,7 @@ public abstract class UhcDriver {
 			try {
 				if (IPerceptionsPopup.isDisplayed()) {
 					// driver.switchTo().frame(IPerceptionsFrame);
-					IPerceptionPopuNoBtn.click();
+					IPerceptionsPopup.click();
 					// driver.switchTo().defaultContent();
 					System.out.println("IPerceptions Popup  found");
 				}

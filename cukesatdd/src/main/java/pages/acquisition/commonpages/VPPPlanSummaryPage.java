@@ -950,7 +950,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	private WebElement compareButton;
 
 	// @FindBy(xpath = "//span[@class='size36 semiBoldText colorPrimaryBlue']")
-	@FindBy(xpath = "(//*[contains(text(),'Compare AARP� Medicare Supplement')])[1]")
+	@FindBy(xpath = "(//*[contains(text(),'Compare AARPŽ Medicare Supplement')])[1]")
 	private WebElement comparePageHeader;
 
 //	@FindBy(xpath = "(//button[@class='unliked buttonIntoText'])[1]")
@@ -7854,7 +7854,7 @@ public String GetMonthlyPremiumValue() {
 			Assertion.fail("*****************TFN number was  not found macthing with the SAM call Popup ***************"
 					+ ExpectedCallSAMTFN);
 		}*/
-		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. ï¿½ 8 p.m., 7 days a week.*\n*Alaska and Hawaii: 8 a.m. ï¿½ 8 p.m. Monday ï¿½ Friday, 8 a.m. ï¿½ 5 p.m. Saturday and Sunday.";
+		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. ĂŻÂżÂ˝ 8 p.m., 7 days a week.*\n*Alaska and Hawaii: 8 a.m. ĂŻÂżÂ˝ 8 p.m. Monday ĂŻÂżÂ˝ Friday, 8 a.m. ĂŻÂżÂ˝ 5 p.m. Saturday and Sunday.";
 		validate(CallSamTFNtimezone);
 		String ActualCallSamTFNtimezone = CallSamTFNtimezone.getText();
 		System.out.println(ExpectedCallSamTFNtimezone);
