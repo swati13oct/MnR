@@ -432,47 +432,51 @@ public class CQPage extends UhcDriver {
         }
         selectAppDropdown.click();
 
-        for (WebElement e : selectAppOptions) {
-            if (!e.getAttribute("class").contains("disabled")) {
-                selectAppDropdown.click();
-                System.out.println(e.getText() + " from Select Application dropdown is selected");
-                e.click();
-                sleepBySec(2);
-                if (selectViewDropDown.isDisplayed()) {
-                    sleepBySec(1);
-                    System.out.println("Select View Dropdown is visible");
-                    for (WebElement x : selectViewOptions) {
-                        selectViewDropDown.click();
-                        System.out.println(x.getText() + " from View dropdown is selected");
-                        x.click();
-                        sleepBySec(2);
-                        if (selectSubViewDropDown.isDisplayed()) {
-                            sleepBySec(1);
-                            System.out.println("Select Sub View Dropdown is visible");
-                            for (WebElement sub : selectSubViewOptions) {
-                                selectSubViewDropDown.click();
-                                System.out.println(sub.getText() + " from Sub View dropdown is selected");
-                                sub.click();
+        for (int i = 0; i < selectAppOptions.size(); i++) {
+            for (WebElement e : selectAppOptions) {
+                if (!e.getAttribute("class").contains("disabled")) {
+                    selectAppDropdown.click();
+                    System.out.println(e.getText() + " from Select Application dropdown is selected");
+                    e.click();
+                    sleepBySec(2);
+                    if (selectViewDropDown.isDisplayed()) {
+                        sleepBySec(1);
+                        System.out.println("Select View Dropdown is visible");
+                        for (WebElement x : selectViewOptions) {
+                            selectViewDropDown.click();
+                            System.out.println(x.getText() + " from View dropdown is selected");
+                            x.click();
+                            sleepBySec(2);
+                            if (selectSubViewDropDown.isDisplayed()) {
+                                sleepBySec(1);
+                                System.out.println("Select Sub View Dropdown is visible");
+                                for (WebElement sub : selectSubViewOptions) {
+                                    selectSubViewDropDown.click();
+                                    System.out.println(sub.getText() + " from Sub View dropdown is selected");
+                                    sub.click();
+                                    sleepBySec(3);
+                                    checkResult();
+                                    validateEditAssetModalPopUp();
+                                }
+                            } else {
+                                System.out.println("Select Sub View Dropdown is not visible");
                                 sleepBySec(3);
                                 checkResult();
                                 validateEditAssetModalPopUp();
                             }
-                        } else {
-                            System.out.println("Select Sub View Dropdown is not visible");
-                            sleepBySec(3);
-                            checkResult();
-                            validateEditAssetModalPopUp();
                         }
-                    }
 					/*selectViewDropDown.click();
 					selectViewOptions.get(1).click();*/
 
-                } else {
-                    System.out.println("Select View Dropdown is not visible");
-                    checkResult();
-                    validateEditAssetModalPopUp();
+                    } else {
+                        System.out.println("Select View Dropdown is not visible");
+                        checkResult();
+                        validateEditAssetModalPopUp();
+                    }
                 }
+                continue;
             }
+
         }
 /*		selectAppOptions.get(4).click();
 		sleepBySec(2);

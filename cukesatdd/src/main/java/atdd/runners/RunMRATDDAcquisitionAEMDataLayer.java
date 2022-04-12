@@ -14,9 +14,9 @@ import org.testng.annotations.Test;
                 "html:reports/test-report.html",
                 "json:target/cucumber-RunMRATDDAcquisitionAEMDataLayer.json",
                 "timeline:target"},
-        tags = "@AEM_DataLayer")
+        tags = "@checkDLU")
 
-@RetryCountIfFailed(1)
+@RetryCountIfFailed(0)
 public class RunMRATDDAcquisitionAEMDataLayer extends BaseTestConfig {
     @Test(dataProvider = ScenarioDataProvider)
     public void runCukes(PickleWrapper pickleWrapper, FeatureWrapper featureWrapper) {

@@ -65,7 +65,7 @@ Feature: To validate pages on AEM
     Then the user nagivates to Data Layer Page
     Then the user validates the Dynamic Apps tab components
 
-    @AEM_DataLayer
+    @AEM_DataLayer @checkDLU
     Examples: 
       | username | password |
       | admin    | admin    |

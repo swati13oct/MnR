@@ -962,7 +962,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | TFNflag  | <tfnFlag>  |
     Then the user validates whether call icon is visible
 
-    @regressionAARP @avengersRegressionAARP @featureGate @check123
+    @regressionAARP @avengersRegressionAARP @featureGate
     Examples:
       | site | tfnXpath            | tfnFlag                                       |      | UHCUrl                      |
       | AARP | AARP Medicare Plans | //*[@class='amp']//a[contains(@class, 'tel')] | true | https://www.myuhcagent.com/ |
