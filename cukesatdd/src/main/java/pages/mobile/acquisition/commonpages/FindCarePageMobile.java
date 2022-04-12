@@ -39,7 +39,7 @@ public class FindCarePageMobile extends UhcDriver {
 	@FindBy(xpath = "//span[text()='Change Location']")
 	public WebElement ChangeLocationButton;
 
-	@FindBy(css = "button[data-test-id='MedicalDirectory']")
+	@FindBy(xpath="//*[contains(@data-test-id,'MedicalDirectory')]")
 	private WebElement MedicalDirectory;
 
 	@FindBy(css = "button[data-test-id='BehavioralHealthDirectory']")

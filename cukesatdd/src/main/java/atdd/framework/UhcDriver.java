@@ -1138,7 +1138,7 @@ public abstract class UhcDriver {
 		checkModelPopup(driver, defaultTimeoutInSec);
 	}
 
-	@FindBy(xpath = ".//*[contains(@id,'singleLargeLayoutContainer')]")
+	@FindBy(xpath = ".//*[contains(@id,'singleLargeLayoutContainer') or @id='ip-no']")
 	public WebElement IPerceptionsPopup;
 
 	@FindBy(xpath = "//*[contains(@id,'ip-no')]")
