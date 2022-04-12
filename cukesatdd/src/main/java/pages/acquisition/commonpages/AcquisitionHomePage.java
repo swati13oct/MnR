@@ -1021,7 +1021,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public void openAndValidate(String site) {
-		if (site.equalsIgnoreCase("UHC") || site.equalsIgnoreCase("UMS")) {
+		if (site.equalsIgnoreCase("UHC") || site.equalsIgnoreCase("UMS") || site.equalsIgnoreCase("ULayer")) {
 			if (MRScenario.environment.equals("offline")) {
 				startNew(UMS_ACQISITION_OFFLINE_PAGE_URL);
 				testSiteUrl = UMS_ACQISITION_OFFLINE_PAGE_URL;
