@@ -236,7 +236,7 @@ public abstract class UhcDriver {
 		driver.get(url);
 		
 		if(!url.contains("uhcmedicare")&& url.contains("uhc")) {
-			Cookie cookieName = new Cookie("X_UMS_DEBUG_SESSION","true");
+			Cookie cookieName = new Cookie("X_UMS_DEBUG_SESSION","stage");
 			driver.manage().addCookie(cookieName);
 			driver.navigate().refresh();
 			
@@ -799,7 +799,7 @@ public abstract class UhcDriver {
 		driver.get(url);
 		
 		if(!url.contains("uhcmedicaresolution")&& url.contains("uhc")) {
-			Cookie cookieName = new Cookie("X_UMS_DEBUG_SESSION","true");
+			Cookie cookieName = new Cookie("X_UMS_DEBUG_SESSION","stage");
 			driver.manage().addCookie(cookieName);
 			driver.navigate().refresh();
 			

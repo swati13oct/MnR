@@ -1151,7 +1151,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			}else if (MRScenario.environment.contains("chargers-uhc")) {
 					startNewMobile(UMS_ACQISITION_CHARGERS_UHC_URL);
 					checkModelPopup(driver, 20); 
-					checkForSecurityPage();				
+					checkForSecurityPage();
+				
 			} else {
 				startNewMobile(UMS_ACQISITION_PAGE_URL);
 				testSiteUrl = UMS_ACQISITION_PAGE_URL;
