@@ -1153,7 +1153,7 @@ public abstract class UhcDriver {
 			try {
 				if (IPerceptionsPopup.isDisplayed()) {
 					// driver.switchTo().frame(IPerceptionsFrame);
-					IPerceptionPopuNoBtn.click();
+					IPerceptionsPopup.click();
 					// driver.switchTo().defaultContent();
 					System.out.println("IPerceptions Popup  found");
 				}
