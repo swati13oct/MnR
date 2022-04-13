@@ -10,6 +10,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
+import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
@@ -256,7 +257,7 @@ public class CampaignExternalLinksMobile extends UhcDriver {
 	private WebElement LocationBtn;
 
 
-	@FindBy(xpath = "//p[contains(text(),'Please enter valid zip code')]")
+	@FindBy(xpath = "//*[contains(text(),'Please enter a 5-digit ZIP code.')]")
 	private WebElement EnterValidZipCode;
 
 	@FindBy(xpath = "//input[@class='c-input js-state-zipcode']")
@@ -398,13 +399,13 @@ public class CampaignExternalLinksMobile extends UhcDriver {
 //Enter a valid 5-digit ZIP code in the format 12345
 
 
-	@FindBy(xpath = "(//span[contains(text(),'View Plans & Pricing')])[1]")
+	@FindBy(xpath = "(//span[contains(text(),'View Plans & Pricing')])[2]")
 	private WebElement viewplanspricing;
 	
-	@FindBy(xpath = "//div[@id='zipErrorMessage-0']")
+	@FindBy(xpath = "//p[contains(@id,'zip-form-error-1')]")
 	private WebElement ziperrorMsg;
 
-	@FindBy(xpath ="//input[@name='zipcodemeded-0']")
+	@FindBy(xpath ="//input[@id='zipcodemeded-1']")
 	private WebElement Zipinput;
 	
 	@FindBy(xpath = "(//a[@class='tel ng-binding'])[1]")
@@ -423,7 +424,7 @@ public class CampaignExternalLinksMobile extends UhcDriver {
 	@FindBy(xpath = "//a[@data-asset-name='View Plans & Pricing ']")
 	private WebElement viewPricingBtn;
 	
-	@FindBy(xpath = "//span[@class='sam__button__text desktop-tfn-text']")
+	@FindBy(xpath = "//p[contains(@class,'sam__button__text')][2]")
 	private WebElement samTfn;
 	
 	@FindBy(xpath = "//a[@data-asset-name='Estimate Your Prescription Drug Costs ']")
@@ -1362,7 +1363,8 @@ public class CampaignExternalLinksMobile extends UhcDriver {
 	
 	public void clickFindPlansinyourArea() {
 		String parentWindow = driver.getWindowHandle();
-		clickFindPlansinyourArea.click();
+		//clickFindPlansinyourArea.click();
+		jsClickNew(clickFindPlansinyourArea);
 		Set<String> tabs_windows = driver.getWindowHandles();
 		Iterator<String> itr = tabs_windows.iterator();
 		while (itr.hasNext()) {
@@ -1962,17 +1964,38 @@ public class CampaignExternalLinksMobile extends UhcDriver {
 
 	public void  validateFindADoc() {
 		validateNew(FindADoctor);
-		jsClickNew(FindADoctor);
-//		FindADoctor.click();
-//		CommonUtility.waitForPageLoadNew(driver, location, 30);
-		Assert.assertTrue(true);
-		Assert.assertEquals("https://connect.werally.com/county-plan-selection/uhc.mnr/zip?clientPortalCode=AARP1&backBtn=false", driver.getCurrentUrl());
+		switchToNewTabNew(FindADoctor);
+		// CommonUtility.checkPageIsReadyNew(driver);
+		// CommonUtility.waitForPageLoadNew(driver, location, 30);
+		sleepBySec(3);
+		// Assert.assertTrue(true);
+		// Assert.assertEquals("https://connect.werally.com/county-plan-selection/uhc.mnr/zip?clientPortalCode=AARP1&backBtn=false",
+		// driver.getCurrentUrl());
+		if (!driver.getCurrentUrl().contains("werally.com")) {
+			Assert.fail("Rally page not opened successfully");
+		} else {
+			System.out.println("Rally opened successfully");
+		}
+
+		if (driver.getWindowHandles().size() > 1) {
+			String currentPage = driver.getWindowHandle();
+			Set<String> newWindow = driver.getWindowHandles();
+			for (String parentWindow : newWindow) {
+				if (!parentWindow.equalsIgnoreCase(currentPage)) {
+					driver.switchTo().window(currentPage).close();
+					driver.switchTo().window(CommonConstants.getMainWindowHandle());
+					break;
+				}
+			}
+		} else {
+			driver.navigate().back();
+			threadsleep(20000);
+		}
 	}
 
 	//https://www.uhc.com/legal/accessibility
 
 	public void validatePrivacy() {
-		CommonUtility.checkPageIsReadyNew(driver);
 		validateNew(PrivacyPolicy);
 		String parentwindow = driver.getWindowHandle();
 		switchToNewTabNew(PrivacyPolicy);
@@ -1990,17 +2013,24 @@ public class CampaignExternalLinksMobile extends UhcDriver {
 //		Accessibility.click();
 //		switchToNewTab();
 		threadsleep(8);
-		Set<String> handles = driver.getWindowHandles();
-		System.out.println(handles);
-		for(String handle1:handles)
-		    if(!parentwindow.equals(handle1))
-		    {
-		        driver.switchTo().window(handle1);
-		        System.out.println(handle1);
-		    }
-		Assert.assertEquals("https://www.uhc.com/legal/accessibility", driver.getCurrentUrl());
-		driver.close();
-		driver.switchTo().window(parentwindow);
+		if(driver.toString().toUpperCase().contains("ANDROID")) {
+			Set<String> handles = driver.getWindowHandles();
+			System.out.println(handles);
+			for(String handle1:handles)
+			    if(!parentwindow.equals(handle1))
+			    {
+			        driver.switchTo().window(handle1);
+			        System.out.println(handle1);
+			    }
+			Assert.assertEquals("https://www.uhc.com/legal/accessibility", driver.getCurrentUrl());
+			driver.close();
+			driver.switchTo().window(parentwindow);
+		}
+		else {
+			sleepBySec(50);
+			Assert.assertEquals("https://www.uhc.com/legal/accessibility", driver.getCurrentUrl());
+			driver.navigate().back();
+		}
 	}
 
 	public void validateErrorMsgtakeadvantage() {
@@ -2072,7 +2102,8 @@ public class CampaignExternalLinksMobile extends UhcDriver {
 		CommonUtility.waitForPageLoad(driver, LocationLink, 30);
 		LocationLink.click();
 		threadsleep(8);
-		InputZipCode.clear();
+		if(driver.toString().toUpperCase().contains("ANDROID"))
+			InputZipCode.clear();
 		//InputZipCode.sendKeys(zipcodeMulti);
 		sendkeysMobile(InputZipCode, zipcodeMulti);
 		jsClickNew(LocationBtn);
@@ -2085,8 +2116,9 @@ public class CampaignExternalLinksMobile extends UhcDriver {
 		validateNew(LocationBtn);
 		LocationBtn.click();
 		threadsleep(5);
-		Assert.assertEquals("Please enter valid zip code", EnterValidZipCode.getText());
-		InputZipCode.clear();
+		Assert.assertEquals("Please enter a 5-digit ZIP code.", EnterValidZipCode.getText());
+		if(driver.toString().toUpperCase().contains("ANDROID"))
+			InputZipCode.clear();
 		//InputZipCode.sendKeys(zipcodeSingle);
 		sendkeysMobile(InputZipCode, zipcodeSingle);
 		threadsleep(8);
@@ -2095,28 +2127,31 @@ public class CampaignExternalLinksMobile extends UhcDriver {
 			
 	}
 
-	public void validatezipcodecomponent() {
+	public void validatezipcodecomponent(String zipcode) {
 		// TODO Auto-generated method stub
-		
+
 		waitforElementNew(viewplanspricing);
-		viewplanspricing.click();
-		
-		waitforElementNew(ziperrorMsg);
-		System.out.println("@@Zip error Message@@@"+ziperrorMsg.getText());
-		Assert.assertEquals(ziperrorMsg.getText(), "Please enter a valid zip code");
-		
 		Zipinput.clear();
-		Zipinput.sendKeys("33111");
-		viewplanspricing.click();
-		
-		waitforElementNew(tfn);
-		
-		System.out.println("@@tfn@@"+tfn.getText());
-		Assert.assertEquals(tfn.getText(), "1-855-264-3792");
-		
-//		//driver.navigate().back();
-		
-		
+		scrollToView(viewplanspricing);
+		//viewplanspricing.click();
+		jsClickNew(viewplanspricing);
+
+		waitforElementNew(ziperrorMsg);
+		System.out.println("@@Zip error Message@@@" + ziperrorMsg.getText());
+		Assert.assertEquals(ziperrorMsg.getText(), "Error: Please enter a valid ZIP Code");
+
+		Zipinput.clear();
+		Zipinput.sendKeys(zipcode);
+		//viewplanspricing.click();
+		jsClickNew(viewplanspricing);
+		sleepBySec(4);
+		CommonUtility.checkPageIsReadyNew(driver);
+
+		if (!driver.getCurrentUrl().contains("/health-plans")) {
+			Assert.fail("VVP not opened");
+		}
+
+		// //driver.navigate().back();
 	}
 
 	public void clickFindPlansPricingtakeadvantage() {
@@ -2167,7 +2202,8 @@ public class CampaignExternalLinksMobile extends UhcDriver {
 
 		public void clickonEstimateDrugCostBtnAndNavigatesToDCE() {
 			waitforElementNew(EstimateDrugCost);
-			EstimateDrugCost.click();
+			//EstimateDrugCost.click();
+			jsClickNew(EstimateDrugCost);
 			threadsleep(4);
 			waitforElementNew(samTfn);
 		}
@@ -2244,7 +2280,8 @@ public class CampaignExternalLinksMobile extends UhcDriver {
 		
 		public void validateDCEExternallinkMA() {
 			parentWindow = driver.getWindowHandle();
-			dceexternallinkMA.click();
+			//dceexternallinkMA.click();
+			jsClickNew(dceexternallinkMA);
 			Set<String> tabs_windows = driver.getWindowHandles();
 			Iterator<String> itr = tabs_windows.iterator();
 			while (itr.hasNext()) {

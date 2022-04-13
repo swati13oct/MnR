@@ -70,9 +70,8 @@ public class ProviderSearchPage extends UhcDriver {
 	private List<WebElement> SaveBtns;
 
 	@FindBys(value = {
-			// @FindBy(xpath = "//div[@class='acquisitionButtons
-			// hidden-phone']//button[contains(@class,'saved-provider-button')]") })
-	@FindBy(xpath = "//button[contains(@class,'saved-provider-button')]") })
+		//	 @FindBy(xpath = "//div[@class='acquisitionButtons hidden-phone']//button[contains(@class,'saved-provider-button')]") })
+			@FindBy(xpath = "//*[@data-test-id='saved-provider-button']") })
 	private List<WebElement> MulitpleSaveBtns;
 
 	@FindBy(xpath = "//button[@data-test-id='button-close']")
@@ -748,7 +747,7 @@ public class ProviderSearchPage extends UhcDriver {
 	 * 
 	 * return new VPPPlanSummaryPage(driver); }
 	 */
-	public VPPPlanSummaryPage MultipleselectsProvider() {
+	public VPPPlanSummaryPage MultipleselectsProvider() throws InterruptedException {
 		GetStarted.click();
 
 		CommonUtility.waitForPageLoadNew(driver, MedicalDirectory, 10);
@@ -770,9 +769,12 @@ public class ProviderSearchPage extends UhcDriver {
 		// jsClickNew(selectProviderBtn);
 
 		int counter = 0;
+		Thread.sleep(10000);
 		for (WebElement element : MulitpleSaveBtns) {
 			// CommonUtility.waitForPageLoadNew(driver, element, 45);
-			CommonUtility.waitForPageLoadNew(driver, element, 10);
+		//	CommonUtility.waitForPageLoadNew(driver, element, 30);
+			Thread.sleep(10000);
+			scrollToView(element);
 			jsClickNew(element);
 
 			if (validate(selectLocationOption, 10)) {
@@ -795,11 +797,12 @@ public class ProviderSearchPage extends UhcDriver {
 			 */
 
 			counter++;
-			if (counter == 8) {
+			if (counter == 9) {
 				break;
 			}
 
 		}
+
 
 		/*---------------------Commented the lines as per new changes in rally---------------
 			CommonUtility.waitForPageLoadNew(driver, Savedproviders, 10);

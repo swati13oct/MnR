@@ -68,17 +68,11 @@ public class VppPlanSummaryStepDefinitionAARPMobile {
 	 * @toDo:Verify provider covered information is displayed on Plan
 	 *              Summary page
 	 */
-	@Then("^Verify provider name is displayed on Plan Summary page Ulayer$")
+/*	@Then("^Verify provider name is displayed on Plan Summary page Ulayer$")
 	public void verify_provider_covered_ulayer(DataTable Planname) {
 
 		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
 		plannameAttributesMap = DataTableParser.readDataTableAsMaps(Planname);
-		/*List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows();
-		for (int i = 0; i < plannameAttributesRow.size(); i++) {
-
-			plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
-					plannameAttributesRow.get(i).getCells().get(1));
-		}*/
 		String planName = plannameAttributesMap.get("PlanName");
 
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
@@ -86,7 +80,7 @@ public class VppPlanSummaryStepDefinitionAARPMobile {
 		String providerFromRally = (String) getLoginScenario().getBean(VPPCommonConstants.SAVED_PROVIDER_RALLY);
 		plansummaryPage.verifyproviderName(planName, providerFromRally);
 	}
-	
+*/
 	@Then("^the user validates the pharmacy drug cost on plan compare page for the selected plan$")
 	public void verify_Pharmacy_drug_cost_PlanCompare(DataTable Planname) {
 
@@ -853,6 +847,116 @@ public class VppPlanSummaryStepDefinitionAARPMobile {
 			plansummaryPage.validatesLearnMoreAboutExtraHelpPopup();
 		}
 	}
+	
+	@Then("^user clicks on view plan details button and validates plan name start application button and benefit link$")
+	public void user_clicks_on_view_plan_details_button_and_validates_plan_name_start_application_button_and_benefit_link()
+			throws Throwable {
+		// Write code here that turns the phrase above into concrete actions
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		boolean result = plansummaryPage.validateFieldsOnPlanDetails();
+		Assertion.assertTrue("plan name start application button and benefit link are validated", result);
+		System.out.println("plan name start application button and benefit link are validated");
+
+	}
+	
+	@And("^user clicks on compare button and navigate to plan compare page for \"([^\"]*)\" time$")
+	public void user_clicks_on_compare_button_and_navigate_to_plan_compare_page(String attempt,
+			DataTable givenAttributes) throws Throwable {
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*
+		 * List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows(); for
+		 * (int i = 0; i < givenAttributesRow.size(); i++) {
+		 *
+		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
+
+		String totalPlans = givenAttributesMap.get("No Of Plans To Compare");
+		int total_plans = Integer.parseInt(totalPlans);
+
+		String navigateToCompare = givenAttributesMap.get("Navigate To Compare");
+
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		boolean result = plansummaryPage.clickAndVerifyNavigateToPage("Compare", total_plans, attempt,
+				navigateToCompare);
+		Assertion.assertTrue("On clicking compare button user is navigated to plan compare page", result);
+		System.out.println("user clicks on compare button and navigate to plan compare page");
+
+	}
+	
+	@And("^user clicks on save button and saves to plan cart for \"([^\"]*)\" time$")
+	public void user_clicks_on_save_button_and_saves_to_plan_cart(String attempt, DataTable givenAttributes)
+			throws Throwable {
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*
+		 * List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows(); for
+		 * (int i = 0; i < givenAttributesRow.size(); i++) {
+		 *
+		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
+
+		String totalPlans = givenAttributesMap.get("No Of Plans To Compare");
+		int total_plans = Integer.parseInt(totalPlans);
+
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		boolean result = plansummaryPage.clickAndVerifyNavigateToPage("Save", total_plans, attempt, "Yes");
+		Assertion.assertTrue("On clicking save button user is navigated to save plan page", result);
+		System.out.println("user clicks on save button and saves to plan cart");
+
+	}
+	
+	@Then("^user clicks on View plan button link and navigate back to vpp summary page of medsupp$")
+	public void user_clicks_on_View_plan_button_link_and_navigate_back_to_vpp_summary_page_of_medsupp()
+			throws Throwable {
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		boolean result = plansummaryPage.clickAndVerifyNavigateToPage("View Plan", 1, "first", "Yes");
+		Assertion.assertTrue("On clicking View Plan button user is navigated to plan summary page", result);
+		System.out.println("user clicks on View plan button link and navigate back to vpp summary page of medsupp");
+	}
+	
+	@Then("^user clicks on Save icon for all the plans and validate count in cart should match to plans$")
+	public void user_clicks_on_Save_icon_for_all_the_plans_and_match_count(DataTable givenAttributes) throws Throwable {
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*
+		 * List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows(); for
+		 * (int i = 0; i < givenAttributesRow.size(); i++) {
+		 *
+		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
+
+		String noOfPlansSavedOnComparePage = givenAttributesMap.get("No Of Saved Plans On Compare Page");
+		int savedPlanCountOfComparePage = Integer.parseInt(noOfPlansSavedOnComparePage);
+
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		boolean result = plansummaryPage.verifyPlanCount(savedPlanCountOfComparePage);
+		Assertion.assertTrue("Plan count is matched", result);
+		System.out.println("Plan count is matched");
+	}
+	
+	@And("^user clicks on view saved plans land on shopper profile page$")
+	public void user_clicks_on_view_saved_plans_land_on_shopper_profile_page() throws Throwable {
+		// Write code here that turns the phrase above into concrete actions
+
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		boolean result = plansummaryPage.clickOnSavedPlansAndNavigateToShopperProfile();
+		Assertion.assertTrue("user land on shopper profile page", result);
+		System.out.println("user land on shopper profile page");
+
+	}
 
 	@Then("^the user validates and clicks learn more about Extra help link for MAPD , PDP , DSNP Plans and it should not be displayed for MA Plans in AARP site$")
 	public void user_validatesAndClickslearnMoreAboutExtraHelp_aarp() throws InterruptedException {
@@ -1251,6 +1355,30 @@ public class VppPlanSummaryStepDefinitionAARPMobile {
 
 	}
 	
+	@And("^user clicks on heart icon and save two heart icon plans$")
+	public void user_clicks_on_heart_icon_and_save_two_heart_icon_plans(DataTable givenAttributes) throws Throwable {
+		// Write code here that turns the phrase above into concrete actions
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 *
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
+
+		String planCount = memberAttributesMap.get("No Of Plans To Save");
+		int number = Integer.parseInt(planCount);
+
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		boolean result = plansummaryPage.savePlansOnSummaryPage(number);
+		Assertion.assertTrue("user saved two heart icon plans", result);
+		System.out.println("user saved two heart icon plans");
+
+	}	
 	
 	@Then("^the user validates the right rail$")
 	public void user_validates_rightRail() {

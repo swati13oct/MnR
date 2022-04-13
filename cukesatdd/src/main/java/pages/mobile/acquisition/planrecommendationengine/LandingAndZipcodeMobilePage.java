@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -189,10 +190,18 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 		System.out.println("Validating Title: ");
 //		String preBreadcrumbs = (driver.findElement(By.cssSelector("div.breadcrumb"))).getText();
 //		Assertion.assertTrue(preBreadcrumbs.contains("Home / Plan Recommendation Engine"));
-		String ExpectedTitle = "plan";
+		String ExpectedTitle = "Plan";
 		validate(landingpageHeader, 30);
-		String ActualTitle = landingpageHeader.getText();
-		System.out.println(ActualTitle.equalsIgnoreCase(ExpectedTitle));
+		//String ActualTitle = landingpageHeader.getText();
+		try {
+			String ActualTitle = landingpageHeader.getText(); //.getAttribute("innerHTML");
+			System.out.println(ActualTitle.contains(ExpectedTitle));
+		}
+		catch (Exception e) {
+			driver.navigate().refresh();
+			String ActualTitle = landingpageHeader.getAttribute("innerHTML");
+			System.out.println(ActualTitle.contains(ExpectedTitle));
+		}
 		System.out.println("Validating Animation Images: ");
 		validate(landingpageAnimationImage, 30);
 		System.out.println("Validating Text: ");
