@@ -252,6 +252,7 @@ public class WelcomePage extends UhcDriver{
 					String elementPath = "(//*[contains(text(), 'Enroll in plan')])[1]";
 					WebElement enrollInPlan = driver.findElement(By.xpath(elementPath));
 					System.out.println("MA and PDP plans are displayed:" +Expected_PlanType);
+					sleepBySec(5);
 					validateNew(enrollInPlan);
 					jsClickNew(enrollInPlan);
 				}
@@ -260,6 +261,7 @@ public class WelcomePage extends UhcDriver{
 					String elementPath ="(//*[contains(@data-ng-show, 'displayEnrollNow')])[2]";
 					WebElement enrollInPlan = driver.findElement(By.xpath(elementPath));
 					System.out.println("SNP plans are displayed:" +Expected_PlanType);
+					sleepBySec(5);
 					validateNew(enrollInPlan);
 					jsClickNew(enrollInPlan);
 				}
