@@ -967,6 +967,8 @@ public class PersonalInformationPage extends UhcDriver {
 		String CityEntered = PermanentAdd_City.getText();
 		System.out.println("CityEntered : " + CityEntered);
 
+		sendkeys(PermanentAdd_Aptno,Perm_Aptno);
+
 		String AddressEntered = PermanentAdd_Street.getText();
 		System.out.println("AddressEntered : " + AddressEntered);
 
@@ -1015,6 +1017,8 @@ public class PersonalInformationPage extends UhcDriver {
 
 			String MailingCityEntered = MailingAdd_City.getText();
 			System.out.println("CityEntereed : " + CityEntered);
+
+			sendkeysNew(MailingAdd_Aptno,Mailing_Aptno);
 
 			String State = MailingAdd_State_DropDown.getText();
 
