@@ -944,7 +944,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	// @FindBy(xpath = "(//*[contains(@class,'show
 	// active')]//*[contains(@class,'swiper-container')]//button[contains(text(),'Compare
 	// plans')])[1]")
-	@FindBy(xpath = "(//button[contains(@class,'compare-plans-button uhc-button')])[2]")
+	@FindBy(xpath="//span[contains(@class,'ng-binding show')]//button[contains(text(),'Compare plans')][1]")
+
 	
 	//@FindBy(xpath = "//*[contains(@class,'show active')]//div[contains(@class,'module-plan-overview module swiper-slide')]//button[contains(text(),'Compare plans')][1]")
 	private WebElement compareButton;
@@ -7434,7 +7435,8 @@ validateNew(requestplaninformationsubmitpopup);
 
 	public ComparePlansPage clickCompareButton() {
 		validateNew(compareButton);
-		compareButton.click();
+		//compareButton.click();
+		jsClickNew(compareButton);
 		CommonUtility.waitForPageLoad(driver, backToPlanComparePage, 30);
 		if (currentUrl().contains("/plan-compare"))
 			return new ComparePlansPage(driver);
