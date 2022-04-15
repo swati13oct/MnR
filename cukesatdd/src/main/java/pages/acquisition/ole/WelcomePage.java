@@ -125,7 +125,7 @@ public class WelcomePage extends UhcDriver{
 	@FindBy(xpath = "//a[contains(text(),'Extra Help')]")
 	private WebElement Extrahelp;
 	
-	@FindBy(xpath = "//a[contains(text(),'www.aarpmedicareplans.com/health-plans/aarp-pharmacy.html')]")
+	@FindBy(xpath = "//a[contains(text(),'www.aarpmedicareplans.com/health-plans/aarp-pharmacy.html') or contains(text(),'www.aarpmedicareplans.com/medicare/health-plans/aarp-pharmacy.html')]")
 	private WebElement AARPPharmacy;
 	
 	@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
