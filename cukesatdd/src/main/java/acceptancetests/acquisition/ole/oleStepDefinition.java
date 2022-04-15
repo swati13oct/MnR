@@ -2518,6 +2518,7 @@ public class oleStepDefinition {
 				|| MRScenario.environment.equalsIgnoreCase("team-avengers")
 				|| MRScenario.environment.equalsIgnoreCase("team-chargers")
 				|| MRScenario.environment.equalsIgnoreCase("chargers-qa")
+				|| MRScenario.environment.equalsIgnoreCase("chargers-uhc")
 				|| MRScenario.environment.equalsIgnoreCase("team-c")
 				|| MRScenario.environment.equalsIgnoreCase("team-f")
 				|| MRScenario.environment.equalsIgnoreCase("team-voc")
