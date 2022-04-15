@@ -464,3 +464,13 @@ Feature: 1.01.1-Vpp to plan Summary Scenarios
       | FID     | site | zipcode | planyear | plantype | county       | isMultutiCounty | drug1   | planname                                     | pharmacyzipcode | distance | pharmacyname                     | networkType |
       | F751464 | UHC  |   78006 | future   | MAPD     | Bexar County | yes             | Lipitor | AARP Medicare Advantage SecureHorizons (HMO) |           99827 | 25 Miles | SEARHC HAINES MEDICAL CLINIC PHA | true        |
       | F751464 | UHC  |   78006 | future   | MAPD     | Bexar County | yes             | Lipitor | AARP Medicare Advantage SecureHorizons (HMO) |           99669 | 25 Miles | PROFESSIONAL HOME IV             | false       |
+
+   @vbfGate124
+  Scenario Outline: Gated: <TID> -plan type: <plantype> - Verify plan cards on plan summary page in <site> site
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+      
+       Examples: 
+      | FID     | site | zipcode | planyear | plantype | county       | isMultutiCounty | drug1   | planname                                     | pharmacyzipcode | distance | pharmacyname                     | networkType |
+      | F751464 | UHC  |   78006 | future   | MAPD     | Bexar County | yes             | Lipitor | AARP Medicare Advantage SecureHorizons (HMO) |           99827 | 25 Miles | SEARHC HAINES MEDICAL CLINIC PHA | true        |
+      
