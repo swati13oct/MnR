@@ -4827,7 +4827,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public ContactUsAARPPage contactUsFooterClick() {
 		validateNew(footerContactUsLink);
-		footerContactUsLink.click();
+		jsClickNew(footerContactUsLink);
+		//footerContactUsLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		waitForPageLoadSafari();
 		if (driver.getCurrentUrl().contains("contact-us")) {
@@ -5338,7 +5339,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		WebElement lnkComplaintForm = driver.findElement(By.xpath("(//a[contains(text(),'Complaint Form')])[1]"));
 		validateNew(lnkComplaintForm);
 		scrollToView(lnkComplaintForm);
-		jsClickNew(lnkComplaintForm);
+		sleepBySec(2);
+		//jsClickNew(lnkComplaintForm);
+		lnkComplaintForm.click();
 		proceedToLeaveAARP();
 		System.out.println("\n\n======="+driver.getCurrentUrl()+"=========\n\n");
 		if (driver.getCurrentUrl().contains("medicare.gov/my/medicare-complaint")) {

@@ -2081,6 +2081,15 @@ public class CampaignTFNPage extends UhcDriver {
 		backToPlansComparePage.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 	}
+	
+	@FindBy(xpath = "(//span[@class='invoca_swap text-bold tel']/following::span[@class='tty'])[1]")
+	private WebElement planSummaryTFNMS;
+	
+	public void validateTFNBannerOnMS() {
+		//To validate newly added TFN section on MS plan summary
+		Assert.assertTrue(validate(planSummaryTFNMS,3), "New TFN Validation failed.....");;
+		
+	}
 }
 
 
