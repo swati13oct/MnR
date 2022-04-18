@@ -2087,6 +2087,7 @@ public class CampaignTFNPage extends UhcDriver {
 	
 	public void validateTFNBannerOnMS() {
 		//To validate newly added TFN section on MS plan summary
+		System.out.println("Validating newly added TFN component on MS plan summary page......");
 		Assert.assertTrue(validate(planSummaryTFNMS,3), "New TFN Validation failed.....");;
 		
 	}
