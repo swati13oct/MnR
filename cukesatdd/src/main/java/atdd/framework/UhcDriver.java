@@ -1,21 +1,42 @@
 package atdd.framework;
 
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.text.DecimalFormat;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 import java.util.regex.Pattern;
 
+import javax.mail.Address;
+import javax.mail.Flags;
+import javax.mail.Folder;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Multipart;
+import javax.mail.NoSuchProviderException;
+import javax.mail.Part;
+import javax.mail.Session;
+import javax.mail.Store;
+import javax.mail.Message.RecipientType;
+import javax.mail.search.AndTerm;
+import javax.mail.search.FlagTerm;
+import javax.mail.search.RecipientStringTerm;
+import javax.mail.search.SearchTerm;
 
 import static org.apache.commons.io.IOUtils.toByteArray;
 
@@ -32,6 +53,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.jsoup.Jsoup;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.Dimension;
@@ -799,7 +821,7 @@ public abstract class UhcDriver {
 		driver.get(url);
 		
 		if(!url.contains("uhcmedicaresolution")&& url.contains("uhc")) {
-			Cookie cookieName = new Cookie("X_UMS_DEBUG_SESSION","stage");
+			Cookie cookieName = new Cookie("X_UMS_DEBUG_SESSION","chargers");
 			driver.manage().addCookie(cookieName);
 			driver.navigate().refresh();
 			
@@ -2163,5 +2185,66 @@ public abstract class UhcDriver {
 
 
 		}
+		
+		public String[] getContentFromOutlook()  {
+			
+			String username = "gpdportals@gmail.com";
+		        String password = "gpdUser1";
+		        String array[] = null;
+		        try {
 
+		        Properties props = new Properties();        
+		    	props.setProperty("mail.store.protocol", "imaps");
+	    		Session mailSession = Session.getDefaultInstance(props, null);
+		        mailSession.setDebug(true);
+		        Store mailStore = mailSession.getStore("imaps");
+		        mailStore.connect("impag.gmail.com", username, password);
+				
+				Folder emailFolder = mailStore.getFolder("Inbox");
+				
+				emailFolder.open(Folder.READ_WRITE);
+				
+				// Filter inbox messages by "UNSEEN" and "TO={username}"
+				FlagTerm ft_unseen = new FlagTerm(new Flags(Flags.Flag.SEEN), false);
+				RecipientStringTerm ft_toEmail = new RecipientStringTerm(RecipientType.TO, username);
+				
+				SearchTerm searchTerm = new AndTerm(ft_unseen, ft_toEmail);
+				
+				Message message[] = emailFolder.search(searchTerm);
+						
+				Object emailContent = message[message.length - 1].getContent();
+				
+				System.out.println(emailContent);
+				
+				String linkUrl;
+				try {
+					String[] tempArray2;
+					String[] tempArray = ((String) emailContent).split("href=\"");
+					
+					tempArray2 = tempArray[1].split("\"");
+					linkUrl = tempArray2[0];
+				} catch (Exception e) {
+					linkUrl = " ";
+				}
+
+				String[] returnArray = new String[] { linkUrl, message[message.length - 1].getSubject().toString(),
+						Jsoup.parse(emailContent.toString()).text() };
+				returnArray[0] = returnArray[0].replaceAll("&amp;", "&");//login not working with URL having &amp;
+				System.out.println(returnArray);
+			      emailFolder.close(false);
+			      mailStore.close();
+			      mailSession = null;
+			      array = returnArray;
+		        } catch (NoSuchProviderException e) {
+		            e.printStackTrace();
+		         } catch (MessagingException e) {
+		            e.printStackTrace();
+		         } catch (IOException e) {
+		            e.printStackTrace();
+		         } catch (Exception e) {
+		            e.printStackTrace();
+		         }
+		        return array;
+		}
+		
 }

@@ -104,7 +104,7 @@ public class GlobalComponentsCommonStepDefinition {
 			getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, "UHC_ACQ");
 		else
 			getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, "AARP_ACQ");
-
+		aquisitionhomepage.getContentFromOutlook();
 	}
 	
 
