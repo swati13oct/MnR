@@ -12,6 +12,8 @@ import java.util.Set;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
@@ -1021,15 +1023,15 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public void openAndValidate(String site) {
-		if (site.equalsIgnoreCase("UHC") || site.equalsIgnoreCase("UMS")) {
+		if (site.equalsIgnoreCase("UHC") || site.equalsIgnoreCase("UMS") || site.equalsIgnoreCase("ULayer")) {
 			if (MRScenario.environment.equals("offline")) {
 				startNew(UMS_ACQISITION_OFFLINE_PAGE_URL);
 				testSiteUrl = UMS_ACQISITION_OFFLINE_PAGE_URL;
-				checkModelPopup(driver, 30);
+				checkModelPopup(driver, 45);
 			} else if (MRScenario.environment.equals("prod")) {
 				startNew(UMS_ACQISITION_PROD_PAGE_URL);
 				testSiteUrl = UMS_ACQISITION_PROD_PAGE_URL;
-				checkModelPopup(driver, 30);
+				checkModelPopup(driver, 45);
 			} else if (MRScenario.environment.contains("stage-0")) {
 				startNew(UMS_ACQISITION_PAGE_URL_NEW);
 				checkModelPopup(driver, 20);
@@ -3433,17 +3435,34 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public void validateChatSam() throws InterruptedException {
 		boolean present;
-		try {
-			validateNew(chatsam, 30);
-			present = true;
-		} catch (NoSuchElementException e) {
-			present = false;
+		
+		boolean flag = false;
+		if (MRScenario.environment.equalsIgnoreCase("stage")) {
+			flag = true;
 		}
-		if (present) {
-			System.out.println("@@@@@@@@@ Able to find chat widget @@@@@@@@@");
-
-		} else
-			System.out.println("@@@@@@@@@ No chat widget @@@@@@@@@");
+		else if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) {
+			Date today = new Date();
+	        DateFormat df = new SimpleDateFormat("HH");
+	        df.setTimeZone(TimeZone.getTimeZone("CST"));
+	        int time = Integer.parseInt(df.format(today));
+	        if(time>=8 && time<=20)
+	        	flag = true;
+	        else
+	        	flag = false;
+		}
+		if(flag) {
+			try {
+				validateNew(chatsam, 30);
+				present = true;
+			} catch (NoSuchElementException e) {
+				present = false;
+			}
+			if (present) {
+				System.out.println("@@@@@@@@@ Able to find chat widget @@@@@@@@@");
+	
+			} else
+				System.out.println("@@@@@@@@@ No chat widget @@@@@@@@@");
+		}
 
 	}
 
