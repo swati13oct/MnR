@@ -419,6 +419,20 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
       | UHC  | Aetna     |           |          |            |         |             |                                                                                    |           |
       | UHC  | Humana    |           |          |            |         |             |                                                                                    |           |
 
+    @AnthemImportAARP
+    Examples:
+      | site | member      | firstName | lastName | dob | zipcode | mbi | Drugs | Providers |
+      | AARP | Anthem      |           |          |     |         |     |       |           |
+      | AARP | Anthem Blue |           |          |     |         |     |       |           |
+      | AARP | Amerigroup  |           |          |     |         |     |       |           |
+
+    @AnthemImportUHC
+    Examples:
+      | site | member      | firstName | lastName | dob | zipcode | mbi | Drugs | Providers |
+      | UHC  | Anthem      |           |          |     |         |     |       |           |
+      | UHC  | Anthem Blue |           |          |     |         |     |       |           |
+      | UHC  | Amerigroup  |           |          |     |         |     |       |           |
+
   @vppMSSP4.0
   Scenario Outline: Verify user save Medsupp plans 4.0 with plan details,start application, learn more,add your information on unauthenticated visitor profile-Medsup4.0 in <site> site- zipcode - <zipcode>
     Given the user is on medicare acquisition site landing page
