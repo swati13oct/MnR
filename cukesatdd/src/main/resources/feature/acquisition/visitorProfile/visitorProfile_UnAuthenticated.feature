@@ -341,7 +341,7 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
     Then verify the plans on plan compare page
       | Test Plans | <testPlans> |
 
-    @visitorProfile_AARP @VP_ProdRegression_AARP @prodRegression_AARP_04 @prodRegression @regressionAARP @vbfGate
+    @visitorProfile_AARP @VP_ProdRegression_AARP @prodRegression_AARP_04 @prodRegression @regressionAARP
     Examples:
       | UID                                   | site | state   | UID       | zipcode | isMultiCounty | county            | plantype | planyear | testPlans                                                                                                                                                                                   |
       | Visitor Profile - E2E Scenario 3 _AMP | AARP | Alabama | US1770330 | 90210   | NO            | Jefferson County  | MAPD     | next     | AARP Medicare Advantage Freedom Plus (HMO-POS),AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage Harmony (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |

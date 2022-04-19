@@ -4149,6 +4149,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public void fillDetails(String zipCode, String DateOfBirth) throws InterruptedException {
 		sendkeys(medSuppZipCode, zipCode);
 		sleepBySec(10);
+		waitforElementNew(DOB,30);
 		sendkeys(DOB, DateOfBirth);
 		System.out.println("Date of birth is entered");
 

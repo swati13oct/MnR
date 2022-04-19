@@ -845,6 +845,7 @@ public class VisitorProfilePage extends UhcDriver {
         jsClickNew(comparePlans);
         //validateNew(enrollBtn);
         CommonUtility.checkPageIsReadyNew(driver);
+        sleepBySec(15);
         validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Compare')]")), 45);
         waitForPageLoadSafari();
         if (driver.getCurrentUrl().contains("/plan-compare")) {
