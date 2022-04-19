@@ -4148,7 +4148,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public void fillDetails(String zipCode, String DateOfBirth) throws InterruptedException {
 		sendkeys(medSuppZipCode, zipCode);
-		Thread.sleep(5000);
+		sleepBySec(10);
+		waitforElementNew(DOB,30);
 		sendkeys(DOB, DateOfBirth);
 		System.out.println("Date of birth is entered");
 
@@ -4185,7 +4186,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
 		//CommonUtility.waitForPageLoadNew(driver, Start_ApplicationBtn, 45);
-		CommonUtility.waitForPageLoadNew(driver, driver.findElement(By.xpath("(//button[contains(@class,'start') or contains(text(),'Start')])[1]")), 60);
+		CommonUtility.waitForPageLoadNew(driver, driver.findElement(By.xpath("(//button[contains(@class,'start') or contains(text(),'Start')])[1]")), 75);
 		// Start_ApplicationBtn.click();
 		// if (driver.getCurrentUrl().contains("aarpsupplementalhealth"))
 		// return new MedSuppOLEPage(driver);
