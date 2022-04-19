@@ -1,7 +1,7 @@
 #Author: namita_meher@optum.com
 Feature: OLE Enrol Pages
 
- #@uhccp
+ @uhccp
  Scenario Outline: OLE Without County Selection - <zipcode> - Language: <lang>
     Given User is on the UHCCP landing page
     And the user selects language
