@@ -69,13 +69,13 @@ public class WerallyMobilePage extends UhcDriver {
 	@FindBy(css = "div[class*='savedProviderModal'] div[class*='modal-btn']>button")
 	private WebElement saveModalCloseContinueSearchbutton;
 
-	@FindBy(css = "div[class*='savedProviderModal'] div[class*='modal-btn']>a")
+	@FindBy(css="a[track='Saved']")
 	private WebElement viewSavedbutton;
 
 	@FindBy(css = "#savedProviders>.export-saved-providers button")
 	private WebElement checkProviderCoveragebutton;
 
-	@FindBy(css = "span.location")
+	@FindBy(xpath = "//h3[contains(@class,'location')]")
 	private WebElement location;
 
 	@FindBy(css = "div[class*='savedProviderModal'] div[class*='modal-btn'] button[type='submit']")
@@ -160,7 +160,8 @@ public class WerallyMobilePage extends UhcDriver {
 		else {
 			try {
 				validate(welcomeTilte, 30);
-				jsClickNew(getStarted);
+				scrollToView(getStarted);
+				getStarted.click();
 			} catch (Exception e) {
 				System.out.println("No Get Started button available in werally");
 			}
@@ -169,7 +170,13 @@ public class WerallyMobilePage extends UhcDriver {
 			if (type.toUpperCase().contains("DOCTOR")) {
 				// driver.navigate().refresh();
 				// pageloadcomplete();
-				String zipinfo = location.getText().trim();
+				String zipinfo;
+				try {
+					zipinfo = location.getAttribute("innerHTML").trim();
+				}
+				catch (Exception e) {
+					zipinfo = location.getText().trim();
+				}
 				String zip = zipinfo.split(" ")[zipinfo.split(" ").length - 1];
 				sendkeysMobile(searchBox, searchParameter);
 
@@ -205,13 +212,12 @@ public class WerallyMobilePage extends UhcDriver {
 				if (actualResultscount >= count) {
 					for (int i = count - 1; i >= 0; i--) {
 						threadsleep(1000);
-						doctorsName.add(searchResults.get(i).findElement(By.cssSelector("h2")).getText().trim() + " "
-								+ searchResults.get(i).findElement(By.cssSelector("span[data-test-id='specialty']"))
-										.getText().trim());
+						doctorsName.add(searchResults.get(i).findElement(By.cssSelector("h3")).getText().trim());
 						WebElement save = searchResults.get(i)
-								.findElement(By.cssSelector(".acquisitionButtons.visible-phone>button"));
+								.findElement(By.cssSelector("div[class*='ctaButtonContainer'] button"));
 						jsClickNew(save);
 						threadsleep(1000);
+						chooseFirstLocation();
 						String text = saveModalCloseContinueSearchbutton.getText();
 						if (text.toUpperCase().contains("CONTINUE"))
 							newRally = true;

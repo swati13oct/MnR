@@ -1149,7 +1149,7 @@ public class VppCommonStepDefinition {
 	}
 
 	@When("^user selects a multiple providers and retuns to VPP page$")
-	public void user_selects_a_multiple_providers_and_retuns_to_VPP_page() {
+	public void user_selects_a_multiple_providers_and_retuns_to_VPP_page() throws InterruptedException {
 		{
 			ProviderSearchPage providerSearchPage = (ProviderSearchPage) getLoginScenario()
 					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
