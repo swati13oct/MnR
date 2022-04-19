@@ -84,5 +84,22 @@ public class PlanPageStepDefinition {
 
 		getLoginScenario().saveBean(PageConstants.UHCCP_PLAN_DETAILS_PAGE, planDetailsPage);
 	}
+	
+	@When("validates the total number of results displayed on header")
+	public void validates_the_total_number_of_results_displayed_on_header() {
+	    
+	}
+	@When("validates the total count of results from Filter section")
+	public void validates_the_total_count_of_results_from_filter_section() {
+	    
+	}
+	@When("validates the total count of plan card in default state")
+	public void validates_the_total_count_of_plan_card_in_default_state() {
+	    
+	}
+	@When("selects a filter and validates the plan card based on filter")
+	public void selects_a_filter_and_validates_the_plan_card_based_on_filter() {
+	    
+	}
 
 }
