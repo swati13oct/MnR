@@ -1,7 +1,7 @@
 #Author: namita_meher@optum.com
 Feature: Plan Results Page Search Count
 
-  @uhccp
+  #@uhccp
   Scenario Outline: Plan Results Page - Count of plan results
     Given User is on the UHCCP landing page
     When the user performs plan search in UHCCP homepage 
