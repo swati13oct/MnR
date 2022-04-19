@@ -1138,7 +1138,7 @@ public abstract class UhcDriver {
 		checkModelPopup(driver, defaultTimeoutInSec);
 	}
 
-	@FindBy(xpath = ".//*[contains(@id,'singleLargeLayoutContainer')]")
+	@FindBy(xpath = ".//*[contains(@id,'singleLargeLayoutContainer') or @id='ip-no']")
 	public WebElement IPerceptionsPopup;
 
 	@FindBy(xpath = "//*[contains(@id,'ip-no')]")
@@ -1153,7 +1153,7 @@ public abstract class UhcDriver {
 			try {
 				if (IPerceptionsPopup.isDisplayed()) {
 					// driver.switchTo().frame(IPerceptionsFrame);
-					IPerceptionPopuNoBtn.click();
+					IPerceptionsPopup.click();
 					// driver.switchTo().defaultContent();
 					System.out.println("IPerceptions Popup  found");
 				}
@@ -1268,7 +1268,7 @@ public abstract class UhcDriver {
 		System.out.println("Proceed to open a new blank tab to check the system time");
 		// tbd String urlGetSysTime=testSiteUrl+
 		// "/DCERestWAR/dcerest/profiledetail/bConnected";
-		String urlGetSysTime = testSiteUrl + "/PlanBenefitsWAR/profiledetail/aarp";
+		String urlGetSysTime = testSiteUrl + "/planbenefitsinfo/profiledetail/aarp";
 		System.out.println("test env URL for getting time: " + urlGetSysTime);
 
 		if (driver.getClass().toString().toUpperCase().contains("IOS")) {

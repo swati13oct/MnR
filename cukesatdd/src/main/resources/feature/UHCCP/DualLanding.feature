@@ -1,7 +1,7 @@
 #Author: namita_meher@optum.com
 Feature: Dual Landing Page
 
- # @uhccp
+ @uhccp
   Scenario Outline: Dual Landing Page - Request an Agent form validation
     Given User is on the UHCCP landing page
     Then User clicks on Medicare dual from Contact us hover over
