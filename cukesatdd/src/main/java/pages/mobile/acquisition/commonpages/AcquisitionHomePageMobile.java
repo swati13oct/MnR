@@ -4483,6 +4483,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = "(//a[contains(@href,'https://www.myuhcagent.com/')])[1]")
 	private WebElement RightRail_FindAnAgentMedsupp;
+	
+	@FindBy(xpath = "//*[@id='proceed']")
+	private WebElement proceedToAgent;
 
 	public void clickonFindanAgentlink(String ExpectedUHCAgentURL) {
 		validateNew(RightRail_FindAnAgent);
@@ -4502,7 +4505,14 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 				driver.switchTo().window(window);
 			}
 		}
-
+		
+		try {
+			sleepBySec(2);
+			jsClickNew(proceedToAgent);
+		}
+		catch (Exception e) {
+		}
+		
 		CommonUtility.checkPageIsReadyNew(driver);
 		String CurrentUHCAgentURL = driver.getCurrentUrl();
 		String ActualCurrentUHCAgentURL = CurrentUHCAgentURL.substring(0, 27).trim();

@@ -1529,7 +1529,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		waitforElementNew(msDOB);
 	}
 
-	@FindBy(css = "#AddYourInfoForm button[class$='continue-application']")
+	@FindBy(xpath = "//button[contains(@class,'continue-application')]")
 	private WebElement continueApplicationButton;
 
 	@FindBy(css = "#AddYourInfo button[class^='back-to-plans']")

@@ -163,7 +163,7 @@ public class CampaignExternalLinksMobile extends UhcDriver {
 	@FindBy(xpath = "(//button[contains(text(),'Find a Plan')])[1]")
 	private WebElement findPlanSubmitBtn;
 
-	@FindBy(xpath = "//p[contains(@class,'c-tfn-fragment__headline')]")
+	@FindBy(xpath = "(//p[contains(@class,'c-tfn-fragment__headline')])[2]")
 	private WebElement tfnHeader;
 
 	@FindBy(xpath = "//span[contains(text(),'Accessibility')]")
