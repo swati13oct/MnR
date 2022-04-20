@@ -1417,9 +1417,13 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		sleepBySec(5);
 		// CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 		// CommonConstants.setMainWindowHandle(driver.getWindowHandle());
-
-		if (maPlansViewLink.isDisplayed())
-			jsClickNew(maPlansViewLink);
+		try {
+			if (maPlansViewLink.isDisplayed())
+				jsClickNew(maPlansViewLink);
+		}
+		catch (Exception e) {
+		}
+		
 
 		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 				+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@dtmname,'Provider Search')]"));
@@ -1430,9 +1434,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		switchToNewTabNew(ProviderSearchLink);
 		sleepBySec(15);
 		if(driver.toString().contains("IOS")) {
-			sleepBySec(20);
-			driver.navigate().refresh();
-			sleepBySec(20);
+			sleepBySec(40);
 		}
 		if (driver.getCurrentUrl().contains("werally")) {
 			return new ProviderSearchPageMobile(driver);
@@ -5738,10 +5740,10 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		int initialCount = driver.getWindowHandles().size();
 		// ProviderSearchLink.click();
 		jsClickNew(ProviderSearchLink);
-		if(driver.toString().contains("IOS")) {
-			sleepBySec(60);
-			driver.navigate().refresh();
-		}
+//		if(driver.toString().contains("IOS")) {
+//			sleepBySec(60);
+////			driver.navigate().refresh();
+//		}
 		sleepBySec(10);
 		System.out.println("Provider Search Link has been clicked");
 		waitForCountIncrement(initialCount);
@@ -5754,6 +5756,11 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 				break;
 		}
 
+		if(driver.toString().contains("IOS")) {
+			sleepBySec(60);
+//			driver.navigate().refresh();
+		}
+		
 		if (driver.getCurrentUrl().contains("werally")) {
 			System.out.println("Provider Search Page is displayed");
 			Assertion.assertTrue(true);

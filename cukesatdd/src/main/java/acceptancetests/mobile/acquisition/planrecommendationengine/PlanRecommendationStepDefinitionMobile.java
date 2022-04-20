@@ -357,6 +357,15 @@ public class PlanRecommendationStepDefinitionMobile {
 		AdditionalServicesMobilePage additionalpage = new AdditionalServicesMobilePage((AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		additionalpage.additionalpageerror(inputValues.get("Additional Option"));
 	}
+	
+	@Then("^user selects add drug option in Drug page without continue next page$")
+  	public void add_drugs_page_WithoutContinue(DataTable givenAttributes) {
+		readfeaturedataMobile(givenAttributes);
+		DrugMobilePage planSelectorDrugspage =  new DrugMobilePage((AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+  		planSelectorDrugspage.drugsInitiate(inputValues.get("Drug Selection"));
+  		planSelectorDrugspage.drugsHandlerWithdetails(inputValues.get("Drug Details"));
+  		planSelectorDrugspage.drugnamesList();
+  	}
 
 	@Then("^user validate elements in cost preferences page$")
 	public void elements_costpreferences_page_mobile() {
@@ -401,6 +410,14 @@ public class PlanRecommendationStepDefinitionMobile {
 		String r2 = inputValues.get("2nd Recommendation");
 		resultpage.resultsUI(zip, county, r1, r2, false);
 	}
+	
+	@Then("^user validate zipcode saved in PRE session	and reflected in home page$")
+    public void zipcode_home_page(DataTable givenAttributes) {
+		readfeaturedataMobile(givenAttributes);
+        HeaderFooterMobile headerAndFooter =  new HeaderFooterMobile((AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+        headerAndFooter.storedZipcode(inputValues.get("Zip Code"));
+                    
+    }
 
 	@Then("^user validate tie recommendations in results page mobile$")
 	public void view_tie_recommendations_results_page_mobile(DataTable givenAttributes) {
@@ -604,7 +621,7 @@ public class PlanRecommendationStepDefinitionMobile {
 		drugpage.verifyExisitngVPPDruglist();
 	}
 
-	@Then("^user verifies \"([^\"]*)\" page mobile$")
+	@Then("^user verifies \"([^\"]*)\" page$")
 	public void verify_vpp_summary_page_mobile(String VPP) {
 		ResultsMobilePage resultpage = new ResultsMobilePage((AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		if (VPP.toUpperCase().contains("PRE"))
@@ -1001,6 +1018,13 @@ public void sortBy_No() {
 	@Then("^user validate a \"([^\"]*)\" buttons from PRE$")
 	public void btn_tab_mobile(String tabtype) {
 		System.out.println("This Step is specifically for Desktop.. Ignoring in Mobile Execution");
+	}
+	
+	@Then("^user validates Important Resources section enabled in PRE-Result page$")
+	public void Imp_Res(DataTable givenAttributes) {
+		readfeaturedataMobile(givenAttributes);
+		NewResultsMobilePage planSelectorNewResultspage =  new NewResultsMobilePage((AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorNewResultspage.importantResourceSection(inputValues.get("Resources Links"));
 	}
 
 }
