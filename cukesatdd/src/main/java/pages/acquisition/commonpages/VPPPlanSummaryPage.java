@@ -4175,9 +4175,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		yearDrpDwnOptionPartB.click();
 
 		System.out.println("Effective date- year value selected");
-		Thread.sleep(5000);
+		sleepBySec(10);
+		waitforElementNew(startDrpDwn,20);
 		startDrpDwn.click();
-		Thread.sleep(5000);
+		sleepBySec(10);
+		waitforElementNew(startDrpDwnOption,20);
 		startDrpDwnOption.click();
 
 		System.out.println("Plan to start date selected");
@@ -4185,8 +4187,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		jsClickNew(viewPlansBtnMedSupp);
 		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
+		sleepBySec(10);
+		waitforElementNew(driver.findElement(By.xpath("(//button[contains(@class,'start') or contains(text(),'Start')])[1]")), 75);
 		//CommonUtility.waitForPageLoadNew(driver, Start_ApplicationBtn, 45);
-		CommonUtility.waitForPageLoadNew(driver, driver.findElement(By.xpath("(//button[contains(@class,'start') or contains(text(),'Start')])[1]")), 75);
+		//CommonUtility.waitForPageLoadNew(driver, driver.findElement(By.xpath("(//button[contains(@class,'start') or contains(text(),'Start')])[1]")), 75);
 		// Start_ApplicationBtn.click();
 		// if (driver.getCurrentUrl().contains("aarpsupplementalhealth"))
 		// return new MedSuppOLEPage(driver);
