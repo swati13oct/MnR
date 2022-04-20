@@ -534,6 +534,12 @@ public class PlanRecommendationStepDefinitionMobile {
 		docpage.verifyExisitngPREDoclist(multiDoctor);
 		docpage.nextPageValidationDoctor();
 	}
+	
+	@Then("^user Validate Zipcode and Plantype using StartApplication in Visitor profile page$")
+	public void user_verify_OLE(DataTable givenAttributes) {
+		NewResultsMobilePage planSelectorResultspage =  new NewResultsMobilePage((AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorResultspage.validateOLEDetails(inputValues.get("Zip Code"));
+	}
 
 	@And("^user verifies exisitng PRE drug session using startover mobile$")
 	public void verify_exisitng_pre_drugs_session_drug_page_mobile() {
@@ -956,8 +962,12 @@ public void sortBy_No() {
 	}
 
 	@Then("^user validate SNP Plan in Enroll page$")
-	public void verify_SNP_Plan_names_mobile() {
-		System.out.println("This Step is specifically for Desktop.. Ignoring in Mobile Execution");
+	public void verify_SNP_Plan_names(DataTable givenAttributes) {
+		readfeaturedataMobile(givenAttributes);
+		checkpopup();
+		NewResultsMobilePage planSelectorNewResultspage =  new NewResultsMobilePage((AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorNewResultspage.viewPlanInfo(inputValues.get("Plan Info"));
+		planSelectorNewResultspage.validateSNPPlanName();
 	}
 
 	@When("^user navigate to Plan Recommendation Engine Tool$")
