@@ -72,7 +72,7 @@ Feature: 1.09. UAT - Visitor profile MedSup UnAuthenticated
     And user delets the added Ms plans on visitor profile page
       | MS_testPlans | <MS_testPlans> |
 
-    @visitorProfile_AARP @VP_ProdRegression_AARP @prodRegression_AARP_02 @regressionAARP @vpMS4Start  @featureGate
+    @visitorProfile_AARP @VP_ProdRegression_AARP @prodRegression_AARP_02 @regressionAARP @vpMS4Start  @featureGate @nonOffline @nonProd
     Examples:
       | site | zipcode | isMultiCounty | plantype | county                 | MS_testPlans                                      | MS_Plan                  | component_code |
       | AARP | 07303   | NO            | MS       | Hudson County          | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
@@ -133,7 +133,7 @@ Feature: 1.09. UAT - Visitor profile MedSup UnAuthenticated
       | UHC  | 58102   | NO            | MS       | Cass County            | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
 
 
-    @visitorProfile_UHC @VP_ProdRegression_UHC @prodRegression_UHC_02 @prodRegression @regressionUHC
+    @visitorProfile_UHC @VP_ProdRegression_UHC @prodRegression_UHC_02 @prodRegression
     Examples:
       | site | zipcode | isMultiCounty | plantype | county                 | MS_testPlans  | MS_Plan | component_code |
       | AARP | 05401   | NO            | MS       | Chittenden County      | Plan G,Plan A | Plan G  | WB27375ST      |
