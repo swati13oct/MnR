@@ -227,7 +227,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     And check one plan and add it to plancompare
     Then Verify newly added plan displayed on new plan compare page
 
-    @regressionAARP @prodRegression @vbfGate @featureGate
+    @regressionAARP @prodRegression @vbfGate
     Examples: 
       | TID | site | zipcode | isMultiCounty | county | plantype | count | planyear |
 
@@ -285,7 +285,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
       | TID | site | zipcode | isMultiCounty | county | plantype | planname | planyear |
 
     #   | 00011 | UHC  |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | current  |
-    @regressionUHC @nextYear @featureGate
+    @regressionUHC @nextYear
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county             | plantype | planname                              | planyear |
       | 00011 | UHC  |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage Harmony (HMO) | next     |
@@ -316,7 +316,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
       | TID | site | zipcode | isMultiCounty | county | plantype | planname | planyear |
 
     # | 00012 | AARP |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | current  |
-    @regressionAARP @nextYear @featureGate
+    @regressionAARP @nextYear
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county             | plantype | planname                                            | planyear |
       | 00012 | AARP |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | next     |
@@ -391,7 +391,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
       | TID | site | zipcode | isMultiCounty | county | plantype | planname | planyear |
 
     # | 00014 | AARP |   10010 | NO            | New York County | MAPD     | AARP Medicare Advantage Plan 1 (HMO) | current  |
-    @regressionAARP @nextYear @featureGate
+    @regressionAARP @nextYear
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county          | plantype | planname                             | planyear |
       | 00014 | AARP |   10010 | NO            | New York County | MAPD     | AARP Medicare Advantage Plan 1 (HMO) | next     |
