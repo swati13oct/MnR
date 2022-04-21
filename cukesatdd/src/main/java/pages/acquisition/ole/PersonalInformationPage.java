@@ -7,13 +7,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
-import atdd.framework.Assertion;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
+
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
@@ -114,6 +114,7 @@ public class PersonalInformationPage extends UhcDriver {
 
 	@FindBy(id = "address1")
 	private WebElement PermanentAdd_Street;
+
 
 	@FindBy(xpath = "//*[contains(@class,'ole-add-error-msg')]")
 	private WebElement PermanentAdd_Street_Error;
@@ -948,6 +949,30 @@ public class PersonalInformationPage extends UhcDriver {
 		sendkeys(PermanentAdd_Street, Perm_streetError);
 		validateNew(PermanentAdd_Street_Error);
 
+		PermanentAdd_Street.clear();
+
+		//To-Do:Need to add code to verify when we enter a number API returns top five address
+		sendkeys(PermanentAdd_Street, "5");
+
+		boolean flag = true;
+		List<WebElement> topFiveAddress = driver.findElements(By.xpath("//div[@role='listbox']/mat-option"));
+		if(topFiveAddress.size()==5){
+		for( WebElement Address : topFiveAddress) {
+			System.out.println(Address.getText());
+			if(!Address.getText().contains("5")){
+				flag= false;
+				break;
+			}
+		}
+
+		if(flag){
+			System.out.println("API returns top five address");
+		}
+		{
+			System.out.println("Real Time Address Validation is not working");
+			}
+
+		}
 		PermanentAdd_Street.clear();
 		sendkeys(PermanentAdd_Street, Perm_Street);
 
