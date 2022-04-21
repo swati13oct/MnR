@@ -1514,8 +1514,9 @@ public class CampaignTFNCommonStepDefinition {
 			//"*** imsPlan4HeadingVisible/Invisible : '" + msPlansHeading + "' for zipCode : '" + zipCode + "'");
 		System.out.println("ms Plan heading flag"+msPlansHeading);
 		//if (msPlansHeading) 
-		if (zipCode.equals("90210"))
-			tfnPage.ms4ViewPlanDetails();
+		if (zipCode.equals("90210")) {
+			tfnPage.validateTFNBannerOnMS();
+			tfnPage.ms4ViewPlanDetails();}
 		else if (zipCode.equals("23666"))
 			tfnPage.ms3ViewPlanDetails();
 		else
