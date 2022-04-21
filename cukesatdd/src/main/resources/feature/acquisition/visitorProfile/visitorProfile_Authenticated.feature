@@ -3,43 +3,6 @@
 @visitorProfileAuthenticated @visitorProfile @nonProd
 Feature: 1.09. UAT - Visitor profile Authenticated
 
-#  @vpMSSavePlanAuthenticated @authenticated
-  Scenario Outline: <UID> : Verify user saves Medsupp plans from VPP to the unauthenticated visitor profile - zipcode - <zipcode> on <site> site
-    Given the user is on medicare acquisition site landing page
-      | Site | <site> |
-    When the user performs plan search using following information
-      | Zip Code        | <zipcode>       |
-      | County Name     | <county>        |
-      | Is Multi County | <isMultiCounty> |
-    When the user views the plans of the below plan type
-      | Plan Type | <plantype> |
-    Then user fills out medsup form and proceeds to next pages
-      | Zip Code | <zipcode> |
-      | DOB      | <DOB>     |
-    Then user saves two ms plans as favorite
-      | MS Test Plans | <MS_testPlans> |
-    Then user gets a create profile prompt
-    Then user click on continue as guest button
-    Then the user signs in with optum Id credentials
-      | User Name | <userName> |
-      | Password  | <password> |
-    And user validates the added Ms plans on visitor profile page
-      | MS Test Plans | <MS_testPlans> |
-    And user delets the added Ms plans on visitor profile page
-      | MS Test Plans | <MS_testPlans> |
-
-
-#    @visitorProfile_AARP @regressionAARP @authenticatedAARP
-
-    Examples:
-      | UID                                   | site | zipcode | isMultiCounty | plantype | planyear | DOB        | county        | MS_testPlans  | userName    | password     |
-      | Visitor Profile - E2E Scenario 7 _AMP | AARP | 23223   | YES           | MS       | future   | 11/11/1949 | Richmond City | Plan G,Plan A | vdmsatdd_01 | Password@123 |
-
-#    @visitorProfile_UHC @regressionUHC @authenticatedUHC @featureGate
-    Examples:
-      | UID                                   | site | zipcode | isMultiCounty | plantype | planyear | DOB        | county        | MS_testPlans  | userName        | password     |
-      | Visitor Profile - E2E Scenario 7 _UHC | UHC  | 23223   | YES           | MS       | future   | 11/11/1949 | Richmond City | Plan G,Plan A | vdmsatdd_01_uhc | Password@123 |
-
   @addDrugAuthenticated @authenticated
   Scenario Outline: <UID> : Verify user is able to add drug information to the authenticated visitor profile on <site> site
     Given the user is on medicare acquisition site landing page
@@ -126,7 +89,7 @@ Feature: 1.09. UAT - Visitor profile Authenticated
       | site | state    | zipcode | isMultutiCounty | county          | userName  | password       | plantype | planname                             | status      | monthlyPremium |
       | AARP | New York | 10010   | NO              | New York County | vdatdd_14 | Password@12345 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | In Progress | $34            |
 
-    @visitorProfile_UHC @regressionUHC @featureGate 
+    @visitorProfile_UHC @regressionUHC @featureGate
     Examples:
       | site | state    | zipcode | isMultutiCounty | county          | userName  | password       | plantype | planname                             | status      | monthlyPremium |
       | UHC  | New York | 10010   | NO              | New York County | vdatdd_14 | Password@12345 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | In Progress | $34            |
@@ -331,7 +294,7 @@ Feature: 1.09. UAT - Visitor profile Authenticated
       | UHC  | UHC    | JONETTE   | ESCUTIA  | 03/27/1936 | 06902   | 3PW3A88CU71 | jonette@getairmail.com | Password@123 |
 
   @SavePlanPRE
-  Scenario Outline: User validate PRE flow for MS from Visitor Profile on <site> site for zipcode -<Zipcode> for plan <testPlan>
+  Scenario Outline: User validate PRE flow for <plantype> from Visitor Profile on <site> site for zipcode -<Zipcode> for plan <testPlan>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     And the user clicks on the shopping cart icon
@@ -375,10 +338,8 @@ Feature: 1.09. UAT - Visitor profile Authenticated
     Examples:
       | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                   | testPlan                             | userName              | password     | Premium | plantype |
       | AARP | 07303   | NO            | New York | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | No             | No,No,No,No                   | Lower                | [blank]        | [blank]                      | AARP Medicare Advantage Choice (PPO) | vdatdd_18@getnada.com | Password@123 | $0      | MAPD     |
-      | AARP | 19901   | NO            | New York | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | No             | No,No,No,No                   | Higher               | 1st            | Health Care Premium, Doctors | Plan F                               | vdatdd_19@getnada.com | Password@123 | [blank] | MS       |
 
     @SavePlanPRE_UHC @regressionUHC
     Examples:
       | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                   | testPlan                             | userName                  | password     | Premium | plantype |
       | UHC  | 07303   | NO            | New York | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | No             | No,No,No,No                   | Lower                | [blank]        | [blank]                      | AARP Medicare Advantage Choice (PPO) | vdatdd_18_uhc@getnada.com | Password@123 | $0      | MAPD     |
-      | UHC  | 19901   | NO            | New York | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | No             | No,No,No,No                   | Higher               | 1st            | Health Care Premium, Doctors | Plan F                               | vdatdd_19_uhc@getnada.com | Password@123 | [blank] | MS       |

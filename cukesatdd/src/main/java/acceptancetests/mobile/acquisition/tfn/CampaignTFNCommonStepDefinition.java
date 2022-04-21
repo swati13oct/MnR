@@ -1630,8 +1630,9 @@ public class CampaignTFNCommonStepDefinition {
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(inputAttributese);	
 		String ExpecetdTFNNo = memberAttributesMap.get("TFN No");
+		String ExpecetdTFNxpath = memberAttributesMap.get("TFN Xpath");
 		CampaignTFNPageMobile tfnPage = (CampaignTFNPageMobile) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
-		tfnPage.validateStaticMedsupTFNNo(ExpecetdTFNNo);
+		tfnPage.validateStaticMedsupTFNNo(ExpecetdTFNNo,ExpecetdTFNxpath);
 	}
 	
 }

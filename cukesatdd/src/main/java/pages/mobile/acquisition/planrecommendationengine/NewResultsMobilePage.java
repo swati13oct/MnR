@@ -55,9 +55,27 @@ public class NewResultsMobilePage extends UhcDriver {
 
 		@FindBy(css = "body>div#overlay")
 		private WebElement planLoaderscreen;
+		
+		@FindBy(css = "div[class*='bottomPaginationSec'] div[class*='pdf-section'] p")
+		private List<WebElement> ImpResSectionPDFLinks;
 
 		@FindBy(xpath = "//*[@class='mobileHeader']")
 		private WebElement planZipInfo;
+		
+		@FindBy(xpath = "//*[contains(text(),'Enroll in plan')]")
+		private WebElement enrollBtnPlanDetails;
+		
+		@FindBy(css = ".segment div[class*='content p-b-0'] h3")
+		private WebElement planNameEnrollPageExternal;
+		
+		@FindBy(css = ".segment h2")
+		private WebElement planNameEnrollPage;
+		
+		@FindBy(css = ".uhc-container div.content h2")
+		private WebElement planNameVPPDetailsPage;
+		
+		@FindBy(xpath = "//span[contains(text(),'Enroll in plan')]")
+		private WebElement enrollBtnLPPlanDetails;
 		
 		@FindBy(css = ".planRemoveSort svg")
 		private WebElement removeBreadCrumbs;
@@ -110,6 +128,42 @@ public class NewResultsMobilePage extends UhcDriver {
 		
 		@FindBy(css = "li.planTileGrid")
 		private List<WebElement> plantiles1;
+		
+		@FindBy(css = "div[class*='med-supp-profile-card'] button[class*='start-application']")
+		private WebElement MSStartApplication;
+		
+		@FindBy(css = "div#AddYourInfoForm div:nth-child(3) input#dateOfBirthInput")
+		private WebElement DOB;
+		
+		@FindBy(css = "label[for='Female']")
+		private WebElement genderFemale;
+		
+		@FindBy(css = "div[class*='electronicDiscountParent'] div[role='radiogroup'] label:nth-child(2)")
+		private WebElement answeringQues;
+		
+		@FindBy(css = "button[class*='continue-application']")
+		private WebElement continApp;
+		
+		@FindBy(css = "#ole-cancel-confirm .modal-footer>a:nth-child(2)")
+		private WebElement cancelButton;
+		
+		@FindBy(css = "#ole-form-content div[class*='wizardpagebody'] p:nth-child(2)")
+		private WebElement OLEPlanName;
+		
+		@FindBy(css = "#ole-form-content div[class*='wizardpagebody'] ul.bottomMargin5>li:nth-child(1)")
+		private List<WebElement> OLEZip;
+		
+		@FindBy(css = "#ole-form-controls div>div>a[class*='cancel-button']")
+		private WebElement cancelLink;
+		
+		@FindBy(css = "div[class*='med-supp-profile-card'] #undefined-button h2")
+		private WebElement VPMSPlanName;
+
+		@FindBy(css = ".planTileSection .visitingProfileContainer h3")
+		private WebElement MSPlanSection;
+
+		@FindBy(css = ".planTileSection .userProfileMedSuppPlan")
+		private List<WebElement> MSPlansCount;
 		
 		@FindBy(css = "div.modal-inner button[class*='modal-close']")
 		private WebElement modelCloseICon;
@@ -223,6 +277,9 @@ public class NewResultsMobilePage extends UhcDriver {
 		@FindBy(css = "div.content h2")
 		private WebElement planNameDetailsPage;
 		
+		@FindBy(css = "div[class*='bottomPaginationSec'] div[class*='pdf-section']")
+		private WebElement ImpResSection;
+		
 		@FindBy(css="div.sortBySection #plansSorting")
 		private WebElement sortByDropdown;
 		
@@ -284,8 +341,8 @@ public class NewResultsMobilePage extends UhcDriver {
 				text = "Special";
 
 			int plancount = plantiles.size();
-			Assert.assertTrue(sortBreadCrumbs.getText().trim().contains(text),
-					"BreadCrumbs not showing for " + plan + " PlanType");
+		//	Assert.assertTrue(sortBreadCrumbs.getText().trim().contains(text),
+		//			"BreadCrumbs not showing for " + plan + " PlanType");
 			for (int i = 0; i < plancount; i++) {
 				// System.out.println("I count is: "+i);
 				PlanType = plantiles.get(i).findElement(By.xpath(".//div[contains(@class,'planNameType')]")).getText().trim();
@@ -394,6 +451,38 @@ public class NewResultsMobilePage extends UhcDriver {
 			Assert.assertTrue(nonCovered == 0, "Mismatch in Not Covered. Should be Zero drugs");
 		}
 
+	}
+	
+	public void fillMSform() {
+		DOB.click();
+		DOB.sendKeys("01/06/1940");
+		jsClickNew(genderFemale);
+		threadsleep(8000);
+		jsClickNew(genderFemale);
+		threadsleep(3000);		
+		answeringQues.click();
+		continApp.click();
+		pageloadcomplete();
+	}
+	
+	public void validateOLEDetails(String zip) {
+		driver.navigate().back();
+		driver.navigate().refresh();
+		pageloadcomplete();
+		Assert.assertTrue(driver.getCurrentUrl().contains("guest"),"--- VP page not loaded---");
+		String plnMS = VPMSPlanName.getText().trim().toUpperCase();
+		MSStartApplication.click();
+		threadsleep(2000);
+		fillMSform();
+		threadsleep(3000);
+		Assert.assertTrue(driver.getCurrentUrl().contains("online-application.html"),"--- OLE Plan Details page not loaded---");
+		Assert.assertTrue(OLEPlanName.getText().toUpperCase().equals(plnMS),"PlanName is not matching in OLE Details Page");
+		Assert.assertTrue(OLEZip.get(0).getText().contains(zip),"ZIPCOde is not matching in OLE Details Page");
+		cancelLink.click();
+		threadsleep(1000);
+		cancelButton.click();
+		pageloadcomplete();
+		Assert.assertTrue(driver.getCurrentUrl().contains("plan-summary"),"--- VPP page not loaded---");
 	}
 	
 	public void csnRanking(String snpOption) {
@@ -641,12 +730,21 @@ public class NewResultsMobilePage extends UhcDriver {
 //		waitforResultsPage();
 		scrollToView(pagePreviousButton);
 		
-		JavascriptExecutor js = (JavascriptExecutor) driver; 
-		js.executeScript("window.scrollBy(0,-800)");
-		js.executeScript("window.scrollBy(0,-800)");
-		
-		String pageCount1 = pagenoLabel.getText().trim();
-		int currentPage = Integer.parseInt(pageCount1.toLowerCase().replace(" ", "").split("of")[0].replace("plan", ""));
+		if(!driver.toString().contains("IOS")) {
+			JavascriptExecutor js = (JavascriptExecutor) driver; 
+			js.executeScript("window.scrollBy(0,-800)");
+			js.executeScript("window.scrollBy(0,-800)");
+		}
+		scrollToView(pagenoLabel);
+		String pageCount1;
+		int currentPage;
+		try {
+			pageCount1 = pagenoLabel.getText().trim();
+			currentPage = Integer.parseInt(pageCount1.toLowerCase().replace(" ", "").split("of")[0].replace("plan", ""));
+		}catch (Exception e) {
+			pageCount1 = driver.findElement(By.xpath("//span[contains(@class,'mobilePaginationText')]")).getText().trim();
+			currentPage = Integer.parseInt(pageCount1.toLowerCase().replace(" ", "").split("of")[0].replace("plan", ""));
+		}
 		if(currentPage != 1) {
 			for(int c = 1; c < currentPage; c++) {
 				pagePreviousButton.click();
@@ -657,7 +755,12 @@ public class NewResultsMobilePage extends UhcDriver {
 		// String uniqueName = "Plan 1 (Regional PPO)";
 		// int totalPlans = plantiles.size();
 //		String pageCount1 = pagenoLabel.getText().trim();
-		int totalPage = Integer.parseInt(pageCount1.toLowerCase().replace(" ", "").split("of")[1]);
+		int totalPage;
+		try {
+			totalPage = Integer.parseInt(pageCount1.toLowerCase().replace(" ", "").split("of")[1]);
+		}catch (Exception e) {
+			totalPage = Integer.parseInt(((pageCount1.toLowerCase().replace(" ", "").split("of")[1]).replace("ranked"," ")).split(" ")[0]);
+		}
 		int i = 1, planIndex = 1;
 		do {
 			// 3 plans per page
@@ -688,6 +791,46 @@ public class NewResultsMobilePage extends UhcDriver {
 		waitForPageLoadSafari();
 		validate(planZipInfo, 60);
 		threadsleep(1000);
+	}
+	
+	public void validateSNPPlanName() {
+		System.out.println("Validating SNP Plan Names in result pages : ");
+		plansLoader();
+		verifyPlanNameinOLE();
+		browserBack();
+		plansLoader();
+	}
+	
+	public void browserBack() {
+
+		driver.navigate().back();
+		plansLoader();
+	}
+	
+	public void verifyPlanNameinOLE() {
+		String PlanName= planNameVPPDetailsPage.getText().trim().split("\n")[0].toUpperCase();
+		System.out.println("Plan Name in Plan Details Page: "+PlanName);
+		String planNameinOLE = "";
+		if(validate(enrollBtnPlanDetails,20))
+			enrollBtnPlanDetails.click();
+		if(validate(enrollBtnLPPlanDetails,20))
+			enrollBtnLPPlanDetails.click();
+		pageloadcomplete();
+		System.out.println(driver.getCurrentUrl());
+		if(validate(planNameEnrollPage,20))
+			Assert.assertTrue(planNameEnrollPage.getText().trim().contains(PlanName), "PlanName Invalid in OLE");
+		Assert.assertTrue(driver.getCurrentUrl().contains("/welcome"), "OLE page not loaded");
+		if(validate(planNameEnrollPageExternal,20))
+			planNameinOLE = planNameEnrollPageExternal.getText().trim().toUpperCase();
+		System.out.println("Plan Name in Plan Enroll Page: "+planNameinOLE);
+		Assert.assertTrue(planNameinOLE.contains(PlanName), "--- Plan name are not matches---");
+	}
+	
+	public void plansLoader() {
+		pageloadcomplete();
+		if(validate(planLoaderscreen, 60))
+			waitforElementInvisibilityInTime(planLoaderscreen,60);
+		threadsleep(5000);// Plan loader
 	}
 	
 	public void preResultsUI(String zip, String county) {
@@ -967,6 +1110,90 @@ public class NewResultsMobilePage extends UhcDriver {
 				validate(planNameDetailsPage, 60);
 				Assert.assertTrue(planNameDetailsPage.getText().toLowerCase().contains(planFullName.toLowerCase()),
 						"Not navigated to Plan details page");
+			}
+		}
+	}
+	
+	public void ImportantResource() {
+		System.out.println("Validate ImportantResource Not Present");
+		Assert.assertTrue(isElementPresent(ImpResSection), "ImportantResource is not displaying in Result Page");
+		scrollToView(ImpResSection);
+		threadsleep(3000);
+		Assert.assertTrue(ImpResSectionPDFLinks.size()>0, "ImportantResource is not having PDF Links in Result Page");
+	}
+	
+	public void pdfLink(String pdfname, String pdflink) {
+		int pdfindex = 0;
+		String curWindow = driver.getWindowHandle();
+		System.out.println(curWindow);
+		for(int p=0; p<ImpResSectionPDFLinks.size(); p++) {
+			try {
+				ImpResSectionPDFLinks.get(p).getText().contains(pdfname);
+				pdfindex = p;
+				break;
+			}
+			catch (Exception e) {
+				System.out.println("Unable to find PDF with : " + p);
+			}
+		}
+		windowSwape(pdfindex,curWindow,pdflink);
+		
+	}
+	
+	public void windowSwape(int p, String curWindow, String pdf ) {
+		threadsleep(2000);
+		ImpResSectionPDFLinks.get(p).click();
+		ArrayList<String> windows = new ArrayList<String>(driver.getWindowHandles());
+		System.out.println(windows);
+		for (String window : windows) {
+			System.out.println(window.replace("page-", ""));
+			if (!window.equals(curWindow)) {
+				driver.switchTo().window(window);
+				Assert.assertTrue(driver.getCurrentUrl().contains(pdf), "PDF doc is not correct one");
+				driver.close();
+			}else
+				System.out.println("It is Primary Window");
+			threadsleep(5000);
+			driver.switchTo().window(curWindow);
+		}
+	}
+	
+	public void findPDF(String uniqueName) {
+		System.out.println("Finding a PDF... " + uniqueName);
+		if(uniqueName.contains("wrap")) 
+			pdfLink("AARP Medicare","WR1000");
+		if(uniqueName.contains("cms guide")) 
+			pdfLink("Health Insurance","GU25125ST");
+		if(uniqueName.contains("pov")) 
+			pdfLink("plan overview","POV");
+		if(uniqueName.contains("rate pages")) 
+			pdfLink("Rate Pages","RP");
+		if(uniqueName.contains("rd")) 
+			pdfLink("Rules and Disclosures","RD");
+		if(uniqueName.contains("bt")) 
+			pdfLink("Benefit Tables","RD");
+		if(uniqueName.contains("ooc")) 
+			pdfLink("Outline of Coverage","OOC");
+		if(uniqueName.contains("creeed enroll")) 
+			pdfLink("Enrollment Discount","WB");
+		if(uniqueName.contains("selecthd")) 
+			pdfLink("Select Provider","HD1000");
+	}
+	
+	public void importantResourceSection(String ImpRes) {
+		System.out.println("Validate ImportantResource Present and Links");
+		ImportantResource();
+		threadsleep(3000);
+		System.out.println("Validating PDF document Info...");
+		String resName = "";
+		if(ImpRes.isEmpty())
+			System.out.println("Resources is Empty ");
+		else
+		{
+			String[] resDetails = ImpRes.split(",");
+			for (int i = 0; i < resDetails.length; i++) {
+				resName = resDetails[i].toLowerCase();
+				findPDF(resName);
 			}
 		}
 	}

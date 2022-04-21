@@ -310,6 +310,12 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = ".//*[@id='togglenextYear']/a")
 	private WebElement toggleplanYear;
+	
+	@FindBy(xpath = "(//*[contains(@class,'uhc-card')]//*[contains(@class,'compare-plans-btn')]//label)[1]")
+	private WebElement firstComparePlanButtonForMS4;
+	
+	@FindBy(xpath = "(//*[contains(@class,'compare-box')]//button[contains(@class,'cta-button')])[1]")
+    private WebElement firstComparePlanButtonForMS3;
 
 	@FindBy(xpath = "(//span[@class='view--more'])[1]")
 	private WebElement viewMoreLink;
@@ -1417,9 +1423,13 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		sleepBySec(5);
 		// CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 		// CommonConstants.setMainWindowHandle(driver.getWindowHandle());
-
-		if (maPlansViewLink.isDisplayed())
-			jsClickNew(maPlansViewLink);
+		try {
+			if (maPlansViewLink.isDisplayed())
+				jsClickNew(maPlansViewLink);
+		}
+		catch (Exception e) {
+		}
+		
 
 		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 				+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@dtmname,'Provider Search')]"));
@@ -1430,9 +1440,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		switchToNewTabNew(ProviderSearchLink);
 		sleepBySec(15);
 		if(driver.toString().contains("IOS")) {
-			sleepBySec(20);
-			driver.navigate().refresh();
-			sleepBySec(20);
+			sleepBySec(40);
 		}
 		if (driver.getCurrentUrl().contains("werally")) {
 			return new ProviderSearchPageMobile(driver);
@@ -1594,6 +1602,54 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		}
 		return currentYearFlag;
 
+	}
+	
+	public void compareAllMS4Plans() {
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		List<WebElement> allMSPlans = driver
+				.findElements(By.xpath("//*[contains(@class,'uhc-card')]//*[contains(@class,'compare-plans-btn')]//label"));
+		int plansForCompare = allMSPlans.size();
+		if (plansForCompare > 4) {
+			System.out.println("There are more than 4 plans, only first 4 will be compared");
+			plansForCompare = 4;
+		}
+		if (allMSPlans != null) {
+			for (int i = 0; i < plansForCompare; i++) {
+				moveMouseToElement(allMSPlans.get(i));
+				jsClickNew(allMSPlans.get(i));
+				System.out.println("Plan added to compare : " + i);
+			}
+		}
+		jsClickNew(firstComparePlanButtonForMS4);
+	}
+	
+	public void compareAllMS3Plans() {
+		try {
+			Thread.sleep(8000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		List<WebElement> allMSPlans = driver
+				.findElements(By.xpath("//*[contains(@class,'compare-box')]//*[contains(@id,'compare-plan')]/../label"));
+		int plansForCompare = allMSPlans.size();
+		if (plansForCompare > 4) {
+			System.out.println("There are more than 4 plans, only first 4 will be compared");
+			plansForCompare = 4;
+		}
+		if (allMSPlans != null) {
+			for (int i = 0; i < plansForCompare; i++) {
+				moveMouseToElement(allMSPlans.get(i));
+				jsClickNew(allMSPlans.get(i));
+				System.out.println("Plan added to compare : " + i);
+			}
+		}
+		jsClickNew(firstComparePlanButtonForMS3);
 	}
 
 	public VPPPlanSummaryPageMobile togglePlanYear(String planType) {
@@ -2024,15 +2080,19 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	
 	public boolean updatePersonalDetailsForMedsup() {
 		validateNew(updateDOBDetailsForMedsup);
-		updateDOBDetailsForMedsup.clear();
-		sendKeysByCharacter(updateDOBDetailsForMedsup, "05/05/1945");
+		
+		sendkeysMobile(updateDOBDetailsForMedsup, "05/05/1945");
+		
 		threadsleep(5);
 		//jsClickNew(partBDropdown);
 		//partBDropdown.click();
 		jsClickNew(updateGenderDetailsForMedsup);
 		threadsleep(5);
-		//selectFromDropDownByText(driver, partBDropdown, "May");
-		mobileSelectOption(partBDropdown, "May", true);
+		//selectFromDropDownByText(driver, partBDropdown, "March");
+		partBDropdown.click();
+		Select dropdown = new Select(partBDropdown);
+		dropdown.selectByValue("05");
+		threadsleep(5);
 		jsClickNew(saveAndUpdatePremiumsBtn);
 		threadsleep(5);
 		if(validate(EditYourInformationLink)) {
@@ -5738,10 +5798,10 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		int initialCount = driver.getWindowHandles().size();
 		// ProviderSearchLink.click();
 		jsClickNew(ProviderSearchLink);
-		if(driver.toString().contains("IOS")) {
-			sleepBySec(60);
-			driver.navigate().refresh();
-		}
+//		if(driver.toString().contains("IOS")) {
+//			sleepBySec(60);
+////			driver.navigate().refresh();
+//		}
 		sleepBySec(10);
 		System.out.println("Provider Search Link has been clicked");
 		waitForCountIncrement(initialCount);
@@ -5754,6 +5814,11 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 				break;
 		}
 
+		if(driver.toString().contains("IOS")) {
+			sleepBySec(60);
+//			driver.navigate().refresh();
+		}
+		
 		if (driver.getCurrentUrl().contains("werally")) {
 			System.out.println("Provider Search Page is displayed");
 			Assertion.assertTrue(true);
