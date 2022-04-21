@@ -4534,11 +4534,12 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	private WebElement learnaboutMedicare;
 
 	public ShopForPlanNavigationPageMobile HoveronalearnaboutMedicare() throws InterruptedException {
-		waitforElement(learnaboutMedicare);
 		if (driver.getClass().toString().toUpperCase().contains("ANDROID")
 				|| driver.getClass().toString().toUpperCase().contains("IOS")) {
 			System.out.println("Hove Action skipped on Mobile");
+			openLearnAboutMedicareFromMenu();
 		} else {
+			waitforElement(learnaboutMedicare);
 			if (learnaboutMedicare.isDisplayed()) {
 				Actions action = new Actions(driver);
 				action.moveToElement(learnaboutMedicare).build().perform();
@@ -5637,7 +5638,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			throws InterruptedException {
 
 		CommonUtility.waitForPageLoadNew(driver, zipCodeMedicareField, 30);
-		sendkeys(zipCodeMedicareField, zipcode);
+		sendkeysMobile(zipCodeMedicareField, zipcode);
 		// jsClickNew(LearnMedicareMedsuppEnrollButton);
 		waitForPageLoadSafari();
 		CommonUtility.waitForPageLoadNew(driver, LearnMedicareMedsuppEnrollButton, 30);

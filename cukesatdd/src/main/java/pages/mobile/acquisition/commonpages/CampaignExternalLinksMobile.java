@@ -1637,7 +1637,7 @@ public class CampaignExternalLinksMobile extends UhcDriver {
 		waitForPageLoadSafari();
 		checkModelPopup(driver, 10);
 
-		validateNew(vppTop, 30);
+		//validateNew(vppTop, 30);
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPageMobile(driver);
 		} else
