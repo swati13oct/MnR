@@ -106,7 +106,7 @@ public abstract class UhcDriver {
 	@FindBy(xpath = ".//iframe[contains(@id,'IPerceptionsEmbed')]")
 	public WebElement IPerceptionsFrame;
 
-	@FindBy(xpath = "//*[@id='ip-no']")
+	@FindBy(xpath = "//*[contains(@id,'ip-no')]")
 	private WebElement surveyPopupNoBtn;
 
 	@FindBy(xpath = "//*[contains(@class,'btn-no')]")
@@ -258,7 +258,7 @@ public abstract class UhcDriver {
 		driver.get(url);
 		
 		if(!url.contains("uhcmedicare")&& url.contains("uhc")) {
-			Cookie cookieName = new Cookie("X_UMS_DEBUG_SESSION","stage");
+			Cookie cookieName = new Cookie("X_UMS_DEBUG_SESSION",env);
 			driver.manage().addCookie(cookieName);
 			driver.navigate().refresh();
 			
@@ -270,7 +270,7 @@ public abstract class UhcDriver {
 	}
 
 	public void waitforElement(WebElement element) {
-		WebDriverWait wait = new WebDriverWait(driver, 40);
+		WebDriverWait wait = new WebDriverWait(driver, 20);
 		wait.until(ExpectedConditions.visibilityOf(element));
 
 	}
@@ -1169,25 +1169,16 @@ public abstract class UhcDriver {
 	public void checkModelPopup(WebDriver driver, long timeoutInSec) {
 		if (!(driver.getClass().toString().toUpperCase().contains("ANDROID")
 				|| driver.getClass().toString().toUpperCase().contains("IOS"))) {
-			// CommonUtility.waitForPageLoad(driver, IPerceptionsFrame, timeoutInSec);
-			CommonUtility.waitForPageLoad(driver, IPerceptionsPopup, timeoutInSec);
+			
 
 			try {
-				if (IPerceptionsPopup.isDisplayed()) {
-					// driver.switchTo().frame(IPerceptionsFrame);
-					IPerceptionsPopup.click();
-					// driver.switchTo().defaultContent();
+				waitforElementNew(surveyPopupNoBtn,30);
+				if (surveyPopupNoBtn.isDisplayed()) {
+					surveyPopupNoBtn.click();
 					System.out.println("IPerceptions Popup  found");
 				}
 			} catch (Exception e) {
 				System.out.println("IPerceptions Popup not found");
-				/*
-				 * try { if (IPerceptionsFrame.isDisplayed()) {
-				 * System.out.println("IPerceptionsFrame found");
-				 * driver.switchTo().frame(IPerceptionsFrame); IPerceptionNoBtn.click();
-				 * driver.switchTo().defaultContent(); } } catch (Exception e1) {
-				 * System.out.println("Iperceptions not found"); }
-				 */
 			}
 		} else {
 			System.out.println("Popup check skipped in mobile >>>>");
@@ -2193,10 +2184,10 @@ public abstract class UhcDriver {
 		        String array[] = null;
 		        try {
 
-		        Properties props = new Properties();        
+		        Properties props = System.getProperties();        
 		    	props.setProperty("mail.store.protocol", "imaps");
 	    		Session mailSession = Session.getDefaultInstance(props, null);
-		        mailSession.setDebug(true);
+		        //mailSession.setDebug(true);
 		        Store mailStore = mailSession.getStore("imaps");
 		        mailStore.connect("impag.gmail.com", username, password);
 				

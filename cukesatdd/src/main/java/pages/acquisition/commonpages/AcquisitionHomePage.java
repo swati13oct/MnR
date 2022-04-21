@@ -1017,7 +1017,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public void openAndValidate(String site) {
-		if (site.equalsIgnoreCase("UHC") || site.equalsIgnoreCase("UMS") || site.equalsIgnoreCase("ULayer")) {
+		if (site.equalsIgnoreCase("UHC") || site.equalsIgnoreCase("UMS")) {
 			if (MRScenario.environment.equals("offline")) {
 				startNew(UMS_ACQISITION_OFFLINE_PAGE_URL);
 				testSiteUrl = UMS_ACQISITION_OFFLINE_PAGE_URL;
@@ -1064,7 +1064,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			} catch (Exception e) {
 				System.out.println("Proactive chat popup not displayed");
 			}
-		} else if (site.equalsIgnoreCase("AARP")) {
+		} else if (site.equalsIgnoreCase("AARP")|| site.equalsIgnoreCase("ULayer")) {
 			if (MRScenario.environment.equals("offline")) {
 				start(AARP_ACQISITION_OFFLINE_PAGE_URL);
 				testSiteUrl = AARP_ACQISITION_OFFLINE_PAGE_URL;
