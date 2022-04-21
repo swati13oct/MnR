@@ -258,7 +258,7 @@ public abstract class UhcDriver {
 		driver.get(url);
 		
 		if(!url.contains("uhcmedicare")&& url.contains("uhc")) {
-			Cookie cookieName = new Cookie("X_UMS_DEBUG_SESSION",env);
+			Cookie cookieName = new Cookie("X_UMS_DEBUG_SESSION","chargers");
 			driver.manage().addCookie(cookieName);
 			driver.navigate().refresh();
 			
