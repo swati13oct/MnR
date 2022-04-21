@@ -334,9 +334,9 @@ public class CQPage extends UhcDriver {
 
     public void navigateToDataLayerUrl() {
         String datalayerurl = "etc/analytics-tools/analytics-data-updater.html";
-        String curURL=driver.getCurrentUrl();
-        curURL=curURL.substring(0,curURL.lastIndexOf("aem"));
-        String finalURL=curURL+datalayerurl;
+        String curURL = driver.getCurrentUrl();
+        curURL = curURL.substring(0, curURL.lastIndexOf("aem"));
+        String finalURL = curURL + datalayerurl;
         driver.navigate().to(finalURL);
         CommonUtility.checkPageIsReadyNew(driver);
         WebElement dataLayerHead = driver.findElement(By.xpath("//h1[contains(text(),'Data Layer Utility')]"));
@@ -412,7 +412,7 @@ public class CQPage extends UhcDriver {
     }
 
     // method to check Dynamic Tab Elements
-    public void validateDataLayerDynamicTab() {
+    /*public void validateDataLayerDynamicTab() {
         CommonUtility.checkPageIsReadyNew(driver);
         jsClickNew(tab_Dynamic);
         if (validateNew(selectAppDropdown) && selectAppDropdown.isDisplayed()) {
@@ -428,56 +428,53 @@ public class CQPage extends UhcDriver {
             }
             System.out.println("Element Present in Select App DropDown: " + presentApp);
         } else {
-            Assertion.fail("Elemnents not present in Dropdown");
+            Assertion.fail("Elements not present in Dropdown");
         }
         selectAppDropdown.click();
 
-        for (int i = 0; i < selectAppOptions.size(); i++) {
-            for (WebElement e : selectAppOptions) {
-                if (!e.getAttribute("class").contains("disabled")) {
-                    selectAppDropdown.click();
-                    System.out.println(e.getText() + " from Select Application dropdown is selected");
-                    e.click();
-                    sleepBySec(2);
-                    if (selectViewDropDown.isDisplayed()) {
-                        sleepBySec(1);
-                        System.out.println("Select View Dropdown is visible");
-                        for (WebElement x : selectViewOptions) {
-                            selectViewDropDown.click();
-                            System.out.println(x.getText() + " from View dropdown is selected");
-                            x.click();
-                            sleepBySec(2);
-                            if (selectSubViewDropDown.isDisplayed()) {
-                                sleepBySec(1);
-                                System.out.println("Select Sub View Dropdown is visible");
-                                for (WebElement sub : selectSubViewOptions) {
-                                    selectSubViewDropDown.click();
-                                    System.out.println(sub.getText() + " from Sub View dropdown is selected");
-                                    sub.click();
-                                    sleepBySec(3);
-                                    checkResult();
-                                    validateEditAssetModalPopUp();
-                                }
-                            } else {
-                                System.out.println("Select Sub View Dropdown is not visible");
+        for (WebElement e : selectAppOptions) {
+            if (!e.getAttribute("class").contains("disabled")) {
+                selectAppDropdown.click();
+                System.out.println(e.getText() + " from Select Application dropdown is selected");
+                e.click();
+                sleepBySec(2);
+                if (selectViewDropDown.isDisplayed()) {
+                    sleepBySec(1);
+                    System.out.println("Select View Dropdown is visible");
+                    for (WebElement x : selectViewOptions) {
+                        selectViewDropDown.click();
+                        System.out.println(x.getText() + " from View dropdown is selected");
+                        x.click();
+                        sleepBySec(2);
+                        if (selectSubViewDropDown.isDisplayed()) {
+                            sleepBySec(1);
+                            System.out.println("Select Sub View Dropdown is visible");
+                            for (WebElement sub : selectSubViewOptions) {
+                                selectSubViewDropDown.click();
+                                System.out.println(sub.getText() + " from Sub View dropdown is selected");
+                                sub.click();
                                 sleepBySec(3);
                                 checkResult();
                                 validateEditAssetModalPopUp();
                             }
+                        } else {
+                            System.out.println("Select Sub View Dropdown is not visible");
+                            sleepBySec(3);
+                            checkResult();
+                            validateEditAssetModalPopUp();
                         }
-					/*selectViewDropDown.click();
-					selectViewOptions.get(1).click();*/
-
-                    } else {
-                        System.out.println("Select View Dropdown is not visible");
-                        checkResult();
-                        validateEditAssetModalPopUp();
                     }
-                }
-                continue;
-            }
+					*//*selectViewDropDown.click();
+					selectViewOptions.get(1).click();*//*
 
+                } else {
+                    System.out.println("Select View Dropdown is not visible");
+                    checkResult();
+                    validateEditAssetModalPopUp();
+                }
+            }
         }
+    }*/
 /*		selectAppOptions.get(4).click();
 		sleepBySec(2);
 		if(selectViewDropDown.isDisplayed()) {
@@ -487,7 +484,72 @@ public class CQPage extends UhcDriver {
 			sleepBySec(2);
 		}
 		checkResult();*/
+
+
+    //Updated method to check all Dynamic Apps
+    public void validateDynamicApps(String appName) {
+        CommonUtility.checkPageIsReadyNew(driver);
+        jsClickNew(tab_Dynamic);
+        if (validateNew(selectAppDropdown) && selectAppDropdown.isDisplayed()) {
+            System.out.println("Dynamic App Tab Opened Successfully");
+        } else {
+            Assertion.fail("Dynamic App Tab did not Opened Successfully");
+        }
+        selectAppDropdown.click();
+        if (!selectAppOptions.isEmpty()) {
+            String presentApp = "";
+            for (int i = 0; i < selectAppOptions.size(); i++) {
+                presentApp += selectAppOptions.get(i).getText() + ", ";
+            }
+            System.out.println("Element Present in Select App DropDown: " + presentApp);
+        } else {
+            Assertion.fail("Elements not present in Dropdown");
+        }
+        selectAppDropdown.click();
+        for (WebElement e : selectAppOptions) {
+            if (e.getAttribute("value").contains(appName)) {
+                selectAppDropdown.click();
+                System.out.println(e.getText() + " from Select Application dropdown is selected");
+                e.click();
+                sleepBySec(2);
+                if (selectViewDropDown.isDisplayed()) {
+                    sleepBySec(1);
+                    System.out.println("Select View Dropdown is visible");
+                    for (WebElement x : selectViewOptions) {
+                        selectViewDropDown.click();
+                        System.out.println(x.getText() + " from View dropdown is selected");
+                        x.click();
+                        sleepBySec(2);
+                        if (selectSubViewDropDown.isDisplayed()) {
+                            sleepBySec(1);
+                            System.out.println("Select Sub View Dropdown is visible");
+                            for (WebElement sub : selectSubViewOptions) {
+                                selectSubViewDropDown.click();
+                                System.out.println(sub.getText() + " from Sub View dropdown is selected");
+                                sub.click();
+                                sleepBySec(3);
+                                checkResult();
+                                validateEditAssetModalPopUp();
+                            }
+                        } else {
+                            System.out.println("Select Sub View Dropdown is not visible");
+                            sleepBySec(3);
+                            checkResult();
+                            validateEditAssetModalPopUp();
+                        }
+                    }
+					/*selectViewDropDown.click();
+					selectViewOptions.get(1).click();*/
+
+                } else {
+                    System.out.println("Select View Dropdown is not visible");
+                    checkResult();
+                    validateEditAssetModalPopUp();
+                }
+            }
+        }
     }
+
 
     //Method to check what result is displayed
     public void checkResult() {
