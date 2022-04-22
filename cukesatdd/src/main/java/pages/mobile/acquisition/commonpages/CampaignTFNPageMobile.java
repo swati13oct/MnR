@@ -1051,7 +1051,6 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 			jsClickNew(msPlansViewLink);
 			waitForPageLoadSafari();
 			CommonUtility.waitForPageLoadNew(driver, msPlansHeading, 30);
-			CommonUtility.waitForPageLoadNew(driver, planCardMS4_0, 30);
 			/*
 			 * msPlansViewLink.click(); CommonUtility.waitForPageLoadNew(driver,
 			 * medSuppPlanList.get(0), 30);

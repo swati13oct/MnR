@@ -2957,7 +2957,13 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	public void validateAnnualDeductible(String planName, String annualDeductible) {
 		WebElement AnnualDeductibleForPlan = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
 				+ "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//*[contains(text(), 'Deductible')]//following::span[3]"));
-		String planDeductible = AnnualDeductibleForPlan.getAttribute("textContent").trim();
+		String planDeductible;
+		try {
+			planDeductible = AnnualDeductibleForPlan.getAttribute("textContent").trim();
+		}
+		catch (Exception e) {
+			planDeductible = AnnualDeductibleForPlan.getText().trim();
+		}
 		/*
 		 * try {
 		 *
