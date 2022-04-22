@@ -951,7 +951,6 @@ public class PersonalInformationPage extends UhcDriver {
 
 		PermanentAdd_Street.clear();
 
-		//To-Do:Need to add code to verify when we enter a number API returns top five address
 		sendkeys(PermanentAdd_Street, "5");
 
 		try {
