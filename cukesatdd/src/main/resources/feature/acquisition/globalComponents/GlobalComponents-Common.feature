@@ -397,10 +397,10 @@ Feature: 1.12 ACQ - Global Components Validation
       | AARP | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | Decision Guide | //*[@id='tfn'] | true    |
 
     #| AARP | health-plans/medicare-supplement-plans/agent-appointment.html             | Agent Appointment | //*[@id='tfn'] | true    |
-    @MedSuppOnlyPages_GlobalCompsUHC @uhcmedicare
+    @MedSuppOnlyPages_GlobalCompsUHC @uhcmedicare 
     Examples: 
       | site | path                                                                      | pageName       | tfnXpath       | tfnFlag |
-      | UHC  | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | Decision Guide | //*[@id='tfn'] | true    |
+      | UHC  | /health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | Decision Guide | //*[@id='tfn'] | true    |
 
   #| UHC  | health-plans/medicare-supplement-plans/agent-appointment.html             | Agent Appointment | //*[@id='tfn'] | true    |
  
