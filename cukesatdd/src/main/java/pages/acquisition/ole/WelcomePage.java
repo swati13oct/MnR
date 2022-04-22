@@ -125,7 +125,7 @@ public class WelcomePage extends UhcDriver{
 	@FindBy(xpath = "//a[contains(text(),'Extra Help')]")
 	private WebElement Extrahelp;
 	
-	@FindBy(xpath = "//a[contains(text(),'www.aarpmedicareplans.com/health-plans/aarp-pharmacy.html')]")
+	@FindBy(xpath = "//a[contains(text(),'www.aarpmedicareplans.com/health-plans/aarp-pharmacy.html') or contains(text(),'www.aarpmedicareplans.com/medicare/health-plans/aarp-pharmacy.html')]")
 	private WebElement AARPPharmacy;
 	
 	@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
@@ -251,7 +251,8 @@ public class WelcomePage extends UhcDriver{
 				if (!Expected_PlanType.equalsIgnoreCase("SNP")) {
 					String elementPath = "(//*[contains(text(), 'Enroll in plan')])[1]";
 					WebElement enrollInPlan = driver.findElement(By.xpath(elementPath));
-					//	enrollInPlan.click();
+					System.out.println("MA and PDP plans are displayed:" +Expected_PlanType);
+					sleepBySec(5);
 					validateNew(enrollInPlan);
 					jsClickNew(enrollInPlan);
 				}
@@ -259,7 +260,8 @@ public class WelcomePage extends UhcDriver{
 					//String elementPath = "(//*[contains(text(), 'Enroll in plan')])[2]";
 					String elementPath ="(//*[contains(@data-ng-show, 'displayEnrollNow')])[2]";
 					WebElement enrollInPlan = driver.findElement(By.xpath(elementPath));
-					//	enrollInPlan.click();
+					System.out.println("SNP plans are displayed:" +Expected_PlanType);
+					sleepBySec(5);
 					validateNew(enrollInPlan);
 					jsClickNew(enrollInPlan);
 				}

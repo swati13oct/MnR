@@ -4186,6 +4186,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				startNewPRE(
 						UMS_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html#/get-started"),
 						browser);
+			}else if (MRScenario.environment.equalsIgnoreCase("chargers-qa")) {
+					startNewPRE(
+							AARP_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html#/get-started"),
+							browser);
 			} else if (MRScenario.environment.equalsIgnoreCase("offline-prod-aarp")) {
 				startNewPRE(AARP_ACQISITION_OFFLINE_PAGE_URL.replace(".com",
 						".com/plan-recommendation-engine.html#/get-started"), browser);
