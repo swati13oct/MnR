@@ -2868,7 +2868,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			 * 
 			 * public GetStartedPage navigateToPrescriptionDrug() {
 			 * enterYourDrugListButton.click(); if (getTitle().
-			 * equalsIgnoreCase("Our Medicare Plan Types | AARPï¿½ Medicare Plans from UnitedHealthcareï¿½"
+			 * equalsIgnoreCase("Our Medicare Plan Types | AARPÃ¯Â¿Â½ Medicare Plans from UnitedHealthcareÃ¯Â¿Â½"
 			 * )) { return new GetStartedPage(driver); } else { return null; } }
 			 * 
 			 * public DrugCostEstimatorPage navigateToDCEToolFromHome() throws
@@ -3066,7 +3066,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	 * 
 	 * public GetStartedPage navigateToPrescriptionDrug() {
 	 * enterYourDrugListButton.click(); if (getTitle().
-	 * equalsIgnoreCase("Our Medicare Plan Types | AARPï¿½ Medicare Plans from UnitedHealthcareï¿½"
+	 * equalsIgnoreCase("Our Medicare Plan Types | AARPÃ¯Â¿Â½ Medicare Plans from UnitedHealthcareÃ¯Â¿Â½"
 	 * )) { return new GetStartedPage(driver); } else { return null; } }
 	 * 
 	 * public DrugCostEstimatorPage navigateToDCEToolFromHome() throws
@@ -3390,7 +3390,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			Assertion.fail("*****************TFN number was  not found macthing with the SAM call Popup ***************"
 					+ ExpectedCallSAMTFN);
 		}
-		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. ï¿½ 8 p.m., 7 days a week.*\n*Alaska and Hawaii: 8 a.m. ï¿½ 8 p.m. Monday ï¿½ Friday, 8 a.m. ï¿½ 5 p.m. Saturday and Sunday.";
+		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. Ã¯Â¿Â½ 8 p.m., 7 days a week.*\n*Alaska and Hawaii: 8 a.m. Ã¯Â¿Â½ 8 p.m. Monday Ã¯Â¿Â½ Friday, 8 a.m. Ã¯Â¿Â½ 5 p.m. Saturday and Sunday.";
 		validate(CallSamTFNtimezone);
 		String ActualCallSamTFNtimezone = CallSamTFNtimezone.getText();
 		System.out.println(ExpectedCallSamTFNtimezone);
@@ -4186,6 +4186,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				startNewPRE(
 						UMS_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html#/get-started"),
 						browser);
+			}else if (MRScenario.environment.equalsIgnoreCase("chargers-qa")) {
+					startNewPRE(
+							AARP_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html#/get-started"),
+							browser);
 			} else if (MRScenario.environment.equalsIgnoreCase("offline-prod-aarp")) {
 				startNewPRE(AARP_ACQISITION_OFFLINE_PAGE_URL.replace(".com",
 						".com/plan-recommendation-engine.html#/get-started"), browser);
@@ -5727,7 +5731,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			Assertion.fail("*****************TFN number was  not found macthing with the SAM call Popup ***************"
 					+ ExpectedCallSAMTFN);
 		}*/
-		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. ï¿½ 8 p.m., 7 days a week.*\n*Alaska and Hawaii: 8 a.m. ï¿½ 8 p.m. Monday ï¿½ Friday, 8 a.m. ï¿½ 5 p.m. Saturday and Sunday.";
+		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. Ã¯Â¿Â½ 8 p.m., 7 days a week.*\n*Alaska and Hawaii: 8 a.m. Ã¯Â¿Â½ 8 p.m. Monday Ã¯Â¿Â½ Friday, 8 a.m. Ã¯Â¿Â½ 5 p.m. Saturday and Sunday.";
 		validate(CallSamTFNtimezone);
 		String ActualCallSamTFNtimezone = CallSamTFNtimezone.getText();
 		System.out.println(ExpectedCallSamTFNtimezone);
@@ -5943,7 +5947,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		else
 			Assert.fail("TFN element is not found / displayed on Right rail on the page : ");
 */
-		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. ï¿½ 8 p.m.,\n7 days a week";
+		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. Ã¯Â¿Â½ 8 p.m.,\n7 days a week";
 		// String ExpectedCallSamTFNtimezone1 = "Hours: 8 a.m. - 8 p.m.,\n7 days a
 		// week";
 		// String ExpectedCallSamTFNtimezone2 = "Hours: 8 a.m. - 8 p.m., 7 days a week";
@@ -5973,7 +5977,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 
 		String ExpectedCallSamTFNMember = "Need Help? Call UnitedHealthcare at " + ExpecetdTFNNo
-		+ " (TTY 711) toll free, 8 a.m. � 8 p.m., 7 days a week.";
+		+ " (TTY 711) toll free, 8 a.m. – 8 p.m., 7 days a week.";
 		validate(footertextsectioncallus);
 		String ActualCallSamTFNMember = footertextsectioncallus.getText();
 
@@ -6005,7 +6009,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		else
 			Assert.fail("TFN element is not found / displayed on page : " + TFNXpath);
 
-		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. � 8 p.m., 7 days a week.";
+		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. – 8 p.m., 7 days a week.";
 		String ActualCallSamTFNtimezone = footertextsectionTFNtimezone.getText();
 
 		System.out.println("########Validating TFN Time zone in Footer scetion########");
@@ -6074,7 +6078,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			Assert.fail("TFN elemet is not found / displayed on Call popup icon : ");*/
 
 		System.out.println("#######Validating TFN time zone on Call Popup#######");
-		String ExpectedCallSamTFNtimezone = "7 a.m. ï¿½ 11 p.m. ET, Monday-Friday\n9 a.m. ï¿½ 5 p.m. ET, Saturday";
+		String ExpectedCallSamTFNtimezone = "7 a.m. Ã¯Â¿Â½ 11 p.m. ET, Monday-Friday\n9 a.m. Ã¯Â¿Â½ 5 p.m. ET, Saturday";
 		validateNew(CallSamTFNMedsupptimezone);
 		String ActualCallSamTFNtimezone = CallSamTFNMedsupptimezone.getText();
 
@@ -6145,7 +6149,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				Assert.fail("TFN element is not found / displayed on Call popup icon : ");
 
 			System.out.println("#######Validating TFN time zone on Call Popup#######");
-			String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. Ã‚- 8 p.m., 7 days a week.*\n*Alaska and Hawaii: 8 a.m. Ã‚- 8 p.m. Monday ï¿½ Friday, 8 a.m. Ã‚- 5 p.m. Saturday and Sunday.";
+			String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. Ãƒâ€š- 8 p.m., 7 days a week.*\n*Alaska and Hawaii: 8 a.m. Ãƒâ€š- 8 p.m. Monday Ã¯Â¿Â½ Friday, 8 a.m. Ãƒâ€š- 5 p.m. Saturday and Sunday.";
 			validate(CallSamTFNtimezone);
 			String ActualCallSamTFNtimezone = CallSamTFNtimezone.getText();
 			System.out.println("TFN Timezone Content for Expected Values:" + ExpectedCallSamTFNtimezone);
@@ -6218,7 +6222,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		else
 			Assert.fail("TFN element is not found / displayed on page : " + TFNXpath);*/
 
-		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. ï¿½ 8 p.m., 7 days a week.\nHours: 8 a.m. ï¿½ 8 p.m. Monday ï¿½ Friday, 8 a.m. ï¿½ 5 p.m. Saturday and Sunday.";
+		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. Ã¯Â¿Â½ 8 p.m., 7 days a week.\nHours: 8 a.m. Ã¯Â¿Â½ 8 p.m. Monday Ã¯Â¿Â½ Friday, 8 a.m. Ã¯Â¿Â½ 5 p.m. Saturday and Sunday.";
 		String ActualCallSamTFNtimezone = footertextsectionMedsuppTFNtimezone.getText();
 
 		System.out.println("########Validating TFN Time zone in Footer scetion########");
@@ -6265,7 +6269,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		/*
 		 * String ExpectedCallSamTFNtimezone =
-		 * "Hours: 8 a.m. ï¿½ 8 p.m., 7 days a week"; String ActualCallSamTFNtimezone
+		 * "Hours: 8 a.m. Ã¯Â¿Â½ 8 p.m., 7 days a week"; String ActualCallSamTFNtimezone
 		 * = rightRailsectionTFNtimezone.getText();
 		 * 
 		 * System.out.
@@ -6328,9 +6332,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		else
 			Assert.fail("TFN element is not found / displayed on Right rail on the page : ");*/
 
-		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. Ã‚â€“ 8 p.m., 7 days a week\n(Alaska and Hawaii: 8 a.m. Ã‚â€“ 8 p.m. Monday Ã‚â€“ Friday, 8 a.m. Ã‚â€“ 5 p.m. Saturday Ã‚â€“ Sunday)";
+		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. Ãƒâ€šÃ¢â‚¬â€œ 8 p.m., 7 days a week\n(Alaska and Hawaii: 8 a.m. Ãƒâ€šÃ¢â‚¬â€œ 8 p.m. Monday Ãƒâ€šÃ¢â‚¬â€œ Friday, 8 a.m. Ãƒâ€šÃ¢â‚¬â€œ 5 p.m. Saturday Ãƒâ€šÃ¢â‚¬â€œ Sunday)";
 		String ExpectedCallSamTFNtimezone1 = "Hours: 8 a.m. - 8 p.m., 7 days a week\n(Alaska and Hawaii: 8 a.m. - 8 p.m. Monday - Friday, 8 a.m. - 5 p.m. Saturday - Sunday)";
-		// String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. Ã‚â€“ 8 p.m., 7
+		// String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. Ãƒâ€šÃ¢â‚¬â€œ 8 p.m., 7
 		// days a
 		// week";
 		// String ExpectedCallSamTFNtimezone = rightRailsectionTFNtimezone.getText();
@@ -6394,7 +6398,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		else
 			Assert.fail("TFN element is not found / displayed on Right rail on the page : ");*/
 
-		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. Ã‚- 8 p.m.,\n7 days a week";
+		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. Ãƒâ€š- 8 p.m.,\n7 days a week";
 		String ExpectedCallSamTFNtimezone1 = "Hours: 8 a.m. - 8 p.m.,\n7 days a week";
 		String ExpectedCallSamTFNtimezone2 = "Hours: 8 a.m. - 8 p.m., 7 days a week";
 		// String ExpectedCallSamTFNtimezone = rightRailsectionTFNtimezone.getText();
@@ -6424,7 +6428,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		System.out.println("########Validating TFN Info in ZipCode Component section########");
 
 		String ExpectedCallSamTFNMember = "Need Help? Call UnitedHealthcare at " + ExpecetdTFNNo
-				+ " (TTY 711) toll free, 8 a.m. � 8 p.m., 7 days a week.";
+				+ " (TTY 711) toll free, 8 a.m. – 8 p.m., 7 days a week.";
 		// String ExpectedCallSamTFNMember = footertextsectioncallus.getText();
 		validateNew(footertextsectioncallus);
 		String ActualCallSamTFNMember = footertextsectioncallus.getText().replace("\n", "");
@@ -6500,11 +6504,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		//else
 		//	Assert.fail("TFN element is not found / displayed on Right rail on the page : ");
 
-		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. â€“ 8 p.m., local time, 7 days a week";
+		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. Ã¢â‚¬â€œ 8 p.m., local time, 7 days a week";
 		// String ExpectedCallSamTFNtimezone1 = "Hours: 8 a.m. - 8 p.m., 7 days a
 		// week\n(Alaska and Hawaii: 8 a.m. - 8 p.m. Monday - Friday, 8 a.m. - 5 p.m.
 		// Saturday - Sunday)";
-		// String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. Ã‚â€“ 8 p.m., 7
+		// String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. Ãƒâ€šÃ¢â‚¬â€œ 8 p.m., 7
 		// days a
 		// week";
 		// String ExpectedCallSamTFNtimezone = rightRailsectionTFNtimezone.getText();
@@ -6894,7 +6898,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				|| driver.getCurrentUrl().contains("/compare/compare-ms")
 				|| driver.getCurrentUrl().contains("/enroll/ms-apply")
 				|| driver.getCurrentUrl().contains("shop/estimate/ms-costs")) {
-			String ExpectedCallSamTFNtimezone = "7 a.m. Ã¢â‚¬â€œ 11 p.m. ET, Monday-Friday\n9 a.m. Ã¢â‚¬â€œ 5 p.m. ET, Saturday";
+			String ExpectedCallSamTFNtimezone = "7 a.m. ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“ 11 p.m. ET, Monday-Friday\n9 a.m. ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“ 5 p.m. ET, Saturday";
 			validate(CallSamTFNtimezone_Medsup);
 			String ActualCallSamTFNtimezone = CallSamTFNtimezone_Medsup.getText();
 			System.out.println(ExpectedCallSamTFNtimezone);
@@ -6922,7 +6926,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 								+ ActualCallSamTFNMember);
 			}
 		} else {
-			String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. ï¿½ 8 p.m., 7 days a week.*\n*Alaska and Hawaii: 8 a.m. ï¿½ 8 p.m. Monday ï¿½ Friday, 8 a.m. ï¿½ 5 p.m. Saturday and Sunday.";
+			String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. Ã¯Â¿Â½ 8 p.m., 7 days a week.*\n*Alaska and Hawaii: 8 a.m. Ã¯Â¿Â½ 8 p.m. Monday Ã¯Â¿Â½ Friday, 8 a.m. Ã¯Â¿Â½ 5 p.m. Saturday and Sunday.";
 			validate(CallSamTFNtimezone);
 			String ActualCallSamTFNtimezone = CallSamTFNtimezone.getText();
 			System.out.println(ExpectedCallSamTFNtimezone);
@@ -7593,7 +7597,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		jsClickNew(shopForMedigapPlans);
 		CommonUtility.waitForPageLoad(driver, shopForMedigapHeader, 30);
 		Assert.assertEquals(shopForMedigapHeader.getText(),
-				"AARP® Medicare Supplement Insurance Plans insured by UnitedHealthcare");
+				"AARPÂ® Medicare Supplement Insurance Plans insured by UnitedHealthcare");
 		// driver.navigate().back();
 		// CommonUtility.waitForPageLoad(driver, shopForMedigapPlans, 30);
 
@@ -7704,7 +7708,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public void validateQtFNTiming() {
 		CommonUtility.waitForPageLoad(driver, qTfntime, 30);
-		Assert.assertEquals(qTfntime.getText(), "8 a.m. – 8 p.m., in your time zone, 7 days a week");
+		Assert.assertEquals(qTfntime.getText(), "8 a.m. â€“ 8 p.m., in your time zone, 7 days a week");
 
 	}
 
