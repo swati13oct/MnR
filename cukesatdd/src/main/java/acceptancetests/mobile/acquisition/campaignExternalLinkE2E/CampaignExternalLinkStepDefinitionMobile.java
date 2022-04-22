@@ -727,6 +727,27 @@ public void the_user_validates_SAM_icons_on_medsupp_page_from_external_Link(Data
 
 }
 
+@Then("^the user validates TFN Number on Right Rail$")
+public void validate_TFN_On_Right_Rail(DataTable givenAttributes) throws InterruptedException {
+
+	Map<String, String> memberAttributesMap = new HashMap<String, String>();
+	memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+	/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+	for (int i = 0; i < memberAttributesRow.size(); i++) {
+		memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+				memberAttributesRow.get(i).getCells().get(1));
+	}*/
+	String TFNXpath = memberAttributesMap.get("TFN Xpath");
+	String ExpectedTFNNo = (String) getLoginScenario().getBean(CommonConstants.CAMPAIGN_EXTERNAL_LINK_TFNNO);
+	WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+	AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+			.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+
+
+	aquisitionhomepage.validateTFNNoonRightRail(TFNXpath, ExpectedTFNNo);
+
+}
+
 @Then("^the user validates TFN Number on Right Rail for Medsupp External Link$")
 public void the_user_validates_TFN_Number_on_Right_Rail_for_Medsupp_page(DataTable givenAttributes)
 		throws InterruptedException {

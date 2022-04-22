@@ -19,6 +19,8 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.ShopForPlanNavigationPage;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
+import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.tfn.CampaignTFNPage;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.CampaignTFNPageMobile;
@@ -64,6 +66,13 @@ public class SAMIconsStepDefinitionAARPTablet {
 
 		aquisitionhomepage.validateTFNNoonRightRailForPlanDetailsPage(TFNXpath, ExpectedTFNNo);
 	
+	}
+	
+	@Then("^the user validates SAM icons on Medsupp page from External page$")
+	public void the_user_validates_SAM_icons_on_medsupp_page_from_external_page(DataTable givenAttributes) throws InterruptedException {
+
+		System.out.println("Skipping chat validations in mobile");
+
 	}
 	
 	@Then("^the user validates TFN Number on Right Rail OLE page$")
@@ -253,6 +262,13 @@ public class SAMIconsStepDefinitionAARPTablet {
 		aquisitionhomepage.navigateToPage(pagename);
 	}
 	
+	@Then("^the user validates SAM icons on the DCE page$")
+	public void the_user_validates_SAM_icons_on_the_DCE_page(DataTable givenAttributes) throws InterruptedException {
+
+		System.out.println("Skipping chat validations in Mobile");
+
+	}
+	
 	@Then("^the user validates SAM icons on the page$")
 	public void the_user_validates_SAM_icons_on_the_page(DataTable givenAttributes) throws InterruptedException {
 
@@ -297,5 +313,12 @@ public class SAMIconsStepDefinitionAARPTablet {
 		aquisitionhomepage.validateTFNNoonZipCodeComponent(TFNXpath, ExpectedTFNNo);
 		CampaignTFNPageMobile tfnPage=new CampaignTFNPageMobile(wd);
 		getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE,tfnPage);
+	}
+	
+	@Then("^the user validates SAM icons on the VPP page$")
+	public void the_user_validates_SAM_icons_on_the_vpp_page(DataTable givenAttributes) throws InterruptedException {
+
+		System.out.println("Skipping chat validations in Mobile");
+
 	}
 }

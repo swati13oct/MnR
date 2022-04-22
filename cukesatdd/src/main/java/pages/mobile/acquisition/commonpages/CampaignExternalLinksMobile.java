@@ -1427,7 +1427,12 @@ public class CampaignExternalLinksMobile extends UhcDriver {
 
 	public PharmacySearchPageMobile navigateToPharmacyGetStarted() {
 		parentWindow = driver.getWindowHandle();
-		startnow.click();
+		try {
+			startnow.click();
+		}
+		catch (Exception e) {
+			jsClickNew(startnow);
+		}
 		Set<String> tabs_windows = driver.getWindowHandles();
 		Iterator<String> itr = tabs_windows.iterator();
 		while (itr.hasNext()) {
