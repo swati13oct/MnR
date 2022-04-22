@@ -1635,8 +1635,12 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	//	List<WebElement> allMSPlans = driver
+	//			.findElements(By.xpath("//*[contains(@class,'compare-box')]//*[contains(@id,'compare-plan')]/../label"));
+		
 		List<WebElement> allMSPlans = driver
-				.findElements(By.xpath("//*[contains(@class,'compare-box')]//*[contains(@id,'compare-plan')]/../label"));
+				.findElements(By.xpath("//label[text()='Add to Compare']"));
+		
 		int plansForCompare = allMSPlans.size();
 		if (plansForCompare > 4) {
 			System.out.println("There are more than 4 plans, only first 4 will be compared");
