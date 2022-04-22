@@ -315,6 +315,28 @@ public class SAMIconsStepDefinitionAARPTablet {
 		getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE,tfnPage);
 	}
 	
+	@Then("^the user validates TFN Number on Right Rail for Medsupp page$")
+	public void the_user_validates_TFN_Number_on_Right_Rail_for_Medsupp_page(DataTable givenAttributes)
+			throws InterruptedException {
+
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}*/
+		String TFNXpath = memberAttributesMap.get("TFN Xpath");
+		String ExpectedTFNNo = memberAttributesMap.get("TFN No");
+				//(String) getLoginScenario().getBean(CommonConstants.CAMPAIGN_EXTERNAL_LINK_TFNNO);
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+
+		aquisitionhomepage.validateTFNNoonRightRailforMedsupp(TFNXpath, ExpectedTFNNo);
+
+	}
+	
 	@Then("^the user validates SAM icons on the VPP page$")
 	public void the_user_validates_SAM_icons_on_the_vpp_page(DataTable givenAttributes) throws InterruptedException {
 
