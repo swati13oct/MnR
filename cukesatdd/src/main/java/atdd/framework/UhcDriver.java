@@ -40,7 +40,6 @@ import javax.mail.search.SearchTerm;
 
 import static org.apache.commons.io.IOUtils.toByteArray;
 
-
 import com.sun.org.apache.bcel.internal.generic.RETURN;
 import io.appium.java_client.MobileElement;
 import org.apache.commons.collections.CollectionUtils;
@@ -157,6 +156,12 @@ public abstract class UhcDriver {
 	@FindBy(xpath = "//a[.='Back to Top']")
 	private WebElement backToTop;
 
+	@FindBy(xpath = "//*[@id='umsEnvForm']/button")
+	private WebElement proceedToUMSBtn;
+
+	@FindBy(xpath = "//h1[contains(text(),'UMS Proxy Test Harness')]")
+	private WebElement testHarnessHeader;
+
 	public void MobileMenu() {
 		jsClickNew(MenuMobile);
 		jsClickNew(MenuShopForPlanMobile);
@@ -256,12 +261,14 @@ public abstract class UhcDriver {
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 		driver.get(url);
+
 		
 		if(!url.contains("uhcmedicare")&& url.contains("uhc")) {
 			Cookie cookieName = new Cookie("X_UMS_DEBUG_SESSION","chargers");
+
 			driver.manage().addCookie(cookieName);
 			driver.navigate().refresh();
-			
+
 		}
 	}
 
@@ -345,7 +352,7 @@ public abstract class UhcDriver {
 			}
 			sendKeys_IOS(element, message);
 			element.getText().replaceAll("\u00A00", " ").trim();
-			//element.sendKeys(Keys.ENTER);
+			// element.sendKeys(Keys.ENTER);
 
 			// element.sendKeys(Keys.BACK_SPACE);
 
@@ -403,7 +410,6 @@ public abstract class UhcDriver {
 	public boolean validateNew(WebElement element) {
 		return validateNew(element, defaultTimeoutInSec);
 	}
-
 
 	public void waitforElementNew(WebElement element) {
 		waitforElementNew(element, defaultTimeoutInSec);
@@ -691,17 +697,17 @@ public abstract class UhcDriver {
 			System.out.println("Click and JsClick failed");
 		}
 	}
-	
+
 	public boolean isElementPresent(WebElement element) {
-	    try {
-	    	if (element.isDisplayed()) {
+		try {
+			if (element.isDisplayed()) {
 				System.out.println("Element found!!!!");
 				return true;
 			}
-	    } catch (org.openqa.selenium.NoSuchElementException e) {
-	    	System.out.println("Element Not found!!!!");
-	    }
-	    return false;	    
+		} catch (org.openqa.selenium.NoSuchElementException e) {
+			System.out.println("Element Not found!!!!");
+		}
+		return false;
 	}
 
 	public void jsClickNew(WebElement element) {
@@ -816,15 +822,38 @@ public abstract class UhcDriver {
 
 	public void startNew(String url) {
 
-		//driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		// driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
 		driver.get(url);
-		
-		if(!url.contains("uhcmedicaresolution")&& url.contains("uhc")) {
-			Cookie cookieName = new Cookie("X_UMS_DEBUG_SESSION","chargers");
-			driver.manage().addCookie(cookieName);
-			driver.navigate().refresh();
-			
+
+		if (!url.contains("uhcmedicaresolution") && url.contains("uhc")) {
+//			Cookie cookieName = new Cookie("X_UMS_DEBUG_SESSION","chargers");
+//			driver.manage().addCookie(cookieName);
+//			driver.navigate().refresh();
+
+			pageloadcomplete();
+			/**** Validate Test-Harness header is displayed after page load finished */
+			testHarnessHeader.isDisplayed();
+			/****** Select sandbox/PBC -Team env ******/
+			Select sl = new Select(driver.findElement(By.id("envs")));
+			Select sl1 = new Select(driver.findElement(By.id("expires")));
+			if (MRScenario.environment.contains("chargers-uhc") || MRScenario.environment.contains("uhc-stg")
+					|| MRScenario.environment.contains("uhc-off-stg")) {
+				/***** Select environment ******/
+				if (MRScenario.environment.contains("chargers-uhc")) {
+					sl.selectByVisibleText("chargers");
+				} else if (MRScenario.environment.contains("uhc-stg")) {
+					sl.selectByVisibleText("stage");
+				} else if (MRScenario.environment.contains("uhc-off-stg")) {
+					sl.selectByVisibleText("offline-stage");
+
+				}
+				/****** Select cookie expire timeout setting it to 4 hours ******/
+				sl1.selectByValue("4");
+				/***** Click on Proceed to UMS Button ******/
+				jsClickNew(proceedToUMSBtn);
+			}
+
 		}
 	}
 
@@ -858,12 +887,11 @@ public abstract class UhcDriver {
 		}
 	}
 
-
 	public void switchToNewTabNew(WebElement Element) {
 
 		CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 		int initialCount = driver.getWindowHandles().size();
-		//scrollToView(Element);
+		// scrollToView(Element);
 		jsClickNew(Element);
 		waitForPageLoadSafari();
 		waitForCountIncrement(initialCount);
@@ -1396,12 +1424,12 @@ public abstract class UhcDriver {
 	 * @return
 	 */
 
-
-	//public boolean mobileUpload(String imageLocation, WebElement uploadBtn) throws InterruptedException {
-	public boolean  mobileUpload(String uploadBtn) throws InterruptedException, IOException {
+	// public boolean mobileUpload(String imageLocation, WebElement uploadBtn)
+	// throws InterruptedException {
+	public boolean mobileUpload(String uploadBtn) throws InterruptedException, IOException {
 		boolean uploadSuccess = true;
 
-		//------------iOS Code-------------
+		// ------------iOS Code-------------
 		if (MRScenario.mobileDeviceOSName.equalsIgnoreCase("IOS")) {
 			String curHandle = ((AppiumDriver) driver).getContext();
 			System.out.println("curHandle - " + curHandle);
@@ -1416,10 +1444,12 @@ public abstract class UhcDriver {
 			}
 
 			((AppiumDriver) driver).findElement(MobileBy.AccessibilityId("Photo Library")).click();
-			//((IOSDriver) driver).findElement(MobileBy.AccessibilityId("Choose File")).click();
+			// ((IOSDriver) driver).findElement(MobileBy.AccessibilityId("Choose
+			// File")).click();
 			sleepBySec(5);
-			//-------For higher Version of IOS----------//
-			//if (MRScenario.mobileDeviceName.equalsIgnoreCase("iPhone 12 Pro Max") ||MRScenario.mobileDeviceName.equalsIgnoreCase("iPhone X")) {
+			// -------For higher Version of IOS----------//
+			// if (MRScenario.mobileDeviceName.equalsIgnoreCase("iPhone 12 Pro Max")
+			// ||MRScenario.mobileDeviceName.equalsIgnoreCase("iPhone X")) {
 
 			if (MRScenario.mobileDeviceOSVersion.contains("14.")) {
 				((AppiumDriver) driver).findElement(MobileBy.xpath("//XCUIElementTypeImage[1]")).click();
@@ -1428,19 +1458,21 @@ public abstract class UhcDriver {
 				sleepBySec(5);
 				((AppiumDriver) driver).findElement(MobileBy.AccessibilityId("Use photo")).click();
 				sleepBySec(5);
-				//-------For higher Version of IOS----------//
+				// -------For higher Version of IOS----------//
 			}
-			//-------For lower Version of IOS----------//
+			// -------For lower Version of IOS----------//
 			else {
 				try {
 					((AppiumDriver) driver).findElement(MobileBy.AccessibilityId("All Photos")).click();
 					sleepBySec(10);
-					//((AppiumDriver) driver).findElement(MobileBy.xpath("//XCUIElementTypeCell[1]//XCUIElementTypeOther")).click();
+					// ((AppiumDriver)
+					// driver).findElement(MobileBy.xpath("//XCUIElementTypeCell[1]//XCUIElementTypeOther")).click();
 					((AppiumDriver) driver).findElement(MobileBy.xpath("//XCUIElementTypeCell[1]")).click();
 					sleepBySec(10);
 
-				//	((AppiumDriver) driver).findElement(MobileBy.AccessibilityId("Done")).click();
-			//		sleepBySec(5);
+					// ((AppiumDriver)
+					// driver).findElement(MobileBy.AccessibilityId("Done")).click();
+					// sleepBySec(5);
 					((AppiumDriver) driver).findElement(MobileBy.AccessibilityId("Use photo")).click();
 					sleepBySec(5);
 				} catch (Exception e) {
@@ -1449,10 +1481,11 @@ public abstract class UhcDriver {
 				}
 
 			}
-			//	((IOSDriver) driver).findElement(MobileBy.xpath("//XCUIElementTypeStaticText[@name='Cancel']")).click();
-		//	((IOSDriver) driver).findElement(MobileBy.xpath("//XCUIElementTypeStaticText[@name='Choose']")).click();
-						//-------For lower Version of IOS----------//
-
+			// ((IOSDriver)
+			// driver).findElement(MobileBy.xpath("//XCUIElementTypeStaticText[@name='Cancel']")).click();
+			// ((IOSDriver)
+			// driver).findElement(MobileBy.xpath("//XCUIElementTypeStaticText[@name='Choose']")).click();
+			// -------For lower Version of IOS----------//
 
 			((AppiumDriver) driver).findElement(MobileBy.AccessibilityId("Confirm Number")).click();
 
@@ -1465,13 +1498,13 @@ public abstract class UhcDriver {
 
 					break;
 				}
-				System.out.println("Web view of current window:" +strContextName);
+				System.out.println("Web view of current window:" + strContextName);
 			}
 
 		}
-					//------------iOS Code-------------
+		// ------------iOS Code-------------
 		else {
-			//-------Android Code-----------------
+			// -------Android Code-----------------
 
 			Set<String> AndroidcontextNames = ((AppiumDriver) driver).getContextHandles();
 			for (String strContextName : AndroidcontextNames) {
@@ -1480,52 +1513,53 @@ public abstract class UhcDriver {
 					break;
 				}
 			}
-			//--Uploading the file for Android File----
+			// --Uploading the file for Android File----
 
 			uploadFileToRealDevice();
 
+			if (MRScenario.mobileDeviceOSVersion.contains("11") || MRScenario.mobileDeviceOSVersion.contains("10")) {
+				// ||MRScenario.mobileDeviceOSVersion.contains("12")) {
 
-			if (MRScenario.mobileDeviceOSVersion.contains("11") || MRScenario.mobileDeviceOSVersion.contains("10") ){
-					//||MRScenario.mobileDeviceOSVersion.contains("12")) {
-
-				//By AllowButton = By.id("com.android.permissioncontroller:id/permission_allow_button");
+				// By AllowButton =
+				// By.id("com.android.permissioncontroller:id/permission_allow_button");
 				By AllowButton = By.xpath("//android.widget.Button[@text='ALLOW']");
 				driver.findElement(AllowButton).click();
 
-				//Click on Browse button on Android
+				// Click on Browse button on Android
 
 				sleepBySec(5);
 				By Browse = By.xpath("//android.widget.TextView[@text='Browse']");
 				driver.findElement(Browse).click();
 				sleepBySec(5);
-				//Click on Hamburger menu to navigate to gallery
+				// Click on Hamburger menu to navigate to gallery
 				((AppiumDriver) driver).findElement(MobileBy.AccessibilityId("Show roots")).click();
 				sleepBySec(5);
-				//Click on gallery button
+				// Click on gallery button
 				By Gallery = By.xpath("//android.widget.TextView[@text='Gallery']");
 				driver.findElement(Gallery).click();
 				sleepBySec(5);
-				//Select a folder in gallery
-			//	By SelectFile = By.id("com.android.gallery3d.id/gl_root_view");
+				// Select a folder in gallery
+				// By SelectFile = By.id("com.android.gallery3d.id/gl_root_view");
 				By SelectFile = By.id("com.android.gallery3d.id/gl_root_view");
 				driver.findElement(SelectFile).click();
 				sleepBySec(5);
-				//select a file from browse
+				// select a file from browse
 				By SelectFile1 = By.id("com.android.documentsui:id/icon_thumb");
 				driver.findElement(SelectFile1).click();
 				sleepBySec(5);
 			} else {
 				try {
 
-				//	@FindBy(xpath = ".//iframe[contains(@id,'IPerceptionsEmbed')]")
-				//	public WebElement IPerceptionsFrame;
+					// @FindBy(xpath = ".//iframe[contains(@id,'IPerceptionsEmbed')]")
+					// public WebElement IPerceptionsFrame;
 					By AllowButton = By.id("com.android.permissioncontroller:id/permission_allow_button");
 					driver.findElement(AllowButton).click();
 
 					sleepBySec(5);
 
 					System.out.println("Printing");
-					//((AppiumDriver) driver).findElement(MobileBy.AccessibilityId("Allow")).click();
+					// ((AppiumDriver)
+					// driver).findElement(MobileBy.AccessibilityId("Allow")).click();
 					By Browse = By.xpath("//android.widget.TextView[@text='Browse']");
 					driver.findElement(Browse).click();
 					sleepBySec(5);
@@ -1534,11 +1568,11 @@ public abstract class UhcDriver {
 					driver.findElement(SelectFile1).click();
 					sleepBySec(5);
 
-			} catch(Exception e){
-				e.printStackTrace();
-				System.out.println("For lower version on Mobile devices");
+				} catch (Exception e) {
+					e.printStackTrace();
+					System.out.println("For lower version on Mobile devices");
+				}
 			}
-		}
 			By UsePhoto = By.xpath("//android.widget.TextView[@text='Use photo']");
 			driver.findElement(UsePhoto).click();
 			sleepBySec(5);
@@ -1546,7 +1580,7 @@ public abstract class UhcDriver {
 			driver.findElement(ConfirmNumber).click();
 			sleepBySec(5);
 
-			//Switch to  chrome browser
+			// Switch to chrome browser
 
 			Set<String> contextNamesAndroid = ((AppiumDriver) driver).getContextHandles();
 			for (String strContextName : contextNamesAndroid) {
@@ -1555,16 +1589,15 @@ public abstract class UhcDriver {
 					((AppiumDriver) driver).context(strContextName);
 
 					break;
-					}
-				System.out.println("Web view of current window:" +strContextName);
 				}
-				//-------Android Code-----------------
-				//
+				System.out.println("Web view of current window:" + strContextName);
 			}
+			// -------Android Code-----------------
+			//
+		}
 
 		return uploadSuccess;
 	}
-
 
 	/**
 	 * Gets the image file from mobile.
@@ -1587,8 +1620,6 @@ public abstract class UhcDriver {
 
 		return content;
 	}
-
-
 
 	/**
 	 * @author Murali - mmurugas This method will hide mobile keypad
@@ -2126,7 +2157,8 @@ public abstract class UhcDriver {
 						break;
 					} catch (NoSuchElementException e) {
 						try {
-							((IOSDriver) driver).findElement(MobileBy.className("XCUIElementTypeButton[contains(@name,'search')]"))
+							((IOSDriver) driver)
+									.findElement(MobileBy.className("XCUIElementTypeButton[contains(@name,'search')]"))
 									.click();
 							break;
 						} catch (NoSuchElementException ne) {
@@ -2142,100 +2174,94 @@ public abstract class UhcDriver {
 		}
 	}
 
-	/*public static String uploadFile() {
-
-		String cmd = "curl -F payload=@/Users/vkanagal/ATDD/MRATDD/cukesatdd/src/main/resources/Images/OLE/ -u $SAUCE_USERNAME:$SAUCE_ACCESS_KEY 'https://api.us-west-1.saucelabs.com/v1/storage/upload'";
-
-				ProcessBuilder process=new ProcessBuilder(cmd);
-
-
-			Process p;
-		try {
-			p=process.start();
-			BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
-			StringBuilder builder = new StringBuilder();
-			String line = null;
-			while ((line = reader.readLine()) != null) {
-				builder.append(line);
-				builder.append(System.getProperty("line.separator"));
-			}
-
-
-		}catch (IOException e){
-			e.printStackTrace();
-		}
-		return null;
-	}*/
-		public void uploadFileToRealDevice() throws InterruptedException, IOException {
+	/*
+	 * public static String uploadFile() {
+	 * 
+	 * String cmd =
+	 * "curl -F payload=@/Users/vkanagal/ATDD/MRATDD/cukesatdd/src/main/resources/Images/OLE/ -u $SAUCE_USERNAME:$SAUCE_ACCESS_KEY 'https://api.us-west-1.saucelabs.com/v1/storage/upload'"
+	 * ;
+	 * 
+	 * ProcessBuilder process=new ProcessBuilder(cmd);
+	 * 
+	 * 
+	 * Process p; try { p=process.start(); BufferedReader reader = new
+	 * BufferedReader(new InputStreamReader(p.getInputStream())); StringBuilder
+	 * builder = new StringBuilder(); String line = null; while ((line =
+	 * reader.readLine()) != null) { builder.append(line);
+	 * builder.append(System.getProperty("line.separator")); }
+	 * 
+	 * 
+	 * }catch (IOException e){ e.printStackTrace(); } return null; }
+	 */
+	public void uploadFileToRealDevice() throws InterruptedException, IOException {
 
 		AndroidDriver mobileDriver = (AndroidDriver) driver;
 
-			String codingBot = "src/main/resources/Images/OLE/MedicareNo-1.jpg";
-			File codingBotFile = new File(codingBot);
-			mobileDriver.pushFile("/storage/self/primary/MedicareNo-1.jpg", codingBotFile);
+		String codingBot = "src/main/resources/Images/OLE/MedicareNo-1.jpg";
+		File codingBotFile = new File(codingBot);
+		mobileDriver.pushFile("/storage/self/primary/MedicareNo-1.jpg", codingBotFile);
 
+	}
 
-		}
+	public String[] getContentFromOutlook()  {
 		
-		public String[] getContentFromOutlook()  {
+		String username = "gpdportals@gmail.com";
+	        String password = "gpdUser1";
+	        String array[] = null;
+	        try {
+
+	        Properties props = System.getProperties();        
+	    	props.setProperty("mail.store.protocol", "imaps");
+    		Session mailSession = Session.getDefaultInstance(props, null);
+	        //mailSession.setDebug(true);
+	        Store mailStore = mailSession.getStore("imaps");
+	        mailStore.connect("impag.gmail.com", username, password);
 			
-			String username = "gpdportals@gmail.com";
-		        String password = "gpdUser1";
-		        String array[] = null;
-		        try {
-
-		        Properties props = System.getProperties();        
-		    	props.setProperty("mail.store.protocol", "imaps");
-	    		Session mailSession = Session.getDefaultInstance(props, null);
-		        //mailSession.setDebug(true);
-		        Store mailStore = mailSession.getStore("imaps");
-		        mailStore.connect("impag.gmail.com", username, password);
-				
-				Folder emailFolder = mailStore.getFolder("Inbox");
-				
-				emailFolder.open(Folder.READ_WRITE);
-				
-				// Filter inbox messages by "UNSEEN" and "TO={username}"
-				FlagTerm ft_unseen = new FlagTerm(new Flags(Flags.Flag.SEEN), false);
-				RecipientStringTerm ft_toEmail = new RecipientStringTerm(RecipientType.TO, username);
-				
-				SearchTerm searchTerm = new AndTerm(ft_unseen, ft_toEmail);
-				
-				Message message[] = emailFolder.search(searchTerm);
-						
-				Object emailContent = message[message.length - 1].getContent();
-				
-				System.out.println(emailContent);
-				
-				String linkUrl;
-				try {
-					String[] tempArray2;
-					String[] tempArray = ((String) emailContent).split("href=\"");
+			Folder emailFolder = mailStore.getFolder("Inbox");
+			
+			emailFolder.open(Folder.READ_WRITE);
+			
+			// Filter inbox messages by "UNSEEN" and "TO={username}"
+			FlagTerm ft_unseen = new FlagTerm(new Flags(Flags.Flag.SEEN), false);
+			RecipientStringTerm ft_toEmail = new RecipientStringTerm(RecipientType.TO, username);
+			
+			SearchTerm searchTerm = new AndTerm(ft_unseen, ft_toEmail);
+			
+			Message message[] = emailFolder.search(searchTerm);
 					
-					tempArray2 = tempArray[1].split("\"");
-					linkUrl = tempArray2[0];
-				} catch (Exception e) {
-					linkUrl = " ";
-				}
+			Object emailContent = message[message.length - 1].getContent();
+			
+			System.out.println(emailContent);
+			
+			String linkUrl;
+			try {
+				String[] tempArray2;
+				String[] tempArray = ((String) emailContent).split("href=\"");
+				
+				tempArray2 = tempArray[1].split("\"");
+				linkUrl = tempArray2[0];
+			} catch (Exception e) {
+				linkUrl = " ";
+			}
 
-				String[] returnArray = new String[] { linkUrl, message[message.length - 1].getSubject().toString(),
-						Jsoup.parse(emailContent.toString()).text() };
-				returnArray[0] = returnArray[0].replaceAll("&amp;", "&");//login not working with URL having &amp;
-				System.out.println(returnArray);
-			      emailFolder.close(false);
-			      mailStore.close();
-			      mailSession = null;
-			      array = returnArray;
-		        } catch (NoSuchProviderException e) {
-		            e.printStackTrace();
-		         } catch (MessagingException e) {
-		            e.printStackTrace();
-		         } catch (IOException e) {
-		            e.printStackTrace();
-		         } catch (Exception e) {
-		            e.printStackTrace();
-		         }
-		        return array;
-		}
-		
+			String[] returnArray = new String[] { linkUrl, message[message.length - 1].getSubject().toString(),
+					Jsoup.parse(emailContent.toString()).text() };
+			returnArray[0] = returnArray[0].replaceAll("&amp;", "&");//login not working with URL having &amp;
+			System.out.println(returnArray);
+		      emailFolder.close(false);
+		      mailStore.close();
+		      mailSession = null;
+		      array = returnArray;
+	        } catch (NoSuchProviderException e) {
+	            e.printStackTrace();
+	         } catch (MessagingException e) {
+	            e.printStackTrace();
+	         } catch (IOException e) {
+	            e.printStackTrace();
+	         } catch (Exception e) {
+	            e.printStackTrace();
+	         }
+	        return array;
+	}
+	
 }

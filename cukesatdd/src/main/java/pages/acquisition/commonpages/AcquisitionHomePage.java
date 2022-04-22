@@ -973,6 +973,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private static String UMS_ACQISITION_CHARGERS_UHC_URL = MRConstants.CHARGERS_UHC_URL;
 	private static String UMS_ACQISITION_UHC_TEST2_URL = MRConstants.UHC_TEST2_URL;
 	private static String UMS_ACQISITION_UHC_STAGE_URL = MRConstants.UHC_STAGE_URL;
+	private static String UMS_ACQISITION_UHC_OFFLINE_STAGE_URL = MRConstants.UHC_OFFLINE_STAGE_URL;
 	private static String UHCCP_PROD_URL=MRConstants.UHCCP_URL_PROD;
 	private static String UHCCP_STAGE_URL=MRConstants.UHCCP_URL_STAGE;
 	
@@ -1045,6 +1046,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			}
 			else if (MRScenario.environment.contains("uhc-stg")) {
 				startNew(UMS_ACQISITION_UHC_STAGE_URL);
+				checkModelPopup(driver, 20); 
+			}
+			else if (MRScenario.environment.contains("uhc-off-stg")) {
+				startNew(UMS_ACQISITION_UHC_OFFLINE_STAGE_URL);
 				checkModelPopup(driver, 20); 
 			}
 			else {
