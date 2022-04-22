@@ -944,7 +944,7 @@ public class PersonalInformationPage extends UhcDriver {
 		String Mailing_City = memberDetailsMap.get("Mailing_City");
 		String Mailing_State = memberDetailsMap.get("Mailing_State");
 		String Mailing_Zip = memberDetailsMap.get("Mailing_Zip");
-
+		int count = 0;
 		String Perm_streetError = "Test 155";
 		sendkeys(PermanentAdd_Street, Perm_streetError);
 		validateNew(PermanentAdd_Street_Error);
@@ -954,25 +954,24 @@ public class PersonalInformationPage extends UhcDriver {
 		//To-Do:Need to add code to verify when we enter a number API returns top five address
 		sendkeys(PermanentAdd_Street, "5");
 
-		boolean flag = true;
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		List<WebElement> topFiveAddress = driver.findElements(By.xpath("//div[@role='listbox']/mat-option"));
-		if(topFiveAddress.size()==5){
-		for( WebElement Address : topFiveAddress) {
-			System.out.println(Address.getText());
-			if(!Address.getText().contains("5")){
-				flag= false;
-				break;
+		if (topFiveAddress.size()==5) {
+			for (WebElement Address : topFiveAddress) {
+				if (Address.getText().contains("5")) {
+					System.out.println(Address.getText());
+					count++;
+				}
 			}
 		}
-
-		if(flag){
-			System.out.println("API returns top five address");
-		}
-		{
-			System.out.println("Real Time Address Validation is not working");
+			if (count == 5) {
+				System.out.println("Address validation passed");
 			}
 
-		}
 		PermanentAdd_Street.clear();
 		sendkeys(PermanentAdd_Street, Perm_Street);
 
