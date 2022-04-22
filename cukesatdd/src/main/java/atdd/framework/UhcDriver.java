@@ -1281,7 +1281,7 @@ public abstract class UhcDriver {
 		System.out.println("Proceed to open a new blank tab to check the system time");
 		// tbd String urlGetSysTime=testSiteUrl+
 		// "/DCERestWAR/dcerest/profiledetail/bConnected";
-		String urlGetSysTime = testSiteUrl + "/PlanBenefitsWAR/profiledetail/aarp";
+		String urlGetSysTime = testSiteUrl + "/planbenefitsinfo/profiledetail/aarp";
 		System.out.println("test env URL for getting time: " + urlGetSysTime);
 
 		if (driver.getClass().toString().toUpperCase().contains("IOS")) {

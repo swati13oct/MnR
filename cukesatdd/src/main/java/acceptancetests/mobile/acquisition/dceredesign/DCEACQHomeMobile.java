@@ -1222,14 +1222,17 @@ public class DCEACQHomeMobile {
 	@Then("^the user clicks on Build Drug List to navigate to Build Drug List Page$")
 	public void the_user_clicks_on_Build_Drug_List_to_navigate_to_Build_DrugList() throws Throwable {
 		GetStartedPageMobile DCEgetStarted = (GetStartedPageMobile) getLoginScenario()
-				.getBean(PageConstants.DCE_Redesign_GetStarted);
-		getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
-		BuildYourDrugListMobile DCEbuildDrugList = DCEgetStarted.clickAddsDrugs();
-		String druglist = (String) getLoginScenario().getBean(DCERedesignCommonConstants.DRUGLIST);
-		// druglist = "";
-		System.out.println("Setting Drugs List : " + druglist);
-		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, druglist);
-		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, DCEbuildDrugList);
+                .getBean(PageConstants.DCE_Redesign_GetStarted);
+        BuildYourDrugListMobile DCEbuildDrugList = DCEgetStarted.clickAddsDrugs();
+        String druglist = (String) getLoginScenario().getBean(DCERedesignCommonConstants.DRUGLIST);
+
+        if (druglist == null) {
+            druglist = "";
+        }
+
+        System.out.println("Setting Drugs List : " + druglist);
+        getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, druglist);
+        getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, DCEbuildDrugList);
 	}
 
 	@Then("^the user searches and adds the following Drug to Drug List$")

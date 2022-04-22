@@ -98,7 +98,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 	@FindBy(css = "button[data-test-id='BehavioralHealthDirectory']")
 	private WebElement BehavioralHealthDirectory;
 
-	@FindBy(css = "button[data-test-id='DentalHealthDirectory']")
+	@FindBy(xpath = "//*[contains(@data-test-id,'DentalHealthDirectory')]")
 	private WebElement DentalDirectory;
 
 	@FindBy(css = "button[data-test-id='People']")
