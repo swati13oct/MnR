@@ -89,7 +89,7 @@ public class GlobalComponentsCommonStepDefinition {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		String site = "";
-		if(getLoginScenario().getSiteType()!=null)
+		if(!getLoginScenario().getSiteType().isEmpty())
 			site = getLoginScenario().getSiteType();
 		else
 			site = memberAttributesMap.get("Site");
