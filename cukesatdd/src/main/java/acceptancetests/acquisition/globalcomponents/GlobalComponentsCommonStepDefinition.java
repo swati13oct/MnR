@@ -88,7 +88,11 @@ public class GlobalComponentsCommonStepDefinition {
 		WebDriver wd = getLoginScenario().getWebDriverNew();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		String site = memberAttributesMap.get("Site");
+		String site = "";
+		if(getLoginScenario().getSiteType()!=null)
+			site = getLoginScenario().getSiteType();
+		else
+			site = memberAttributesMap.get("Site");
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().openApplicationURL(wd, site);
 		if(aquisitionhomepage.returnCookieValue()!= null)
 			scenario.log(aquisitionhomepage.returnCookieValue());
@@ -104,7 +108,6 @@ public class GlobalComponentsCommonStepDefinition {
 			getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, "UHC_ACQ");
 		else
 			getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, "AARP_ACQ");
-		aquisitionhomepage.getContentFromOutlook();
 	}
 	
 

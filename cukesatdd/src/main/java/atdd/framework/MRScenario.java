@@ -130,6 +130,7 @@ public class MRScenario {
 	public String mobileSessionTimeout = "900000";
 //	public static String runnerFiles = "";
 	public static String mobileDeviceType;
+	public static String site = "AARP";
 
 	private static final ThreadLocal<String> runnerFileName = new ThreadLocal<>();
 
@@ -331,6 +332,10 @@ public class MRScenario {
 		planYear = null != System.getProperty(VPPCommonConstants.PLAN_YEAR)
 				? System.getProperty(VPPCommonConstants.PLAN_YEAR)
 				: null != props ? props.get(VPPCommonConstants.PLAN_YEAR) : "";
+		
+		site = null != System.getProperty(CommonConstants.SITE)
+				? System.getProperty(CommonConstants.SITE)
+				: null != props ? props.get(CommonConstants.SITE) : "";
 
 		/*
 		 * appiumVersion = (null == System.getProperty(CommonConstants.APPIUM_VERSION) ?
@@ -1043,5 +1048,8 @@ public class MRScenario {
 					: new AcquisitionHomePage(driver, site);
 		}
 	}
-
+	
+	public String getSiteType() {
+		return site; 
+	}
 }

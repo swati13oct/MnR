@@ -367,9 +367,9 @@ public void yahooSearch(String searchParameter) {
 	@FindBy(xpath = "//*[contains(@id, 'modal')]//h2[contains(text(), 'Partial Success')]")
 	public WebElement Import_PartialSuccessMsg;
 	@FindBy(xpath = "//*[contains(@id, 'modal')]//h2[contains(text(), 'Failure')]")
-	public WebElement Import_FailureMsg;
-	@FindBy(xpath = "//*[contains(@id, 'modal')]//li/*[contains(text(), 'Drugs')]//*[contains(text(), 'We were unable to')]")
 	public WebElement Drugs_FailureMsg;
+	@FindBy(xpath = "//*[contains(@id, 'modal')]//li/*[contains(text(), 'Drugs')]//*[contains(text(), 'We were unable to')]")
+	public WebElement Import_FailureMsg;
 
 	//*[contains(@id, 'modal')]//h2[contains(text(), 'Success')]
 	public void ValidateImportCompleteModal(String drugsFlag, String providersFlag) {

@@ -905,6 +905,23 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 		jsClickNew(findPlansButton);
 	}
 	
+	public void validateStaticMedsupTFNNo(String ExpecetdTFNNo, String ExpecetdTFNxpath) {
+		CheckPageLoad();
+		CheckiPerseptions();
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		validate(driver.findElement(By.xpath(ExpecetdTFNxpath)));
+		if (ExpecetdTFNNo.contains(driver.findElement(By.xpath(ExpecetdTFNxpath)).getText())) {
+			System.out.println("TFN is Displayed on Page : " + driver.findElement(By.xpath(ExpecetdTFNxpath)).getText());
+		} else {
+			Assertion.fail("Static TFN elemnet is not found / displayed on page ");
+		}
+	}
+	
 	public VPPPlanSummaryPageMobile planSearch(String zip) {
 		CheckPageLoad();
 
@@ -1034,7 +1051,6 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 			jsClickNew(msPlansViewLink);
 			waitForPageLoadSafari();
 			CommonUtility.waitForPageLoadNew(driver, msPlansHeading, 30);
-			CommonUtility.waitForPageLoadNew(driver, planCardMS4_0, 30);
 			/*
 			 * msPlansViewLink.click(); CommonUtility.waitForPageLoadNew(driver,
 			 * medSuppPlanList.get(0), 30);

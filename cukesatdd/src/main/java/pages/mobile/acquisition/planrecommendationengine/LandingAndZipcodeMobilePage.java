@@ -175,7 +175,7 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 		driver.switchTo().defaultContent();
 		waitTillElementClickableInTime(getStartedBtn, 45);
 		waitforElementVisibilityInTime(zipCode, 45);
-		sendkeys(zipCode, zip_code);
+		sendkeysMobile(zipCode, zip_code);
 		Thread.sleep(2000);
 //		zipcodePagemultiCounty();
 		waitforElementVisibilityInTime(PRECounty, 45);

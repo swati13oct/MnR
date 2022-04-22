@@ -105,7 +105,7 @@ public abstract class UhcDriver {
 	@FindBy(xpath = ".//iframe[contains(@id,'IPerceptionsEmbed')]")
 	public WebElement IPerceptionsFrame;
 
-	@FindBy(xpath = "//*[@id='ip-no']")
+	@FindBy(xpath = "//*[contains(@id,'ip-no')]")
 	private WebElement surveyPopupNoBtn;
 
 	@FindBy(xpath = "//*[contains(@class,'btn-no')]")
@@ -262,8 +262,10 @@ public abstract class UhcDriver {
 		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 		driver.get(url);
 
-		if (!url.contains("uhcmedicare") && url.contains("uhc")) {
-			Cookie cookieName = new Cookie("X_UMS_DEBUG_SESSION", "stage");
+		
+		if(!url.contains("uhcmedicare")&& url.contains("uhc")) {
+			Cookie cookieName = new Cookie("X_UMS_DEBUG_SESSION","chargers");
+
 			driver.manage().addCookie(cookieName);
 			driver.navigate().refresh();
 
@@ -275,7 +277,7 @@ public abstract class UhcDriver {
 	}
 
 	public void waitforElement(WebElement element) {
-		WebDriverWait wait = new WebDriverWait(driver, 40);
+		WebDriverWait wait = new WebDriverWait(driver, 20);
 		wait.until(ExpectedConditions.visibilityOf(element));
 
 	}
@@ -1195,25 +1197,16 @@ public abstract class UhcDriver {
 	public void checkModelPopup(WebDriver driver, long timeoutInSec) {
 		if (!(driver.getClass().toString().toUpperCase().contains("ANDROID")
 				|| driver.getClass().toString().toUpperCase().contains("IOS"))) {
-			// CommonUtility.waitForPageLoad(driver, IPerceptionsFrame, timeoutInSec);
-			CommonUtility.waitForPageLoad(driver, IPerceptionsPopup, timeoutInSec);
+			
 
 			try {
-				if (IPerceptionsPopup.isDisplayed()) {
-					// driver.switchTo().frame(IPerceptionsFrame);
-					IPerceptionsPopup.click();
-					// driver.switchTo().defaultContent();
+				waitforElementNew(surveyPopupNoBtn,30);
+				if (surveyPopupNoBtn.isDisplayed()) {
+					surveyPopupNoBtn.click();
 					System.out.println("IPerceptions Popup  found");
 				}
 			} catch (Exception e) {
 				System.out.println("IPerceptions Popup not found");
-				/*
-				 * try { if (IPerceptionsFrame.isDisplayed()) {
-				 * System.out.println("IPerceptionsFrame found");
-				 * driver.switchTo().frame(IPerceptionsFrame); IPerceptionNoBtn.click();
-				 * driver.switchTo().defaultContent(); } } catch (Exception e1) {
-				 * System.out.println("Iperceptions not found"); }
-				 */
 			}
 		} else {
 			System.out.println("Popup check skipped in mobile >>>>");
@@ -1316,7 +1309,7 @@ public abstract class UhcDriver {
 		System.out.println("Proceed to open a new blank tab to check the system time");
 		// tbd String urlGetSysTime=testSiteUrl+
 		// "/DCERestWAR/dcerest/profiledetail/bConnected";
-		String urlGetSysTime = testSiteUrl + "/PlanBenefitsWAR/profiledetail/aarp";
+		String urlGetSysTime = testSiteUrl + "/planbenefitsinfo/profiledetail/aarp";
 		System.out.println("test env URL for getting time: " + urlGetSysTime);
 
 		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
@@ -2210,41 +2203,41 @@ public abstract class UhcDriver {
 
 	}
 
-	public String[] getContentFromOutlook() {
-
+	public String[] getContentFromOutlook()  {
+		
 		String username = "gpdportals@gmail.com";
-		String password = "gpdUser1";
-		String array[] = null;
-		try {
+	        String password = "gpdUser1";
+	        String array[] = null;
+	        try {
 
-			Properties props = new Properties();
-			props.setProperty("mail.store.protocol", "imaps");
-			Session mailSession = Session.getDefaultInstance(props, null);
-			mailSession.setDebug(true);
-			Store mailStore = mailSession.getStore("imaps");
-			mailStore.connect("impag.gmail.com", username, password);
-
+	        Properties props = System.getProperties();        
+	    	props.setProperty("mail.store.protocol", "imaps");
+    		Session mailSession = Session.getDefaultInstance(props, null);
+	        //mailSession.setDebug(true);
+	        Store mailStore = mailSession.getStore("imaps");
+	        mailStore.connect("impag.gmail.com", username, password);
+			
 			Folder emailFolder = mailStore.getFolder("Inbox");
-
+			
 			emailFolder.open(Folder.READ_WRITE);
-
+			
 			// Filter inbox messages by "UNSEEN" and "TO={username}"
 			FlagTerm ft_unseen = new FlagTerm(new Flags(Flags.Flag.SEEN), false);
 			RecipientStringTerm ft_toEmail = new RecipientStringTerm(RecipientType.TO, username);
-
+			
 			SearchTerm searchTerm = new AndTerm(ft_unseen, ft_toEmail);
-
+			
 			Message message[] = emailFolder.search(searchTerm);
-
+					
 			Object emailContent = message[message.length - 1].getContent();
-
+			
 			System.out.println(emailContent);
-
+			
 			String linkUrl;
 			try {
 				String[] tempArray2;
 				String[] tempArray = ((String) emailContent).split("href=\"");
-
+				
 				tempArray2 = tempArray[1].split("\"");
 				linkUrl = tempArray2[0];
 			} catch (Exception e) {
@@ -2253,22 +2246,22 @@ public abstract class UhcDriver {
 
 			String[] returnArray = new String[] { linkUrl, message[message.length - 1].getSubject().toString(),
 					Jsoup.parse(emailContent.toString()).text() };
-			returnArray[0] = returnArray[0].replaceAll("&amp;", "&");// login not working with URL having &amp;
+			returnArray[0] = returnArray[0].replaceAll("&amp;", "&");//login not working with URL having &amp;
 			System.out.println(returnArray);
-			emailFolder.close(false);
-			mailStore.close();
-			mailSession = null;
-			array = returnArray;
-		} catch (NoSuchProviderException e) {
-			e.printStackTrace();
-		} catch (MessagingException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return array;
+		      emailFolder.close(false);
+		      mailStore.close();
+		      mailSession = null;
+		      array = returnArray;
+	        } catch (NoSuchProviderException e) {
+	            e.printStackTrace();
+	         } catch (MessagingException e) {
+	            e.printStackTrace();
+	         } catch (IOException e) {
+	            e.printStackTrace();
+	         } catch (Exception e) {
+	            e.printStackTrace();
+	         }
+	        return array;
 	}
-
+	
 }
