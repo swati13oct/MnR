@@ -826,7 +826,9 @@ public abstract class UhcDriver {
 		driver.manage().window().maximize();
 		driver.get(url);
 
-		if (!url.contains("uhcmedicaresolution") && url.contains("uhc")) {
+		//if (!url.contains("uhcmedicaresolution") && url.contains("uhc"))
+			
+			if (url.contains("ums-test-page")){
 //			Cookie cookieName = new Cookie("X_UMS_DEBUG_SESSION","chargers");
 //			driver.manage().addCookie(cookieName);
 //			driver.navigate().refresh();
