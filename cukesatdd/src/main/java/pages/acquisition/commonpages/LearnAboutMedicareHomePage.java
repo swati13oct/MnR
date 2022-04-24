@@ -441,16 +441,14 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 			String window = itr.next();
 			if (!parentWindow.equals(window)) {
 				driver.switchTo().window(window);
-
+				jsClickNew(proceedLink);
 
 
 			}
 
 		}
 		
-//		if (proceedLink.isDisplayed()) {
-//		jsClickNew(proceedLink);
-//	}
+	
 
 		/*
 		 * CommonUtility.checkPageIsReadyNew(driver); String CurrentUHCAgentURL =

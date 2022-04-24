@@ -121,7 +121,7 @@ public class PrescriptionsProvidersBenefitsPage extends GlobalWebElements {
 		validateNew(providerSearchFromMedEd);
 	
 		switchToNewTabNew(providerSearchFromMedEd);
-		if(proceedLink.isDisplayed())
+		
 		jsClickNew(proceedLink);
 
 		CommonUtility.checkPageIsReadyNew(driver);
