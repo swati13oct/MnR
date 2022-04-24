@@ -5640,6 +5640,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		String parentWindow = driver.getWindowHandle();
 		// FindAnAgent.click();
 		jsClickNew(FindAnAgent);
+		
 		sleepBySec(3);
 		Set<String> tabs_windows = driver.getWindowHandles();
 		Iterator<String> itr = tabs_windows.iterator();
@@ -5647,9 +5648,14 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			String window = itr.next();
 			if (!parentWindow.equals(window)) {
 				driver.switchTo().window(window);
+				
 			}
 		}
 
+//		if(proceedLink.isDisplayed()) {
+//			jsClickNew(proceedLink);}
+		
+		
 		/*
 		 * CommonUtility.checkPageIsReadyNew(driver); String CurrentUHCAgentURL =
 		 * driver.getCurrentUrl();
