@@ -281,6 +281,7 @@ public class LearnAboutMedicareHomePageNew extends GlobalWebElements {
             String window = itr.next();
             if (!parentWindow.equals(window)) {
                 driver.switchTo().window(window);
+                if(proceedLink.isDisplayed())
                 jsClickNew(proceedLink);
             }
         }
