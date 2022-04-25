@@ -806,6 +806,13 @@ public class GlobalComponentsCommonStepDefinition {
 		enrollmentBasicsPage.clickSeePlans();
 	}
 
+	@Then("^the user click on additional coverage link on Enrollment Basic Page$")
+	public void check_the_additional_coverage_link_on_Enrollment_Basic() {
+		EnrollmentBasicsPage enrollmentBasicsPage = (EnrollmentBasicsPage) getLoginScenario()
+				.getBean(PageConstants.ENROLLMENT_BASICS_PAGE);
+		enrollmentBasicsPage.clickAdditionalCoverage();
+	}
+
 	@Then("^the user hover over and select plan page link$")
 	public void the_user_hover_over_and_select_MS_plan_page_link(DataTable givenAttributes) {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
