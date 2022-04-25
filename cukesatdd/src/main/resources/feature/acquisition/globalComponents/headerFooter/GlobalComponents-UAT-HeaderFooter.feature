@@ -52,7 +52,7 @@ Feature: 1.12 UAT - Header and Footer flows
     #And the user clicks on Back to top Link
     And user clicks on visit aarp.org link in the footer
 
-    @globalfooter_AARP @regressionAARP @featureGate
+    @globalfooter_AARP @regressionAARP @featureGate 
     Examples: 
       | Scenario           | site |
       | E2E Scenario_1 AMP | AARP |
@@ -229,7 +229,7 @@ Feature: 1.12 UAT - Header and Footer flows
     #And the user clicks on browser back button
     And user clicks on visit aarp.org link in the footer
 
-    @globalfooter_AARP @regressionAARP @featureGate
+    @globalfooter_AARP @regressionAARP @featureGate 
     Examples: 
       | Scenario           | site |
       | E2E Scenario_5 AMP | AARP |

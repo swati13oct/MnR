@@ -3,6 +3,7 @@ package pages.mobile.acquisition.commonpages;
 import java.util.Arrays;
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -152,7 +153,7 @@ public class ShopForPlanNavigationPageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//div[@id='accordion2']//h3[text()='Enrollment']")
 	private WebElement EnrollmentLink;
 
-	@FindBy(xpath = "(//a[contains(@href,'/medicare-education/medicare-supplement-plans.html')])[1]")
+	@FindBy(xpath = "(//a[contains(@href,'/medicare-education/medicare-supplement-plans.html')])[2]")
 	private WebElement MedicareSupplementLink;
 
 	@FindBy(xpath = "//a[contains(text(),'Member Resources')]")
@@ -265,6 +266,7 @@ public class ShopForPlanNavigationPageMobile extends GlobalWebElements {
 	}
 
 	public ShopPage medicareductaionOnMedsuppPlan() throws Exception {
+		jsClickNew(driver.findElement(By.xpath("//p[contains(text(),'Types of Plans')]")));
 		scrollToView(MedicareSupplementLink);
 		waitforElement(MedicareSupplementLink);
 		jsClickNew(MedicareSupplementLink);

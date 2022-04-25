@@ -944,14 +944,14 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	// @FindBy(xpath = "(//*[contains(@class,'show
 	// active')]//*[contains(@class,'swiper-container')]//button[contains(text(),'Compare
 	// plans')])[1]")
-	@FindBy(xpath="//span[contains(@class,'ng-binding show')]//button[contains(text(),'Compare plans')][1]")
+	@FindBy(xpath="//*[contains(@class,'compare-plans-button uhc-button')]//*[contains(text(),'Compare Plan')][1]")
 
 	
 	//@FindBy(xpath = "//*[contains(@class,'show active')]//div[contains(@class,'module-plan-overview module swiper-slide')]//button[contains(text(),'Compare plans')][1]")
 	private WebElement compareButton;
 
 	// @FindBy(xpath = "//span[@class='size36 semiBoldText colorPrimaryBlue']")
-	@FindBy(xpath = "(//*[contains(text(),'Compare AARPŽ Medicare Supplement')])[1]")
+	@FindBy(xpath = "(//*[contains(@class,'d-flex align')]//*[contains(text(),'Medicare Supplement Insurance Plans')])[1]")
 	private WebElement comparePageHeader;
 
 //	@FindBy(xpath = "(//button[@class='unliked buttonIntoText'])[1]")
@@ -5817,7 +5817,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				Thread.sleep(5000);
 				// action.moveToElement(comparePageHeader).build().perform(); //Does not work on
 				// Safari browser
-				jsMouseOver(comparePageHeader);
+			//	jsMouseOver(comparePageHeader);
 				if (comparePageHeader.isDisplayed()) {
 					flag = true;
 				}

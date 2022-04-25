@@ -1201,6 +1201,7 @@ public class oleStepDefinition {
 			getLoginScenario().saveBean(oleCommonConstants.EMAIL_CONFIRMATION, MemberDetailsMap.get("Email Confirmation"));
 			getLoginScenario().saveBean(oleCommonConstants.PAPERLESS_DELIVERY, MemberDetailsMap.get("Go Green"));
 			getLoginScenario().saveBean(oleCommonConstants.Go_Green, MemberDetailsMap.get("Go Green"));
+			getLoginScenario().saveBean(oleCommonConstants.Auto_Address, MemberDetailsMap.get("Auto Address"));
 			//getLoginScenario().saveBean(oleCommonConstants.MEDICAID_NUMBER, MemberDetailsMap.get("MedicaidNumber"));			
 			Assertion.assertTrue(true);
 		} else
@@ -1261,6 +1262,8 @@ public class oleStepDefinition {
 			getLoginScenario().saveBean(oleCommonConstants.PRIMARY_PHONE_NUMBER, MemberDetailsMap.get("Home Number"));
 			getLoginScenario().saveBean(oleCommonConstants.MOBILE_NUMBER, MemberDetailsMap.get("Mobile Number"));
 			getLoginScenario().saveBean(oleCommonConstants.MIDDLE_NAME, MemberDetailsMap.get("Middle Name"));
+			getLoginScenario().saveBean(oleCommonConstants.Auto_Address, MemberDetailsMap.get("Auto Address"));
+
 			Assertion.assertTrue(true);
 		} else
 			Assertion.fail("OLE Personal Information Page - Adding Member Details Failed for SNP Plans");
@@ -2515,6 +2518,7 @@ public class oleStepDefinition {
 				|| MRScenario.environment.equalsIgnoreCase("team-avengers")
 				|| MRScenario.environment.equalsIgnoreCase("team-chargers")
 				|| MRScenario.environment.equalsIgnoreCase("chargers-qa")
+				|| MRScenario.environment.equalsIgnoreCase("chargers-uhc")
 				|| MRScenario.environment.equalsIgnoreCase("team-c")
 				|| MRScenario.environment.equalsIgnoreCase("team-f")
 				|| MRScenario.environment.equalsIgnoreCase("team-voc")
