@@ -125,12 +125,7 @@ public class VppCommonStepDefinition {
 		WebDriver wd = getLoginScenario().getWebDriverNew();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*
-		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
-		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-		 * memberAttributesRow.get(i).getCells().get(1)); }
-		 */
+
 		String site = memberAttributesMap.get("Site");
 		// AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd, site);
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().openApplicationURL(wd, site);
@@ -138,7 +133,9 @@ public class VppCommonStepDefinition {
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
 		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, " ");
 		getLoginScenario().saveBean(DCERedesignCommonConstants.YOUPAYLIST_ALLDRUGS, " ");
-
+		if (MRScenario.environment.equalsIgnoreCase("chargers-qa") && site.equalsIgnoreCase("UHC") ) {
+			aquisitionhomepage.checkForSecurityPage();
+		}
 		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, site);
 		if (!(MRScenario.environment.equalsIgnoreCase("team-acme"))) {
 			if (site.equalsIgnoreCase("AARP"))
