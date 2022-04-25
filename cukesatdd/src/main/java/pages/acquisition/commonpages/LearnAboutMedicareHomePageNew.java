@@ -267,7 +267,7 @@ public class LearnAboutMedicareHomePageNew extends GlobalWebElements {
 	}
 
 	@FindBy(xpath = "//*[@id='proceed']")
-	private WebElement proceedLink;
+	private WebElement proceedLinkForUHC;
 
 	public void clickonFindanAgentlinkfromMedEd(String ExpectedUHCAgentURL) {
 		validateNew(FindAnAgent);
@@ -286,7 +286,7 @@ public class LearnAboutMedicareHomePageNew extends GlobalWebElements {
 		}
 
 		if (driver.getCurrentUrl().contains("leaving.intermediatepage.html")) {
-			jsClickNew(proceedLink);
+			jsClickNew(proceedLinkForUHC);
 		}
 
 		CommonUtility.checkPageIsReadyNew(driver);

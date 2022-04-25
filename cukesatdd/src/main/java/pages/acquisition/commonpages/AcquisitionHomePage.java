@@ -526,8 +526,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//button[@id='details-button' and contains(text(),'Advanced')]")
 	private WebElement advancedBtn;
 
-	@FindBy(xpath = "//*[@id='proceed']")
-	private WebElement proceedLink;
+	@FindBy(xpath = "//*[@id='proceed-link']")
+	private WebElement proceedLinkForUHC;
 
 	@FindBy(xpath = "//button[contains(@dtmname,'add my drugs')]")
 	public WebElement AddMyDrugsBtn;
@@ -5654,7 +5654,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		
 		if (driver.getCurrentUrl().contains("leaving.intermediatepage.html")) {
-			jsClickNew(proceedLink);
+			jsClickNew(proceedLinkForUHC);
 		}
 		
 		/*
