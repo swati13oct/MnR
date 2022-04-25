@@ -58,7 +58,7 @@ Feature: To validate pages on AEM
       | admin    | admin    | /content/aarpmedicareplans/en/medicare-articles |
 
 
-  Scenario Outline: To Validate AEM Data Layer for Dynamic Pages
+  Scenario Outline: To Validate AEM Data Layer for Dynamic Pages for : <microapp>
     Given the user login in AEM
       | Username | <username> |
       | Password | <password> |
