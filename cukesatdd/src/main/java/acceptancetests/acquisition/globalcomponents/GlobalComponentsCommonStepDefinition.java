@@ -89,9 +89,9 @@ public class GlobalComponentsCommonStepDefinition {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		String site = "";
-		if(!getLoginScenario().getSiteType().isEmpty())
-			site = getLoginScenario().getSiteType();
-		else
+//		if(!getLoginScenario().getSiteType().isEmpty())
+//			site = getLoginScenario().getSiteType();
+//		else
 			site = memberAttributesMap.get("Site");
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().openApplicationURL(wd, site);
 		if(aquisitionhomepage.returnCookieValue()!= null)
