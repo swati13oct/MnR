@@ -526,7 +526,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//button[@id='details-button' and contains(text(),'Advanced')]")
 	private WebElement advancedBtn;
 
-	@FindBy(xpath = "//a[@id='proceed-link']")
+	@FindBy(xpath = "//*[@id='proceed']")
 	private WebElement proceedLink;
 
 	@FindBy(xpath = "//button[contains(@dtmname,'add my drugs')]")
@@ -5640,6 +5640,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		String parentWindow = driver.getWindowHandle();
 		// FindAnAgent.click();
 		jsClickNew(FindAnAgent);
+		
 		sleepBySec(3);
 		Set<String> tabs_windows = driver.getWindowHandles();
 		Iterator<String> itr = tabs_windows.iterator();
@@ -5647,9 +5648,15 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			String window = itr.next();
 			if (!parentWindow.equals(window)) {
 				driver.switchTo().window(window);
+				
 			}
 		}
 
+		
+		if (driver.getCurrentUrl().contains("leaving.intermediatepage.html")) {
+			jsClickNew(proceedLink);
+		}
+		
 		/*
 		 * CommonUtility.checkPageIsReadyNew(driver); String CurrentUHCAgentURL =
 		 * driver.getCurrentUrl();
