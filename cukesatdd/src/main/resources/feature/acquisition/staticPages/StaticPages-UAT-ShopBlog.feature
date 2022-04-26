@@ -11,11 +11,6 @@ Feature: 1.13 UAT - Shop Blog Pages flows
     Then the user validate ZipCode Components on page using ZipCode "55410"
     When the user clicks on Agent link and validates the correct URL is loaded from article page
       | UHC Agent URL | <UHCUrl> |
-    Given the user is on medicare acquisition site landing page
-      | Site | <site> |
-    And the user navigates to following medicare acquisition site page
-      | PageName | <pageName> |
-      | PagePath | <path>     |
     Then the user validates TFN on the page
       | TFNxpath | <tfnXpath> |
       | TFNflag  | <tfnFlag>  |
