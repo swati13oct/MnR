@@ -53,7 +53,6 @@ import pages.acquisition.dceredesign.BuildYourDrugList;
 import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.ZipCodePlanYearCapturePage;
 
-
 public class GlobalComponentsCommonStepDefinition {
 
 	@Autowired
@@ -62,8 +61,9 @@ public class GlobalComponentsCommonStepDefinition {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
+
 	private Scenario scenario;
-	
+
 	@Before
 	public void before(Scenario scenario) {
 		this.scenario = scenario;
@@ -83,8 +83,7 @@ public class GlobalComponentsCommonStepDefinition {
 
 	@Given("^the user is on medicare acquisition site landing page$")
 	public void the_user_on__medicare_acquisition_Site(DataTable givenAttributes) {
-		
-		
+
 		WebDriver wd = getLoginScenario().getWebDriverNew();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
@@ -92,24 +91,23 @@ public class GlobalComponentsCommonStepDefinition {
 //		if(!getLoginScenario().getSiteType().isEmpty())
 //			site = getLoginScenario().getSiteType();
 //		else
-			site = memberAttributesMap.get("Site");
+		site = memberAttributesMap.get("Site");
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().openApplicationURL(wd, site);
-		if(aquisitionhomepage.returnCookieValue()!= null)
+		if (aquisitionhomepage.returnCookieValue() != null)
 			scenario.log(aquisitionhomepage.returnCookieValue());
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		String testSiteUrl = aquisitionhomepage.getTestSiteUrl();
 		aquisitionhomepage.checkForSecurityPage();
 		getLoginScenario().saveBean(PageConstants.TEST_SITE_URL, testSiteUrl);
-		
+
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
 		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, null);
 		getLoginScenario().saveBean(DCERedesignCommonConstants.YOUPAYLIST_ALLDRUGS, null);
-		if(site.equalsIgnoreCase("UHC") || site.equalsIgnoreCase("UMS"))
+		if (site.equalsIgnoreCase("UHC") || site.equalsIgnoreCase("UMS"))
 			getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, "UHC_ACQ");
 		else
 			getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, "AARP_ACQ");
 	}
-	
 
 	@When("^user accesses global footer of the Medicare Plans All page$")
 	public void access_global_footer_aarp_all_pages() {
@@ -156,11 +154,12 @@ public class GlobalComponentsCommonStepDefinition {
 		WebDriver wd = getLoginScenario().getWebDriverNew();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String site = memberAttributesMap.get("Site");
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd, site);
 		if (site.equalsIgnoreCase("AARP")) {
@@ -176,8 +175,10 @@ public class GlobalComponentsCommonStepDefinition {
 		String path = memberAttributesMap.get("PagePath");
 		path = path.replace("!", "#");
 		System.out.print("Path to Acq page : " + path);
+//		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+
 		aquisitionhomepage.navigateToPath(path);
 	}
 
@@ -187,18 +188,19 @@ public class GlobalComponentsCommonStepDefinition {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String state = memberAttributesMap.get("State");
 		String code = memberAttributesMap.get("Code");
 		String classic = memberAttributesMap.get("ClassicUrl");
 		String generic = memberAttributesMap.get("GenericUrl");
-		aquisitionhomepage.validateMedupsStateUrl(state,code,classic,generic);
+		aquisitionhomepage.validateMedupsStateUrl(state, code, classic, generic);
 	}
-	
+
 	@Then("^the User validates Shop for a Plan Navigation link$")
 	public void the_USer_validates_Shop_for_a_Plan_Navigation_links() throws Throwable {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
@@ -225,11 +227,12 @@ public class GlobalComponentsCommonStepDefinition {
 	public void the_user_validates_TFN_on_page(DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String tfnXpath = memberAttributesMap.get("TFNxpath");
 		String tfnFlag = memberAttributesMap.get("TFNflag");
 
@@ -263,14 +266,15 @@ public class GlobalComponentsCommonStepDefinition {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String state = memberAttributesMap.get("State");
 		String code = memberAttributesMap.get("Code");
-		aquisitionhomepage.validatestatedropDown(state,code);
+		aquisitionhomepage.validatestatedropDown(state, code);
 		getLoginScenario().saveBean(CommonConstants.STATE_SELECTED, state);
 	}
 
@@ -448,7 +452,7 @@ public class GlobalComponentsCommonStepDefinition {
 		aquisitionhomepage.clickVisitAARPHeaderLink();
 
 	}
-	
+
 	@And("^user clicks on visit aarp.org link in the header for cancel$")
 	public void click_visitAARP_Link_in_the_header_for_cancel() {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
@@ -540,11 +544,12 @@ public class GlobalComponentsCommonStepDefinition {
 	public void user_check_inner_page_links(DataTable givenAttributes) {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String pageName = memberAttributesMap.get("PageName");
 
 		LearnAboutMedicareHomePage learnAboutMedicareHomePage = (LearnAboutMedicareHomePage) getLoginScenario()
@@ -727,11 +732,12 @@ public class GlobalComponentsCommonStepDefinition {
 	public void user_navigates_to_plan(DataTable givenAttributes) {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String planType = memberAttributesMap.get("planType");
 		LearnAboutMedicareHomePage learnAboutMedicareHomePage = (LearnAboutMedicareHomePage) getLoginScenario()
 				.getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
@@ -810,11 +816,12 @@ public class GlobalComponentsCommonStepDefinition {
 	public void the_user_hover_over_and_select_MS_plan_page_link(DataTable givenAttributes) {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String plantype = memberAttributesMap.get("nextplanType");
 		LearnAboutMedicareHomePage learnAboutMedicareHomePage = (LearnAboutMedicareHomePage) getLoginScenario()
 				.getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
@@ -903,11 +910,12 @@ public class GlobalComponentsCommonStepDefinition {
 	public void the_user_validates_TFN_on_right_rail_Medicare_article(DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String tfnXpath = memberAttributesMap.get("TFNxpath");
 		String tfnFlag = memberAttributesMap.get("TFNflag");
 
@@ -923,11 +931,12 @@ public class GlobalComponentsCommonStepDefinition {
 	public void the_user_validates_TFN_on_need_help_section_of_Shop_pages(DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String tfnXpath = memberAttributesMap.get("TFNxpath");
 		String tfnFlag = memberAttributesMap.get("TFNflag");
 
@@ -953,11 +962,12 @@ public class GlobalComponentsCommonStepDefinition {
 	public void the_user_validates_TFN_on_the_page(DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String tfnXpath = memberAttributesMap.get("TFNxpath");
 		String tfnFlag = memberAttributesMap.get("TFNflag");
 
@@ -983,11 +993,12 @@ public class GlobalComponentsCommonStepDefinition {
 	public Map<String, String> parseInputArguments(DataTable memberAttributes) {
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(memberAttributes);
-		/*List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 		return memberAttributesMap;
 	}
 
@@ -997,15 +1008,16 @@ public class GlobalComponentsCommonStepDefinition {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String path = memberAttributesMap.get("PagePath");
 		aquisitionhomepage.validatePageNavigated(path);
 	}
-	
+
 	@Given("^the user hovers over the learn about medicare$")
 	public void the_user_hovers_screen_over_the_learnaboutmedicare() throws Throwable {
 		AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
@@ -1018,7 +1030,7 @@ public class GlobalComponentsCommonStepDefinition {
 			Assert.fail("Issue in selecting a learn about medicare drop down");
 		}
 	}
-		
+
 	@When("^user click on \"([^\"]*)\" link under learn about medicare$")
 	public void user_click_on_link_under_learn_about_medicare(String linkName) throws Throwable {
 		AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
@@ -1029,19 +1041,19 @@ public class GlobalComponentsCommonStepDefinition {
 
 	@Then("^user should be navigated to respective medicare education page$")
 	public void user_should_be_navigated_to_medicare_education_page() throws Throwable {
-		String linkName=(String) getLoginScenario().getBean(CommonConstants.LEARNABOUTMEDICARE_LINK);
+		String linkName = (String) getLoginScenario().getBean(CommonConstants.LEARNABOUTMEDICARE_LINK);
 		AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		acqusitionHomePage.validateLearnAboutMedicareLinkNavigation(linkName);
 	}
-	
+
 	@Then("^user enter email and submit in email section$")
 	public void user_enter_email_and_submit_in_email_section() throws Throwable {
 		AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		acqusitionHomePage.validateLearnAboutMedicareEmailSection();
 	}
-	
+
 	@Then("^the message \"([^\"]*)\" should be displayed in email section$")
 	public void the_message_should_be_displayed_in_email_section(String expectedMsg) throws Throwable {
 		AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
@@ -1055,7 +1067,7 @@ public class GlobalComponentsCommonStepDefinition {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		acqusitionHomePage.clickOnPlanRecommendationButton();
 	}
-	
+
 	@When("^user click on \"([^\"]*)\" link under shop plans$")
 	public void user_click_on_link_under_shop_plan(String linkName) throws Throwable {
 		AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
@@ -1063,7 +1075,7 @@ public class GlobalComponentsCommonStepDefinition {
 		acqusitionHomePage.clickFooterLinks(linkName);
 		getLoginScenario().saveBean(CommonConstants.FOOTER_LINK, linkName);
 	}
-	
+
 	@When("^user click on \"([^\"]*)\" link under Tools & Resources$")
 	public void user_click_on_link_under_tools(String linkName) throws Throwable {
 		AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
@@ -1071,7 +1083,7 @@ public class GlobalComponentsCommonStepDefinition {
 		acqusitionHomePage.clickFooterLinks(linkName);
 		getLoginScenario().saveBean(CommonConstants.FOOTER_LINK, linkName);
 	}
-	
+
 	@When("^user click on \"([^\"]*)\" link under Learn About Medicare$")
 	public void user_click_on_link_under_Learn_About_Medicare(String linkName) throws Throwable {
 		AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
@@ -1079,7 +1091,7 @@ public class GlobalComponentsCommonStepDefinition {
 		acqusitionHomePage.clickFooterLinks(linkName);
 		getLoginScenario().saveBean(CommonConstants.FOOTER_LINK, linkName);
 	}
-	
+
 	@When("^user click on \"([^\"]*)\" link under more$")
 	public void user_click_on_link_under_more(String linkName) throws Throwable {
 		AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
@@ -1087,15 +1099,15 @@ public class GlobalComponentsCommonStepDefinition {
 		acqusitionHomePage.clickFooterLinks(linkName);
 		getLoginScenario().saveBean(CommonConstants.FOOTER_LINK, linkName);
 	}
-	
+
 	@Then("^user should be navigated to respective footer links page$")
 	public void user_should_be_navigated_to_footer_links_page() throws Throwable {
-		String linkName=(String) getLoginScenario().getBean(CommonConstants.FOOTER_LINK);
+		String linkName = (String) getLoginScenario().getBean(CommonConstants.FOOTER_LINK);
 		AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		acqusitionHomePage.validateFooterLinksNavigation(linkName);
 	}
-	
+
 	@When("^user hover over for plan member to click to go to member site$")
 	public void hover_plan_Member_to_Click_membersite() {
 		scenario.log("Changes made on 6/30- Step added for new Header redesign");
@@ -1107,7 +1119,7 @@ public class GlobalComponentsCommonStepDefinition {
 			Assertion.fail("Home page not found");
 		}
 	}
-	
+
 	@When("user validates TFN in header")
 	public void user_clicks_on_tfn_in_header() throws InterruptedException {
 		scenario.log("Changes made on 7/06- Step added for new Header redesign");
@@ -1116,122 +1128,126 @@ public class GlobalComponentsCommonStepDefinition {
 		aquisitionhomepage.validateTfnInHeader();
 	}
 
-
 	@Then("^the user validate facebook button from social share$")
-	public void the_user_validate_facebook_button_from_social_share(){
+	public void the_user_validate_facebook_button_from_social_share() {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.clickOnFacebookShareButton();
 	}
 
 	@Then("^the user validate twitter button from social share$")
-	public void the_user_validate_twitter_button_from_social_share(){
+	public void the_user_validate_twitter_button_from_social_share() {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.clickOnTwitterShareButton();
 	}
 
-
 	@Then("^the user validate email button from social share$")
-	public void the_user_validate_email_button_from_social_share(){
+	public void the_user_validate_email_button_from_social_share() {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validateSocialShareEmailButton();
 	}
 
-	//Redesigned home page
-	
+	// Redesigned home page
+
 	@When("user enters zipcode and navigates to VPP")
 	public void user_enters_zipcode_and_navigates_to_vpp() throws AWTException {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		VPPPlanSummaryPage plansummaryPage=aquisitionhomepage.enterAndValidateZipCode();
+		VPPPlanSummaryPage plansummaryPage = aquisitionhomepage.enterAndValidateZipCode();
 		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
-	    
+
 	}
+
 	@When("user validates TFN within feature box of hero component")
 	public void user_validates_tfn_within_feature_box_of_hero_component(DataTable givenAttributes) {
-		
+
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String TFN = memberAttributesMap.get("TFN");
-		
+
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.needHelpContentValidation(TFN);
 	}
-	
+
 	@When("user clicks on shop for Part C plans")
 	public void user_clicks_on_shop_for_part_c_plans() {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validateShopC();
 	}
-	
+
 	@When("user clicks on shop for Medigap plans")
 	public void user_clicks_on_shop_for_medigap_plans() {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validateMedigap();
 	}
+
 	@When("user clicks on shop for Part D plans")
 	public void user_clicks_on_shop_for_part_d_plans() {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validateShopforPartD();
 	}
+
 	@When("user clicks on shop for D-SNPs plans")
 	public void user_clicks_on_shop_for_d_sn_ps_plans() {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validateShopForDSNP();
 	}
-	
+
 	@When("user clicks on shop all plans")
 	public void user_clicks_on_shop_all_plans() {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validateShopAll();
 	}
-	
+
 	@When("user clicks on get started link and navigates to PRE")
 	public void user_clicks_on_get_started_link_and_navigates_to_pre() {
-	    AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.getStartedvalidation();
 	}
+
 	@When("user clicks on learn more link")
 	public void user_clicks_on_learn_more_link() {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.learnMorevalidation();
 	}
+
 	@When("user clicks on learn more button link and navigates to Medicare Education Home page")
 	public void user_clicks_on_learn_more_button_link_and_navigates_to_medicare_education_home_page() {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validateLearnMoreBtn();
 	}
-	
+
 	@When("user clicks on Estimate drug costs and navigates to DCE")
 	public void user_clicks_on_estimate_drug_costs_and_navigates_to_dce() {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validateestimateDrugCost();
 	}
-	
+
 	@When("user clicks on find a provider link")
 	public void user_clicks_on_find_a_provider_link() {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validateFindAProvider();
 	}
-	
+
 	@When("user validates TFN on page")
 	public void user_validates_tfn_on_page(DataTable givenAttributes) {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
@@ -1242,38 +1258,40 @@ public class GlobalComponentsCommonStepDefinition {
 		aquisitionhomepage.validateQtFNTiming();
 		aquisitionhomepage.validateTFN(tfn);
 	}
-	
+
 	@When("user validates Email capture component")
 	public void user_validates_email_capture_component() {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validateEMail();
 	}
-	
+
 	@Then("user clicks on cancel link on shop for a plan")
 	public void user_clicks_on_cancel_link_on_shop_for_a_plan() {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.clickOnCancel();
 	}
+
 	@Then("user enters the zipcode and validates the URL")
 	public void user_enters_the_zipcode_and_validates_the_url(DataTable givenAttributes) {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String site = memberAttributesMap.get("SiteOnPlan");
 		String zipcode = memberAttributesMap.get("ZipCodeOnPlan");
-		System.out.println("@@site@@"+site);
-		System.out.println("@@zipcode@@"+zipcode);
-		aquisitionhomepage.sendZipCodeAndValidateUrl(zipcode,site);
+		System.out.println("@@site@@" + site);
+		System.out.println("@@zipcode@@" + zipcode);
+		aquisitionhomepage.sendZipCodeAndValidateUrl(zipcode, site);
 	}
-	
+
 	@When("^the user performs Change Location on Plan Summary Page using following MultiCounty Zip information from HomePage$")
 	public void the_user_performs_Change_Location_on_Plan_Summary_Page_using_following_MultiCounty_Zip_information_from_HomePage(
 			DataTable givenAttributes) throws Throwable {
@@ -1290,10 +1308,11 @@ public class GlobalComponentsCommonStepDefinition {
 		 */
 
 		String zipcode = memberAttributesMap.get("Zip Code");
-		System.out.println("@@zip code @@"+zipcode);
+		System.out.println("@@zip code @@" + zipcode);
 		aquisitionhomepage.VPP_ChangeLocationValidateMultiCOuntyPopUp(zipcode);
 
 	}
+
 	@Then("^the user validates the Cancel button for Multi County Pop-up lands on enter Zip code HomePage$")
 	public void the_user_validates_the_Cancel_button_for_Multi_COunty_Pop_up_lands_on_enter_Zip_code_HomePage()
 			throws Throwable {
@@ -1304,10 +1323,10 @@ public class GlobalComponentsCommonStepDefinition {
 				Validation_Flag);
 
 	}
-	
+
 	@When("^the user clicks on Find plans on vpp using following information from Homepage$")
-	public void the_user_clicks_on_Find_plans_on_vpp_using_following_information_from_Homepage(DataTable givenAttributes)
-			throws Throwable {
+	public void the_user_clicks_on_Find_plans_on_vpp_using_following_information_from_Homepage(
+			DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*
@@ -1331,8 +1350,7 @@ public class GlobalComponentsCommonStepDefinition {
 			if (plansummaryPage.validateVPPPlanSummaryPage()) {
 				aquisitionhomepage.clickViewPlansLink();
 				Assertion.assertTrue(true);
-			}
-			else {
+			} else {
 				Assertion.fail("Error in validating the Plan Summary Page");
 			}
 		}
@@ -1342,9 +1360,9 @@ public class GlobalComponentsCommonStepDefinition {
 	public void the_user_clicks_on_Review_Drug_Costs_to_Land_on_Drug_DetailsP_HomePage() throws Throwable {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		 aquisitionhomepage.navigateToDrugDetailsPage();
+		aquisitionhomepage.navigateToDrugDetailsPage();
 	}
-	
+
 	@Then("^user enters valid zipcode and county on HomePage$")
 	public void user_enter_valid_zipcode_and_county_on_HomePage(DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
@@ -1353,17 +1371,20 @@ public class GlobalComponentsCommonStepDefinition {
 		String zipcode = memberAttributesMap.get("ZipCode");
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		 aquisitionhomepage.enterZipCodeandcounty(zipcode);
+		aquisitionhomepage.enterZipCodeandcounty(zipcode);
 	}
+
 	@Then("^the user validates MedSup TFN Number$")
 	public void the_user_validates_TFN(DataTable inputAttributes) throws Throwable {
-		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		Map<String, String> inputAttributesMap = parseInputArguments(inputAttributes);
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		String TFNXpath = inputAttributesMap.get("TFN Xpath");
 		String ExpecetdTFNNo = inputAttributesMap.get("TFN No");
 //		String TFN_Xpath = inputAttributesMap.get("TFN Xpath");
-		aquisitionhomepage.validateMedsupTFNNo(TFNXpath,ExpecetdTFNNo);
+		aquisitionhomepage.validateMedsupTFNNo(TFNXpath, ExpecetdTFNNo);
 	}
+
 	@And("^user validates AARP membership links in medsup header \"([^\"]*)\"$")
 	public void hover_over_AARP_Membership_In_Medsup_Header(String linkTexts) throws Exception {
 		scenario.log("Changes made on 10/19- Step added for new Medsup Header redesign");
@@ -1397,14 +1418,14 @@ public class GlobalComponentsCommonStepDefinition {
 			Assertion.fail("Join AARP page is not loaded");
 		}
 	}
-	
+
 	@Then("^Verify AARP Membership links in header not present on home page$")
 	public void verifyAARPMembershipLinksNotPresentOnOtherPage() {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.verifyElementNotPresent();
 	}
-	
+
 	@Then("^user validate affiliate link on header for geo target state$")
 	public void Verifiy_affiliate_Link() {
 		scenario.log("Changes made on 2/13- Step added for affiliate company name header redesign");
@@ -1412,7 +1433,7 @@ public class GlobalComponentsCommonStepDefinition {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.verifiyAffiliatelink();
 	}
-	
+
 	@Then("^user validate affiliate for non-geo target states$")
 	public void Verifiy_affiliate_Text() {
 		scenario.log("Changes made on 2/13- Step added for affiliate label header redesign");
@@ -1421,4 +1442,3 @@ public class GlobalComponentsCommonStepDefinition {
 		aquisitionhomepage.verifiyAffiliateText();
 	}
 }
-
