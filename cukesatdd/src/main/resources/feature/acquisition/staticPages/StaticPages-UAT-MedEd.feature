@@ -69,7 +69,7 @@ Feature: 1.12 UAT - Medicare Education Pages flows
       | Scenario           | site | geoState            | path                                         | pageName             | tfnXpath                                                            | tfnFlag | UHCUrl                      |
       | E2E Scenario 1_AMP | AARP | U.S. Virgin Islands | medicare-education/medicare-eligibility.html | Medicare Eligibility | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
 
-    @avengersRegressionUHC @MedEdPages_1_GlobalCompsUHC @regressionUHC @featureGate
+    @avengersRegressionUHC @MedEdPages_1_GlobalCompsUHC @regressionUHC @featureGate @MHJ
     Examples:
       | Scenario           | site | geoState            | path                                         | pageName             | tfnXpath                                                            | tfnFlag | UHCUrl                      |
       | E2E Scenario 1_UMS | UHC  | U.S. Virgin Islands | medicare-education/medicare-eligibility.html | Medicare Eligibility | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |

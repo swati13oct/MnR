@@ -526,8 +526,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//button[@id='details-button' and contains(text(),'Advanced')]")
 	private WebElement advancedBtn;
 
-	@FindBy(xpath = "//*[@id='proceed']")
-	private WebElement proceedLink;
+	@FindBy(xpath = "//*[@id='proceed-link'] | //*[@id='proceed']")
+	private WebElement proceedLinkForUHC;
 
 	@FindBy(xpath = "//button[contains(@dtmname,'add my drugs')]")
 	public WebElement AddMyDrugsBtn;
@@ -3751,6 +3751,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			action.moveToElement(planMemberLink).perform();
 		}
 		// validateNew(headerRegisterLink);
+		action.moveToElement(planMemberLink).perform();
 		validateNew(goToMemberSiteLink);
 		jsMouseOut(planMemberLink);
 		/*if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
@@ -4872,6 +4873,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public ContactUsAARPPage contactUsFooterClick() {
+		pageloadcomplete();
 		validateNew(footerContactUsLink);
 		footerContactUsLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -5111,7 +5113,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		// MedicareSupplementInsurancePlans.click();
 		scrollToView(MedicareSupplementInsurancePlans);
 		jsClickNew(MedicareSupplementInsurancePlans);
-		threadsleep(5);
+		threadsleep(10);
 		if (driver.getCurrentUrl().contains("shop/medicare-supplement-plans.html")) {
 			Assertion.assertTrue(true);
 			System.out.println("MS Plan Page open: URL-->" + driver.getCurrentUrl());
@@ -5654,7 +5656,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		
 		if (driver.getCurrentUrl().contains("leaving.intermediatepage.html")) {
-			jsClickNew(proceedLink);
+			jsClickNew(proceedLinkForUHC);
 		}
 		
 		/*
@@ -6755,6 +6757,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				By.xpath("//div[contains(@id,'learnmore-scroll')]//a[contains(text(),'" + linkName + "')]"));
 		waitforElement(link);
 		jsClickNew(link);
+		pageloadcomplete();
 	}
 
 	public void validateLearnAboutMedicareLinkNavigation(String linkName) {

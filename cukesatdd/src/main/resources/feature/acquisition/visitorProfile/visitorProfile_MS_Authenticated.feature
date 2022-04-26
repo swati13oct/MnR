@@ -28,13 +28,13 @@ Feature: 1.09. UAT - Visitor profile MedSup Authenticated
 
 #    @visitorProfile_AARP @regressionAARP @authenticatedAARP
     Examples:
-      | UID                                   | site | zipcode | isMultiCounty | plantype | planyear | DOB        | county        | MS_testPlans  | userName    | password     |
-      | Visitor Profile - E2E Scenario 7 _AMP | AARP | 23223   | YES           | MS       | future   | 11/11/1949 | Richmond City | Plan G,Plan A | vdmsatdd_01 | Password@123 |
+      | UID                                   | site | zipcode | isMultiCounty | plantype | planyear | DOB        | county        | MS_testPlans  | userName    | password       |
+      | Visitor Profile - E2E Scenario 7 _AMP | AARP | 23223   | YES           | MS       | future   | 11/11/1949 | Richmond City | Plan G,Plan A | vdmsatdd_01 | Password@12345 |
 
 #    @visitorProfile_UHC @regressionUHC @authenticatedUHC @featureGate
     Examples:
-      | UID                                   | site | zipcode | isMultiCounty | plantype | planyear | DOB        | county        | MS_testPlans  | userName        | password     |
-      | Visitor Profile - E2E Scenario 7 _UHC | UHC  | 23223   | YES           | MS       | future   | 11/11/1949 | Richmond City | Plan G,Plan A | vdmsatdd_01_uhc | Password@123 |
+      | UID                                   | site | zipcode | isMultiCounty | plantype | planyear | DOB        | county        | MS_testPlans  | userName        | password       |
+      | Visitor Profile - E2E Scenario 7 _UHC | UHC  | 23223   | YES           | MS       | future   | 11/11/1949 | Richmond City | Plan G,Plan A | vdmsatdd_01_uhc | Password@12345 |
 
 
   @SavePlanPRE
