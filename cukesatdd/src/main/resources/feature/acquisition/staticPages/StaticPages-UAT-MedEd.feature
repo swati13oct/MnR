@@ -33,7 +33,7 @@ Feature: 1.12 UAT - Medicare Education Pages flows
       | Scenario           | site | geoState            | path                                      | pageName                            | tfnXpath                                                            | tfnFlag | UHCUrl                      |
       | E2E Scenario 3_AMP | AARP | U.S. Virgin Islands | medicare-education/medicare-benefits.html | Prescriptions, Providers & Benefits | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
 
-    @avengersRegressionUHC @MedEdPages_1_GlobalCompsUHC @regressionUHC
+    @avengersRegressionUHC @MedEdPages_1_GlobalCompsUHC @regressionUHC @MHJ
     Examples:
       | Scenario           | site | geoState            | path                                      | pageName                            | tfnXpath                                                            | tfnFlag | UHCUrl                      |
       | E2E Scenario 3_UMS | UHC  | U.S. Virgin Islands | medicare-education/medicare-benefits.html | Prescriptions, Providers & Benefits | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |

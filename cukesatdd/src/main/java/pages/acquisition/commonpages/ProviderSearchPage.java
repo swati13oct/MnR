@@ -16,6 +16,7 @@ import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
@@ -201,7 +202,10 @@ public class ProviderSearchPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		CommonUtility.waitForPageLoadNew(driver, continueButton, 45);
+		if(validate(continueButton)||validate(GetStarted)) {
+			System.out.println("Elements validated on Rally landing page");
+		}else
+			Assert.fail("Continue button or Get Started button not present on Rally landing page");
 	}
 
 	public VPPPlanSummaryPage selectsProvider(String physicianSearchCriteria, String physicianName) {
