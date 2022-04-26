@@ -127,7 +127,7 @@ public class GlobalWebElements  extends UhcDriver{
 	@FindBy(xpath = "//*[contains(@class,'visit-aarp-link')]")
 	 public WebElement visitAARPLink;
 
-	@FindBy(id = "proceed")
+	@FindBy(id = "proceed-link")
 	 public WebElement proceedLink;
 	
 	@FindBy(className = "menu-dropdown")
