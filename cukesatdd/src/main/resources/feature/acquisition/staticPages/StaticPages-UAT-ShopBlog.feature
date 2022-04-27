@@ -20,7 +20,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | TFNxpath | <tfnXpath> |
       | TFNflag  | <tfnFlag>  |
 
-    @avengersRegressionAARP @vbfGate @regressionAARP
+    @avengersRegressionAARP @vbfGate @regressionAARP 
     Examples:
       | Scenario           | site | path                                                | pageName                | UHCUrl                      | tfnXpath                                                           | tfnFlag |
       | E2E Scenario 3_AMP | AARP | shop/estimate/pdp-costs.html                        | Estimate PDP            | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
