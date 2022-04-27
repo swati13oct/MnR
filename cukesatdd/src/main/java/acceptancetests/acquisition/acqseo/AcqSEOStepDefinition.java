@@ -26,7 +26,7 @@ import io.cucumber.java.en.Given;
 /**
  * Functionality: Acquisition SEO for AARP
  */
-public class AcqSEOStepDefinitionAARP {
+public class AcqSEOStepDefinition {
 
     @Autowired
     MRScenario loginScenario;
@@ -39,7 +39,7 @@ public class AcqSEOStepDefinitionAARP {
     /**
      * @toDo: login with user details
      */
-    @Given("^load the AARP Ulayer medicare acquisition site page url$")
+    @Given("^load the Medicare acquisition site page url$")
     public void user_Login(DataTable Url) {
         WebDriver wd = getLoginScenario().getWebDriverNew();
         getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
@@ -81,13 +81,16 @@ public class AcqSEOStepDefinitionAARP {
                 String locationUrl = connection.getHeaderField("Location");
                 System.out.println("Redirect URL -------> " + locationUrl);
                 iRedirectionCounter++;
-                if (locationUrl != null && locationUrl.trim().length() > 0) {
+/*                if (locationUrl != null && locationUrl.trim().length() > 0) {
                     connection.disconnect();
-                    resultUrl = fetchRedirectURL(locationUrl);
-                    if(iRedirectionCounter<=3)
-                        Assertion.assertTrue("Number of redirection urls "+iRedirectionCounter, true);
-                    else
-                        Assertion.assertTrue("Number of redirection urls "+iRedirectionCounter, false);
+                    resultUrl = fetchRedirectURL(locationUrl);*/
+                    if(iRedirectionCounter<=3) {
+                        Assertion.assertTrue(true);
+                        System.out.println("Number of redirection urls - " + iRedirectionCounter);
+                    }
+                    else{
+                        Assertion.assertTrue(false);
+                        System.out.println("Number of redirection urls - " + iRedirectionCounter);
 
             }
         }

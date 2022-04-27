@@ -528,6 +528,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(xpath = "//*[@id='proceed-link'] | //*[@id='proceed']")
 	private WebElement proceedLinkForUHC;
+	@FindBy(xpath = "//*[@id='proceed-link']")
+	private WebElement proceedLink;
 
 	@FindBy(xpath = "//button[contains(@dtmname,'add my drugs')]")
 	public WebElement AddMyDrugsBtn;

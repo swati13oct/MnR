@@ -33,7 +33,7 @@ Feature: 1.12 UAT - Medicare Education Pages flows
       | Scenario           | site | geoState            | path                                      | pageName                            | tfnXpath                                                            | tfnFlag | UHCUrl                      |
       | E2E Scenario 3_AMP | AARP | U.S. Virgin Islands | medicare-education/medicare-benefits.html | Prescriptions, Providers & Benefits | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
 
-    @avengersRegressionUHC @MedEdPages_1_GlobalCompsUHC @regressionUHC
+    @avengersRegressionUHC @MedEdPages_1_GlobalCompsUHC @regressionUHC @MHJ
     Examples:
       | Scenario           | site | geoState            | path                                      | pageName                            | tfnXpath                                                            | tfnFlag | UHCUrl                      |
       | E2E Scenario 3_UMS | UHC  | U.S. Virgin Islands | medicare-education/medicare-benefits.html | Prescriptions, Providers & Benefits | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
@@ -155,7 +155,7 @@ Feature: 1.12 UAT - Medicare Education Pages flows
     Then the user navigates to plan information page
       | planType | <plantype> |
     Then user click on see plan in your area link
-    Then the user select state for geotargeting from dropdown
+    Then the user validate the state selected is correct
       | GeoState | <geoState> |
     Then the user gather medicare info through video
     Then the user click on video transcript link
@@ -164,7 +164,7 @@ Feature: 1.12 UAT - Medicare Education Pages flows
     Then the user hover over and select plan page link
       | nextplanType | PDP |
     Then user click on see plan in your area link
-    Then the user select state for geotargeting from dropdown
+    Then the user validate the state selected is correct
       | GeoState | <geoState> |
     Then the user gather medicare info through video
     Then the user click on video transcript link
@@ -197,6 +197,7 @@ Feature: 1.12 UAT - Medicare Education Pages flows
     Then the user navigates to Enrollment Basics Page
     Then the user check Social Security link on Enrollment Basic Page
     Then the user click on see all plan link on Enrollment Basic Page
+    Then the user click on additional coverage link on Enrollment Basic Page
     Then the user validate ZipCode Components on the page using ZipCode "10001"
     Then the user check Still have a question
     Then the user validates TFN on the page

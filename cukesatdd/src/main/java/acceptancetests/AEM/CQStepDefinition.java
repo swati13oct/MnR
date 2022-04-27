@@ -114,8 +114,8 @@ public class CQStepDefinition {
 		
 	}
 	
-	@Then("^the user nagivates to Data Layer Page$")
-	public void the_user_nagivates_to_Data_Layer_Page() {
+	@Then("^the user navigates to Data Layer Page$")
+	public void the_user_navigates_to_Data_Layer_Page() {
 		CQPage cqPage=(CQPage)getLoginScenario().getBean(PageConstants.CQ_PAGE);
 		cqPage.navigateToDataLayerUrl();
 	}
@@ -136,11 +136,20 @@ public class CQStepDefinition {
 		CQPage cqPage=(CQPage)getLoginScenario().getBean(PageConstants.CQ_PAGE);
 		cqPage.validateDataLayerStaticTab(url);
 	}
-	
-	@Then("^the user validates the Dynamic Apps tab components$")
-	public void the_user_validates_the_Dynamic_Apps_tab_components() {
+
+/*	@Then("^the user validates the Dynamic Apps tab components$")
+	public void the_user_validates_the_Dynamic_Apps_tab() {
 		CQPage cqPage=(CQPage)getLoginScenario().getBean(PageConstants.CQ_PAGE);
-		cqPage.validateDataLayerDynamicTab();		
+		cqPage.validateDataLayerDynamicTab();
+	}*/
+
+	@Then("^the user validates the Dynamic App for all Apps$")
+	public void the_user_validates_the_Dynamic_App_for_DCE(DataTable givenAttributes) {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		String appName = memberAttributesMap.get("App");
+		CQPage cqPage=(CQPage)getLoginScenario().getBean(PageConstants.CQ_PAGE);
+		cqPage.validateDynamicApps(appName);
 	}
 
 	@Then("^the user validates the Header and Footer tab components$")

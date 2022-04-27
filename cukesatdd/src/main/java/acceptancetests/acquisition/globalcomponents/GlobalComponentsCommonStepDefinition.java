@@ -88,10 +88,12 @@ public class GlobalComponentsCommonStepDefinition {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		String site = "";
-//		if(!getLoginScenario().getSiteType().isEmpty())
-//			site = getLoginScenario().getSiteType();
-//		else
-		site = memberAttributesMap.get("Site");
+
+		if(getLoginScenario().getSiteType()!=null &&!getLoginScenario().getSiteType().isEmpty())
+			site = getLoginScenario().getSiteType();
+		else
+			site = memberAttributesMap.get("Site");
+
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().openApplicationURL(wd, site);
 		if (aquisitionhomepage.returnCookieValue() != null)
 			scenario.log(aquisitionhomepage.returnCookieValue());
@@ -810,6 +812,13 @@ public class GlobalComponentsCommonStepDefinition {
 		EnrollmentBasicsPage enrollmentBasicsPage = (EnrollmentBasicsPage) getLoginScenario()
 				.getBean(PageConstants.ENROLLMENT_BASICS_PAGE);
 		enrollmentBasicsPage.clickSeePlans();
+	}
+
+	@Then("^the user click on additional coverage link on Enrollment Basic Page$")
+	public void check_the_additional_coverage_link_on_Enrollment_Basic() {
+		EnrollmentBasicsPage enrollmentBasicsPage = (EnrollmentBasicsPage) getLoginScenario()
+				.getBean(PageConstants.ENROLLMENT_BASICS_PAGE);
+		enrollmentBasicsPage.clickAdditionalCoverage();
 	}
 
 	@Then("^the user hover over and select plan page link$")
