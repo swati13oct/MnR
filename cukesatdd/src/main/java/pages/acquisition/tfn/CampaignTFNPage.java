@@ -2070,14 +2070,14 @@ public class CampaignTFNPage extends UhcDriver {
 		CommonUtility.checkPageIsReadyNew(driver);
 	}
 
-	@FindBy(xpath = "(//span[@class='invoca_swap text-bold tel']/following::span[@class='tty'])[1]")
+	@FindBy(xpath = "//h5[contains(text(),'Need Help')]")
 	private WebElement planSummaryTFNMS;
 
 	public void validateTFNBannerOnMS() {
 		pageloadcomplete();
 		// To validate newly added TFN section on MS plan summary
 		System.out.println("Validating newly added TFN component on MS plan summary page......");
-		Assert.assertTrue(scrollToView(planSummaryTFNMS), "New TFN Validation failed.....");
+		Assert.assertTrue(planSummaryTFNMS.isDisplayed(), "New TFN Validation failed.....");
 
 
 	}
