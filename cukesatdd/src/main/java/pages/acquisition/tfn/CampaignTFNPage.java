@@ -112,7 +112,8 @@ public class CampaignTFNPage extends UhcDriver {
 	// Plans')]")
 	@FindBy(xpath = "//h3[normalize-space()='Learn More About Medicare Advantage Plans'][1]")
 
-	//@FindBy(xpath = "//h3[normalize-space()='Comparing Medicare Advantage Plans | UnitedHealthcare']")
+	// @FindBy(xpath = "//h3[normalize-space()='Comparing Medicare Advantage Plans |
+	// UnitedHealthcare']")
 
 	public WebElement UHCSearchLinkfromGoogle;
 
@@ -291,7 +292,8 @@ public class CampaignTFNPage extends UhcDriver {
 	@FindBy(xpath = "//a[@class='uhc-link-button plandetails view-more-link' and @plancode='F01']")
 	private WebElement ms4ViewPlanDetails;
 
-	//@FindBy(xpath = "//a[@class='uhc-link-button back-to-plans' and normalize-space()='Back to plan list']")
+	// @FindBy(xpath = "//a[@class='uhc-link-button back-to-plans' and
+	// normalize-space()='Back to plan list']")
 	@FindBy(xpath = "//div[contains(@class,'med-supp-plans')]//a[normalize-space()='Back to plan list']")
 	private WebElement ms4BackToPlanList;
 
@@ -333,10 +335,8 @@ public class CampaignTFNPage extends UhcDriver {
 
 	/**
 	 * 
-	 * @param site
-	 *            - ulayer or blayer
-	 * @param path
-	 *            - path for the url To open Homepage+ path as per env,
+	 * @param site - ulayer or blayer
+	 * @param path - path for the url To open Homepage+ path as per env,
 	 */
 
 	public void OpenPath(String site, String path) {
@@ -1176,7 +1176,7 @@ public class CampaignTFNPage extends UhcDriver {
 		Part_A_yearDrpDwnOption.click();
 		System.out.println("Effective date- year value selected");
 		Thread.sleep(2000);
-		//part_B_monthDrpDwn.click();
+		// part_B_monthDrpDwn.click();
 		jsClickNew(part_B_monthDrpDwn);
 		Thread.sleep(2000);
 		Part_B_monthDrpDwnOption.click();
@@ -1654,7 +1654,7 @@ public class CampaignTFNPage extends UhcDriver {
 
 	@FindBy(xpath = "//div[@id='ole-cancel-confirm']//a[normalize-space()='Cancel Application']")
 	private WebElement cancelMS4FormModal;
-	
+
 	@FindBy(xpath = "//*[contains(@id,'ole-form-controls')]//div//a[contains(@class,'cancel-button modal-link')][normalize-space()='Cancel Application']")
 	private WebElement cancelMS4OLE;
 
@@ -1843,6 +1843,9 @@ public class CampaignTFNPage extends UhcDriver {
 
 	}
 
+	@FindBy(xpath = "[@class='insured-member']//a[@class='tfn-call']/span")
+	private WebElement ExpectedTFNElement;
+
 	public void validateStaticMedsupTFNNo(String ExpecetdTFNNo, String ExpecetdTFNxpath) {
 		CheckPageLoad();
 		CheckiPerseptions();
@@ -1853,50 +1856,52 @@ public class CampaignTFNPage extends UhcDriver {
 			e.printStackTrace();
 		}
 		validate(driver.findElement(By.xpath(ExpecetdTFNxpath)));
-		if (ExpecetdTFNNo.contains(driver.findElement(By.xpath(ExpecetdTFNxpath)).getText())) {
-			System.out.println("TFN is Displayed on Page : " + driver.findElement(By.xpath(ExpecetdTFNxpath)).getText());
-		} else {
-			Assertion.fail("Static TFN elemnet is not found / displayed on page ");
-		}
+		//if (ExpecetdTFNNo.contains(driver.findElement(By.xpath(ExpecetdTFNxpath)).getText()))
+			if (validate(driver.findElement(By.xpath(ExpecetdTFNxpath)))) {
+				System.out.println(
+						"TFN is Displayed on Page : " + driver.findElement(By.xpath(ExpecetdTFNxpath)).getText());
+			} else {
+				Assertion.fail("Static TFN elemnet is not found / displayed on page ");
+			}
 	}
-	
+
 	@FindBy(xpath = "//button[contains(@class,'uhc-button')][normalize-space()='Start Application']")
 	private WebElement startMS4OLE_PlanDetails;
 
 	public void clickStartMS4OleFromPlanDetails() {
 		jsClickNew(startMS4OLE_PlanDetails);
 	}
-	
+
 	@FindBy(id = "planDetailStartApp")
 	private WebElement startMS3OLE_PlanDetails;
 
 	public void clickStartMS3OleFromPlanDetails() {
 		jsClickNew(startMS3OLE_PlanDetails);
 	}
-	
+
 	@FindBy(xpath = "//button[contains(@class,'start-btn') and @data-plan-code='F01']")
 	private WebElement startMS4OLEPlanCompare;
 
 	public void clickStartMS4OlePlanCompare() {
 		jsClickNew(startMS4OLEPlanCompare);
 	}
-	
+
 	@FindBy(xpath = "//div[@class='has-flag column-header']//button[contains(@class,'apply-button')]//span[text()='Start application']")
 	private WebElement startMS3OLEPlanCompare;
 
 	public void clickStartMS3OlePlanCompare() {
 		jsClickNew(startMS3OLEPlanCompare);
 	}
-	
+
 	@FindBy(xpath = "(//input[contains(@id,'zipcode')])[2]")
 	private WebElement planSearchEnterZip;
-	
+
 	@FindBy(xpath = "//*[contains(@class,'zip-button') or contains(@id,'zipcodebtn')]")
 	private WebElement planSearchBtn;
-	
+
 	@FindBy(id = "change-location")
 	private WebElement changeLocationLink;
-	
+
 	public VPPPlanSummaryPage planSearch(String zip) {
 		CheckPageLoad();
 		CheckiPerseptions();
@@ -1915,10 +1920,10 @@ public class CampaignTFNPage extends UhcDriver {
 		planSearchBtn.click();
 		if (validate(changeLocationLink))
 			return new VPPPlanSummaryPage(driver);
-		else 
+		else
 			return null;
 	}
-	
+
 	public void updateURLGoogleSearchUHC(String env) {
 		validateNew(GoogleSearchField);
 		GoogleSearchField.sendKeys("UHC Medicare Advantage Plans" + Keys.ENTER);
@@ -1928,25 +1933,22 @@ public class CampaignTFNPage extends UhcDriver {
 		WebElement element = driver
 				.findElement(By.xpath("//h3[normalize-space()='Learn More About Medicare Advantage Plans'][1]/.."));
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-			if (env.equalsIgnoreCase("stage")) {
-				js.executeScript(
-						"arguments[0].setAttribute('href','https://stage-uhcmedicaresolutions.uhc.com/shop/medicare-advantage-plans.html')",
-						element);
-			} 
-			else if (env.equalsIgnoreCase("offline")) {
-				js.executeScript(
-						"arguments[0].setAttribute('href','https://offline.uhcmedicaresolutions.com/shop/medicare-advantage-plans.html')",
-						element);
-			}else
-			{
-				System.out.println("Executing on Prod environment");
-			}
+		if (env.equalsIgnoreCase("stage")) {
+			js.executeScript(
+					"arguments[0].setAttribute('href','https://stage-uhcmedicaresolutions.uhc.com/shop/medicare-advantage-plans.html')",
+					element);
+		} else if (env.equalsIgnoreCase("offline")) {
+			js.executeScript(
+					"arguments[0].setAttribute('href','https://offline.uhcmedicaresolutions.com/shop/medicare-advantage-plans.html')",
+					element);
+		} else {
+			System.out.println("Executing on Prod environment");
+		}
 		jsClickNew(UHCSearchLinkfromGoogle);
 		System.out.println("Google Results - UHC Medicare Advantage Plan - Link Clicked");
 		CheckPageLoad();
 	}
-	
-	
+
 	public void updateURLBingSearchUHC(String env) {
 		CommonUtility.waitForPageLoad(driver, bingSearchField, 30);
 		bingSearchField.click();
@@ -1961,24 +1963,22 @@ public class CampaignTFNPage extends UhcDriver {
 			Assertion.assertFalse("Bing search result not found", false);
 		}
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-			if (env.equalsIgnoreCase("stage")) {
-				js.executeScript(
-						"arguments[0].setAttribute('href','https://stage-uhcmedicaresolutions.uhc.com/shop/medicare-advantage-plans.html')",
-						UHCSearchLinkfromBing);
-			} 
-			else if (env.equalsIgnoreCase("offline")) {
-				js.executeScript(
-						"arguments[0].setAttribute('href','https://offline.uhcmedicaresolutions.com/shop/medicare-advantage-plans.html')",
-						UHCSearchLinkfromBing);
-			}else
-			{
-				System.out.println("Executing on Prod environment");
-			}
-			UHCSearchLinkfromBing.click();
-			System.out.println("Bing Results - UHC Medicare Advantage Plan - Link Clicked");
-			CheckPageLoad();
+		if (env.equalsIgnoreCase("stage")) {
+			js.executeScript(
+					"arguments[0].setAttribute('href','https://stage-uhcmedicaresolutions.uhc.com/shop/medicare-advantage-plans.html')",
+					UHCSearchLinkfromBing);
+		} else if (env.equalsIgnoreCase("offline")) {
+			js.executeScript(
+					"arguments[0].setAttribute('href','https://offline.uhcmedicaresolutions.com/shop/medicare-advantage-plans.html')",
+					UHCSearchLinkfromBing);
+		} else {
+			System.out.println("Executing on Prod environment");
+		}
+		UHCSearchLinkfromBing.click();
+		System.out.println("Bing Results - UHC Medicare Advantage Plan - Link Clicked");
+		CheckPageLoad();
 	}
-	
+
 	public void updateURLYahooSearchUHC(String env) {
 
 		CommonUtility.waitForPageLoad(driver, YahooSearchField, 30);
@@ -1999,13 +1999,11 @@ public class CampaignTFNPage extends UhcDriver {
 			js.executeScript(
 					"arguments[0].setAttribute('href','https://stage-uhcmedicaresolutions.uhc.com/shop/medicare-advantage-plans.html')",
 					YahooSearchResultUHC);
-		} 
-		else if (env.equalsIgnoreCase("offline")) {
+		} else if (env.equalsIgnoreCase("offline")) {
 			js.executeScript(
 					"arguments[0].setAttribute('href','https://offline.uhcmedicaresolutions.com/shop/medicare-advantage-plans.html')",
 					YahooSearchResultUHC);
-		}else
-		{
+		} else {
 			System.out.println("Executing on Prod environment");
 		}
 		YahooSearchResultUHC.click();
@@ -2013,7 +2011,7 @@ public class CampaignTFNPage extends UhcDriver {
 		switchToNewTab();
 		CheckPageLoad();
 	}
-	
+
 	public void updateURLGoogleSearchAARP(String env) {
 		CommonUtility.waitForPageLoad(driver, GoogleSearchField, 30);
 		validateNew(GoogleSearchField);
@@ -2023,24 +2021,18 @@ public class CampaignTFNPage extends UhcDriver {
 		WebElement element = driver
 				.findElement(By.xpath("//h3[contains(text(),'AARP Medicare Plans from UnitedHealthcare')]/.."));
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-			if (env.equalsIgnoreCase("stage")) {
-				js.executeScript(
-						"arguments[0].setAttribute('href','https://stage-aarpmedicareplans.uhc.com')",
-						element);
-			} 
-			else if (env.equalsIgnoreCase("offline")) {
-				js.executeScript(
-						"arguments[0].setAttribute('href','https://offline.aarpmedicareplans.com')",
-						element);
-			}else
-			{
-				System.out.println("Executing on Prod environment");
-			}
-			AARPSearchLinkfromGoogle_alternative.click();
-			System.out.println("Google Results - AARP Medicare Advantage Plan - Link Clicked");
-			CheckPageLoad();
+		if (env.equalsIgnoreCase("stage")) {
+			js.executeScript("arguments[0].setAttribute('href','https://stage-aarpmedicareplans.uhc.com')", element);
+		} else if (env.equalsIgnoreCase("offline")) {
+			js.executeScript("arguments[0].setAttribute('href','https://offline.aarpmedicareplans.com')", element);
+		} else {
+			System.out.println("Executing on Prod environment");
+		}
+		AARPSearchLinkfromGoogle_alternative.click();
+		System.out.println("Google Results - AARP Medicare Advantage Plan - Link Clicked");
+		CheckPageLoad();
 	}
-	
+
 	public void updateURLBingSearchAARP(String env) {
 		CommonUtility.waitForPageLoad(driver, bingSearchField, 30);
 
@@ -2056,41 +2048,37 @@ public class CampaignTFNPage extends UhcDriver {
 			Assertion.assertFalse("Bing search result not found", false);
 		}
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-			if (env.equalsIgnoreCase("stage")) {
-				js.executeScript(
-						"arguments[0].setAttribute('href','https://stage-aarpmedicareplans.uhc.com')",
-						AARPSearchLinkfromBing);
-			} 
-			else if (env.equalsIgnoreCase("offline")) {
-				js.executeScript(
-						"arguments[0].setAttribute('href','https://offline.aarpmedicareplans.com')",
-						AARPSearchLinkfromBing);
-			}else
-			{
-				System.out.println("Executing on Prod environment");
-			}
+		if (env.equalsIgnoreCase("stage")) {
+			js.executeScript("arguments[0].setAttribute('href','https://stage-aarpmedicareplans.uhc.com')",
+					AARPSearchLinkfromBing);
+		} else if (env.equalsIgnoreCase("offline")) {
+			js.executeScript("arguments[0].setAttribute('href','https://offline.aarpmedicareplans.com')",
+					AARPSearchLinkfromBing);
+		} else {
+			System.out.println("Executing on Prod environment");
+		}
 		AARPSearchLinkfromBing.click();
 		System.out.println("Bing Results - AARP Medicare Advantage Plan - Link Clicked");
 		CheckPageLoad();
 	}
-	
+
 	@FindBy(xpath = "//*[@id='header']//*[contains(@class,'back-to-plans')]|//*[@id='is_vpp_subcontent_placeholder']//*[contains(@class,'back-to-plans')]")
 	private WebElement backToPlansComparePage;
-	
+
 	public void clickBackToPlansLinkComparePage() {
 		backToPlansComparePage.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 	}
-	
+
 	@FindBy(xpath = "(//span[@class='invoca_swap text-bold tel']/following::span[@class='tty'])[1]")
 	private WebElement planSummaryTFNMS;
-	
+
 	public void validateTFNBannerOnMS() {
-		//To validate newly added TFN section on MS plan summary
+		pageloadcomplete();
+		// To validate newly added TFN section on MS plan summary
 		System.out.println("Validating newly added TFN component on MS plan summary page......");
-		Assert.assertTrue(validate(planSummaryTFNMS,3), "New TFN Validation failed.....");;
-		
+		Assert.assertTrue(scrollToView(planSummaryTFNMS), "New TFN Validation failed.....");
+
+
 	}
 }
-
-

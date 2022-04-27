@@ -5383,7 +5383,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public void clickComplaintFormLink() {
-		WebElement lnkComplaintForm = driver.findElement(By.xpath("(//a[contains(text(),'Complaint Form')])[1]"));
+		WebElement lnkComplaintForm = driver.findElement(By.xpath("//*[@class='wcmAuthorMode geoTargetedContent']/p/a[2]"));
 		validateNew(lnkComplaintForm);
 		scrollToView(lnkComplaintForm);
 		jsClickNew(lnkComplaintForm);
