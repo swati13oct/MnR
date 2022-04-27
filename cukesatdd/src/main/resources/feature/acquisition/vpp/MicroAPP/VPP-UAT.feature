@@ -213,7 +213,7 @@ Feature: 1.01.4 UAT Feature to test VPP scenarios
       | PDF type     | <pdfType> |
       | DocumentCode | <docCode> |
 
-    @vppPlanCompareCommon_AARP01New @regressionAARP @featureGate
+    @vppPlanCompareCommon_AARP01New @regressionAARP
     Examples: 
       | Scenario                 | site | zipcode | isMultiCounty | county           | plantype | count | planyear | drug1  | drug2                | drug3   | planname                             | pdfType               | docCode                  | planyear | MonthlyPremium | yearlyPremium | optionalRider   | monthlyPremium |
       | VPP -E2E Scenario 2_AARP | AARP |   98012 | NO            | Snohomish County | MAPD     |     2 | future   | Ativan | diclofenac potassium | Lipitor | AARP Medicare Advantage Plan 3 (HMO) | Step Therapy Criteria | Step_Therapy_MCORE_2022 | current  | $45            | $540          | Dental Platinum | $40            |
@@ -283,7 +283,7 @@ Feature: 1.01.4 UAT Feature to test VPP scenarios
       | Scenario           | site | UHCUrl                      |
       | E2E Scenario 3_AMP | AARP | https://www.myuhcagent.com/ |
 
-    @vppPlanCompareCommon_UHC01New @regressionUHC @featureGate
+    @vppPlanCompareCommon_UHC01New @regressionUHC
     Examples: 
       | Scenario           | site | UHCUrl                      |
       | E2E Scenario 3_UMS | UHC  | https://www.myuhcagent.com/ |
@@ -411,7 +411,7 @@ Feature: 1.01.4 UAT Feature to test VPP scenarios
       | Scenario              | site | zipcode | zipcode2 | isMultutiCounty | county            | county2     | plantype | plantype1 | drug1   | drug2     | drug3    | planyear | planname                        | planname1                            | firstname | lastname | dob      | gender | permstreet    | permcity | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | emailConfirmation | goGreen | phoneno    | mobileno   | middlename  |
       | VPP-E2E Scenario5_AMP | AARP |   33111 |    90210 | No              | Miami-Dade County | Los Angeles | PDP      | MAPD      | Lipitor | Ibuprofen | Nicomide | next     | AARP MedicareRx Walgreens (PDP) | AARP Medicare Advantage Choice (PPO) | GOTTFRIED | GARRAND  | 04261944 | Male   | 003 Morris Rd | Miami    | No                     | 123 Test      | Miami       | FL           |      33111 | test@test.com | yes               | yes     | 1234567890 | 2345678901 | Test_Middle |
 
-    @vppPlanCompareCommon_UHC01New @regressionUHC @featureGate
+    @vppPlanCompareCommon_UHC01New @regressionUHC
     Examples: 
       | Scenario              | site | zipcode | zipcode2 | isMultutiCounty | county            | county2     | plantype | plantype1 | drug1   | drug2     | drug3    | planyear | planname                        | planname1                            | firstname | lastname | dob      | gender | permstreet    | permcity | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | emailConfirmation | goGreen | phoneno    | mobileno   | middlename  |
       | VPP-E2E Scenario5_UMS | UHC  |   33111 |    90210 | No              | Miami-Dade County | Los Angeles | PDP      | MAPD      | Lipitor | Ibuprofen | Nicomide | next     | AARP MedicareRx Walgreens (PDP) | AARP Medicare Advantage Choice (PPO) | GOTTFRIED | GARRAND  | 04261944 | Male   | 003 Morris Rd | Miami    | No                     | 123 Test      | Miami       | FL           |      33111 | test@test.com | yes               | yes     | 1234567890 | 2345678901 | Test_Middle |

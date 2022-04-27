@@ -211,13 +211,13 @@ Feature: 1.10.5 DCE-REDISIGN DCE Details Page Scenarios - To test DCE Details Pa
   @dce_DrugDetailsCopay_Standard_AARP @regressionAARP
     Examples:
       | drug1      | drug2  | zipCode | planType | planName                             | site | DefaultSelected | MailPharSelected | SpecialtyPharmacyZip | SpecialtyPharmacy | insulinDrug    | insulinCopay | insulinCopay2 |
-      | vigabatrin | Fanapt | 33111   | MAPD     | AARP Medicare Advantage Choice (PPO) | AARP | Standard Retail | Standard Mail    | 80002                | US BIOSERVICES    | insulin lispro | $35          | $95           |
+      | vigabatrin | Fanapt | 33111   | MAPD     | AARP Medicare Advantage Choice (PPO) | AARP | Standard Retail | Preferred Mail    | 80002                | US BIOSERVICES    | insulin lispro | $35          | $95           |
 
   @dce_DrugDetailsCopay_Standard_UHC @regressionUHC @featureGate
     Examples:
       | drug1      | drug2  | zipCode | planType | planName                                      | site | DefaultSelected | MailPharSelected | SpecialtyPharmacyZip | SpecialtyPharmacy | insulinDrug    | insulinCopay | insulinCopay2 |
 #      | vigabatrin | Fanapt | 33111   | MAPD     | MedicareMax (HMO)                             | UHC  | Standard Retail | Standard Mail    | 80002                | US BIOSERVICES    | insulin lispro | $20          | $50           |
-      | vigabatrin | Fanapt | 33111   | MAPD      | AARP Medicare Advantage Choice (PPO) | UHC  | Standard Retail | Standard Mail    | 80002                | US BIOSERVICES    | insulin lispro | $35          | $95           |
+      | vigabatrin | Fanapt | 33111   | MAPD      | AARP Medicare Advantage Choice (PPO) | UHC  | Standard Retail | Preferred Mail    | 80002                | US BIOSERVICES    | insulin lispro | $35          | $95           |
 
   @dce_DrugDetailsPremiumValidation
   Scenario Outline: To verify DCE Details Page  <site> site - for MS dollor Zero or Range Premium for plantype-<plantype> for premium - <premium>

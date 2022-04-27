@@ -15,7 +15,7 @@ import io.cucumber.testng.PickleWrapper;
 				"html:reports/test-report.html",
 				"json:target/cucumber-RunMRATDDAcquisitionDCE.json",
 				"timeline:target" },
-				tags = "@DCEDEBUG",
+				tags = "@dce_Redesign_VPP_PlanDetailsLearnMore1",
 				dryRun = false)
 
 @RetryCountIfFailed(1)

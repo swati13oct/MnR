@@ -45,6 +45,12 @@ public class PrescriptionsProvidersBenefitsPage extends GlobalWebElements {
 	@FindBy(id="uhc-arrow")
 	private WebElement btnNext;
 	
+	@FindBy(xpath="//*[@id='proceed']")
+	private WebElement proceedLinkForUHC;
+	
+	
+	
+	
 	public WebElement getBtnNext() {
 		return btnNext;
 	}
@@ -115,6 +121,10 @@ public class PrescriptionsProvidersBenefitsPage extends GlobalWebElements {
 		validateNew(providerSearchFromMedEd);
 	
 		switchToNewTabNew(providerSearchFromMedEd);
+		
+		if (driver.getCurrentUrl().contains("leaving.intermediatepage.html")) {
+			jsClickNew(proceedLinkForUHC);
+		}
 
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("werally")) {

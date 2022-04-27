@@ -845,6 +845,7 @@ public class VisitorProfilePage extends UhcDriver {
         jsClickNew(comparePlans);
         //validateNew(enrollBtn);
         CommonUtility.checkPageIsReadyNew(driver);
+        sleepBySec(15);
         validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Compare')]")), 45);
         waitForPageLoadSafari();
         if (driver.getCurrentUrl().contains("/plan-compare")) {
@@ -1324,7 +1325,7 @@ public class VisitorProfilePage extends UhcDriver {
      */
     public void validateNewHeader(DataTable data) {
         Map<String, String> expectedData = data.asMap(String.class, String.class);
-        Assertion.assertEquals("welcome," + expectedData.get("Name").toLowerCase(), profileName.getText().trim().toLowerCase());
+        Assertion.assertEquals("welcome, " + expectedData.get("Name").toLowerCase(), profileName.getText().trim().toLowerCase());
         Assertion.assertEquals("Your Saved\n" + "Insurance Plans (1)", savedInsuredPlans.getText().trim());
         Assertion.assertEquals("Your Saved\n" + "Drugs & Pharmacy (1)", yourSavedPharmacyAndDrugs.getText().trim());
         Assertion.assertEquals("Your Saved\n" + "Doctors & Dentists (1)", yourSavedDoctorsAndProviders.getText().trim());
@@ -1513,70 +1514,104 @@ public class VisitorProfilePage extends UhcDriver {
         Map<String, String> testData = data.asMap(String.class, String.class);
         jsClickNew(importLnk);
         jsClickNew(btnGetStarted);
-        switch (testData.get("Member")) {
-            case "Aetna":
-                jsClickNew(chkAetna);
-                jsClickNew(btnNext);
-                jsClickNew(chkMAwithAetna);
-                jsClickNew(btnNext);
-                waitforElementNew(chkReqAccess);
-                jsClickNew(chkReqAccess);
-                jsClickNew(chkTermsOfUse);
-                jsClickNew(flexContinueBtn);
-                waitforElement(flexImportBtn);
-                jsClickNew(flexImportBtn);
-                threadsleep(5000);
-                switchToNewTab();
-                Assert.assertTrue(driver.getCurrentUrl().contains("aetna.com"));
-                break;
-            case "Humana":
-                jsClickNew(chkHumana);
-                jsClickNew(btnNext);
-                jsClickNew(chkMAwithHumana);
-                jsClickNew(btnNext);
-                waitforElementNew(chkReqAccess);
-                jsClickNew(chkReqAccess);
-                jsClickNew(chkTermsOfUse);
-                jsClickNew(flexContinueBtn);
-                waitforElement(flexImportBtn);
-                jsClickNew(flexImportBtn);
-                threadsleep(5000);
-                switchToNewTab();
-                Assert.assertTrue(driver.getCurrentUrl().contains("humana.com"));
-                break;
-            case "UHC":
-                jsClickNew(chkUHC);
-                jsClickNew(btnNext);
-                txtFName.sendKeys(testData.get("FirstName"));
-                txtLName.sendKeys(testData.get("LastName"));
-                txtDOB.sendKeys(testData.get("DOB"));
-                txtZipCode.sendKeys(testData.get("ZipCode"));
-                txtMedicareId.sendKeys(testData.get("MBI"));
-                jsClickNew(chkAttest);
-                jsClickNew(btnViewDrugsAndDocs);
-                waitforElementNew(savedDrugsAndDoctorsHeader);
-                break;
-            case "NonMember":
-                jsClickNew(chkMilliman);
-                jsClickNew(btnNext);
-                jsClickNew(btnNonMemNext);
-                txtAgreementName.sendKeys(testData.get("FirstName") + " " + testData.get("LastName"));
-                jsClickNew(btnNonMemNext2);
-                txtNonMemFName.sendKeys(testData.get("FirstName"));
-                txtNonMemLName.sendKeys(testData.get("LastName"));
-                txtNonMemDOB.sendKeys(testData.get("DOB"));
-                jsClickNew(genderMale);
-                txtNonMemZipCode.sendKeys(testData.get("ZipCode"));
-                jsClickNew(chkAttest);
-                jsClickNew(btnNonMemViewDrugsAndDocs);
-                sleepBySec(15);
-                waitforElementNew(savedDrugsAndDoctorsHeader);
-                break;
+        String memberType = testData.get("Member");
 
-            default:
-                break;
+        if (memberType.equalsIgnoreCase("Aetna")) {
+            jsClickNew(chkAetna);
+            jsClickNew(btnNext);
+            jsClickNew(chkMAwithAetna);
+            jsClickNew(btnNext);
+            waitforElementNew(chkReqAccess);
+            jsClickNew(chkReqAccess);
+            jsClickNew(chkTermsOfUse);
+            jsClickNew(flexContinueBtn);
+            waitforElement(flexImportBtn);
+            jsClickNew(flexImportBtn);
+            threadsleep(5000);
+            switchToNewTab();
+            Assert.assertTrue(driver.getCurrentUrl().contains("aetna.com"));
+        } else if (memberType.equalsIgnoreCase("Humana")) {
+            jsClickNew(chkHumana);
+            jsClickNew(btnNext);
+            jsClickNew(chkMAwithHumana);
+            jsClickNew(btnNext);
+            waitforElementNew(chkReqAccess);
+            jsClickNew(chkReqAccess);
+            jsClickNew(chkTermsOfUse);
+            jsClickNew(flexContinueBtn);
+            waitforElement(flexImportBtn);
+            jsClickNew(flexImportBtn);
+            threadsleep(5000);
+            switchToNewTab();
+            Assert.assertTrue(driver.getCurrentUrl().contains("humana.com"));
+        } else if (memberType.equalsIgnoreCase("UHC")) {
+            jsClickNew(chkUHC);
+            jsClickNew(btnNext);
+            txtFName.sendKeys(testData.get("FirstName"));
+            txtLName.sendKeys(testData.get("LastName"));
+            txtDOB.sendKeys(testData.get("DOB"));
+            txtZipCode.sendKeys(testData.get("ZipCode"));
+            txtMedicareId.sendKeys(testData.get("MBI"));
+            jsClickNew(chkAttest);
+            jsClickNew(btnViewDrugsAndDocs);
+            waitforElementNew(savedDrugsAndDoctorsHeader);
+        } else if (memberType.equalsIgnoreCase("NonMember")) {
+            jsClickNew(chkMilliman);
+            jsClickNew(btnNext);
+            jsClickNew(btnNonMemNext);
+            txtAgreementName.sendKeys(testData.get("FirstName") + " " + testData.get("LastName"));
+            jsClickNew(btnNonMemNext2);
+            txtNonMemFName.sendKeys(testData.get("FirstName"));
+            txtNonMemLName.sendKeys(testData.get("LastName"));
+            txtNonMemDOB.sendKeys(testData.get("DOB"));
+            jsClickNew(genderMale);
+            txtNonMemZipCode.sendKeys(testData.get("ZipCode"));
+            jsClickNew(chkAttest);
+            jsClickNew(btnNonMemViewDrugsAndDocs);
+            sleepBySec(15);
+            waitforElementNew(savedDrugsAndDoctorsHeader);
+        } else if (memberType.equalsIgnoreCase("Anthem")
+                || memberType.equalsIgnoreCase("Anthem Blue")
+                || memberType.equalsIgnoreCase("Amerigroup")){
+
+            selectAnthemPair(memberType);
+            jsClickNew(btnNext);
+            jsClickNew(rdbMAAnthem);
+            jsClickNew(btnNext);
+            waitforElementNew(chkReqAccess,30);
+            jsClickNew(chkReqAccess);
+            jsClickNew(chkTermsOfUse);
+            jsClickNew(flexContinueBtn);
+            waitforElement(flexImportBtn);
+            jsClickNew(flexImportBtn);
+            sleepBySec(15);
+            switchToNewTab();
+            Assert.assertTrue(driver.getCurrentUrl().contains("careevolution.com"));
+
         }
+    }
 
+    @FindBy(xpath = "//div[text()='Anthem']/parent::label")
+    WebElement rdbAnthem;
+
+    @FindBy(xpath = "//div[text()='Anthem Blue Cross CA']/parent::label")
+    WebElement rdbAnthemBlue;
+
+    @FindBy(xpath = "//div[text()='Amerigroup']/parent::label")
+    WebElement rdbAmerigroup;
+
+  @FindBy(xpath = "//div[contains(text(),'Anthem') or contains(text(),'Amerigroup')]/parent::label")
+    WebElement rdbMAAnthem;
+
+    void selectAnthemPair(String memberType) {
+        if (memberType.equalsIgnoreCase("Anthem")) {
+            jsClickNew(rdbAnthem);
+        } else if (memberType.equalsIgnoreCase("Anthem Blue")) {
+            jsClickNew(rdbAnthemBlue);
+        }
+        if (memberType.equalsIgnoreCase("Amerigroup")) {
+            jsClickNew(rdbAmerigroup);
+        }
     }
 
     /**
@@ -2143,7 +2178,7 @@ public class VisitorProfilePage extends UhcDriver {
     }
 
     public void gotoProfilePage() {
-        WebElement viewSavedItem= driver.findElement(By.xpath("//*[contains(@class,'saved_items')]"));
+        WebElement viewSavedItem = driver.findElement(By.xpath("//*[contains(@class,'saved_items')]"));
         // shoppingCartIcon.click();
         jsClickNew(viewSavedItem);
         jsClickNew(driver.findElement(By.xpath("//*[contains(@id,'saved-items-button') and contains(@class,'show-element')]")));

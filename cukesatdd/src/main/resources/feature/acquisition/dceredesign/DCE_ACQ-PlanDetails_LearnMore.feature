@@ -32,4 +32,4 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     @regressionAARP 
     Examples: 
       | drug1      | drug2   | zipCode | planType | planName                                      | site | DefaultSelected | MailPharSelected |
-      | vigabatrin | Lipitor |   78006 | SNP      | UnitedHealthcare Chronic Complete (HMO C-SNP) | AARP | Standard Retail | Standard Mail    |
+      | vigabatrin | Lipitor |   78006 | SNP      | UnitedHealthcare Chronic Complete (HMO C-SNP) | UHC | Standard Retail | Standard Mail    |
