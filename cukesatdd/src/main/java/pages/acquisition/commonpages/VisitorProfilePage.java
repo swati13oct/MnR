@@ -3,6 +3,7 @@ package pages.acquisition.commonpages;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import atdd.framework.MRScenario;
 import io.cucumber.java.bs.A;
@@ -382,6 +383,10 @@ public class VisitorProfilePage extends UhcDriver {
     @FindBy(xpath = "//div[contains(@class,'data-import')]//button//span[contains(text(),'Review My Drugs')]")
     private WebElement btnReviewDrugs;
     //WebElement btnReviewDrugs;
+
+    @FindBy(xpath = "//a[@class='printVisitorProfile']")
+    private WebElement btnPrint;
+
 
 //	@FindBy(xpath = "//*[@id='signInOptumID']")
 //	WebElement SignInHeader;
@@ -1572,13 +1577,13 @@ public class VisitorProfilePage extends UhcDriver {
             waitforElementNew(savedDrugsAndDoctorsHeader);
         } else if (memberType.equalsIgnoreCase("Anthem")
                 || memberType.equalsIgnoreCase("Anthem Blue")
-                || memberType.equalsIgnoreCase("Amerigroup")){
+                || memberType.equalsIgnoreCase("Amerigroup")) {
 
             selectAnthemPair(memberType);
             jsClickNew(btnNext);
             jsClickNew(rdbMAAnthem);
             jsClickNew(btnNext);
-            waitforElementNew(chkReqAccess,30);
+            waitforElementNew(chkReqAccess, 30);
             jsClickNew(chkReqAccess);
             jsClickNew(chkTermsOfUse);
             jsClickNew(flexContinueBtn);
@@ -1600,7 +1605,7 @@ public class VisitorProfilePage extends UhcDriver {
     @FindBy(xpath = "//div[text()='Amerigroup']/parent::label")
     WebElement rdbAmerigroup;
 
-  @FindBy(xpath = "//div[contains(text(),'Anthem') or contains(text(),'Amerigroup')]/parent::label")
+    @FindBy(xpath = "//div[contains(text(),'Anthem') or contains(text(),'Amerigroup')]/parent::label")
     WebElement rdbMAAnthem;
 
     void selectAnthemPair(String memberType) {
@@ -2224,6 +2229,46 @@ public class VisitorProfilePage extends UhcDriver {
             sleepBySec(10);
             Assert.assertTrue(validateNew(driver.findElement(By.xpath("//h1[contains(@id,'startAppTitle')]")), 45), "Start Application Page not opened");
             validateMSStartApplicationPage();
+        }
+    }
+
+    public void validatePrint() {
+        if (MRScenario.browserName.equalsIgnoreCase("chrome")) {
+            validateNew(btnPrint);
+            jsClickNew(btnPrint);
+            sleepBySec(2);
+
+            // Switch to Print dialog
+            Set<String> windowHandles = driver.getWindowHandles();
+            if (!windowHandles.isEmpty()) {
+                System.out.println("Size : " + windowHandles.size());
+                driver.switchTo().window((String) windowHandles.toArray()[1]);
+                System.out.println(driver.getCurrentUrl());
+            }
+            WebElement printPreview = driver.findElement(By.tagName("print-preview-app"));
+            if (printPreview.isDisplayed()) {
+                System.out.println("Print Functionality working successfully");
+            } else {
+                Assert.fail("Print Functionality not working successfully");
+            }
+            driver.switchTo().window((String) windowHandles.toArray()[1]);
+            driver.getCurrentUrl();
+            sleepBySec(2);
+            driver.switchTo().defaultContent();
+
+            JavascriptExecutor executor = (JavascriptExecutor) driver;
+            WebElement btnPrintCancel = (WebElement) executor.executeScript(
+                    "return document.querySelector('print-preview-app').shadowRoot.querySelector('#sidebar').shadowRoot.querySelector('print-preview-button-strip').shadowRoot.querySelector('.cancel-button')");
+
+            if (btnPrintCancel != null) {
+                btnPrintCancel.click();
+                System.out.println("Print Dialog Closed");
+            } else {
+                Assert.fail("Print Dialog not Closed");
+            }
+            driver.switchTo().window((String) windowHandles.toArray()[0]);
+        } else {
+            System.out.println("Print Validation not available on browser other than Chrome");
         }
     }
 

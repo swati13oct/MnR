@@ -607,3 +607,18 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
     Examples:
       | site | Zipcode | isMultiCounty | state      | county        | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities |
       | UHC  | 07303   | NO            | New Jersey | Hudson County | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | No             | No,No,No,No                   | Lower                | [blank]        | [blank]    |
+
+  @validateVPPrint
+  Scenario Outline: User validate Print button on Visitor Profile on <site> site
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    And the user clicks on the shopping cart icon
+    Then the user validate the print functionality on Visitor Profile
+    
+    Examples:
+      | site |
+      | AARP |
+
+    Examples:
+      | site |
+      | UHC  |

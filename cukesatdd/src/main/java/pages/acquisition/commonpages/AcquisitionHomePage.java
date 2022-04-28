@@ -52,7 +52,7 @@ import pages.acquisition.pharmacyLocator.PharmacySearchPageNew;
 public class AcquisitionHomePage extends GlobalWebElements {
 
 //	@FindBy(xpath = "//*[contains(@id,'zipcodemeded') or contains(@id,'cta-zipcode')]")
-	@FindBy(xpath = "//*[contains(@id,'zipcodemeded-0')]")
+	@FindBy(xpath = "//*[contains(@id,'zipcodemeded-0')] | //input[@id='zipcode']")
 	private WebElement zipCodeField;
 
 	@FindBy(xpath = "//*[contains(@id,'zipcodemeded-0')]")
@@ -5385,7 +5385,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public void clickComplaintFormLink() {
-		WebElement lnkComplaintForm = driver.findElement(By.xpath("(//a[contains(text(),'Complaint Form')])[1]"));
+		WebElement lnkComplaintForm = driver.findElement(By.xpath("//*[@class='wcmAuthorMode geoTargetedContent']/p/a[2]"));
 		validateNew(lnkComplaintForm);
 		scrollToView(lnkComplaintForm);
 		jsClickNew(lnkComplaintForm);
@@ -7365,7 +7365,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		boolean present;
 		try {
 			threadsleep(10);
-			FluentWait<WebDriver> fwait = new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(35))
+			FluentWait<WebDriver> fwait = new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(40))
 					.pollingEvery(Duration.ofMillis(100)).ignoring(NoSuchElementException.class)
 					.ignoring(TimeoutException.class);
 			fwait.until(new Function<WebDriver, WebElement>() {

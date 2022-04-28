@@ -285,13 +285,13 @@ Feature: 1.09. UAT - Visitor profile Authenticated
 
     @visitorProfile_AARP
     Examples:
-      | site | member | firstName | lastName | dob        | zipcode | mbi         | userName               | password     |
-      | AARP | UHC    | JONETTE   | ESCUTIA  | 03/27/1936 | 06902   | 3PW3A88CU71 | jonette@getairmail.com | Password@123 |
+      | site | member | firstName | lastName | dob        | zipcode | mbi         | userName               | password       |
+      | AARP | UHC    | JONETTE   | ESCUTIA  | 03/27/1936 | 06902   | 3PW3A88CU71 | jonette@getairmail.com | Password@12345 |
 
     @visitorProfile_UHC
     Examples:
-      | site | member | firstName | lastName | dob        | zipcode | mbi         | userName               | password     |
-      | UHC  | UHC    | JONETTE   | ESCUTIA  | 03/27/1936 | 06902   | 3PW3A88CU71 | jonette@getairmail.com | Password@123 |
+      | site | member | firstName | lastName | dob        | zipcode | mbi         | userName               | password       |
+      | UHC  | UHC    | JONETTE   | ESCUTIA  | 03/27/1936 | 06902   | 3PW3A88CU71 | jonette@getairmail.com | Password@12345 |
 
   @SavePlanPRE
   Scenario Outline: User validate PRE flow for <plantype> from Visitor Profile on <site> site for zipcode -<Zipcode> for plan <testPlan>
@@ -336,10 +336,10 @@ Feature: 1.09. UAT - Visitor profile Authenticated
 
     @SavePlanPRE_AARP @regressionAARP
     Examples:
-      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                   | testPlan                             | userName              | password     | Premium | plantype |
-      | AARP | 07303   | NO            | New York | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | No             | No,No,No,No                   | Lower                | [blank]        | [blank]                      | AARP Medicare Advantage Choice (PPO) | vdatdd_18@getnada.com | Password@123 | $0      | MAPD     |
+      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities | testPlan                             | userName              | password     | Premium | plantype |
+      | AARP | 07303   | NO            | New York | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | No             | No,No,No,No                   | Lower                | [blank]        | [blank]    | AARP Medicare Advantage Choice (PPO) | vdatdd_18@getnada.com | Password@123 | $0      | MAPD     |
 
     @SavePlanPRE_UHC @regressionUHC
     Examples:
-      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                   | testPlan                             | userName                  | password     | Premium | plantype |
-      | UHC  | 07303   | NO            | New York | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | No             | No,No,No,No                   | Lower                | [blank]        | [blank]                      | AARP Medicare Advantage Choice (PPO) | vdatdd_18_uhc@getnada.com | Password@123 | $0      | MAPD     |
+      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities | testPlan                             | userName                  | password     | Premium | plantype |
+      | UHC  | 07303   | NO            | New York | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | No             | No,No,No,No                   | Lower                | [blank]        | [blank]    | AARP Medicare Advantage Choice (PPO) | vdatdd_18_uhc@getnada.com | Password@123 | $0      | MAPD     |
