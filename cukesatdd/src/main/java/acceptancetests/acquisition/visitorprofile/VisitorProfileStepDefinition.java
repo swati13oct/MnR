@@ -1106,4 +1106,10 @@ public class VisitorProfileStepDefinition {
         VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
         visitorProfile.PREPlanCardEnrollNDetails(plantype);
     }
+
+    @Then("^the user validate the print functionality on Visitor Profile$")
+    public void the_user_validate_the_print_functionality_on_Visitor_Profile() {
+        VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+        visitorProfile.validatePrint();
+    }
 }
