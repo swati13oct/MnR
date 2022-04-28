@@ -224,19 +224,19 @@ public class EnrollmentBasicsPage extends GlobalWebElements {
 
 	public void clickAdditionalCoverage() {
 		CommonUtility.checkPageIsReadyNew(driver);
-		validateNew(lnkadditionalcoverage);
+//		validateNew(lnkadditionalcoverage);
 		scrollToView(lnkadditionalcoverage);
-		switchToNewTabNew(lnkadditionalcoverage);
+		jsClickNew(lnkadditionalcoverage);
 		CommonUtility.checkPageIsReadyNew(driver);
 		sleepBySec(10);
 		if(driver.getCurrentUrl().contains("/medicare-education-classic/medicare-parts-and-medigap-plans-classic.html")) {
 			Assertion.assertTrue(true);
 			System.out.println("Coverage Choices Page open Successfully");
-			waitForPageLoadSafari();
+			/*waitForPageLoadSafari();
 			sleepBySec(5);
 			driver.close();
 //			driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
-			driver.switchTo().window(CommonConstants.getMainWindowHandle());
+			driver.switchTo().window(CommonConstants.getMainWindowHandle());*/
 		}else {
 			Assertion.fail("Coverage Choices Page did not open Successfully");
 		}
