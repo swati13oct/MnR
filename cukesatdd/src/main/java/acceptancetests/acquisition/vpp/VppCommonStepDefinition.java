@@ -58,6 +58,8 @@ import pages.acquisition.commonpages.VisitorProfilePage;
 import pages.acquisition.dceredesign.BuildYourDrugList;
 import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.GetStartedPage;
+import pages.acquisition.ole.OLECommonPages;
+import pages.acquisition.ole.PersonalInformationPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPageNew;
@@ -123,12 +125,7 @@ public class VppCommonStepDefinition {
 		WebDriver wd = getLoginScenario().getWebDriverNew();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*
-		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
-		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-		 * memberAttributesRow.get(i).getCells().get(1)); }
-		 */
+
 		String site = memberAttributesMap.get("Site");
 		// AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd, site);
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().openApplicationURL(wd, site);
@@ -136,7 +133,9 @@ public class VppCommonStepDefinition {
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
 		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, " ");
 		getLoginScenario().saveBean(DCERedesignCommonConstants.YOUPAYLIST_ALLDRUGS, " ");
-
+		if (MRScenario.environment.equalsIgnoreCase("chargers-qa") && site.equalsIgnoreCase("UHC") ) {
+			aquisitionhomepage.checkForSecurityPage();
+		}
 		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, site);
 		if (!(MRScenario.environment.equalsIgnoreCase("team-acme"))) {
 			if (site.equalsIgnoreCase("AARP"))
@@ -1147,7 +1146,7 @@ public class VppCommonStepDefinition {
 	}
 
 	@When("^user selects a multiple providers and retuns to VPP page$")
-	public void user_selects_a_multiple_providers_and_retuns_to_VPP_page() {
+	public void user_selects_a_multiple_providers_and_retuns_to_VPP_page() throws InterruptedException {
 		{
 			ProviderSearchPage providerSearchPage = (ProviderSearchPage) getLoginScenario()
 					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
@@ -5190,12 +5189,21 @@ public class VppCommonStepDefinition {
 	}
 	
 	@When("^user selects medsup plans to compare$")
-	public void user_selects_medsup_plans_to_compare() throws Throwable {
+	public void user_selects_medsup_plans_to_compare(DataTable data) throws Throwable {
+		Map<String, String> inputAttributesMap = parseInputArguments(data);
+		String zipCode = inputAttributesMap.get("Zip Code");
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-			plansummaryPage.compareAllMSPlans();
+		if (zipCode.equals("90210"))
+			plansummaryPage.compareAllMS4Plans();
+		else if (zipCode.equals("23666"))
+			plansummaryPage.compareAllMS3Plans();
+		else
+			System.out.println("Invalid zipcode");
+			
 			System.out.println("Selected All MS plans for Plan Compare");
 	}
+	
 	@Then("^user click to close MS application Modal$")
 	public void click_close_MS_Application_Page() {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
@@ -5240,5 +5248,23 @@ public class VppCommonStepDefinition {
 		
 	}
 
-	
+	@And("^the user signIn with optum Id for OLE$")
+	public void the_user_signIn_with_optum_Id_OLE(DataTable credentials) {
+		if (!(MRScenario.environment.equalsIgnoreCase("offline")
+				|| MRScenario.environment.equalsIgnoreCase("prod"))) {
+			Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+		plannameAttributesMap = DataTableParser.readDataTableAsMaps(credentials);
+
+		String username = plannameAttributesMap.get("User Name");
+		String password = plannameAttributesMap.get("Password");
+
+			//PersonalInformationPage SignIntoEnrollment = (PersonalInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
+			WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+			OLECommonPages SignIntoEnrollment=new OLECommonPages(wd);
+
+			SignIntoEnrollment.signInOLE(username, password);
+		}
+
+	}
+
 }

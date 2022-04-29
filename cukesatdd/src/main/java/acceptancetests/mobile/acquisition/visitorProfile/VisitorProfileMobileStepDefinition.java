@@ -6,7 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.testng.Assert;
 
+import acceptancetests.acquisition.visitorprofile.VisitorProfileCommonConstants;
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
@@ -19,7 +21,9 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.VisitorProfilePage;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineLandingAndZipcodePages;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.ComparePlansPageMobile;
 import pages.mobile.acquisition.commonpages.DrugCostEstimatorPageMobile;
@@ -31,6 +35,7 @@ import pages.mobile.acquisition.commonpages.VisitorProfilePageMobile;
 import pages.mobile.acquisition.commonpages.VisitorProfileTestHarnessPageMobile;
 import pages.mobile.acquisition.dceredesign.BuildYourDrugListMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
+import pages.mobile.acquisition.planrecommendationengine.LandingAndZipcodeMobilePage;
 
 /**
  * @author bnaveen4 Functionality:Visitor Profile for both AAPR and UHC
@@ -136,6 +141,39 @@ public class VisitorProfileMobileStepDefinition {
 		visitorProfile.deletePlans(planYear, savedPlanNames);
 	}
 	
+	@Then("^user click on save result option for PRE and signs in to VP$")
+    public void user_click_on_save_result_option_for_PRE_and_signs_in_to_VP(DataTable credentials) {
+        Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+        plannameAttributesMap = DataTableParser.readDataTableAsMaps(credentials);
+        String username = plannameAttributesMap.get("User Name");
+        String password = plannameAttributesMap.get("Password");
+        VisitorProfilePageMobile visitorProfile = (VisitorProfilePageMobile) getLoginScenario()
+                .getBean(PageConstants.VISITOR_PROFILE_PAGE);
+        visitorProfile.signInSaveResults(username, password);
+        getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfile);
+        getLoginScenario().saveBean(VisitorProfileCommonConstants.VP_USER_TYPE, username);
+    }
+	
+	@Then("^user validate plan recommendation plan card on visitor profile$")
+    public void user_validate_plan_recommendation_plan_card_on_visitor_profile(DataTable dataTable) {
+        Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+        plannameAttributesMap = DataTableParser.readDataTableAsMaps(dataTable);
+        String planName = plannameAttributesMap.get("PlanName");
+        String premium = plannameAttributesMap.get("Premium");
+        String plantype = plannameAttributesMap.get("PlanType");
+        VisitorProfilePageMobile visitorProfile = (VisitorProfilePageMobile) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+        visitorProfile.validatePREPlanCard(planName, premium, plantype);
+    }
+	
+	@Then("^user validate view Plan details on PRE plan card and check enroll or start application button$")
+    public void user_validate_view_Plan_details_on_PRE_plan_card_and_check_enroll_or_start_application_button(DataTable dataTable) {
+        Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+        plannameAttributesMap = DataTableParser.readDataTableAsMaps(dataTable);
+        String plantype = plannameAttributesMap.get("PlanType");
+        VisitorProfilePageMobile visitorProfile = (VisitorProfilePageMobile) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+        visitorProfile.PREPlanCardEnrollNDetails(plantype);
+    }
+	
 	@And("^the user clicks on the shopping cart icon$")
 	public void the_user_clicks_on_the_shopping_cart_icon_in_AARP_site() {
 		AcquisitionHomePageMobile acqHomePage = (AcquisitionHomePageMobile) getLoginScenario()
@@ -145,6 +183,30 @@ public class VisitorProfileMobileStepDefinition {
 		
 		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
 	}
+	
+	@Then("^the user validate the show no drug coverage message on visitor profile$")
+    public void the_user_validate_the_show_no_drug_coverage_message_on_visitor_profile(DataTable data) {
+        Map<String, String> memberAttributesMap = new HashMap<String, String>();
+        memberAttributesMap = DataTableParser.readDataTableAsMaps(data);
+        String pharmacy = memberAttributesMap.get("pharmacyName");
+        VisitorProfilePageMobile visitorProfile = (VisitorProfilePageMobile) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+        visitorProfile.validateNoDrugCoverageMessage(pharmacy);
+    }
+	
+	@Then("^the user validate the show no drug coverage message on visitor profile drug pricing modal$")
+    public void the_user_validate_the_show_no_drug_coverage_message_on_visitor_profile_drug_pricing_modal(DataTable data) {
+        Map<String, String> memberAttributesMap = new HashMap<String, String>();
+        memberAttributesMap = DataTableParser.readDataTableAsMaps(data);
+        String pharmacy = memberAttributesMap.get("pharmacyName");
+        VisitorProfilePageMobile visitorProfile = (VisitorProfilePageMobile) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+        visitorProfile.validateNoDrugCoverageMessageDrugPricingModal(pharmacy);
+    }
+	
+	@Then("^the user click on Change Pharmacy link on Visitor Profile Page Drug Pricing Modal$")
+    public void the_user_click_on_Change_Pharmacy_link_on_Visitor_Profile_Page_Drug_Pricing_Modal() {
+        VisitorProfilePageMobile visitorProfile = (VisitorProfilePageMobile) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+        visitorProfile.validateChangePharmacyLinkPricingModal();
+    }
 
 	@And("^the user clicks on the add drugs button to navigate to DCE Redesign on the profile page mobile$")
 	public void the_user_clicks_on_the_add_drugs_button_in_the_profile_to_DCE_Redesign_in_AARP_site1()
@@ -286,6 +348,27 @@ public class VisitorProfileMobileStepDefinition {
 		visitorProfile.deleteAllDrugs(drugs);
 		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfile);
 	}
+	
+	@Then("^user validate no average cost is visible$")
+    public void user_validate_no_average_cost_is_visible() {
+        VisitorProfilePageMobile visitorProfile = (VisitorProfilePageMobile) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+        visitorProfile.validateNoAvgCostProfile();
+    }
+	
+	@Then("^the user select pharmacy and return to visitor profile$")
+    public void the_user_select_pharmacy_and_return_to_visitor_profile(DataTable givenAttributes) {
+        VisitorProfilePageMobile visitorProfile = (VisitorProfilePageMobile) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+        Map<String, String> memberAttributesMap = new HashMap<String, String>();
+        memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+        String pharmacyToSelect = memberAttributesMap.get("SelectPharmacy");
+        visitorProfile.selectPharmacyandBacktoProfile(pharmacyToSelect);
+    }
+	
+	@Then("^the user click on Change Pharmacy link on Visitor Profile Page$")
+    public void the_user_click_on_Change_Pharmacy_link_on_Visitor_Profile_Page() {
+        VisitorProfilePageMobile visitorProfile = (VisitorProfilePageMobile) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+        visitorProfile.validateChangePharmacyLink();
+    }
 
 	@And("^user validates the added plans on visitor profile page$")
 	public void user_validates_the_added_plans_on_visitor_profile_page_of_AARP_site(DataTable planNames) {
@@ -304,6 +387,31 @@ public class VisitorProfileMobileStepDefinition {
 //		visitorProfile.validateAddedPlans(savePlanNames);
 		visitorProfile.validateAddedPlans(savePlanNames);
 	}
+	
+	@Then("^the user should be able to see the changed pharmacy$")
+    public void the_user_should_be_able_to_see_the_changed_pharmacy(DataTable data) {
+        Map<String, String> memberAttributesMap = new HashMap<String, String>();
+        memberAttributesMap = DataTableParser.readDataTableAsMaps(data);
+        String pharmacy = memberAttributesMap.get("pharmacyName");
+        VisitorProfilePageMobile visitorProfile = (VisitorProfilePageMobile) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+        String user_state;
+        getLoginScenario().getBean(VisitorProfileCommonConstants.VP_USER_TYPE);
+        if (null != getLoginScenario().getBean(VisitorProfileCommonConstants.VP_USER_TYPE)) {
+            user_state = "auth";
+        } else {
+            user_state = "unauth";
+        }
+        visitorProfile.validateChangedPharmacy(pharmacy, user_state);
+    }
+	
+	@Then("^the user validate the show drug coverage message on visitor profile$")
+    public void the_user_validate_the_show_drug_coverage_message_on_visitor_profile(DataTable data) {
+        Map<String, String> memberAttributesMap = new HashMap<String, String>();
+        memberAttributesMap = DataTableParser.readDataTableAsMaps(data);
+        String pharmacy = memberAttributesMap.get("pharmacyName");
+        VisitorProfilePageMobile visitorProfile = (VisitorProfilePageMobile) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+        visitorProfile.validateDrugCoverageMessage(pharmacy);
+    }
 
 	@And("^user validates the added Ms plans on visitor profile page$")
 	public void user_validates_the_added_Ms_plans_on_visitor_profile_page_of_AARP_site(DataTable planNames) {
@@ -353,6 +461,32 @@ public class VisitorProfileMobileStepDefinition {
 		getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, planDetails);
 		System.out.println(planDetails);
 	}
+	
+	@Then("^user save plan on PRE and then go to profile page$")
+    public void user_save_plan_on_PRE_and_then_go_to_profile_page(DataTable data) {
+        Map<String, String> memberAttributesMap = new HashMap<String, String>();
+        memberAttributesMap = DataTableParser.readDataTableAsMaps(data);
+        String planName = memberAttributesMap.get("PlanName");
+        VisitorProfilePageMobile visitorProfile = (VisitorProfilePageMobile) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+        AcquisitionHomePageMobile acqHomePage = (AcquisitionHomePageMobile) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
+        visitorProfile.savePlanOnPRE(planName);
+        //visitorProfile.clickViewSavedPlansPRE();
+        acqHomePage.navigateToVisitorProfilePage();
+    }
+	
+	@Then("^the user click on Get Started to land on Plan Recommendation Page$")
+    public void the_user_click_on_Get_Started_to_land_on_Plan_Recommendation_Page() {
+        VisitorProfilePageMobile visitorProfile = (VisitorProfilePageMobile) getLoginScenario()
+                .getBean(PageConstants.VISITOR_PROFILE_PAGE);
+        LandingAndZipcodeMobilePage planSelectorhomepage = visitorProfile.clickGetStartedPRE();
+
+        if (planSelectorhomepage != null) {
+            //getLoginScenario().saveBean(PageConstants.PRE, visitorProfile);
+            System.out.println("Navigation to PRE from VP successful");
+        } else {
+            Assert.fail("Navigation to PRE from VP is not successful");
+        }
+    }
 
 	@Then("^user saves two ms plans as favorite mobile$")
 	public void user_saves_two_ms_plans_as_favorite_on_AARP_site(DataTable givenAttributes) {
@@ -507,6 +641,13 @@ public class VisitorProfileMobileStepDefinition {
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
 		Assertion.assertTrue(visitorProfile.validateEnrollInPlanIsClickable());
 	}
+	
+	@Then("^user click on save results option and click on create account link and validate the correct login page$")
+    public void user_click_on_save_results_option_and_click_on_create_account_link_and_validate_the_correct_login_page() {
+        VisitorProfilePageMobile visitorProfile = (VisitorProfilePageMobile) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+        visitorProfile.validateCreateAccountLinkPRE();
+
+    }
 
 	@And("^user verifies plan count on shopping cart Icon$")
 	public void user_validates_plan_count_on_shopping_cart_Icon_on_AARP_site(DataTable givenAttributes) {

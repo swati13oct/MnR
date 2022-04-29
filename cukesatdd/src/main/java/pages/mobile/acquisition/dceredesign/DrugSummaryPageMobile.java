@@ -851,6 +851,11 @@ public class DrugSummaryPageMobile extends UhcDriver {
 
 		validate(alertTextImg);
 	}
+	
+	public void validateDefaultPharmacyName(String defaultPharmacy) {
+		validateNew(pharmacyName);
+		Assertion.assertTrue("Default pharmacy name is not displayed", pharmacyName.getText().trim().contains(defaultPharmacy));
+	}
 
 	public void vdrugPricingDeductText() {
 		if (drugPricingDeductText.getText().contains("$0 or $99")
@@ -1449,6 +1454,17 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		jsClickNew(DrugPricing_CloseBtn);
 		CommonUtility.checkPageIsReadyNew(driver);
 		waitForPageLoadSafari();
+	}
+	
+	public void clickReturnToProfile() {
+		try {
+			if (returnToProfileLink.isDisplayed()) {
+				System.out.println("Return to profile displayed");
+				jsClickNew(returnToProfileLink);
+			}
+		} catch (Exception e) {
+			Assertion.fail("Return to profile not displayed");
+		}
 	}
 
 }

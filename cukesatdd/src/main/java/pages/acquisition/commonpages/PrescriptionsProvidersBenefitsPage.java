@@ -45,6 +45,12 @@ public class PrescriptionsProvidersBenefitsPage extends GlobalWebElements {
 	@FindBy(id="uhc-arrow")
 	private WebElement btnNext;
 	
+	@FindBy(xpath="//*[@id='proceed']")
+	private WebElement proceedLinkForUHC;
+	
+	
+	
+	
 	public WebElement getBtnNext() {
 		return btnNext;
 	}
@@ -111,10 +117,14 @@ public class PrescriptionsProvidersBenefitsPage extends GlobalWebElements {
 	}
 	public ProviderSearchPage clicksOnRallyToolFromMedEdPage() {
 		//WebElement providerSearchFromMedEd= driver.findElement(By.xpath("//span[contains(text(),'Look up providers in the Provider Search tool')]"));
-		WebElement providerSearchFromMedEd= driver.findElement(By.xpath("//a//span[contains(text(),'Look up your providers')]"));
+		WebElement providerSearchFromMedEd= driver.findElement(By.xpath("//a[contains(@title,'Look up your providers')]"));
 		validateNew(providerSearchFromMedEd);
 	
 		switchToNewTabNew(providerSearchFromMedEd);
+		
+		if (driver.getCurrentUrl().contains("leaving.intermediatepage.html")) {
+			jsClickNew(proceedLinkForUHC);
+		}
 
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("werally")) {

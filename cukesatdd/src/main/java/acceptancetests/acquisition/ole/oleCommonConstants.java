@@ -21,6 +21,7 @@ public class oleCommonConstants {
 	public static final String OLE_TFN = "tfn";
 	public static final String ACQ_SITE_NAME = "acq_site";
 	public static final String ALREADY_ENROLLED_FLAG = "true";
+	public static final String SITE_NAME = "site";
 	//member details
 	public static final String FIRST_NAME = "firstname";
 	public static final String LAST_NAME = "lastname";
@@ -66,6 +67,7 @@ public class oleCommonConstants {
 	public static final String EMAIL_CONFIRMATION = "emailconfirmation";
 	public static final String PAPERLESS_DELIVERY = "paperlessdelivery";
 	public static final String Go_Green = "gogreen";
+	public static final String Auto_Address = "autoaddress";
 	
 	
 	

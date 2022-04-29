@@ -69,6 +69,9 @@ public class EnrollmentBasicsPage extends GlobalWebElements {
 	
 	@FindBy(xpath="//a//span[contains(text(),'Social Security website')]")
 	private WebElement lnkSocialSecurity;
+
+	@FindBy(xpath="//a[contains(text(),'additional coverage')]")
+	private WebElement lnkadditionalcoverage;
 	
 	public WebElement getBtnNext() {
 		return btnNext;
@@ -217,6 +220,27 @@ public class EnrollmentBasicsPage extends GlobalWebElements {
 			Assertion.fail("Plan Summary Page did not open Successfully");
 		}
 		
+	}
+
+	public void clickAdditionalCoverage() {
+		CommonUtility.checkPageIsReadyNew(driver);
+//		validateNew(lnkadditionalcoverage);
+		scrollToView(lnkadditionalcoverage);
+		jsClickNew(lnkadditionalcoverage);
+		CommonUtility.checkPageIsReadyNew(driver);
+		sleepBySec(10);
+		if(driver.getCurrentUrl().contains("/medicare-education-classic/medicare-parts-and-medigap-plans-classic.html")) {
+			Assertion.assertTrue(true);
+			System.out.println("Coverage Choices Page open Successfully");
+			/*waitForPageLoadSafari();
+			sleepBySec(5);
+			driver.close();
+//			driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+			driver.switchTo().window(CommonConstants.getMainWindowHandle());*/
+		}else {
+			Assertion.fail("Coverage Choices Page did not open Successfully");
+		}
+
 	}
 	
 	public void clickMAEnrolllink() {

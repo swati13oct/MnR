@@ -62,7 +62,7 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 	
 	// Look up Provider - MA, MAPD and DSNP - NonPFFS
 	
-	@FindBy(xpath = "//button[contains(text(), 'Look up your provider')]")
+	@FindBy(xpath = "//button[@id='lookupProviderBtn']")
 	private WebElement LookUpProviderBtn;
 	
 	//Rally - ProviderLookup
@@ -219,7 +219,8 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 					driver.switchTo().window(winHandle);
 				}
 			}
-			CommonUtility.checkPageIsReadyNew(driver);			String CurrentURL = driver.getCurrentUrl();
+			CommonUtility.checkPageIsReadyNew(driver);			
+			String CurrentURL = driver.getCurrentUrl();
 			System.out.println("Currnt URL - "+CurrentURL);
 			if(CurrentURL.contains("post-error")){
 				System.out.println("Provider look Up Button CLicked - Rally Provider Look up Error Page is displayed for Plan Type : "+planType);
@@ -332,13 +333,15 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 					driver.switchTo().window(PCPWindow);
 					if(driver.getCurrentUrl().contains("provider-search")){
 						System.out.println("OLE PCP Page is displayed : Provider Look up is Complete");
-						waitforElement(ProviderNameDisplay_PCPpage);
-						String ProviderNameDisplay = ProviderNameDisplay_PCPpage.getText();
-						if(PCPname.contains(ProviderNameDisplay)
-								&& validate(CurrentPCP_Question_Yes) && validate(CurrentPCP_Question_No)){
-							System.out.println("PCP Name is Displayed"+ProviderNameDisplay);
-							System.out.println("PCP Question and OPtions are Displayed");
-							validation_Flag = true;
+						//waitforElement(ProviderNameDisplay_PCPpage);
+						if (validate(ProviderNameDisplay_PCPpage)) {
+							String ProviderNameDisplay = ProviderNameDisplay_PCPpage.getText();
+							if (PCPname.contains(ProviderNameDisplay) && validate(CurrentPCP_Question_Yes)
+									&& validate(CurrentPCP_Question_No)) {
+								System.out.println("PCP Name is Displayed" + ProviderNameDisplay);
+								System.out.println("PCP Question and OPtions are Displayed");
+								validation_Flag = true;
+							}
 						}
 					}
 				}
@@ -413,6 +416,7 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 		
 		public ArrayList<String> getPCPInfo(){
 			ArrayList<String> pcp = new ArrayList<String>();
+			if(validate(ProviderNameDisplay_PCPpage)) {
 			
 			String pcp_name=ProviderNameDisplay_PCPpage.getText().replaceAll("-", "").trim();
 			String pcp_number=ProviderNumberDisplay_PCPpage.getText().trim();
@@ -423,6 +427,8 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 			pcp.add(pcp_number);
 			pcp.add(pcp_question_text);
 			return pcp;
+			}
+			return null;
 		}
 		
 		public ArrayList<String> pcpinforetreive(String plantype){

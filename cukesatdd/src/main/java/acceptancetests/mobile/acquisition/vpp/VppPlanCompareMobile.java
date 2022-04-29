@@ -37,6 +37,7 @@ import pages.acquisition.commonpages.FindCarePage;
 import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.ProviderSearchPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
+import pages.acquisition.ole.OLECommonPages;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.mobile.acquisition.commonpages.AboutUsAARPPageMobile;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
@@ -62,6 +63,7 @@ import pages.mobile.acquisition.commonpages.VPPTestHarnessPageMobile;
 import pages.mobile.acquisition.commonpages.VisitorProfilePageMobile;
 import pages.mobile.acquisition.commonpages.VisitorProfileTestHarnessPageMobile;
 import pages.mobile.acquisition.commonpages.ZipcodeLookupHomePageMobile;
+import pages.mobile.acquisition.ole.OLECommonPagesMobile;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
 
 /**
@@ -107,7 +109,7 @@ public class VppPlanCompareMobile {
 	/**
 	 * @toDo:user user selects a provider
 	 */
-	@When("^user selects a provider and retuns to VPP page in ulayer$")
+/*	@When("^user selects a provider and retuns to VPP page in ulayer$")
 	public void user_selects_provider_and_return_vpp_page_ulayer() {
 		{
 			ProviderSearchPageMobile providerSearchPage = (ProviderSearchPageMobile) getLoginScenario()
@@ -117,31 +119,24 @@ public class VppPlanCompareMobile {
 //			Assertion.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
 
 		}
-	}
+	} */
 
 	/**
 	 * @toDo:Verify X out of Y provider covered information is displayed on Plan
 	 *              Summary page
 	 */
-	@Then("^Verify X out of Y provider covered information is displayed on Plan Summary page Ulayer$")
+/*	@Then("^Verify X out of Y provider covered information is displayed on Plan Summary page Ulayer$")
 	public void verify_providers_covered_ulayer(DataTable Planname) {
 
 		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
 		plannameAttributesMap = DataTableParser.readDataTableAsMaps(Planname);
-		/*
-		 * List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows(); for
-		 * (int i = 0; i < plannameAttributesRow.size(); i++) {
-		 * 
-		 * plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
-		 * plannameAttributesRow.get(i).getCells().get(1)); }
-		 */
 		String planName = plannameAttributesMap.get("PlanName");
 
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		String providerFromRally = (String) getLoginScenario().getBean(VPPCommonConstants.SAVED_PROVIDER_RALLY);
 		plansummaryPage.verifyproviderName(planName, providerFromRally);
-	}
+	} */
 
 	@When("^user selects a Hospitals and retuns to VPP page in ulayer$")
 	public void user_selects_Hospitals_and_return_vpp_page_ulayer() {
@@ -540,10 +535,18 @@ public class VppPlanCompareMobile {
 	}
 	
 	@When("^user selects medsup plans to compare$")
-	public void user_selects_medsup_plans_to_compare() throws Throwable {
+	public void user_selects_medsup_plans_to_compare(DataTable data) throws Throwable {
+		Map<String, String> inputAttributesMap = parseInputArguments(data);
+		String zipCode = inputAttributesMap.get("Zip Code");
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-			plansummaryPage.compareAllMSPlans();
+		if (zipCode.equals("90210"))
+			plansummaryPage.compareAllMS4Plans();
+		else if (zipCode.equals("23666"))
+			plansummaryPage.compareAllMS3Plans();
+		else
+			System.out.println("Invalid zipcode");
+			
 			System.out.println("Selected All MS plans for Plan Compare");
 	}
 
@@ -5344,6 +5347,69 @@ public class VppPlanCompareMobile {
 		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.VerifyZipErrorMessageNoPlans();
+	}
+	
+	@Then("^user click to close MS application Modal$")
+	public void click_close_MS_Application_Page() {
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.clickCloseMSApplication();
+	}
+	
+	@Then("^user Validates Show DSNP and PDP Link available")
+	public void user_Validates_Show_DSNP_and_PDP_Link_available(){
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateShowDSNPPDPLink();
+		
+	}
+	
+	@Then("^user clicks on Show DSNP Toggle and validate DSNP Plan")
+	public void user_clicks_on_Show_DSNP_Toggle_and_validate_DSNP_Plan(DataTable givenAttributes) throws Exception{
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.clickDSNPToggleValidateSNPPlan(memberAttributesMap);
+		
+	}
+	
+	@Then("^User Click on PDP Link and Validate PDP Plans are loaded")
+	public void User_Click_on_PDP_Link_and_Validate_PDP_Plans_are_loaded(DataTable givenAttributes){
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE); 
+		planComparePage.clickPDPValidatePDPPlan(memberAttributesMap);
+	}
+	
+	@Then("^User Switch backs to MAPD Plans")
+	public void User_Switch_backs_to_MAPD_Plans(DataTable givenAttributes){
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		ComparePlansPageMobile  planComparePage = (ComparePlansPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE); 
+		planComparePage.clickMAPDValidateMAPDPlan(memberAttributesMap);
+		
+	}
+
+	@And("^the user signIn with optum Id for OLE$")
+	public void the_user_signIn_with_optum_Id_OLE(DataTable credentials) {
+		if (!(MRScenario.environment.equalsIgnoreCase("offline")
+				|| MRScenario.environment.equalsIgnoreCase("prod"))) {
+			Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+		plannameAttributesMap = DataTableParser.readDataTableAsMaps(credentials);
+
+		String username = plannameAttributesMap.get("User Name");
+		String password = plannameAttributesMap.get("Password");
+
+			//PersonalInformationPage SignIntoEnrollment = (PersonalInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
+			AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+			OLECommonPagesMobile SignIntoEnrollment=new OLECommonPagesMobile(wd);
+
+			SignIntoEnrollment.signInOLE(username, password);
+		}
+
 	}
 
 }

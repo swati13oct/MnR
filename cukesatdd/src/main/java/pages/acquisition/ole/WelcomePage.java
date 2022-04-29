@@ -125,7 +125,7 @@ public class WelcomePage extends UhcDriver{
 	@FindBy(xpath = "//a[contains(text(),'Extra Help')]")
 	private WebElement Extrahelp;
 	
-	@FindBy(xpath = "//a[contains(text(),'www.aarpmedicareplans.com/health-plans/aarp-pharmacy.html')]")
+	@FindBy(xpath = "//a[contains(text(),'www.aarpmedicareplans.com/health-plans/aarp-pharmacy.html') or contains(text(),'www.aarpmedicareplans.com/medicare/health-plans/aarp-pharmacy.html')]")
 	private WebElement AARPPharmacy;
 	
 	@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
@@ -233,7 +233,7 @@ public class WelcomePage extends UhcDriver{
 		String Expected_ZipCode = planDetailsMap.get("Zip Code");
 		String Expected_Premium = planDetailsMap.get("Plan Premium");
 		String Expected_PlanType = planDetailsMap.get("Plan Type");
-		
+
 		CheckiPerseptions();
 		if(validateNew(ViewPlanDetails)){
 			//ViewPlanDetails.click();
@@ -247,12 +247,24 @@ public class WelcomePage extends UhcDriver{
 				//String VPPTFNNoActual = VPPTFNNo.getText();
 				//System.out.println("TFN in VPP Right Rail TEXT : "+VPPTFNNoActual);
 				//CheckiPerseptions();
-				String elementPath = "//*[not(contains(@class,'ng-hide')) and contains(text(), 'Enroll in plan')]";
-				WebElement enrollInPlan = driver.findElement(By.xpath(elementPath));
-			//	enrollInPlan.click();
-				validateNew(enrollInPlan);
-				jsClickNew(enrollInPlan);
-				
+				//String elementPath = "//*[not(contains(@class,'ng-hide')) and contains(text(), 'Enroll in plan')]";
+				if (!Expected_PlanType.equalsIgnoreCase("SNP")) {
+					String elementPath = "(//*[contains(text(), 'Enroll in plan')])[1]";
+					WebElement enrollInPlan = driver.findElement(By.xpath(elementPath));
+					System.out.println("MA and PDP plans are displayed:" +Expected_PlanType);
+					sleepBySec(5);
+					validateNew(enrollInPlan);
+					jsClickNew(enrollInPlan);
+				}
+				else{
+					//String elementPath = "(//*[contains(text(), 'Enroll in plan')])[2]";
+					String elementPath ="(//*[contains(@data-ng-show, 'displayEnrollNow')])[2]";
+					WebElement enrollInPlan = driver.findElement(By.xpath(elementPath));
+					System.out.println("SNP plans are displayed:" +Expected_PlanType);
+					sleepBySec(5);
+					validateNew(enrollInPlan);
+					jsClickNew(enrollInPlan);
+				}
 				//flag = driver.getCurrentUrl().contains("welcome");
 				CheckiPerseptions();
 				if (flag){
@@ -278,8 +290,8 @@ public class WelcomePage extends UhcDriver{
 		String TFNNeedHelp_OLE = TFNNoNeedHelp.getText();
 			
 		
-		System.out.println("TFN in OLE Right Rail : "+TFNNeedHelp_OLE);
-		System.out.println("TFN in OLE Right Rail : "+TFNWidget_OLE);
+		System.out.println("TFN On  Need help section OLE : "+TFNNeedHelp_OLE);
+		System.out.println("TFN on widgets OLE : "+TFNWidget_OLE);
 		
 		//String Expected_TFN = planDetailsMap.get("TFN");
 		
@@ -793,8 +805,6 @@ public void ValidateFooterAARPPharmacyLink()  throws InterruptedException, IOExc
 			validate(SaveSignIn);
 			SaveSignIn.isDisplayed();
 			Saveclosepopup.isDisplayed();
-		String TFNNoSaveWelcome_OLE = TFNNoSaveWelcomeOLE.getText();
-			System.out.println("TFN in OLE ExitModels : "+TFNNoSaveWelcome_OLE);
 			jsClickNew(Saveclosepopup);
 			validate(OLEStickyHeader);
 			OLEStickyHeader.isDisplayed();

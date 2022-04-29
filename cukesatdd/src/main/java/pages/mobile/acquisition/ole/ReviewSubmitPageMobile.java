@@ -566,6 +566,12 @@ public class ReviewSubmitPageMobile extends UhcDriver {
 	}
 
 	public OLEconfirmationPageMobile submitEnrollment() {
+		try {
+			if(ReviewEditSavechanges.isDisplayed())
+				ReviewEditSavechanges.click();
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
 		scrollToView(SubmitApplicationBtn);
 		validateNew(SubmitApplicationBtn);
 		jsClickNew(SubmitApplicationBtn);
@@ -681,30 +687,30 @@ public class ReviewSubmitPageMobile extends UhcDriver {
 		String expectedText = "0.00";
 		
 		String paymentPlan = detailsMap.get("Payment Plan");
+		
 		System.out.println("Expected Plan Year Displayed  : "+Expected_PlanYear);
 		boolean flag = true;
-		if (Expected_PlanYear.contains("current")) {
-			String Expected_PlanYear_PlanName = Expected_Current_PlanYear + " " + Expected_PlanName;
-			flag = validateTextPlanName(PlanYear_NameDisplay, Expected_PlanYear_PlanName);
-		} else {
-			String Expected_PlanYear_PlanName = Expected_Future_PlanYear + " " + Expected_PlanName;
-			flag = validateTextPlanName(PlanYear_NameDisplay, Expected_PlanYear_PlanName);
-
+		if(Expected_PlanYear.contains("current")) {
+		String Expected_PlanYear_PlanName = Expected_Current_PlanYear+" "+Expected_PlanName;
+		flag=validateTextPlanName(PlanYear_NameDisplay,Expected_PlanYear_PlanName);
+		}else {
+				String Expected_PlanYear_PlanName = Expected_Future_PlanYear+" "+Expected_PlanName;
+				flag=validateTextPlanName(PlanYear_NameDisplay,Expected_PlanYear_PlanName);	
+				
 		}
 		String Zip = "ZIP Code: "+Expected_ZipCode+" ("+Expected_County+")";
 		flag&=validateText(PlanZipDisplay,Zip);
 		flag&=validateText(FirstNameDisplay,FirstName);
 		flag&=validateText(LastNameDisplay,LastName);
 		flag&=validateText(MiddleNameDisplay,MiddleName);
-
+		
 		flag&=validateText(MedicareClaimNumberDisplay,MedicareNumber);
 		flag&=validateText(PartADisplay,PartAeffectiveDate);
 		flag&=validateText(PartBDisplay,PartBeffectiveDate);
 		if(Expected_PlanName.contains("DSNP")) {
-			flag&=validateText(MedicaidNo,Medicaid_No);
+		flag&=validateText(MedicaidNo,Medicaid_No);
 		}
 		flag&=validateText(MobilePhoneNo,MobilePhoneNumber);
-		//flag&=validateText(HomePhoneNo,PrimaryPhoneNumber);
 		flag&=validateText(PrimaryPhoneNo,PrimaryPhoneNumber);
 		//flag&=validateText(EmailConfirmationNo,EmailConfirmationNumber);
 		flag&=validateText(PaperlessDelivery,Paperless_Delivery);
@@ -723,20 +729,21 @@ public class ReviewSubmitPageMobile extends UhcDriver {
 		flag&=validateText(AuthRelationship,AuthRelationshipDisplay);
 		flag&=validateText(PrescriptionDrugRadio,prescriptionDrug);
 		if(!Expected_PlanName.contains("PDP")) {
-			flag&=validateText(HealthInsuranceRadio,healthInsurance);
-			flag&=validateText(HealthInsuranceName,healthInsuranceName);
-			flag&=validateText(HealthInsuranceGroupNo,healthInsuranceGroupNo);
-			flag&=validateText(HealthInsuranceMemberNo,healthInsuranceMemberNo);
+		flag&=validateText(HealthInsuranceRadio,healthInsurance);
+		flag&=validateText(HealthInsuranceName,healthInsuranceName);
+		flag&=validateText(HealthInsuranceGroupNo,healthInsuranceGroupNo);
+		flag&=validateText(HealthInsuranceMemberNo,healthInsuranceMemberNo);
 		}
 		flag&=validateText(PrescriptionDrugName,prescriptionDrugName);
-		flag&=validateText(PrescriptionDrugGroupNo,prescriptionGroupNumber);
+
+		flag&=validateText(PrescriptionDrugGroupNo,prescriptionGroupNumber);		
 		flag&=validateText(PrescriptionDrugMemberNo,prescriptionMemberNumber);
 		flag&=validateText(PrescriptionRXBINMemberNo,rxBINNumber);
-
-		if(!Expected_PlanName.contains("PDP")) {
-			flag&=validateText(PCPName,PCP_Name);
-			flag&=validateText(PCPNumber,PCP_Number);
-			flag&=validateText(PCPRecentlyVisited,PCP_recently_visited);
+		
+		if(!Expected_PlanName.contains("PDP") && !Expected_PlanYear.contains("future")) {
+		flag&=validateText(PCPName,PCP_Name);		
+		flag&=validateText(PCPNumber,PCP_Number);
+		flag&=validateText(PCPRecentlyVisited,PCP_recently_visited);
 		}
 		flag&=validateText(ProposedEffectiveDate,Proposed_Effective_date);
 		flag&=validateText(StreetDisplay,Perm_Street);
@@ -747,22 +754,22 @@ public class ReviewSubmitPageMobile extends UhcDriver {
 		//if(MailStateDisplay.getSize()>1)
 		flag&=validateText(MailStateDisplay,Mailing_State);
 		flag&=validateText(MailZipDisplay,Mailing_Zip);
-		flag&=validateText(MailStreetDisplays,Mailing_Street);
+		flag&=validateText(MailStreetDisplays,Mailing_Street);		
 		//flag&=validateText(MailApartmentSuite,Mailing_AptNo);
 		flag&=validateText(MailCityDisplay,Mailing_City);
-
+		
 		if(!expectedOptionalRidersText.contains("Dental Platinum") || !expectedOptionalHighRidersText.contains("High Option Dental")) {
 			String OptionalRidersdisplay = OptionalRidersDisplay.replace(".", "");
 			flag&=validateText(OptionalRiders,OptionalRidersdisplay);
 		}
-
+		
 		if(!expectedText.contains("0.00")) {
 			flag&=validateText(paymentPlanDisplay,paymentPlan);
-		}
-
-
+			}
+		
+		
 		//-------------Adding the Line for CSNP Plans-------------------------//
-
+		
 		if(Expected_PlanName.contains("Chronic") || Expected_PlanName.contains("Gold") ||Expected_PlanName.contains("Silver")) {
 			flag&=validateText(DiabetsQuestion1,DiabetesQuestion1Display);
 			flag&=validateText(DiabetsQuestion2,DiabetesQuestion2Display);
@@ -782,27 +789,28 @@ public class ReviewSubmitPageMobile extends UhcDriver {
 			flag&=validateText(DisclosureProviderState,DisclosureProviderStateDisplay);
 			flag&=validateText(DisclosureProviderZipcode,DisclosureProviderZipDisplay);
 			flag&=validateText(DisclosureProviderPhoneNumber,DisclosureProviderPhoneNumberDisplay);
+			
+			}
 
-		}
-
-
+	
 		//-------------Adding the Line for CSNP Plans-------------------------//
+		
+		/*if(validate(Submit_Disclaimer) && validate(Enrollment_Disclaimer_Text)){
+			if(Enrollment_Disclaimer_Text.getText().contains("Submitting your enrollment application electronically")){
+				//flag = (!flag)?false:true;
+				System.out.println("Submit Enrollment Disclaimer is Displayed  : "+flag);
+			}
+			else flag = false;
+		}else flag = false;
 
-				/*if(validate(Submit_Disclaimer) && validate(Enrollment_Disclaimer_Text)){
-					if(Enrollment_Disclaimer_Text.getText().contains("Submitting your enrollment application electronically")){
-						//flag = (!flag)?false:true;
-						System.out.println("Submit Enrollment Disclaimer is Displayed  : "+flag);
-					}
-					else flag = false;
-				}else flag = false;
-				if(validate(SubmitApplicationBtn)){
-					if(SubmitApplicationBtn.isEnabled()){
-						//flag = (!flag)?false:true;
-						System.out.println("Submit Application Button is displayed and Enabled : "+flag);
-					}
-					else flag = false;
-				}else flag = false;
-			*/
+		if(validate(SubmitApplicationBtn)){
+			if(SubmitApplicationBtn.isEnabled()){
+				//flag = (!flag)?false:true;
+				System.out.println("Submit Application Button is displayed and Enabled : "+flag);
+			}
+			else flag = false;
+		}else flag = false;
+	*/
 		if (flag) {
 			String expected_EnrollText = "Submitting your enrollment application electronically";
 			String actual_EnrollText = Enrollment_Disclaimer_Text.getText();

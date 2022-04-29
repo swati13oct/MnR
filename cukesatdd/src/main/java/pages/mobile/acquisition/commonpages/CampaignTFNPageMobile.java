@@ -463,6 +463,61 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 		}
 
 	}
+	
+	public HashMap<String, String> retrieveTFNcookieLP() {
+		System.out.println("Current URL - " + driver.getCurrentUrl());
+		Cookie cookietfn = driver.manage().getCookieNamed("TFNSessionCookie");
+		System.err.println(cookietfn);
+		String str = cookietfn.toString();
+		System.out.println("TFN Cookie Value - " + str);
+		/*
+		 * String sep = str.contains(",") ? "," : "%2C"; // String[] arrOfStr =
+		 * str.split("%2C"); String[] arrOfStr = str.split(sep);
+		 */
+
+		String[] arrStr = str.split(",");
+		/*
+		 * String[] arrOfStr = arrStr[0].split(";"); /* if (str.contains(",")) {
+		 * arrOfStr = str.split(","); }
+		 */
+		String PSC_Code;
+		String FedTFN;
+		String MedSuppTFN;
+		String SRC_Code;
+
+		/*
+		 * for (String a : arrOfStr)
+		 * 
+		 * System.out.println(a);
+		 */
+		String PSC_Code_Str = arrStr[0];
+		String[] arrStr_1 = PSC_Code_Str.split("=");
+
+		PSC_Code = arrStr_1[1];
+		FedTFN = arrStr[2];
+		MedSuppTFN = arrStr[3];
+		SRC_Code = arrStr[4];
+
+		System.out.println("Campaign PSC code - " + PSC_Code);
+		System.out.println("Source code - " + SRC_Code);
+		System.out.println("Federal TFN - " + FedTFN);
+		System.out.println("MedSupp TFN - " + MedSuppTFN);
+
+		HashMap<String, String> tfnCookieValues = new HashMap<String, String>();
+		tfnCookieValues.put("PSC Code", PSC_Code);
+		tfnCookieValues.put("Source Code", SRC_Code);
+		tfnCookieValues.put("Fed TFN", FedTFN);
+		tfnCookieValues.put("Medsup TFN", MedSuppTFN);
+		System.out.println(tfnCookieValues);
+		return tfnCookieValues;
+
+		/*
+		 * getLoginScenario().saveBean(TFNCommonConstants.PSC_CODE, PSC_Code);
+		 * getLoginScenario().saveBean(TFNCommonConstants.FEDERAL_TFN, FedTFN);
+		 * getLoginScenario().saveBean(TFNCommonConstants.MEDSUPP_TFN, MedSuppTFN);
+		 */
+
+	}
 
 	public void validateMedSuppTFN(String tFN_Xpath) {
 		WebElement TFNelement = driver.findElement(By.xpath(tFN_Xpath));
@@ -850,6 +905,23 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 		jsClickNew(findPlansButton);
 	}
 	
+	public void validateStaticMedsupTFNNo(String ExpecetdTFNNo, String ExpecetdTFNxpath) {
+		CheckPageLoad();
+		CheckiPerseptions();
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		validate(driver.findElement(By.xpath(ExpecetdTFNxpath)));
+		if (ExpecetdTFNNo.contains(driver.findElement(By.xpath(ExpecetdTFNxpath)).getText())) {
+			System.out.println("TFN is Displayed on Page : " + driver.findElement(By.xpath(ExpecetdTFNxpath)).getText());
+		} else {
+			Assertion.fail("Static TFN elemnet is not found / displayed on page ");
+		}
+	}
+	
 	public VPPPlanSummaryPageMobile planSearch(String zip) {
 		CheckPageLoad();
 
@@ -979,7 +1051,6 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 			jsClickNew(msPlansViewLink);
 			waitForPageLoadSafari();
 			CommonUtility.waitForPageLoadNew(driver, msPlansHeading, 30);
-			CommonUtility.waitForPageLoadNew(driver, planCardMS4_0, 30);
 			/*
 			 * msPlansViewLink.click(); CommonUtility.waitForPageLoadNew(driver,
 			 * medSuppPlanList.get(0), 30);

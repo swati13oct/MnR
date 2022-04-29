@@ -109,7 +109,7 @@ public class GetStartedPageMobile extends UhcDriver {
 	@FindBy(xpath = "//h3[contains(text(), 'Almost there')]")
 	public WebElement BuildDrugPage_verificationTxt;
 
-	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button')]//*[contains(text(), 'Return to')]")
+	@FindBy(xpath="//a[contains(@class, 'uhc-link-button')]//*[contains(text(),'Return')]")
 	public WebElement LinktoExitScenario;
 
 	@FindBy(xpath = "//div/h2[text()='Get Started ']")

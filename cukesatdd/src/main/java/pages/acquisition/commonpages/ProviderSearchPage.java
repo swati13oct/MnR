@@ -16,6 +16,7 @@ import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
@@ -70,9 +71,8 @@ public class ProviderSearchPage extends UhcDriver {
 	private List<WebElement> SaveBtns;
 
 	@FindBys(value = {
-			// @FindBy(xpath = "//div[@class='acquisitionButtons
-			// hidden-phone']//button[contains(@class,'saved-provider-button')]") })
-			@FindBy(xpath = "//button[contains(@class,'saved-provider-button')]") })
+		//	 @FindBy(xpath = "//div[@class='acquisitionButtons hidden-phone']//button[contains(@class,'saved-provider-button')]") })
+			@FindBy(xpath = "//*[@data-test-id='saved-provider-button']") })
 	private List<WebElement> MulitpleSaveBtns;
 
 	@FindBy(xpath = "//button[@data-test-id='button-close']")
@@ -202,7 +202,10 @@ public class ProviderSearchPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		CommonUtility.waitForPageLoadNew(driver, continueButton, 45);
+		if(validate(continueButton)||validate(GetStarted)) {
+			System.out.println("Elements validated on Rally landing page");
+		}else
+			Assert.fail("Continue button or Get Started button not present on Rally landing page");
 	}
 
 	public VPPPlanSummaryPage selectsProvider(String physicianSearchCriteria, String physicianName) {
@@ -748,7 +751,7 @@ public class ProviderSearchPage extends UhcDriver {
 	 * 
 	 * return new VPPPlanSummaryPage(driver); }
 	 */
-	public VPPPlanSummaryPage MultipleselectsProvider() {
+	public VPPPlanSummaryPage MultipleselectsProvider() throws InterruptedException {
 		GetStarted.click();
 
 		CommonUtility.waitForPageLoadNew(driver, MedicalDirectory, 10);
@@ -770,9 +773,12 @@ public class ProviderSearchPage extends UhcDriver {
 		// jsClickNew(selectProviderBtn);
 
 		int counter = 0;
+		Thread.sleep(10000);
 		for (WebElement element : MulitpleSaveBtns) {
 			// CommonUtility.waitForPageLoadNew(driver, element, 45);
-			CommonUtility.waitForPageLoadNew(driver, element, 10);
+		//	CommonUtility.waitForPageLoadNew(driver, element, 30);
+			Thread.sleep(10000);
+			scrollToView(element);
 			jsClickNew(element);
 
 			if (validate(selectLocationOption, 10)) {
@@ -795,11 +801,12 @@ public class ProviderSearchPage extends UhcDriver {
 			 */
 
 			counter++;
-			if (counter == 8) {
+			if (counter == 9) {
 				break;
 			}
 
 		}
+
 
 		/*---------------------Commented the lines as per new changes in rally---------------
 			CommonUtility.waitForPageLoadNew(driver, Savedproviders, 10);

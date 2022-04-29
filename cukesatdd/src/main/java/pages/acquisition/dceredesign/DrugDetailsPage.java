@@ -90,8 +90,11 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='editdrugcontainer']")
 	public WebElement YourDrugs_Table;
 
-	@FindBy(xpath = "//div[@id='editdrugcontainer']//th[contains(text(), 'Drug')]")
+	@FindBy(xpath = "//div[@id='editdrugcontainer']//label[contains(text(), 'Drug')]")
 	public WebElement YourDrugs_DrugsTxt;
+
+	@FindBy(xpath = "//div[@id='editdrugcontainer']//th[contains(text(), 'Drug')]")
+	public WebElement YourDrugs_NoSortTxt;
 
 	@FindBy(xpath = "//div[@id='editdrugcontainer']//th//span[contains(text(), 'You Pay')]")
 	public WebElement YourDrugs_YouPayTxt;
@@ -460,7 +463,7 @@ public class DrugDetailsPage extends UhcDriver {
 	public void validateYourDrugs() {
 		validateNew(YourDrugs_Header);
 		validateNew(YourDrugs_Table);
-		validateNew(YourDrugs_DrugsTxt);
+	//	validateNew(YourDrugs_DrugsTxt);
 		validateNew(YourDrugs_YouPayTxt);
 		// validateNew(YourDrugs_InitlCoverageTxt);
 		validateNew(LinktoEditDrugList);
@@ -667,15 +670,15 @@ public class DrugDetailsPage extends UhcDriver {
 
 	public void ValidatesDrugsTier_LimitsDisplayed() {
 		List<WebElement> Tier1Drugs = driver.findElements(
-				By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//li[contains(text(), 'Tier 1')]"));
+				By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//*[contains(text(), 'Tier 1')]"));
 		List<WebElement> Tier2Drugs = driver.findElements(
-				By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//li[contains(text(), 'Tier 2')]"));
+				By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//*[contains(text(), 'Tier 2')]"));
 		List<WebElement> Tier3Drugs = driver.findElements(
-				By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//li[contains(text(), 'Tier 3')]"));
+				By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//*[contains(text(), 'Tier 3')]"));
 		List<WebElement> Tier4Drugs = driver.findElements(
-				By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//li[contains(text(), 'Tier 4')]"));
+				By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//*[contains(text(), 'Tier 4')]"));
 		List<WebElement> Tier5Drugs = driver.findElements(
-				By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//li[contains(text(), 'Tier 5')]"));
+				By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//*[contains(text(), 'Tier 5')]"));
 		List<WebElement> NotCoveredDrugs = driver.findElements(By.xpath(
 				"//caption[contains(text(), 'Your Drugs')]/ancestor::table//li[contains(text(), 'Not Covered')]"));
 		List<WebElement> PADrugs = driver.findElements(By.xpath(
@@ -896,7 +899,6 @@ public class DrugDetailsPage extends UhcDriver {
 		jsClickNew(DrugCosts_PlanDetailsBtn);
 		waitForPageLoadSafari();
 		pageloadcomplete();
-		//CommonUtility.waitForPageLoadNew(driver, planCostsTab, 20);
 		WebElement PlanName_PlanDetails = driver.findElement(By.xpath("//h2[contains(text(), '"+planName+"')]"));
 		if (driver.getCurrentUrl().contains("details") && validateNew(PlanName_PlanDetails)) {
 			System.out.println("Plan Details Page displayed for current Plan : "+planName);
@@ -1303,7 +1305,7 @@ public class DrugDetailsPage extends UhcDriver {
 		}
 	}
 
-	@FindBy(xpath = "//*[contains(@id, 'plancopaydetail')]//*[contains(text(), 'Insulin Drugs' )and contains(text(),  '$')]")
+	@FindBy(xpath = "//*[contains(@id, 'plancopaydetail')]//*[contains(text(), 'Insulin Drugs' )]//following-sibling::span")
 	private WebElement CopaySection_InsulinTier;
 
 	public void validateInsulinTier_CopaySection(String insulinCopay) {
@@ -1414,6 +1416,9 @@ public class DrugDetailsPage extends UhcDriver {
 
 	@FindBy(xpath = "//button[contains(@dtmname, 'compare')]//*[contains(text(), 'Compare')]")
 	public WebElement DrugCosts_PlanCompareBtn;
+	
+	@FindBy(xpath = "//*[contains(text(), normalize-space('Return to plan compare'))]")
+	public WebElement DrugCosts_PlanCompareLnk;
 
 	@FindBy(xpath = "//*[contains(@id, 'compare-table-header')]")
 	public WebElement ComparePage_TableHeader;
@@ -1425,8 +1430,8 @@ public class DrugDetailsPage extends UhcDriver {
 	private WebElement DrugInfoModal_CloseBtn;
 
 	public ComparePlansPage clickViewPlanCompareBtn_ReturnToCompare_ViewDrugModal() {
-		validateNew(DrugCosts_PlanCompareBtn);
-		jsClickNew(DrugCosts_PlanCompareBtn);
+		validateNew(DrugCosts_PlanCompareLnk);
+		jsClickNew(DrugCosts_PlanCompareLnk);
 		waitForPageLoadSafari();
 		// CommonUtility.waitForPageLoad(driver, ComparePage_TableHeader, 30);
 		CommonUtility.waitForPageLoadNew(driver, DrugInfoModal_DrugCostDetailsBtn, 30);
@@ -1674,7 +1679,7 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id, 'plancopaydetail')]//h3[contains(text(), 'Initial Coverage Stage')]//parent::div")
 	public WebElement LIS_CopayHeader;
 
-	@FindBy(xpath = "//*[contains(@id, 'lisbuydown')]//*[contains(text(), 'All covered drugs:')]")
+	@FindBy(xpath = "//h3[contains(text(), 'Initial Coverage Stage')]//following-sibling::*[contains(text(), 'All covered drugs:')]")
 	public WebElement LIS_BuyDown_Copay;
 
 	@FindBy(xpath = "//*[contains(@id, 'plancopaydetail')]//h3[contains(text(), 'Deductible')]//parent::div")
@@ -1883,8 +1888,8 @@ public class DrugDetailsPage extends UhcDriver {
 
 	public void validateDefaultDistanceDrugDetails() {
 		Select distance = new Select(clickDistanceDefaultMile);
-		Assertion.assertTrue("Default distance is not 15 miles",
-				distance.getFirstSelectedOption().getText().trim().equals("15 Miles"));
+		Assertion.assertTrue("Default distance is not 10 miles",
+				distance.getFirstSelectedOption().getText().trim().equals("10 Miles"));
 	}
 
 	public void sortPharmaciesDrugDetails(String sortOption) {
@@ -2092,10 +2097,9 @@ public class DrugDetailsPage extends UhcDriver {
 
 	}
 
-	private static String LISBUYDOWN_INITIAL_COVERAGE_TEXT = "During the Initial Coverage Stage, the plan pays all of the costs for your covered drugs.";
-	private static String LISBUYDOWN_COVERAGE_GAP_TEXT = "During the Coverage Gap Stage, the plan pays all of the costs for your covered drugs.";
-	private static String LISBUYDOWN_CATASTROPHIC_TEXT = "During the Catastrophic Coverage Stage, the plan pays all of the costs for your covered drugs.";
-
+	private static String LISBUYDOWN_INITIAL_COVERAGE_TEXT = "During the Initial Coverage Stage, the plan pays all of the cost for your covered drugs.";
+	private static String LISBUYDOWN_COVERAGE_GAP_TEXT = "During the Coverage Gap Stage, the plan pays all of the cost for your covered drugs.";
+	private static String LISBUYDOWN_CATASTROPHIC_TEXT = "During the Catastrophic Coverage Stage, the plan pays all of the cost for your covered drugs.";
 	@FindBy(xpath = "//*[contains(@class, 'uhc-modal') and (contains(@id,'modal'))]//p[contains(@class, 'text-normal')]")
 	public WebElement CoverageText;
 
@@ -2516,7 +2520,7 @@ Blank error message is removed
 	public void validateTierCopay_YourDrugsSection(String tierNo, String tierCopay) {
 		validateNew(YourDrugs_DrugsTxt);
 		if(tierCopay.contains("N/A")){
-			WebElement YourDrugs_TierCopay = driver.findElement(By.xpath("//div[@id='drugtable']//ul[contains(@class, 'yourdrugs')]//li[contains(text(), '" + tierNo + "')]"));
+			WebElement YourDrugs_TierCopay = driver.findElement(By.xpath("//div[@id='drugtable']//ul[contains(@class, 'yourdrugs')]//li//span[contains(text(), '" + tierNo + "')]"));
 			validateNew(YourDrugs_TierCopay);
 			System.out.println("Copay Amount Displayed for Tier - " + YourDrugs_TierCopay.getText());
 			if (YourDrugs_TierCopay.getText().contains("$") || YourDrugs_TierCopay.getText().contains("%")) {
@@ -2534,7 +2538,12 @@ Blank error message is removed
 			}
 		}
 		else if(tierNo.contains("3")){
-			List<WebElement> Tier3Copays = driver.findElements(By.xpath("//div[@id='drugtable']//ul[contains(@class, 'yourdrugs')]//li[contains(text(), '" + tierNo + "')]/span"));
+			List<WebElement> Tier3Copays = null;
+			try{
+				Tier3Copays = driver.findElements(By.xpath("//div[@id='drugtable']//ul[contains(@class, 'yourdrugs')]//li//span[contains(text(), '" + tierNo + "')]"));
+			}catch (Exception ex){
+				 Tier3Copays = driver.findElements(By.xpath("//div[@id='drugtable']//ul[contains(@class, 'yourdrugs')]//li[contains(text(), '" + tierNo + "')]"));
+			}
 			boolean flag = false;
 			String Actual = "";
 			for (WebElement Tier3text:Tier3Copays) {
@@ -2551,14 +2560,22 @@ Blank error message is removed
 			}
 		}
 		else {
-			WebElement YourDrugs_TierCopay = driver.findElement(By.xpath("//div[@id='drugtable']//ul[contains(@class, 'yourdrugs')]//li[contains(text(), '" + tierNo + "')]"));
+			WebElement YourDrugs_TierCopay = null;
+			try{
+				YourDrugs_TierCopay = driver.findElement
+						(By.xpath("//div[@id='drugtable']//ul[contains(@class, 'yourdrugs')]//li//span[contains(text(), '" + tierNo + "')]"));
+			}catch (Exception ex){
+				YourDrugs_TierCopay = driver.findElement
+						(By.xpath("//div[@id='drugtable']//ul[contains(@class, 'yourdrugs')]//li[contains(text(), '" + tierNo + "')]"));
+			}
+			//(By.xpath("//div[@id='drugtable']//ul[contains(@class, 'yourdrugs')]//li[contains(text(), '" + tierNo + "')]"));
 			validateNew(YourDrugs_TierCopay);
-			WebElement CopayText = driver.findElement(By.xpath("//div[@id='drugtable']//ul[contains(@class, 'yourdrugs')]//li[contains(text(), '" + tierNo + "')]/span"));
-			validateNew(CopayText);
-			System.out.println("Copay Amount Displayed for Tier - "+tierNo+" : " + CopayText.getText());
-			if (!CopayText.getText().contains(tierCopay)) {
+			//WebElement CopayText = driver.findElement(By.xpath("//div[@id='drugtable']//ul[contains(@class, 'yourdrugs')]//li[contains(text(), '" + tierNo + "')]/span"));
+			//validateNew(CopayText);
+			System.out.println("Copay Amount Displayed for Tier - "+tierNo+" : " + YourDrugs_TierCopay.getText());
+			if (!YourDrugs_TierCopay.getText().contains(tierCopay)) {
 				Assertion.fail(
-						">>>>> Expected Copay for Tier"+tierNo+" In Your Drugs Section - "+tierCopay+"; Actual - "+CopayText.getText()+" <<<<<");
+						">>>>> Expected Copay for Tier"+tierNo+" In Your Drugs Section - "+tierCopay+"; Actual - "+YourDrugs_TierCopay.getText()+" <<<<<");
 			}
 		}
 	}
@@ -2566,7 +2583,7 @@ Blank error message is removed
 	@FindBy(xpath = "//*[contains(text(), 'Deductible')]//following-sibling::ul/li/span")
 	private List<WebElement> SplitDeductible_Text;
 
-	@FindBy(xpath = "//*[contains(text(), 'Deductible')]//following-sibling::ul/li")
+	@FindBy(xpath = "//*[contains(text(), 'Deductible')]//following-sibling::ul//span")
 	private WebElement SingleDeductible_Text;
 
 	public void validateDeductible_CopaySection(String deductible) {
@@ -2655,7 +2672,7 @@ Blank error message is removed
 
 	private static String INITIAL_COVERAGE_TEXT_NextYear = "In the Initial Coverage Stage, you (or others on your behalf) will pay a copay or coinsurance each time you fill a prescription, and the plan pays the rest. When your total drug costs--paid by you (or others on your behalf) and the plan--reach $4,430 you then move to the Coverage Gap Stage.";
 	private static String COVERAGE_GAP_TEXT_NextYear = "During the Coverage Gap Stage, you (or others on your behalf) will pay no more than 25% of the total cost for generic drugs or 25% of the total cost for brand name drugs, for any drug tier until the total amount you (or others on your behalf) and the drug manufacturer have paid reaches $7,050 in year-to-date out-of-pocket costs.";
-	private static String CATASTROPHIC_TEXT_NextYear = "You enter the Catastrophic Coverage Stage after $7,050 is reached (excluding premiums), you will have to pay only one of the following through the end of the year: $3.95 copay for generic drugs, $9.85 copay for brand name drugs or a 5% coinsurance, whichever is greater.";
+	private static String CATASTROPHIC_TEXT_NextYear = "You enter the Catastrophic Coverage Stage after $7,050 is reached (excluding premiums), you will have to pay only one of the following through the end of the year: $3.95 copay for generic drugs, $9.85 copay for brand name drugs or a 15% coinsurance, whichever is greater.";
 
 	public void validateCoveragestagePopUpTextNextYear() {
 		validateNew(MonthlyDrugStage_InitialCoverageLink);
@@ -2808,4 +2825,370 @@ Blank error message is removed
 		}
 	}
 
+	@FindBy(xpath="//label[@id='sortby']//button")
+	protected WebElement Defaultclick;
+
+	@FindBy(xpath="//label[@id='sortby']/..//button[contains(text(),'Apply')]")
+	protected WebElement SortApplyBtn;
+
+	@FindBy(xpath="//div[@id='accordion']//span[contains(text(),'Your Drugs')]")
+	protected WebElement FoundCount;
+
+	@FindBy(xpath="//div[@id='drugtable']//span[@class='text-bold mr-5 onlyserif']")
+	private List<WebElement> Drugname;
+
+	@FindBy(xpath="//div[@id='editdrugcontainer']//div[@id='accordion-1-content']//p[@class='text-bold']")
+	private List<WebElement> DrugCost;
+
+	@FindBy(xpath="//div[@id='drugtable']//*[contains(text(),'Tier')]")
+	private List<WebElement> Coveredd;
+
+	@FindBy(xpath="//div[@id='drugtable']//li[contains(text(),'Not Covered*')]")
+	private List<WebElement> NotCovered;
+
+	public int DrugCount;
+
+	public int tierdrugcount;
+
+	public int getDrugCnt(){
+	    pageloadcomplete();
+		String DrugCountText = FoundCount.getText();
+		String[] trimText=DrugCountText.split("of");
+		String Text= trimText[1].trim();
+	//	System.out.println(Text);
+		DrugCount = Integer.parseInt(Character.toString(Text.charAt(0)));
+		System.out.println("Displayed Drug Count - "+DrugCount);
+		return DrugCount;
+	}
+
+	public int getTierDrugCnt() {
+	        pageloadcomplete();
+			String DrugCountText = FoundCount.getText();
+			String[] trimText=DrugCountText.split("of");
+			String Text= trimText[0].trim();
+		//	System.out.println(Text);
+			tierdrugcount = Integer.parseInt(Character.toString(Text.charAt(Text.length()-1)));
+			System.out.println("Displayed tier Drug Count - "+tierdrugcount);
+			return tierdrugcount;
+	}
+
+	public void validateDrugSortBy(String sortBy) {
+		int Drugcnt = getDrugCnt();
+		int tierdrugcount = getTierDrugCnt();
+		validateNew(Defaultclick);
+		jsClickNew(Defaultclick);
+		String labelId="";
+		if(sortBy.equalsIgnoreCase("Default")){
+			labelId= "(//uhc-radio[@name='sort-order-group']/..//label)[1]";
+		}else if (sortBy.equalsIgnoreCase("A-Z")){
+			labelId="(//uhc-radio[@name='sort-order-group']/..//label)[2]";
+		}else if(sortBy.equalsIgnoreCase("Z-A")){
+			labelId="(//uhc-radio[@name='sort-order-group']/..//label)[3]";
+		}else if(sortBy.equalsIgnoreCase("Cost")){
+			labelId="(//uhc-radio[@name='sort-order-group']/..//label)[4]";
+		}else if(sortBy.equalsIgnoreCase("Tier")){
+			labelId="(//uhc-radio[@name='sort-order-group']/..//label)[5]";
+		}else if(sortBy.equalsIgnoreCase("Covered")){
+			labelId="(//uhc-radio[@name='sort-order-group']/..//label)[6]";
+		}else if(sortBy.equalsIgnoreCase("Not Covered")){
+			labelId="(//uhc-radio[@name='sort-order-group']/..//label)[7]";
+		}else {
+			Assertion.assertTrue("PROBLEM - haven't code to sort By '" + sortBy + "' yet", false);
+		}
+
+		WebElement label = driver.findElement(By.xpath(labelId));
+		validateNew(label);
+		jsClickNew(label);
+		validateNew(SortApplyBtn);
+        jsClickNew(SortApplyBtn);
+        pageloadcomplete();
+        CommonUtility.checkPageIsReady(driver);
+
+        if(Drugcnt==1) {
+        	validateNew(YourDrugs_NoSortTxt);
+        	System.out.println("<<< Sort option is disabled for one drug >>>>>");
+        }else {
+        	validateNew(YourDrugs_DrugsTxt);
+        	if(sortBy.equals("Default")) {
+        		validateNew(Defaultclick);
+        		System.out.println("<<<<< Default text is displayed >>>>");
+        	}else if(sortBy.equalsIgnoreCase("A-Z")){
+        		boolean azflag=false;
+        		List<String> druglist = new ArrayList();
+        		String drug=null;
+        		for(WebElement we : Drugname ) {
+        			drug=we.getText().toLowerCase();
+        			druglist.add(drug);
+        		}
+        		Collections.sort(druglist);
+        		int i=0;
+        		for(WebElement we : Drugname){
+        			if(we.getText().toLowerCase().equals(druglist.get(i))) {
+        				azflag=true;
+        			}
+        			else {
+        				azflag=false;
+        				break;
+        			}
+        			i++;
+        		}
+        		if(azflag==true) {
+        			System.out.println("Drugs sorted in A-Z format");
+        		}else{
+                       Assertion.fail(">>>>>> Drugs Not sorted in A-Z format <<<<<<");
+        		}
+        	}else if(sortBy.equalsIgnoreCase("Z-A")) {
+        		boolean zaflag=false;
+        		List<String> druglist = new ArrayList();
+        		String drug=null;
+        		for (WebElement we : Drugname) {
+        			drug=we.getText().toLowerCase();
+        			druglist.add(drug);
+        		}
+                Collections.sort(druglist,Collections.reverseOrder());
+                int i=0;
+        		for(WebElement we : Drugname){
+        			if(we.getText().toLowerCase().equals(druglist.get(i))) {
+        				zaflag=true;
+        			}else {
+        				zaflag=false;
+        				break;
+        			}
+        			i++;
+        		}
+            		if(zaflag==true) {
+            			System.out.println("Drugs sorted in Z-A format");
+            		}else{
+                           Assertion.fail(">>>>>> Drugs Not sorted in Z-A format <<<<<<<");
+            		}
+        	}else if(sortBy.equalsIgnoreCase("Cost")) {
+        		 boolean costflag=false;
+        		 List<Double> costlist=new ArrayList();
+        		 Double a=0.0;
+        		 for(WebElement we : DrugCost){
+        			 a=Double.parseDouble(we.getText().substring(1));
+        			 costlist.add(a);
+        		 }
+        		 Collections.sort(costlist,Collections.reverseOrder());
+        		 int i=0;
+        		 for(WebElement we : DrugCost){
+         			if(Double.parseDouble(we.getText().substring(1))==(costlist.get(i))) {
+         				costflag=true;
+         			}else {
+         				costflag=false;
+         				break;
+         			}
+         			i++;
+         		}
+        		 if(costflag==true) {
+        			 System.out.println("Durgs sorted by cost high to low");
+        		 }else {
+        			 Assertion.fail(">>>>>> Drugs Not sorted by cost <<<<<");
+        		 }
+        	}else if(sortBy.equalsIgnoreCase("Tier")) {
+        		boolean ncflag=false;
+        		boolean cflag=false;
+        		boolean dflag=false;
+        		boolean dflag1=false;
+        		if(Drugcnt-tierdrugcount >0) {
+            		List<String> notcoveredlist = new ArrayList();
+            		String notcovered=null;
+            		List<String> druglist = new ArrayList();
+            		String drug=null;
+            		for(WebElement we : NotCovered) {
+            			notcovered=we.getText();
+            			notcoveredlist.add(notcovered);
+            		}
+            		int i=0;
+            		for (WebElement we : Drugname) {
+            			if(i==Drugcnt-tierdrugcount) {
+            				break;
+            			}
+            			drug=we.getText().toLowerCase();
+            			druglist.add(drug);
+            			i++;
+            		}
+            		Collections.sort(druglist);
+            		int j=0;
+            		for (WebElement we : Drugname) {
+            			if(j==Drugcnt-tierdrugcount) {
+            				break;
+            			}
+            			if(we.getText().toLowerCase().equals(druglist.get(j))) {
+            				dflag=true;
+            			}else {
+            				dflag=false;
+            				break;
+            			}
+            			j++;
+            			}
+            		int k=0;
+            		for(WebElement we1 : NotCovered ){
+            			if(we1.getText().equals(notcoveredlist.get(k))){
+            				ncflag=true;
+            			}else {
+            				ncflag=false;
+            				break;
+            			}
+            			k++;
+            		}
+        		}
+        		if(tierdrugcount >0) {
+            		List<String> coveredlist = new ArrayList();
+            		String covered=null;
+            		List<String> druglist = new ArrayList();
+            		String drug=null;
+            		for(WebElement we : Coveredd) {
+            			covered=we.getText().substring(0,6);
+            			coveredlist.add(covered);
+            		}
+            		Collections.sort(coveredlist);
+            		int i=0;
+            		for (WebElement we : Drugname) {
+            			if(i<tierdrugcount) {
+            			drug=we.getText().toLowerCase();
+            			druglist.add(drug);
+            			}
+            			i++;
+            		}
+            		int j=0;
+            		for (WebElement we : Drugname) {
+            			if(j<tierdrugcount) {
+            			if(we.getText().toLowerCase().equals(druglist.get(j))) {
+            				dflag1=true;
+            			}else {
+            				dflag1=false;
+            				break;
+            			}
+            			j++;
+            			}
+            		}
+            		int k=0;
+            		for(WebElement we : Coveredd){
+            			if(we.getText().substring(0,6).equals(coveredlist.get(k))){
+            				cflag=true;
+            			}else {
+            				cflag=false;
+            				break;
+            			}
+            			k++;
+            		}
+        		}
+        		if(Drugcnt-tierdrugcount==0 && cflag==true && dflag1==true) {
+        			System.out.println("Drugs sorted by tier low to high");
+        		} else if(tierdrugcount==0 && ncflag==true && dflag==true) {
+        			System.out.println("Drugs sorted by tier low to high");
+        		}else if(cflag==true && ncflag==true && dflag==true && dflag1==true) {
+        			System.out.println("Drugs sorted by tier low to high");
+        		}else {
+        			Assertion.fail(">>>>> Drugs Not sorted by tier low to high <<<<<<< ");
+        		}
+        	}else if(sortBy.equalsIgnoreCase("Covered")) {
+        		boolean cflag=false;
+        		List<String> coveredlist = new ArrayList();
+        		String covered=null;
+        		List<String> druglist = new ArrayList();
+        		String drug=null;
+        		for(WebElement we : Coveredd) {
+        			covered=we.getText().substring(0,6);
+        			coveredlist.add(covered);
+        		}
+        		int i=0;
+        		for (WebElement we : Drugname) {
+        			if(i<tierdrugcount) {
+        			drug=we.getText().toLowerCase();
+        			druglist.add(drug);
+        			}
+        			i++;
+        		}
+        		Collections.sort(druglist);
+        		int j=0;
+        		boolean dflag=false;
+        		for (WebElement we : Drugname) {
+        			if(j<tierdrugcount) {
+        			if(we.getText().toLowerCase().equals(druglist.get(j))) {
+        				dflag=true;
+        			}else {
+        				dflag=false;
+        				break;
+        			}
+        			j++;
+        			}
+        		}
+        		int k=0;
+        		for(WebElement we : Coveredd){
+        			if(we.getText().substring(0,6).equals(coveredlist.get(k))){
+        				cflag=true;
+        			}else {
+        				cflag=false;
+        				break;
+        			}
+        			k++;
+        		}
+            		if(cflag==true && dflag==true) {
+            			System.out.println("Drugs sorted in Covered format");
+            		}else{
+                           Assertion.fail(">>>>>> Drugs Not sorted in Covered format <<<<<<<");
+            		}
+
+        	}else if(sortBy.equalsIgnoreCase("Not Covered")) {
+        		boolean ncflag=false;
+        		List<String> notcoveredlist = new ArrayList();
+        		String notcovered=null;
+        		List<String> druglist = new ArrayList();
+        		String drug=null;
+        		for(WebElement we : NotCovered) {
+        			notcovered=we.getText();
+        			notcoveredlist.add(notcovered);
+        		}
+        		int i=0;
+        		for (WebElement we : Drugname) {
+        			if(i==Drugcnt-tierdrugcount) {
+        				break;
+        			}
+        			drug=we.getText().toLowerCase();
+        			druglist.add(drug);
+        			i++;
+        		}
+        		Collections.sort(druglist);
+        		int j=0;
+        		boolean dflag=false;
+        		for (WebElement we : Drugname) {
+        			if(j==Drugcnt-tierdrugcount) {
+        				break;
+        			}
+        			if(we.getText().toLowerCase().equals(druglist.get(j))) {
+        				dflag=true;
+        			}else {
+        				dflag=false;
+        				break;
+        			}
+        			j++;
+        			}
+        		int k=0;
+        		for(WebElement we1 : NotCovered ){
+        			if(we1.getText().equals(notcoveredlist.get(k))){
+        				ncflag=true;
+        			}else {
+        				ncflag=false;
+        				break;
+        			}
+        			k++;
+        		}
+            		if(ncflag==true && dflag==true) {
+            			System.out.println("Drugs sorted in Not covered format");
+            		}else{
+                           Assertion.fail(">>>>>> Drugs Not sorted in Not covered format <<<<<<<");
+            		}
+        	}
+        }
+	}
+
+	public DrugDetailsPage validateDrugDetailsPage(){
+		if (validateNew(DrugDetails_ChangePharmacyLnk) &&
+			validateNew(DrugCosts_PlanDetailsBtn) && validateNew(DrugDetails_DrugCostsHeading)) {
+			return new DrugDetailsPage(driver);
+		}
+		return null;
+	}
 }

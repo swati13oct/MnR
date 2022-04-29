@@ -7,14 +7,14 @@ import io.cucumber.testng.FeatureWrapper;
 import io.cucumber.testng.PickleWrapper;
 import org.testng.annotations.Test;
 
-@CucumberOptions(glue = {"atdd.framework", "acceptancetests.AEM"},
-        features = {"src/main/resources/feature/AEM"},
+@CucumberOptions(glue = {"atdd.framework", "acceptancetests.acquisition"},
+        features = {"src/main/resources/feature/acquisition/acqseo"},
         monochrome = true,
         plugin = {"pretty",
                 "html:reports/test-report.html",
                 "json:target/cucumber-RunMRATDDAcquisitionSEO.json",
                 "timeline:target"},
-        tags = "@AEM_DataLayer")
+        tags = "@SEO")
 
 @RetryCountIfFailed(1)
 public class RunMRATDDAcquisitionSEO extends BaseTestConfig {

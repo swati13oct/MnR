@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
+import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.acquisition.dceredesign.DCERedesignCommonConstants;
@@ -119,11 +120,24 @@ public class DCEStepDefinitionAARPMobile {
 			Assertion.fail("DCE Redesign page object not loaded");
 	}
 	
+	@When("^user toggle to PDP plan type on drug summary page$")
+    public void user_toggle_to_PDP_plan_type_on_drug_summary_page() {
+		//AppiumDriver wd = getLoginScenario().getMobileDriver();
+        DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile((AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+        drugSummaryPage.verifyPDPPlanToggle();
+    }
+	
 	@Then("^the user validates Not Covered Pharmacy message DCE Summary Page plan card$")
     public void the_user_validates_drug_pricing_message_for_notcovered_Pharmacy_selection_dce_summary_page() throws Throwable {
         DrugSummaryPageMobile drugSummaryPage = (DrugSummaryPageMobile) getLoginScenario()
                 .getBean(PageConstants.DCE_Redesign_DrugSummary);
         drugSummaryPage.ValidateNotCoveredPharMessage();
+    }
+	
+	@When("^user toggle to SNP plan type on drug summary page$")
+    public void user_toggle_to_SNP_plan_type_on_drug_summary_page() {
+        DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile((AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+        drugSummaryPage.verifySNPPlanToggle();
     }
 
 	@Then("^user save the plan on drug detail page$")
@@ -184,6 +198,38 @@ public class DCEStepDefinitionAARPMobile {
 		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, druglist);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, buildDrugList);
 	}
+	
+	@Then("^the user validates 100-day Supply Messaging for Eligible Plan$")
+    public void the_user_validates_100_day_Supply_Messaging_for_Eligible_Plan() throws Throwable {
+        DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario()
+                .getBean(PageConstants.DCE_Redesign_DrugDetails);
+        drugDetailsPage.validate100DayInYourDrugs();
+    }
+	
+	@When("^user should be able to toggle between plan types$")
+    public void user_should_be_able_to_toggle_between_plan_types() throws InterruptedException {
+		//AppiumDriver wd = getLoginScenario().getMobileDriver();
+        DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile((AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+        drugSummaryPage.verifyPDPPlanToggle();
+        drugSummaryPage.verifySNPPlanToggle();
+        getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+    }
+	
+	@Then("^the user verify the default Retail chain pharmacy on drug summary page$")
+    public void the_user_verify_the_default_Retail_chain_pharmacy_on_drug_summary_page(DataTable attributes) {
+        Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+        memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
+		/*List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}*/
+        //AppiumDriver wd = getLoginScenario().getMobileDriver();
+        String pharmacyName = memberAttributesMap.get("DefaultPharmacy");
+        DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile((AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+        drugSummaryPage.validateDefaultPharmacyName(pharmacyName);
+    }
 
 	@Then("^the user validates qty, frequency and Supply Length for following drug in DrugList Page$")
 	public void the_user_validates_qty_frequency_and_Supply_Length_for_following_drug_in_DrugList_Page(
@@ -246,6 +292,18 @@ public class DCEStepDefinitionAARPMobile {
 				.getBean(PageConstants.DCE_Redesign_DrugSummary);
 		drugSummaryPage.validateOptumRxConsistentDisplay_PharmacyPage();
 
+	}
+	
+	@And("the user selects the sort by under your drugs")
+	public void the_user_selects_the_sort_by_under_your_drugs(DataTable givenAttributes){
+		Map<String, String> givenAttributesMap = new LinkedHashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		String sortBy = givenAttributesMap.get("Sort By");
+		System.out.println("Sort by to Select : "+sortBy);
+		 DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario()
+	                .getBean(PageConstants.DCE_Redesign_DrugDetails);
+		 drugDetailsPage.validateDrugSortBy(sortBy);
+		 getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
 
 	@Then("^the user verifies NBA modal for creating profile on drug summary page$")
@@ -352,5 +410,19 @@ public class DCEStepDefinitionAARPMobile {
 	                .getBean(PageConstants.DCE_Redesign_DrugDetails);
 	        drugDetailsPage.ApplyPharmacyFilter(FilterText);
 	    }
+	 
+	 @And("user verify the drug details page")
+     public void user_verify_the_drug_details_page() {
+    	 DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+         drugDetailsPage.validateDrugDetailsPage();
+         getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
+     }
+	 
+	 @When("user clicks on Return to profile link on summary page")
+     public void user_clicks_on_return_to_profile_link_on_summary_page() {
+    	 DrugSummaryPageMobile drugSummaryPage = (DrugSummaryPageMobile) getLoginScenario()
+                 .getBean(PageConstants.DCE_Redesign_DrugSummary);
+    	 drugSummaryPage.clickReturnToProfile();
+      }
 
 }

@@ -17,27 +17,31 @@ Feature: 1.10 ACQ - UAT Scripts Campaign External Links scenario 12 related to N
     Then user validates Current location and change location
       | zipcodeSingle | <zipcodeSingle> |
       | zipcodeMulti  | <zipcodeMulti>  |
-
+    And user is on new campaign external Links page
+      | External Link | <externallink2> |
+    Then the user verify TFN on landing pages
+      | TFN Xpath | <TFNxpath1> |
+      | TFNflag   | <tfnFlag>   |
 
     @CampaignExternal_Scenario12_AARP @teamAvengersLP @featureGate
     Examples:
-      | Scenario                                      | zipcodeMulti | zipcodeSingle | isMultiCounty | county       | TFNNo          | tfnFlag | TFNxpath1                   | workingHrs                              | externallink                                                                         |
-      | Campaign External Links - E2E Scenario 12_AMP | 65656        | 33111         | Yes           | Stone County | 1-855-264-3792 | true    | //a[@data-asset-name='TFN'] | Hours: 8 a.m. to 8 p.m., 7 days a week* | https://www.team-avengers-aarpmedicareplans.ocp-ctc-dmz-nonprod.optum.com/lp/medicare-prescription-drug-plans.html |
+      | Scenario                                      | zipcodeMulti | zipcodeSingle | isMultiCounty | county       | TFNNo          | tfnFlag | TFNxpath1                   | workingHrs                              | externallink                                                                                                       |TFNNo2        |externallink2                                                                                                              |
+      | Campaign External Links - E2E Scenario 12_AMP | 65656        | 33111         | Yes           | Stone County | 1-855-264-3792 | true    | //a[@data-asset-name='TFN'] | Hours: 8 a.m. to 8 p.m., 7 days a week* | https://www.team-avengers-aarpmedicareplans.ocp-ctc-dmz-nonprod.optum.com/lp/medicare-prescription-drug-plans.html |1-844-554-1397|https://www.team-avengers-aarpmedicareplans.ocp-ctc-dmz-nonprod.optum.com/lp/medicare-advantage-plans.html?wt.mc_id=8022408|
 
     @CampaignExternal_Scenario12_AARP @StageLP @regressionAARP
     Examples:
-      | Scenario                                      | zipcodeMulti | zipcodeSingle | isMultiCounty | county       | TFNNo          | tfnFlag | TFNxpath1                   | workingHrs                              | externallink                                                                         |
-      | Campaign External Links - E2E Scenario 12_AMP | 65656        | 33111         | Yes           | Stone County | 1-855-264-3792 | true    | //a[@data-asset-name='TFN'] | Hours: 8 a.m. to 8 p.m., 7 days a week* | https://www.stage-aarpmedicareplans.uhc.com/lp/medicare-prescription-drug-plans.html |
+      | Scenario                                      | zipcodeMulti | zipcodeSingle | isMultiCounty | county       | TFNNo          | tfnFlag | TFNxpath1                   | workingHrs                              | externallink                                                                         |TFNNo2        |externallink2                                                                                         |
+      | Campaign External Links - E2E Scenario 12_AMP | 65656        | 33111         | Yes           | Stone County | 1-855-264-3792 | true    | //a[@data-asset-name='TFN'] | Hours: 8 a.m. to 8 p.m., 7 days a week* | https://www.stage-aarpmedicareplans.uhc.com/lp/medicare-prescription-drug-plans.html |1-844-554-1397| https://www.stage-aarpmedicareplans.uhc.com/lp/medicare-prescription-drug-plans.html?wt.mc_id=8022408|
 
     @CampaignExternal_Scenario12_AARP @OfflineLP 
     Examples:
-      | Scenario                                      | zipcodeMulti | zipcodeSingle | isMultiCounty | county       | TFNNo          | tfnFlag | TFNxpath1                   | workingHrs                              | externallink                                                                   |
-      | Campaign External Links - E2E Scenario 12_AMP | 65656        | 33111         | Yes           | Stone County | 1-855-264-3792 | true    | //a[@data-asset-name='TFN'] | Hours: 8 a.m. to 8 p.m., 7 days a week* | https://offline.aarpmedicareplans.com/lp/medicare-prescription-drug-plans.html |
+      | Scenario                                      | zipcodeMulti | zipcodeSingle | isMultiCounty | county       | TFNNo          | tfnFlag | TFNxpath1                   | workingHrs                              | externallink                                                                   |TFNNo2        |externallink2                                                                                  |
+      | Campaign External Links - E2E Scenario 12_AMP | 65656        | 33111         | Yes           | Stone County | 1-855-264-3792 | true    | //a[@data-asset-name='TFN'] | Hours: 8 a.m. to 8 p.m., 7 days a week* | https://offline.aarpmedicareplans.com/lp/medicare-prescription-drug-plans.html |1-844-554-1397|https://offline.aarpmedicareplans.com/lp/medicare-prescription-drug-plans.html?wt.mc_id=8022408|
 
     @CampaignExternal_Scenario12_AARP  @ProdLP @prodRegression
     Examples:
-      | Scenario                                      | zipcodeMulti | zipcodeSingle | isMultiCounty | county       | TFNNo          | tfnFlag | TFNxpath1                   | workingHrs                              | externallink                                                               |
-      | Campaign External Links - E2E Scenario 12_AMP | 65656        | 33111         | Yes           | Stone County | 1-855-264-3792 | true    | //a[@data-asset-name='TFN'] | Hours: 8 a.m. to 8 p.m., 7 days a week* | https://www.aarpmedicareplans.com/lp/medicare-prescription-drug-plans.html |
+      | Scenario                                      | zipcodeMulti | zipcodeSingle | isMultiCounty | county       | TFNNo          | tfnFlag | TFNxpath1                   | workingHrs                              | externallink                                                               |TFNNo2        |externallink2                                                                              |
+      | Campaign External Links - E2E Scenario 12_AMP | 65656        | 33111         | Yes           | Stone County | 1-855-264-3792 | true    | //a[@data-asset-name='TFN'] | Hours: 8 a.m. to 8 p.m., 7 days a week* | https://www.aarpmedicareplans.com/lp/medicare-prescription-drug-plans.html |1-844-554-1397|https://www.aarpmedicareplans.com/lp/medicare-prescription-drug-plans.html?wt.mc_id=8022408|
 
   @Scenario12
   Scenario Outline: TID: <Scenario> Validate that M&R Prospective client has the ability to land into the portal pages via New Landing pages
@@ -423,7 +427,7 @@ Feature: 1.10 ACQ - UAT Scripts Campaign External Links scenario 12 related to N
       | Scenario                                      | zipcode | county         | tfnFlag | TFNNo          | TFNxpath1                   | workingHrs                              | TFNxpath2                                                                                          | externallink                                                                   | distance | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | Campaign External Links - E2E Scenario 12_AMP | 36016   | Barbour County | true    | 1-855-264-3792 | //a[@data-asset-name='TFN'] | Hours: 8 a.m. to 8 p.m., 7 days a week* | //span[contains(@class,'sam__button__container')]//*[contains(@class,'sam__button__text desktop')] | https://offline.aarpmedicareplans.com/lp/medicare-prescription-drug-plans.html | 15       | 2021        | AARP MedicareRx Walgreens (PDP) | 2021        | AARP MedicareRx Walgreens (PDP) | E-Prescribing | True                  | True             | True                 |
 
-    @CampaignExternal_Scenario12_AARP    @ProdLP @regressionAARP
+    @CampaignExternal_Scenario12_AARP    @ProdLP
     Examples:
       | Scenario                                      | zipcode | county         | tfnFlag | TFNNo          | TFNxpath1                   | workingHrs                              | TFNxpath2                                                                                          | externallink                                                               | distance | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | Campaign External Links - E2E Scenario 12_AMP | 36016   | Barbour County | true    | 1-855-264-3792 | //a[@data-asset-name='TFN'] | Hours: 8 a.m. to 8 p.m., 7 days a week* | //span[contains(@class,'sam__button__container')]//*[contains(@class,'sam__button__text desktop')] | https://www.aarpmedicareplans.com/lp/medicare-prescription-drug-plans.html | 15       | 2021        | AARP MedicareRx Walgreens (PDP) | 2021        | AARP MedicareRx Walgreens (PDP) | E-Prescribing | True                  | True             | True                 |

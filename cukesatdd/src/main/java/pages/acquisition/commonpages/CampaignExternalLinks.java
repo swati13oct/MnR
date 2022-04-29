@@ -70,7 +70,7 @@ public class CampaignExternalLinks extends UhcDriver {
 	private WebElement privacylink;
 
 	// @FindBy(xpath = "//a[@data-asset-name='Find Plans & Pricing']")
-	@FindBy(xpath = "(//*[contains(text(),'Find Plans & Pricing') or contains(text(),'View Plans & Pricing')])[1]")
+	@FindBy(xpath = "//a[@data-asset-name='Find Plans & Pricing']")
 	private WebElement findPlansPricing;
 
 	@FindBy(xpath = "//p[contains(@class,'c-tfn-fragment__hours')]")
@@ -697,7 +697,8 @@ public class CampaignExternalLinks extends UhcDriver {
 		} catch (Exception e) {
 			System.out.println("External popup modal not found");
 		}
-		findPlansPricing.click();
+		jsClickNew(findPlansPricing);
+		//findPlansPricing.click();
 		Set<String> tabs_windows = driver.getWindowHandles();
 		Iterator<String> itr = tabs_windows.iterator();
 		while (itr.hasNext()) {
@@ -925,7 +926,8 @@ public class CampaignExternalLinks extends UhcDriver {
 
 	public void clickFindPlansinyourArea() {
 		String parentWindow = driver.getWindowHandle();
-		clickFindPlansinyourArea.click();
+		//clickFindPlansinyourArea.click();
+		jsClickNew(clickFindPlansinyourArea);
 		Set<String> tabs_windows = driver.getWindowHandles();
 		Iterator<String> itr = tabs_windows.iterator();
 		while (itr.hasNext()) {
@@ -1133,8 +1135,8 @@ public class CampaignExternalLinks extends UhcDriver {
 	}
 
 	public VPPPlanSummaryPage searchPlansWithOutCountyForPDPExternalPage(String zipcode) {
-		if (validate(countyModalVpp))
-			jsClickNew(cancelCountyModal);
+		/*if (validate(countyModalVpp))
+			jsClickNew(cancelCountyModal);*/
 		threadsleep(3);
 
 		validateNew(ZipCodeTxtBx);
@@ -1843,7 +1845,8 @@ public class CampaignExternalLinks extends UhcDriver {
 
 	public void validateDCEExternallinkMA() {
 		parentWindow = driver.getWindowHandle();
-		dceexternallinkMA.click();
+		//dceexternallinkMA.click();
+		jsClickNew(dceexternallinkMA);
 		Set<String> tabs_windows = driver.getWindowHandles();
 		Iterator<String> itr = tabs_windows.iterator();
 		while (itr.hasNext()) {

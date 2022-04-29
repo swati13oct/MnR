@@ -103,7 +103,10 @@ public class PharmacySearchWebElementsNew extends UhcDriver {
 	
 	@FindBy(xpath = "//div[@id='countycontainer']")
 	protected WebElement countyModal;
-	
+
+	@FindBy(xpath = "//*[@id='county']")
+	protected WebElement countyDrpDwn;
+
 	@FindBy(xpath="//h1[@class='text-left text-extra-large text-semibold drug-cost-estimator text-bold text-blue-primary m-0']")
 	protected WebElement pharmacylocatorheader;
 
@@ -149,7 +152,7 @@ public class PharmacySearchWebElementsNew extends UhcDriver {
 	@FindBy(xpath="//*[@id='map']/div/div/iframe")
 	protected WebElement mapCollapse;
 
-	@FindBy(xpath="//a[@id='viewpdf']//span[@class='uhc-button_text']")
+	@FindBy(xpath="//a[@id='viewpdf']")
 	protected WebElement viewsearchpdf;
 
 	@FindBy(xpath = "//app-returnlink//div/a")
@@ -198,7 +201,6 @@ public class PharmacySearchWebElementsNew extends UhcDriver {
 	protected WebElement widget_prefMailServPhar_learnMore;
 
 	@FindBy(xpath="//h3[@class='m-0 text-bold']/../../..//p[contains(text(),'MedicareRx Preferred (PDP)')]/../../..")
-	//@FindBy(xpath="//h3[contains(text(),'Preferred Retail Pharmacy Network ')]/../../..")
 	protected WebElement widget_preferredRetailPharmacyNetwork;
 
 	@FindBy(xpath="(//h3[contains(text(),'Walgreens')]/../../..)[2]")

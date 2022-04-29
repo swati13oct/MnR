@@ -16,6 +16,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
+import acceptancetests.data.CommonConstants;
 import pages.acquisition.commonpages.GlobalWebElements;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineAdditionalServicesPage;
 
@@ -207,6 +208,32 @@ public class EditResponseMobilePage extends GlobalWebElements {
 		validate(returnToPlanLink, 30);
 	}
 	
+	@FindBy(xpath = "//*[@id='ghn_lnk_1']")
+	private WebElement headerNavigationBarHomeTab;
+	
+	public String RecomPlanName = "";
+	public String RecomplanType = "";
+	public void saveFirstRecom() {
+		System.out.println("Save #1 Recom PlanType and PlanName");
+		pageloadcomplete();
+		waitForPageLoadSafari();
+		String curID = String.valueOf(Thread.currentThread().getId());
+		scrollToView(headerNavigationBarHomeTab);
+		RecomPlanName = plantiles.get(0).findElement(By.cssSelector("h2>a")).getText().trim();
+		RecomplanType = plantiles.get(0).findElement(By.cssSelector("div[class*='planNameType']")).getText().trim();
+		CommonConstants.firstRecommentionPlanName.put(curID, firstRecomPlanName);
+		CommonConstants.firstRecommentionplanType.put(curID, planType);
+		System.out.println("Current Thread ID is - "+curID+" Recom Plan Name is: "+RecomPlanName);
+		System.out.println("Current Thread ID is - "+curID+" Recom Plan Type is: "+RecomplanType);
+		threadsleep(5000);
+	}
+	
+	public void browserBackResult() {
+		String pageURL = driver.getCurrentUrl().replace("#/editmypreferences", "#/result");
+		driver.navigate().to(pageURL);
+		threadsleep(2000);
+	}
+	
 	public void navigateEditResponsePageMobile(HashMap<String, String> userInput) {
 		inputValues = userInput;
 		String flow = inputValues.get("Plan Type");
@@ -225,6 +252,20 @@ public class EditResponseMobilePage extends GlobalWebElements {
 		}
 		validate(editResponseTitle);
 		validate(returnToPlanLink, 30);
+	}
+	
+	public void addSNPEditResponse(HashMap<String, String> userInput) {
+		System.out.println("Change SpecialNeeds Options:");
+		inputValues = userInput;
+		pageloadcomplete();
+		navigateEditResponsePage(inputValues.get("Plan Type"));
+		verifyClickEditButton("special", true);
+		validate(progressInfo, 10);
+		String progressText = progressInfo.getText().toLowerCase();
+		Assert.assertTrue(progressText.contains("special") && progressText.contains("100%"),
+				"Progres Bar does not have required Info");
+		editValue("special");
+		System.out.println("******  Add SpecialNeeds Completed ******");
 	}
 
 	public void checkContent(String section) {
@@ -281,6 +322,9 @@ public class EditResponseMobilePage extends GlobalWebElements {
 		String actualExtractedUIText = null;
 		for (WebElement elm : allQuestionSection) {
 			actualExtractedUIText = elm.getText().toLowerCase();
+			if(actualExtractedUIText==null)
+				actualExtractedUIText = elm.getAttribute("innerHTML").toLowerCase();
+			
 			if (actualExtractedUIText.contains(section)) {
 				break;
 			}
@@ -338,6 +382,25 @@ public class EditResponseMobilePage extends GlobalWebElements {
 				givenInfo = inputValues.get("Doctors Search Text").toLowerCase();
 		}
 		Assert.assertTrue(UIInfo.contains(givenInfo), givenInfo + " is not available in " + UIInfo);
+	}
+	
+	public void editedFirstRecom() {
+		String editedRecomPlanName = "";
+		String editedRecomplanType = "";
+		System.out.println("Edited #1 Recom PlanType and PlanName");
+		pageloadcomplete();
+		waitForPageLoadSafari();
+		String curID = String.valueOf(Thread.currentThread().getId());
+		String R1PlanName = CommonConstants.firstRecommentionPlanName.get(curID);
+		String R1PlanType = CommonConstants.firstRecommentionplanType.get(curID);
+		scrollToView(headerNavigationBarHomeTab);
+		editedRecomPlanName = plantiles.get(0).findElement(By.cssSelector("h2>a")).getText().trim();
+		editedRecomplanType = plantiles.get(0).findElement(By.cssSelector("div[class*='planNameType']")).getText().trim();
+		System.out.println("Current Thread ID is - "+curID+" Recom Plan Name is: "+editedRecomPlanName);
+		System.out.println("Current Thread ID is - "+curID+" Recom Plan Type is: "+editedRecomplanType);
+		Assert.assertNotEquals(R1PlanType, editedRecomplanType, "Original and Edited Recommendation PlanType are same");
+		Assert.assertNotEquals(R1PlanName, editedRecomPlanName, "Original and Edited Recommendation PlanName are same");
+		threadsleep(5000);
 	}
 
 	public void setKeyQuestions() {

@@ -1046,6 +1046,8 @@ public class CommonConstants {
 	public static final String FOOTER_LINK = "linkName";
 	
 	public static final String SRC_CODE="sourceCode";
+
+	public static final String SITE = "site";
 	
 	public static LinkedHashMap<String,String> PRE_FLOW = new LinkedHashMap<String,String>();
 	

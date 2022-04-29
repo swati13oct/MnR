@@ -30,6 +30,7 @@ import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -394,7 +395,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	// MedSupp Resume application
 	
-	@FindBy(xpath = "(//button[contains(text(),'Start Application') or contains(text(),'Start application')])[1]")
+	@FindBy(xpath = "(//*[contains(text(),'Start Application') or contains(text(),'Start application')])[1]")
 
 	//@FindBy(xpath = "(//*[contains(text(),'Start Application')])[1]")
 	// @FindBy(xpath =
@@ -402,7 +403,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	// application')])[1]")
 	private WebElement Start_ApplicationBtn;
 
-    @FindBy(xpath = "(//button[contains(text(),'Start Application') or contains(text(),'Start application')])[1]")
+    @FindBy(xpath = "(//*[contains(text(),'Start Application') or contains(text(),'Start application')])[1]")
 	//@FindBy(xpath = "(//*[@id=\"responsiveplan\"]/div[4]/div/div[1]/div[2]/button")
 	// @FindBy(xpath =
 	// "(//*[contains(@class,'swiper-content')]//*[contains(text(),'Start
@@ -943,13 +944,14 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	// @FindBy(xpath = "(//*[contains(@class,'show
 	// active')]//*[contains(@class,'swiper-container')]//button[contains(text(),'Compare
 	// plans')])[1]")
-	//@FindBy(xpath = "//*[contains(text(),'Compare Plan')])[1]")
+	@FindBy(xpath="//*[contains(@class,'compare-plans-button uhc-button')]//*[contains(text(),'Compare Plan')][1]")
+
 	
-	@FindBy(xpath = "//*[contains(@class,'show active')]//div[contains(@class,'module-plan-overview module swiper-slide')]//button[contains(text(),'Compare plans')][1]")
+	//@FindBy(xpath = "//*[contains(@class,'show active')]//div[contains(@class,'module-plan-overview module swiper-slide')]//button[contains(text(),'Compare plans')][1]")
 	private WebElement compareButton;
 
 	// @FindBy(xpath = "//span[@class='size36 semiBoldText colorPrimaryBlue']")
-	@FindBy(xpath = "(//*[contains(text(),'Compare AARP� Medicare Supplement')])[1]")
+	@FindBy(xpath = "(//*[contains(@class,'d-flex align')]//*[contains(text(),'Medicare Supplement Insurance Plans')])[1]")
 	private WebElement comparePageHeader;
 
 //	@FindBy(xpath = "(//button[@class='unliked buttonIntoText'])[1]")
@@ -2136,6 +2138,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	 * @return
 	 */
 	public String GetTFNforPlanType() {
+
+		try {
+			Thread.sleep(7);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		if (validateNew(RightRail_TFN, 45)) {
 			System.out.println("TFN is displayed in Right Rail");
 			String TFN_Number = RightRail_TFN.getText();
@@ -4140,7 +4148,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public void fillDetails(String zipCode, String DateOfBirth) throws InterruptedException {
 		sendkeys(medSuppZipCode, zipCode);
-		Thread.sleep(5000);
+		sleepBySec(10);
+		waitforElementNew(DOB,30);
 		sendkeys(DOB, DateOfBirth);
 		System.out.println("Date of birth is entered");
 
@@ -4166,9 +4175,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		yearDrpDwnOptionPartB.click();
 
 		System.out.println("Effective date- year value selected");
-		Thread.sleep(5000);
+		sleepBySec(10);
+		waitforElementNew(startDrpDwn,20);
 		startDrpDwn.click();
-		Thread.sleep(5000);
+		sleepBySec(10);
+		waitforElementNew(startDrpDwnOption,20);
 		startDrpDwnOption.click();
 
 		System.out.println("Plan to start date selected");
@@ -4176,7 +4187,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		jsClickNew(viewPlansBtnMedSupp);
 		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
-		CommonUtility.waitForPageLoadNew(driver, Start_ApplicationBtn, 45);
+		sleepBySec(10);
+		waitforElementNew(driver.findElement(By.xpath("(//button[contains(@class,'start') or contains(text(),'Start')])[1]")), 75);
+		//CommonUtility.waitForPageLoadNew(driver, Start_ApplicationBtn, 45);
+		//CommonUtility.waitForPageLoadNew(driver, driver.findElement(By.xpath("(//button[contains(@class,'start') or contains(text(),'Start')])[1]")), 75);
 		// Start_ApplicationBtn.click();
 		// if (driver.getCurrentUrl().contains("aarpsupplementalhealth"))
 		// return new MedSuppOLEPage(driver);
@@ -4987,13 +5001,14 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		jsClickNew(nextButton);
 
 		System.out.println("Eligibility Health Questions are displayed");
+		Thread.sleep(2000);
 		jsClickNew(Eligibility);
 		jsClickNew(NursingFacility);
 		jsClickNew(ESRD);
 		jsClickNew(EligibilitySurgery);
 
 		jsClickNew(nextButton);
-
+		Thread.sleep(2000);
 		jsClickNew(atrial);
 		jsClickNew(artery);
 		jsClickNew(peripheral);
@@ -5796,12 +5811,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			if (navigateComparePage.equalsIgnoreCase("Yes")) {
 				// action.moveToElement(compareButton).build().perform(); //Does not work on
 				// Safari browser
-				jsMouseOver(compareButton);
+			//	jsMouseOver(compareButton);
+				scrollToView(compareButton);
 				compareButton.click();
-				Thread.sleep(2000);
+				Thread.sleep(5000);
 				// action.moveToElement(comparePageHeader).build().perform(); //Does not work on
 				// Safari browser
-				jsMouseOver(comparePageHeader);
+			//	jsMouseOver(comparePageHeader);
 				if (comparePageHeader.isDisplayed()) {
 					flag = true;
 				}
@@ -5970,7 +5986,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			Thread.sleep(2000);
 			WebElement heartIcon = driver
 				//	.findElement(By.xpath("(//div[contains(@class,'save-icon pull-right')]/div/div)[" + i + "]"));
-			.findElement(By.xpath("(//div[contains(@class,'save-box')])[" + i + "]"));
+			.findElement(By.xpath("(//*[contains(@class,'save-box')])[" + i + "]"));
 			//flag = heartIcon.getAttribute("class").equalsIgnoreCase("save-favorite-plan added");
 			flag = heartIcon.getAttribute("class").equalsIgnoreCase("save-box");
 
@@ -6265,7 +6281,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			System.out.println("Validating start application button on plan compare----------");
 */
 			jsClickNew(comparePageStartApplicationBtn);
-			if (DOB1.isDisplayed()) {
+
+			if (validateNew(DOB1) && DOB1.isDisplayed()) {
 
 				Thread.sleep(2000);
 				DOB1.sendKeys("01111951");
@@ -6277,8 +6294,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				jsMouseOver(ContinueApplication);
 				jsClickNew(ContinueApplication);
 				Thread.sleep(5000);
-				validateNew(comparePageStartApplicationBtn);
-				jsClickNew(comparePageStartApplicationBtn);
+			//	validateNew(comparePageStartApplicationBtn);
+			//	jsClickNew(comparePageStartApplicationBtn);
 			}
 			else {
 				System.out.println("DOB is not displayed and User clicked on Start Application to land on IS OLE Page");
@@ -6458,6 +6475,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		requestlastName.sendKeys(LastName);
 		validateNew(requestplaninformationsubmit);
 		jsClickNew(requestplaninformationsubmit);
+validateNew(requestplaninformationsubmitpopup);
 		if (requestplaninformationsubmitpopup.getText().contains(
 				"Your information has been submitted. You should start getting your Medicare updates soon.")) {
 			System.out.println("****************Request  information is displayed  ***************");
@@ -6466,7 +6484,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			validateNew(requestplaninformationclose);
 			jsClickNew(requestplaninformationclose);
 		} else {
-			System.out.println("****************Request information is displayed  ***************");
+			System.out.println("****************Request information is not displayed  ***************");
 		}
 		return RequestPlanIInformation_Validation;
 
@@ -7422,7 +7440,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public ComparePlansPage clickCompareButton() {
 		validateNew(compareButton);
-		compareButton.click();
+		//compareButton.click();
+		jsClickNew(compareButton);
 		CommonUtility.waitForPageLoad(driver, backToPlanComparePage, 30);
 		if (currentUrl().contains("/plan-compare"))
 			return new ComparePlansPage(driver);
@@ -7566,7 +7585,7 @@ public String GetMonthlyPremiumValue() {
 			Thread.sleep(5000);
 			for (String plan : listOfTestPlans) {
 				WebElement savePlan = driver.findElement(By.xpath("//h2[text()='" + plan
-						+ "']/following::div[contains(@class,'save-box')][1]"));
+						+ "']/following::*[contains(@class,'save-box')][1]"));
 				((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", savePlan);
 				((JavascriptExecutor) driver).executeScript("arguments[0].click();", savePlan);
 				threadsleep(2);
@@ -7842,7 +7861,7 @@ public String GetMonthlyPremiumValue() {
 			Assertion.fail("*****************TFN number was  not found macthing with the SAM call Popup ***************"
 					+ ExpectedCallSAMTFN);
 		}*/
-		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. ï¿½ 8 p.m., 7 days a week.*\n*Alaska and Hawaii: 8 a.m. ï¿½ 8 p.m. Monday ï¿½ Friday, 8 a.m. ï¿½ 5 p.m. Saturday and Sunday.";
+		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. ĂŻÂżÂ˝ 8 p.m., 7 days a week.*\n*Alaska and Hawaii: 8 a.m. ĂŻÂżÂ˝ 8 p.m. Monday ĂŻÂżÂ˝ Friday, 8 a.m. ĂŻÂżÂ˝ 5 p.m. Saturday and Sunday.";
 		validate(CallSamTFNtimezone);
 		String ActualCallSamTFNtimezone = CallSamTFNtimezone.getText();
 		System.out.println(ExpectedCallSamTFNtimezone);
@@ -7925,7 +7944,7 @@ public String GetMonthlyPremiumValue() {
 	@FindBy(xpath = "(//*[contains(text(),'Edit your information')])[1]")
 	private WebElement EditYourInformationLink;
 	
-	@FindBy(id = "part-b-month")
+	@FindBy(xpath="//*[@id='part-b-month']")
 	private WebElement partBDropdown;
 	
 	public boolean updatePersonalDetailsForMedsup() {
@@ -7937,7 +7956,11 @@ public String GetMonthlyPremiumValue() {
 		//partBDropdown.click();
 		jsClickNew(updateGenderDetailsForMedsup);
 		threadsleep(5);
-		selectFromDropDownByText(driver, partBDropdown, "May");
+		//selectFromDropDownByText(driver, partBDropdown, "March");
+		partBDropdown.click();
+		Select dropdown = new Select(partBDropdown);
+		dropdown.selectByValue("05");
+		threadsleep(5);
 		jsClickNew(saveAndUpdatePremiumsBtn);
 		threadsleep(5);
 		if(validate(EditYourInformationLink)) {
@@ -7946,10 +7969,13 @@ public String GetMonthlyPremiumValue() {
 		return false;
 	}
 	
-	@FindBy(xpath = "(//*[@class='uhc-card']//button[contains(@class,'compare-plans-btn')]//label)[1]")
-	private WebElement firstComparePlanButtonForMS;
+	@FindBy(xpath = "(//*[contains(@class,'uhc-card')]//*[contains(@class,'compare-plans-btn')]//label)[1]")
+	private WebElement firstComparePlanButtonForMS4;
 	
-	public void compareAllMSPlans() {
+	@FindBy(xpath = "(//*[contains(@class,'compare-box')]//button[contains(@class,'cta-button')])[1]")
+    private WebElement firstComparePlanButtonForMS3;
+	
+	public void compareAllMS4Plans() {
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
@@ -7957,7 +7983,7 @@ public String GetMonthlyPremiumValue() {
 			e.printStackTrace();
 		}
 		List<WebElement> allMSPlans = driver
-				.findElements(By.xpath("//*[@class='uhc-card']//button[contains(@class,'compare-plans-btn')]//label"));
+				.findElements(By.xpath("//*[contains(@class,'uhc-card')]//*[contains(@class,'compare-plans-btn')]//label"));
 		int plansForCompare = allMSPlans.size();
 		if (plansForCompare > 4) {
 			System.out.println("There are more than 4 plans, only first 4 will be compared");
@@ -7965,11 +7991,12 @@ public String GetMonthlyPremiumValue() {
 		}
 		if (allMSPlans != null) {
 			for (int i = 0; i < plansForCompare; i++) {
+				moveMouseToElement(allMSPlans.get(i));
 				jsClickNew(allMSPlans.get(i));
 				System.out.println("Plan added to compare : " + i);
 			}
 		}
-		jsClickNew(firstComparePlanButtonForMS);
+		jsClickNew(firstComparePlanButtonForMS4);
 	}
 	
 	@FindBy(xpath = "//div[contains(@class,'find-plans')]/button")
@@ -7980,7 +8007,30 @@ public String GetMonthlyPremiumValue() {
 
 	public void clickCloseMSApplication() {
 		jsClickNew(closebBtnMSApplication);
-		waitforElementNew(addMSPlans);
+		//waitforElementNew(addMSPlans);
 	}
 	
+	public void compareAllMS3Plans() {
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		List<WebElement> allMSPlans = driver
+				.findElements(By.xpath("//*[contains(@class,'compare-box')]//*[contains(@id,'compare-plan')]/../label"));
+		int plansForCompare = allMSPlans.size();
+		if (plansForCompare > 4) {
+			System.out.println("There are more than 4 plans, only first 4 will be compared");
+			plansForCompare = 4;
+		}
+		if (allMSPlans != null) {
+			for (int i = 0; i < plansForCompare; i++) {
+				moveMouseToElement(allMSPlans.get(i));
+				jsClickNew(allMSPlans.get(i));
+				System.out.println("Plan added to compare : " + i);
+			}
+		}
+		jsClickNew(firstComparePlanButtonForMS3);
+	}
 }

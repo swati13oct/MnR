@@ -300,13 +300,14 @@ public class PlanDetailsEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 
 	public void validatingFunctionalityOfEmailOnPlanDetails() {
 
-		validateEmailButtonOnPlanDetails.click();
+		//validateEmailButtonOnPlanDetails.click();
+		jsClickNew(validateEmailButtonOnPlanDetails);
 //		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		validateNew(emailPopupPlanDetail);
 		validateNew(cancelButtonEmailPlanDetailsPopUp);
 		System.out.println("!!!Cancel Button is displayed ===>" + cancelButtonEmailPlanDetailsPopUp.isDisplayed());
-		cancelButtonEmailPlanDetailsPopUp.click();
-		validateEmailButtonOnPlanDetails.click();
+		jsClickNew(cancelButtonEmailPlanDetailsPopUp);
+		jsClickNew(validateEmailButtonOnPlanDetails);
 		validateNew(emailPopupPlanDetail);
 		System.out.println("!!!Cancel Button is displayed ===>" + sendButtonEmailPlanDetailsPopUp.isDisplayed());
 		sendkeysMobile(driver.findElement(By.xpath(".//*[@id='email']")), "alisha_kapoor@optum.com");

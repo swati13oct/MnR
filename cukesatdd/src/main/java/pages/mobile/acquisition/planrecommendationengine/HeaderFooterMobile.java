@@ -3,12 +3,16 @@
  */
 package pages.mobile.acquisition.planrecommendationengine;
 
+import java.util.List;
 import java.util.Set;
 import static acceptancetests.data.CommonConstants.SHOPFORPLAN.SHOP;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 import pages.mobile.acquisition.commonpages.GlobalWebElements;
@@ -73,6 +77,24 @@ public class HeaderFooterMobile extends GlobalWebElements {
 
 	@FindBy(css = "#mobile-nav a[dtmname*='Shop For a Plan']")
 	private WebElement shopforaplanLink;
+	
+	@FindBy(xpath = "//*[@id='ghn_lnk_1']")
+	private WebElement headerNavigationBarHomeTab;
+	
+	@FindBy(css = "select#state-select")
+	public WebElement selectState;
+	
+	@FindBy(css = "input#zipcodemeded-0")
+	private WebElement ZipcodeHomepage;
+	
+	@FindBy(css = "button[class*='uhc-zip-button']")
+	private WebElement homePageFindPlans;
+	
+	@FindBy(css = "body>div#overlay")
+	private WebElement planLoaderscreen;
+	
+	@FindBy(css = ".plan-overview-wrapper>div[class='overview-main'] h2")
+	private WebElement planZipInfo;
 
 	@FindBy(css = "#mobile-nav a[dtmname*='Learn About Medicare']")
 	private WebElement learnaboutmedicareLink;
@@ -224,6 +246,9 @@ public class HeaderFooterMobile extends GlobalWebElements {
 
 	@FindBy(css = "a#gf_lnk_5")
 	public WebElement footerPrivacyPolicyLink;
+	
+	@FindBy(css = ".twobyone-child1")
+	private List<WebElement> PREWidgetHomepage;
 
 	@FindBy(css = "a#gf_lnk_6")
 	public WebElement footerTermsofUseLink;
@@ -567,6 +592,32 @@ public class HeaderFooterMobile extends GlobalWebElements {
 		validate(shopforaplanLink, 30);
 		shopforaplanLink.click();
 	}
+	
+	public void storedZipcode(String zipcode) {
+		System.out.println("Validating Zipcode stored in PRE session");
+		jsClickNew(headerNavigationBarHomeTab);
+		threadsleep(2000);
+		validate(ZipcodeHomepage);
+//		Assert.assertTrue(ZipcodeHomepage.getText().trim().contains(zipcode), "Zipcode is Invalid ");
+		jsClickNew(homePageFindPlans);
+		validate(planZipInfo, 60);
+        waitforElementInvisibilityInTime(planLoaderscreen,60);
+        threadsleep(5000);// Plan loader
+        Assert.assertTrue(planZipInfo.getText().contains(zipcode),"Invalid Zip");
+	}
+	
+	public void navigationToPREViaHomePageWidget() {
+		System.out.println("Validating PRE Widget in homepage");
+		state();
+		Assert.assertTrue(validate(PREWidgetHomepage.get(0), 20), "PRE Widget is not present in homepage");
+		Assert.assertTrue(PREWidgetHomepage.get(0).findElement(By.cssSelector("div[class*='NewCustomRTE']>h2")).getText().toUpperCase().trim().equalsIgnoreCase("NEED HELP FINDING A PLAN?"), "PRE Widget header is not present in homepage");
+		Assert.assertTrue(PREWidgetHomepage.get(0).findElement(By.cssSelector("div[class*='NewCustomRTE'] a[title='Get Started']")).getText().toUpperCase().trim().contains("GET STARTED"), "PRE Widget link is not present in homepage");
+		jsClickNew(PREWidgetHomepage.get(0).findElement(By.cssSelector("div[class*='NewCustomRTE'] a[title='Get Started']")));
+		
+		threadsleep(2000);
+		driver.getCurrentUrl().contains("plan-recommendation-engine.html#/get-started");
+		validate(landingpageHeader,20);
+	}
 
 	public void backtolearnmoremodicare(boolean back) {
 		if (back)
@@ -712,6 +763,16 @@ public class HeaderFooterMobile extends GlobalWebElements {
 //			System.out.println("Geo targetting link 'Medicare FAQ' is not available");
 //			driver.navigate().refresh();
 //		}
+	}
+	
+	public void state() {
+		jsClickNew(headerNavigationBarHomeTab);
+		scrollToView(selectState);
+		Select dropdown = new Select(selectState);
+		waitUntilSelectOptionsPopulated(dropdown);
+		dropdown.selectByVisibleText("California");
+		threadsleep(2000);
+		scrollToView(headerNavigationBarHomeTab);
 	}
 
 	public void footerLinkvalidationMobile() {

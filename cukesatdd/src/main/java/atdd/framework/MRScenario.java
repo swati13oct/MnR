@@ -65,6 +65,7 @@ import acceptancetests.data.MRConstants;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
+import io.appium.java_client.remote.MobileCapabilityType;
 import io.cucumber.java.Scenario;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.FlagsmithLoginPage;
@@ -129,6 +130,7 @@ public class MRScenario {
 	public String mobileSessionTimeout = "900000";
 //	public static String runnerFiles = "";
 	public static String mobileDeviceType;
+	public static String site = "AARP";
 
 	private static final ThreadLocal<String> runnerFileName = new ThreadLocal<>();
 
@@ -269,8 +271,6 @@ public class MRScenario {
 		return result;
 
 	}
-	
-	
 
 	static {
 		props = getProperties();
@@ -332,6 +332,10 @@ public class MRScenario {
 		planYear = null != System.getProperty(VPPCommonConstants.PLAN_YEAR)
 				? System.getProperty(VPPCommonConstants.PLAN_YEAR)
 				: null != props ? props.get(VPPCommonConstants.PLAN_YEAR) : "";
+		
+		site = null != System.getProperty(CommonConstants.SITE)
+				? System.getProperty(CommonConstants.SITE)
+				: null != props ? props.get(CommonConstants.SITE) : "";
 
 		/*
 		 * appiumVersion = (null == System.getProperty(CommonConstants.APPIUM_VERSION) ?
@@ -397,7 +401,8 @@ public class MRScenario {
 			if (environment.contains("stage-0"))
 				domain = "ocp-elr-dmz-nonprod.optum.com";
 			else if (environment.equals("stage") || environment.equals("stage-aarp")
-					|| environment.equals("offline-stage-aarp") || environment.equals("offline-stage") || environment.equals("uhc-test2") || environment.equals("uhc-stg"))
+					|| environment.equals("offline-stage-aarp") || environment.equals("offline-stage")
+					|| environment.equals("uhc-test2") || environment.equals("uhc-stg"))
 				domain = "uhc.com";
 			else if (environment.contains("mnr-acq-ci") || environment.equals("team-atest")
 					|| environment.equals("team-e") || environment.equals("team-t") || environment.equals("team-v1")
@@ -405,7 +410,8 @@ public class MRScenario {
 					|| environment.equals("team-acme") || environment.contains("digital-uat")
 					|| environment.equals("team-chargers") || environment.contains("chargers")
 					|| environment.contains("chargers-qa") || environment.contains("team-uhc-rx")
-					|| environment.contains("digital-dev")|| environment.contains("team-avengers-qa") || environment.contains("chargers-uhc"))
+					|| environment.contains("digital-dev") || environment.contains("team-avengers-qa")
+					|| environment.contains("chargers-uhc"))
 
 				domain = "ocp-elr-core-nonprod.optum.com";
 			else if (environment.contains("mnr-acq"))
@@ -858,6 +864,7 @@ public class MRScenario {
 			if (mobileDeviceOSName.equalsIgnoreCase("Android")) {
 				capabilities.setCapability("browserName", "Chrome");
 				capabilities.setCapability("enablePerformanceLogging", true);
+				capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UIAutomator2");
 				browserName = "Chrome";
 //				mobileDriver = new AndroidDriver(new URL(SauceLabsURL), capabilities);
 
@@ -870,6 +877,7 @@ public class MRScenario {
 				}
 
 			} else {
+
 				capabilities.setCapability("browserName", "Safari");
 				capabilities.setCapability("autoAcceptAlerts", "true");
 				capabilities.setCapability("autoGrantPermissions", "true");
@@ -948,6 +956,7 @@ public class MRScenario {
 					: MRConstants.FLAGSMITH_PROD_UHC_URL;
 		default:
 			return site.equalsIgnoreCase("AARP") ? MRConstants.FLAGSMITH_AARP_URL : MRConstants.FLAGSMITH_UHC_URL;
+		//
 		}
 	}
 
@@ -1039,5 +1048,8 @@ public class MRScenario {
 					: new AcquisitionHomePage(driver, site);
 		}
 	}
-
+	
+	public String getSiteType() {
+		return site; 
+	}
 }

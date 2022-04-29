@@ -163,12 +163,18 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 
 	@FindBy(css = "#modal")
 	private WebElement drugModel;
-
+	
+	@FindBy(css="#modal table caption")
+	private WebElement drugModelPlan;
+	
 	@FindBy(css = "#modal a[class*='buttonLink']")
 	private WebElement editDurglink;
 
 	@FindBy(css = "#modal td.plan-drug-deductible")
 	private WebElement deductible;
+	
+	@FindBy(css="#modal td.plan-drug-deductible div.right-value")
+	private WebElement deductibleVal;
 
 	@FindBy(css = "#modal button")
 	private WebElement drugModelClose;
@@ -842,6 +848,24 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 				"Edit Drug List not found in drug model - " + planName);
 		Assert.assertTrue(deductible.getText().contains("Deductible"),
 				"Deductible not found in drug model - " + planName);
+		String  drugModelPlanName = drugModelPlan.getText();
+		if(drugModelPlanName.equalsIgnoreCase("AARP MedicareRx Walgreens (PDP)"))
+		{
+			System.out.println("Deductible Value for Walgreens plan is :" + deductibleVal.getText());
+			Assert.assertFalse(deductibleVal.getText().equalsIgnoreCase("null"),"Deductible value contains null value");
+			Assert.assertTrue(deductibleVal.getText().contains("$0 for Tier 1")," Walgreens Deuctible Value does not have the tier info");
+		}
+		else if(drugModelPlanName.contains("Assure(HMO)"))
+		{
+			System.out.println("Deductible Value for HMO plan is :" + deductibleVal.getText());
+			Assert.assertFalse(deductibleVal.getText().equalsIgnoreCase("null"),"Deductible value contains null value");
+			Assert.assertTrue(deductibleVal.getText().contains("Extra Help in 2022, then your annual prescription deductible will be $0"),"Assure HMO plan does not have the message");
+		}
+		else
+		{
+			System.out.println("Deductible Value :" + deductibleVal.getText());
+			Assert.assertFalse(deductibleVal.getText().equalsIgnoreCase("null"),"Deductible value contains null value");
+		}
 		// Either all True or all False drugs for a plan
 		int covered = 0, nonCovered = 0;
 		covered = drugModel.findElements(By.cssSelector("span[class^='covered']")).size();
@@ -1284,7 +1308,9 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 		CommonUtility.checkPageIsReadyNew(driver);
 		validate(NextButtonPRE);
 		NextButtonPRE.click();
-		WebElement PRESaveaPlan = driver.findElement(By.xpath("//*[contains(@class,'button button-secondary')]//*[contains(text(), '" + planName + "')]"));
+	//	WebElement PRESaveaPlan = driver.findElement(By.xpath("//*[contains(@class,'button button-secondary')]//*[contains(text(), '" + planName + "')]"));
+		WebElement PRESaveaPlan = driver.findElement(By.xpath("(//*[contains(text(), '" + planName + "')])[2]//following::*[1]"));
+
 		CommonUtility.waitForPageLoadNew(driver, PRESaveaPlan, 30);
 		System.out.println("Plan Name on PRE Page" + PRESaveaPlan);
 		jsClickNew(PRESaveaPlan);

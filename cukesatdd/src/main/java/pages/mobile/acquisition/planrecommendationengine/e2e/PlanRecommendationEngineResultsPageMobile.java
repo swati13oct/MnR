@@ -174,6 +174,9 @@ public class PlanRecommendationEngineResultsPageMobile extends GlobalWebElements
 
 	@FindBy(css = "#mpbed-month")
 	private WebElement MSPlanPartBMonth;
+	
+	@FindBy(css = "li.planTileGrid")
+	private List<WebElement> plantiles;
 
 	@FindBy(css = "#mpbed-year")
 	private WebElement MSPlanPartBYear;
@@ -771,6 +774,13 @@ public class PlanRecommendationEngineResultsPageMobile extends GlobalWebElements
 		System.out.println("DrugList Content is : " + DrugsList);
 		return DrugsList;
 	}
+	
+	public void usereditDrugsPREResult() {
+		threadsleep(10000);
+		System.out.println("Adding drugs from PRE Result page");
+		jsClickNew(plantiles.get(0).findElement(By.cssSelector("div[class*='drugDetails'] a.buttonLink")));
+		threadsleep(3000);
+	}
 
 	public ArrayList<String> drugsCoveredInVPP(int count, String plantype) {
 		System.out.println("Clicking on Drugs Details in Plan Type: " + count);
@@ -911,6 +921,13 @@ public class PlanRecommendationEngineResultsPageMobile extends GlobalWebElements
 		verifyConfirmationmodalResults(DrugsList.size(), DrugsList, ModelDrugsList);
 	}
 
+	public void useraddDrugsPREResult() {
+		threadsleep(10000);
+		System.out.println("Adding drugs from PRE Result page");
+		plantiles.get(0).findElement(By.cssSelector("div[class*='drugDetails'] a.buttonLink")).click();
+		threadsleep(3000);
+	}
+	
 	public void startNowFullFlow(String plan) {
 		System.out.println("Validating Start Now Full flow in PRE");
 		int MAPD = 1;

@@ -22,6 +22,7 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.testng.Assert;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.ComparePlansPage;
 import pages.acquisition.commonpages.DrugCostEstimatorPage;
@@ -34,6 +35,7 @@ import pages.acquisition.dceredesign.BuildYourDrugList;
 import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineLandingAndZipcodePages;
 
 /**
  * @author bnaveen4 Functionality:Visitor Profile for both AAPR and UHC
@@ -1037,5 +1039,77 @@ public class VisitorProfileStepDefinition {
         String planName = memberAttributesMap.get("PlanName");
         VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
         visitorProfile.validateViewDrugPricingModel(planName);
+    }
+
+    @Then("^the user click on Get Started to land on Plan Recommendation Page$")
+    public void the_user_click_on_Get_Started_to_land_on_Plan_Recommendation_Page() {
+        VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
+                .getBean(PageConstants.VISITOR_PROFILE_PAGE);
+        PlanRecommendationEngineLandingAndZipcodePages planSelectorhomepage = visitorProfile.clickGetStartedPRE();
+
+        if (planSelectorhomepage != null) {
+            //getLoginScenario().saveBean(PageConstants.PRE, visitorProfile);
+            System.out.println("Navigation to PRE from VP successful");
+        } else {
+            Assert.fail("Navigation to PRE from VP is not successful");
+        }
+    }
+
+    @Then("^user save plan on PRE and then go to profile page$")
+    public void user_save_plan_on_PRE_and_then_go_to_profile_page(DataTable data) {
+        Map<String, String> memberAttributesMap = new HashMap<String, String>();
+        memberAttributesMap = DataTableParser.readDataTableAsMaps(data);
+        String planName = memberAttributesMap.get("PlanName");
+        VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+        AcquisitionHomePage acqHomePage = (AcquisitionHomePage) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
+        visitorProfile.savePlanOnPRE(planName);
+        //visitorProfile.clickViewSavedPlansPRE();
+        acqHomePage.navigateToVisitorProfilePage();
+    }
+
+    @Then("^user click on save result option for PRE and signs in to VP$")
+    public void user_click_on_save_result_option_for_PRE_and_signs_in_to_VP(DataTable credentials) {
+        Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+        plannameAttributesMap = DataTableParser.readDataTableAsMaps(credentials);
+        String username = plannameAttributesMap.get("User Name");
+        String password = plannameAttributesMap.get("Password");
+        VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
+                .getBean(PageConstants.VISITOR_PROFILE_PAGE);
+        visitorProfile.signInSaveResults(username, password);
+        getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfile);
+        getLoginScenario().saveBean(VisitorProfileCommonConstants.VP_USER_TYPE, username);
+    }
+
+    @Then("^user validate plan recommendation plan card on visitor profile$")
+    public void user_validate_plan_recommendation_plan_card_on_visitor_profile(DataTable dataTable) {
+        Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+        plannameAttributesMap = DataTableParser.readDataTableAsMaps(dataTable);
+        String planName = plannameAttributesMap.get("PlanName");
+        String premium = plannameAttributesMap.get("Premium");
+        String plantype = plannameAttributesMap.get("PlanType");
+        VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+        visitorProfile.validatePREPlanCard(planName, premium, plantype);
+    }
+
+    @Then("^user click on save results option and click on create account link and validate the correct login page$")
+    public void user_click_on_save_results_option_and_click_on_create_account_link_and_validate_the_correct_login_page() {
+        VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+        visitorProfile.validateCreateAccountLinkPRE();
+
+    }
+
+    @Then("^user validate view Plan details on PRE plan card and check enroll or start application button$")
+    public void user_validate_view_Plan_details_on_PRE_plan_card_and_check_enroll_or_start_application_button(DataTable dataTable) {
+        Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+        plannameAttributesMap = DataTableParser.readDataTableAsMaps(dataTable);
+        String plantype = plannameAttributesMap.get("PlanType");
+        VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+        visitorProfile.PREPlanCardEnrollNDetails(plantype);
+    }
+
+    @Then("^the user validate the print functionality on Visitor Profile$")
+    public void the_user_validate_the_print_functionality_on_Visitor_Profile() {
+        VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+        visitorProfile.validatePrint();
     }
 }

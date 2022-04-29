@@ -1,4 +1,4 @@
-@campaignTFN @regressionAARP @campaignTFNStage
+@campaignTFN @regressionAARP @campaignTFNStage @globalComponent
 Feature: 1.19.1 UAT Scripts-To test Campaign TFN in all flows on AARP site
 
 
@@ -109,12 +109,12 @@ Feature: 1.19.1 UAT Scripts-To test Campaign TFN in all flows on AARP site
     @Scenario_1_2_DirectTraffic_UAT_Medsup3.0
     Examples: 
       | scenario         | site | zipcode | TFNNo          | MedSupTFN      | memberTFNNo    | memberSignIn                  | memberSignInstage                   | memberSignInOffline               | pscCode | maUrl                     | pdpUrl                       | snpUrl                                                                                                                                                                                                                                                                                                                      | medSuppUrl                                                                | medicareUrl             | site   | zipcode | plantype | isMultutiCounty | planyear | dceUrl                                                     | Precedence2PSC | PDPplantype | MAplantype | TFNxpath                          | MedsuppTFNxpath                   | DCETFNxpath                                                               | MSplantype | userName          | password        | TFNxpath1                         | planyear | FedTFNNo       | MedSupTFNNo    | sourceCode |
-      | Scenario 1 - AMP | AARP |   23666 | 1-877-699-5710 | 1-866-408-5545 | 1-855-349-3447 | https://www.medicare.uhc.com/ | https://stage-medicare.uhc.com/aarp | https://offline.medicare.uhc.com/ |  810027 | enroll/ma-enrollment.html | shop/estimate/pdp-costs.html | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | medicare-education.html | Ulayer |   80001 | MA       | No              | future   | health-plans/estimate-drug-costs.html#/drug-cost-estimator |        8009508 | PDP         | MA         | (//a[contains(@class, 'tel')])[3] | //*[contains(@class,'tel right')] | //*[@id='sam-call-button']//span[contains(@class,'sam__button__text')][2] | MS         | TiggerOptumID3331 | FebruarY##123$! | (//a[contains(@class, 'tel')])[1] | future   | 1-877-699-5710 | 1-866-408-5545 | AEP        |
+      | Scenario 1 - AMP | AARP |   23666 | 1-877-699-5710 | 1-866-408-5545 | 1-855-349-3447 | https://www.medicare.uhc.com/ | https://stage-medicare.uhc.com/aarp | https://offline.medicare.uhc.com/ |  810027 | enroll/ma-enrollment.html | shop/estimate/pdp-costs.html | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | medicare-education.html | Ulayer |   80001 | MA       | No              | future   | health-plans/estimate-drug-costs.html#/drug-cost-estimator |        8009508 | PDP         | MA         | (//a[contains(@class, 'tel')])[3] | //*[contains(@class,'tel right')] | //*[@id='sam-call-button']//span[contains(@class,'sam__button__text')][2] | MS         | TiggerOptumID3331 | FebruarY##123$) | (//a[contains(@class, 'tel')])[1] | future   | 1-877-699-5710 | 1-866-408-5545 | AEP        |
 
     @Scenario_1_2_DirectTraffic_UAT_Medsup4.0
     Examples: 
       | scenario         | site | zipcode | TFNNo          | MedSupTFN      | memberTFNNo    | memberSignIn                  | memberSignInstage                   | memberSignInOffline               | pscCode | maUrl                     | pdpUrl                       | snpUrl                                                                                                                                                                                                                                                                                                                      | medSuppUrl                                                                | medicareUrl             | site   | zipcode | plantype | isMultutiCounty | planyear | dceUrl                                                     | Precedence2PSC | PDPplantype | MAplantype | TFNxpath                          | MedsuppTFNxpath                                    | DCETFNxpath                                                               | MSplantype | userName          | password        | TFNxpath1                         | planyear | FedTFNNo       | MedSupTFNNo    | sourceCode |
-      | Scenario 1 - AMP | AARP |   90210 | 1-877-699-5710 | 1-866-408-5545 | 1-855-349-3447 | https://www.medicare.uhc.com/ | https://stage-medicare.uhc.com/aarp | https://offline.medicare.uhc.com/ |  810027 | enroll/ma-enrollment.html | shop/estimate/pdp-costs.html | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | medicare-education.html | Ulayer |   80001 | MA       | No              | future   | health-plans/estimate-drug-costs.html#/drug-cost-estimator |        8009508 | PDP         | MA         | (//a[contains(@class, 'tel')])[3] | //*[contains(@class, 'invoca_swap text-bold tel')] | //*[@id='sam-call-button']//span[contains(@class,'sam__button__text')][2] | MS4.0      | TiggerOptumID3331 | FebruarY##123$! | (//a[contains(@class, 'tel')])[1] | future   | 1-877-699-5710 | 1-866-408-5545 | AEP        |
+      | Scenario 1 - AMP | AARP |   90210 | 1-877-699-5710 | 1-866-408-5545 | 1-855-349-3447 | https://www.medicare.uhc.com/ | https://stage-medicare.uhc.com/aarp | https://offline.medicare.uhc.com/ |  810027 | enroll/ma-enrollment.html | shop/estimate/pdp-costs.html | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | medicare-education.html | Ulayer |   80001 | MA       | No              | future   | health-plans/estimate-drug-costs.html#/drug-cost-estimator |        8009508 | PDP         | MA         | (//a[contains(@class, 'tel')])[3] | //*[contains(@class, 'invoca_swap text-bold tel')] | //*[@id='sam-call-button']//span[contains(@class,'sam__button__text')][2] | MS4.0      | TiggerOptumID3331 | FebruarY##123$) | (//a[contains(@class, 'tel')])[1] | future   | 1-877-699-5710 | 1-866-408-5545 | AEP        |
 
   #######################Script 2: Campaign traffic########################################
   @Scenario_2_CampaignTraffic_UAT @UATRegression @prodRegression_UAT
@@ -187,49 +187,6 @@ Feature: 1.19.1 UAT Scripts-To test Campaign TFN in all flows on AARP site
     Then the user validates TFN Number
       | TFN No    | <MedsuppTFNNo>     |
       | TFN Xpath | <MedsuppTFNxpath1> |
-    #Then the site user fills all the details in MedsuppPage for TFN
-    # | DOB | <dob> |
-    Then the user fills all the details in MedsuppPage for TFN
-      | DOB      | <dob>     |
-      | Zip Code | <zipcode> |
-    Then the user validates TFN Number
-      | TFN No    | <MedsuppTFNNo>        |
-      | TFN Xpath | <MedsuppFormTFNxpath> |
-    Then the user validates PSC code
-      | PSC Code | <Precedence1PSC> |
-    Then the user validates source code
-      | sourceCode | <sourceCode1> |
-    #When the user clicks on Agent link for MedsuppPage
-    # | TFN No    | <agentTFN>   |
-    #| TFN Xpath | <agentXpath> |
-    Then the user clicks on decision guide for MedsuppPge
-      | Zip Code | <zipcode> |
-    Then the user validates TFN Number
-      | TFN No    | <MedsuppTFNNo>     |
-      | TFN Xpath | <decisionGuideTFN> |
-    # Then the user navigates back to page
-    Then the user click on back to previous page on Request a Free Decision Guide
-      | Zip Code | <zipcode> |
-    #When the user clicks on Agent link for MedsuppPage
-    # | TFN No    | <agentTFN>   |
-    #| TFN Xpath | <agentXpath> |
-    #| Zip Code  | <zipcode>    |
-    And user click on Start Application in MS plan
-      | Zip Code | <zipcode> |
-    Then the user validates PSC code
-      | PSC Code | <Precedence1PSC> |
-    Then the user validates source code
-      | sourceCode | <sourceCode1> |
-    Then user click on Cancel Application in MS plan
-      | Zip Code | <zipcode> |
-    And user click on View Plan Details in MS plan
-      | Zip Code | <zipcode> |
-    Then the user validates PSC code
-      | PSC Code | <Precedence1PSC> |
-    Then the user validates source code
-      | sourceCode | <sourceCode1> |
-    And user click on Back to Plan in MS Plan Details
-      | Zip Code | <zipcode> |
     Then the user navigates to plan tab for any plan
       | Plan Type | <PDPplantype> |
     Then the user navigates to Plan Details Page for any plan and validates Federal TFN
@@ -722,12 +679,12 @@ Feature: 1.19.1 UAT Scripts-To test Campaign TFN in all flows on AARP site
     @Scenario_9_External_Link_UAT_Medsup3.0 
     Examples: 
       | scenario                                | site | zipcode | MAplantype | pscCode | state   | campaignUrl                                                                        | medEdURL1                                  | medEdTFN                           | shoppagesUrl                        | shoppagesTFN                                                                        | userName          | password        | TFNNo          | TFNxpath                          | EnrollTFNxpath                    | ShopTFNxpath                      | FedTFNNo       | MedSupTFNNo    | sourceCode |
-      | Scenerio 9-ExternalLink - AMP Medsup3.0 | AARP |   23666 | MA         | 8000158 | Alabama | health-plans.html?zipcode=97266&WT.mc_id=8000158&county=420&state=36#/plan-summary | medicare-articles/medicare-made-clear.html | (//span[@class='heading-6']//u)[1] | shop/medicare-supplement-plans.html | //button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')] | TiggerOptumID3331 | FebruarY##123$! | 1-844-850-6592 | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[4] | 1-844-850-6592 | 1-844-850-6592 | RRZ        |
+      | Scenerio 9-ExternalLink - AMP Medsup3.0 | AARP |   23666 | MA         | 8000158 | Alabama | health-plans.html?zipcode=97266&WT.mc_id=8000158&county=420&state=36#/plan-summary | medicare-articles/medicare-made-clear.html | (//span[@class='heading-6']//u)[1] | shop/medicare-supplement-plans.html | //button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')] | TiggerOptumID3331 | FebruarY##123$) | 1-844-850-6592 | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[4] | 1-844-850-6592 | 1-844-850-6592 | RRZ        |
 
     @Scenario_9_External_Link_UAT_Medsup4.0 
     Examples: 
       | scenario                                | site | zipcode | MAplantype | pscCode | state   | campaignUrl                                                                        | medEdURL1                                  | medEdTFN                           | shoppagesUrl                        | shoppagesTFN                                                                        | userName          | password        | TFNNo          | TFNxpath                          | EnrollTFNxpath                    | ShopTFNxpath                      | FedTFNNo       | MedSupTFNNo    | sourceCode |
-      | Scenerio 2-ExternalLink - AMP Medsup4.0 | AARP |   90210 | MA         | 8000158 | Alabama | health-plans.html?zipcode=90210&WT.mc_id=8000158&county=420&state=36#/plan-summary | medicare-articles/medicare-made-clear.html | (//span[@class='heading-6']//u)[1] | shop/medicare-supplement-plans.html | //button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')] | TiggerOptumID3331 | FebruarY##123$! | 1-844-850-6592 | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[4] | 1-844-850-6592 | 1-844-850-6592 | RRZ        |
+      | Scenerio 2-ExternalLink - AMP Medsup4.0 | AARP |   90210 | MA         | 8000158 | Alabama | health-plans.html?zipcode=90210&WT.mc_id=8000158&county=420&state=36#/plan-summary | medicare-articles/medicare-made-clear.html | (//span[@class='heading-6']//u)[1] | shop/medicare-supplement-plans.html | //button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')] | TiggerOptumID3331 | FebruarY##123$) | 1-844-850-6592 | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[4] | 1-844-850-6592 | 1-844-850-6592 | RRZ        |
 
   @Scenario_2_CampaignTrafficdummy
   Scenario Outline: <scenario> Verify TFN for different plan types through Campaign Traffic
@@ -763,7 +720,7 @@ Feature: 1.19.1 UAT Scripts-To test Campaign TFN in all flows on AARP site
       | Scenerio 8-ExternalLink - AMP Medsup 3.0 | ulayer |   23666 | 8001024 | health-plans/prescription-drug-plans/available-plans.html?WT.mc_id=8001024&county=053&state=27#/plan-summary | health-plans/estimate-drug-costs.html?WT.mc_id=8001024&county=053&state=27#/getstarted | Lipitor |   10001 | MAPD     | AARP Medicare Advantage Prime (HMO) | health-plans/aarp-pharmacy.html?WT.mc_id=8001024&county=053&state=27#/Pharmacy-Search-English | medicare-articles/eligibility-and-enrollment.html | shop/medicare-supplement-plans.html | /health-plans/estimate-drug-costs.html#/getstarted | 1-866-308-8818 | (//a[contains(@class, 'tel')])[1] | 1-844-895-7228 | //*[contains(@class,'tel right')] | (//a[contains(@class, 'tel')])[3] | //button[@id='sam-call-button']//span[contains(@class,'invoca_swap')] | (//a[contains(@class, 'tel')])[2] |       15 | None       |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 | PDP         | MA         | MS         | SNP         | future   |
 
   #######################Script 10: Source Code in URL ########################################
-  @Scenario_5_SourceCodeInURL_UAT @UATRegression
+  @Scenario_10_SourceCodeInURL_UAT @UATRegression
   Scenario Outline: <scenario> <zipcode>1.0 Verify TFN and source code from URL
     Given the user Starts WebDriver
     Given the user is on following acquisition site from Campaign Traffic
@@ -822,280 +779,16 @@ Feature: 1.19.1 UAT Scripts-To test Campaign TFN in all flows on AARP site
     Then the user validates MedSup TFN
       | TFN No | <MedSupTFNNo> |
 
-    @Scenario_5_SourceCodeInURL_UAT_Medsup3.0 @IS_TFN_E2E_Scenario_5 @campaignTFNStageMS
+    @Scenario_10_SourceCodeInURL_UAT_Medsup3.0 
     Examples: 
       | scenario                                     | site   | zipcode | MAplantype | MSPlantype | pscCode | state   | campaignUrl   | medEdURL1                                        | medEdTFN                           | shoppagesUrl                        | shoppagesTFN                                                                        | userName          | password        | TFNNo          | TFNxpath                          | EnrollTFNxpath                    | ShopTFNxpath                      | FedTFNNo       | MedSupTFNNo    | sourceCode |
-      | Scenerio 5a-SourceCodeInURL - AMP-Medsup 3.0 | ULayer |   23666 | MA         | MS         |  810106 | Alabama | ?WT.mc_id=5T9 | medicare-education/medicare-advantage-plans.html | (//span[@class='heading-6']//u)[1] | shop/medicare-supplement-plans.html | //button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')] | TiggerOptumID3331 | FebruarY##123$! | 1-844-850-6592 | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[4] | 1-800-850-6807 | 1-866-327-1593 | 5T9        |
+      | Scenerio 10-SourceCodeInURL - AMP-Medsup 3.0 | ULayer |   23666 | MA         | MS         |  810106 | Alabama | ?WT.mc_id=5T9 | medicare-education/medicare-advantage-plans.html | (//span[@class='heading-6']//u)[1] | shop/medicare-supplement-plans.html | //button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')] | TiggerOptumID3331 | FebruarY##123$) | 1-844-850-6592 | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[4] | 1-800-850-6807 | 1-866-327-1593 | 5T9        |
 
-    @Scenario_5_SourceCodeInURL_UAT_Medsup4.0 @campaignTFNStageMS
+    @Scenario_5_SourceCodeInURL_UAT_Medsup4.0 
     Examples: 
       | scenario                                    | site   | zipcode | MAplantype | MSPlantype | pscCode | state   | campaignUrl   | medEdURL1                                        | medEdTFN                           | shoppagesUrl                        | shoppagesTFN                                                                        | userName          | password        | TFNNo          | TFNxpath                          | EnrollTFNxpath                    | ShopTFNxpath                      | FedTFNNo       | MedSupTFNNo    | sourceCode |
-      | Scenerio 5b-SourceCodeInURL - AMP-Medsup4.0 | ULayer |   90210 | MA         | MS4.0      |  810106 | Alabama | ?WT.mc_id=5T9 | medicare-education/medicare-advantage-plans.html | (//span[@class='heading-6']//u)[1] | shop/medicare-supplement-plans.html | //button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')] | TiggerOptumID3331 | FebruarY##123$! | 1-844-850-6592 | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[4] | 1-800-850-6807 | 1-866-327-1593 | 5T9        |
+      | Scenerio 10-SourceCodeInURL - AMP-Medsup4.0 | ULayer |   90210 | MA         | MS4.0      |  810106 | Alabama | ?WT.mc_id=5T9 | medicare-education/medicare-advantage-plans.html | (//span[@class='heading-6']//u)[1] | shop/medicare-supplement-plans.html | //button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')] | TiggerOptumID3331 | FebruarY##123$) | 1-844-850-6592 | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[4] | 1-800-850-6807 | 1-866-327-1593 | 5T9        |
 
-  @Scenario_1_MS
-  Scenario Outline: <scenario> <zipcode>1.0 Verify TFN in MS Plan Details, MS Summary, MS Visitor profie, and MS OLE pages
-    Given the user is on medicare acquisition site landing page
-      | Site | <site> |
-    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
-    Then the user validates TFN Number
-      | TFN No    | <TFNNo>    |
-      | TFN Xpath | <TFNxpath> |
-    Then the user validates PSC code
-      | PSC Code | <pscCode> |
-    Then the user validates source code
-      | sourceCode | <sourceCode> |
-    Then the user validates Fed TFN
-      | TFN No | <FedTFNNo> |
-    Then the user validates MedSup TFN
-      | TFN No | <MedSupTFNNo> |
-    Then the user enter zipcode in homepage
-      | Zip Code  | <zipcode>    |
-      | Plan Type | <MSplantype> |
-    And the user selects plan year
-      | Plan Year | <planyear> |
-    And user click on View Plan Details in MS plan
-      | Zip Code | <zipcode> |
-    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
-    Then the user validates PSC code
-      | PSC Code | <pscCode> |
-    Then the user validates source code
-      | sourceCode | <sourceCode> |
-    Then the user validates Fed TFN
-      | TFN No | <FedTFNNo> |
-    Then the user validates MedSup TFN
-      | TFN No | <MedSupTFNNo> |
-    Then the user validates TFN in Already an insured section
-      | TFN No | <MedSupStaticTFNNo> |
-    Then the user validates TFN Number
-      | TFN No    | <MedSupTFN>       |
-      | TFN Xpath | <MedsuppTFNxpath> |
-    And user click on Back to Plan in MS Plan Details
-      | Zip Code | <zipcode> |
-    And user clicks on Edit Your Information link and navigate back to micro form
-    And user updates Medsup form for user details
-    Then the user validates TFN in Already an insured section
-      | TFN No | <MedSupStaticTFNNo> |
-    Then the user validates TFN Number
-      | TFN No    | <MedSupTFN>       |
-      | TFN Xpath | <MedsuppTFNxpath> |
-    When user selects medsup plans to compare
-    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
-    Then the user validates PSC code
-      | PSC Code | <pscCode> |
-    Then the user validates source code
-      | sourceCode | <sourceCode> |
-    Then the user validates Fed TFN
-      | TFN No | <FedTFNNo> |
-    Then the user validates MedSup TFN
-      | TFN No | <MedSupTFNNo> |
-    Then the user validates TFN in Already an insured section
-      | TFN No | <MedSupStaticTFNNo> |
-    Then the user validates TFN Number
-      | TFN No    | <MedSupTFN>       |
-      | TFN Xpath | <MedsuppTFNxpath> |
-    And user click on Start Application in MS plan compare page
-      | Zip Code | <zipcode> |
-    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
-    Then the user validates PSC code
-      | PSC Code | <pscCode> |
-    Then the user validates source code
-      | sourceCode | <sourceCode> |
-    Then the user validates Fed TFN
-      | TFN No | <FedTFNNo> |
-    Then the user validates MedSup TFN
-      | TFN No | <MedSupTFNNo> |
-    Then user click on Cancel Application in MS plan
-      | Zip Code | <zipcode> |
-    And the user clicks on the shopping cart icon
-    Then the user validates MedSup TFN
-      | TFN No | <MedSupTFNNo> |
 
-    @MSScenario @campaignTFNStageMS
-    Examples: 
-      | scenario                    | site | dob        | zipcode | FedTFNNo       | MedSupTFNNo    | memberTFNNo    | memberSignIn                  | memberSignInstage               | memberSignInOffline               | pscCode | maUrl                     | pdpUrl                       | snpUrl                                                                                                                                                                                                                                                                                                                      | medSuppUrl                                                                | medicareUrl             | site   | zipcode | MSplantype | isMultutiCounty | planyear | dceUrl                                                     | Precedence2PSC | PDPplantype | MAplantype | TFNxpath                          | MedsuppTFNxpath                                    | DCETFNxpath                                                               | MSplantype | userName          | password        | TFNxpath1                         | planyear | FedTFNNo       | MedSupTFNNo    | sourceCode | plantype | MSplantype | MS_Plan | MedSupStaticTFNNo | MedsuppTFNxpath                          |
-      | Scenario 1 - AMP Medsup 4.0 | AARP | 11/11/1950 |   90210 | 1-877-699-5710 | 1-866-408-5545 | 1-855-349-3447 | https://www.medicare.uhc.com/ | https://stage-medicare.uhc.com/ | https://offline.medicare.uhc.com/ |  810027 | enroll/ma-enrollment.html | shop/estimate/pdp-costs.html | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | medicare-education.html | Ulayer |   80001 | MS4.0      | No              | future   | health-plans/estimate-drug-costs.html#/drug-cost-estimator |        8009508 | PDP         | MS4.0      | (//a[contains(@class, 'tel')])[3] | //*[contains(@class, 'invoca_swap text-bold tel')] | //*[@id='sam-call-button']//span[contains(@class,'sam__button__text')][2] | MS4.0      | TiggerOptumID3331 | FebruarY##123$! | (//a[contains(@class, 'tel')])[1] | future   | 1-877-699-5710 | 1-866-408-5545 | AEP        | MA       | MS4.0      | Plan G  | 1-866-603-3424    | //span[contains(@class,'text-bold tel')] |
-
-  #######################IS_TFN_E2E Scenario 8 & 9: VPP (eInquiry) ########################################
-  @Scenario_IS_TFN_E2E_Scenario_8_and_9_UAT @UATRegression
-  Scenario Outline: <scenario> <zipcode>1.0 Verify TFN showing correctly through VPP eInquiry
-    Given the user Starts WebDriver
-    Given the user is on following acquisition site from Campaign Traffic
-      | Site         | <site>        |
-      | Campaign URL | <campaignUrl> |
-    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
-    Then the user validates PSC code
-      | PSC Code | <pscCode> |
-    Then the user validates source code
-      | sourceCode | <sourceCode> |
-    Then the user validates Fed TFN
-      | TFN No | <FedTFNNo> |
-    Then the user validates MedSup TFN
-      | TFN No | <MedSupTFNNo> |
-    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN on VPP
-    Then the user validates PSC code
-      | PSC Code | <pscCode> |
-    Then the user validates source code
-      | sourceCode | <sourceCode> |
-    Then the user validates Fed TFN
-      | TFN No | <FedTFNNo> |
-    Then the user validates MedSup TFN
-      | TFN No | <MedSupTFNNo> |
-    Then the user validates TFN in Already an insured section
-      | TFN No | <MedSupStaticTFNNo> |
-    Then the user validates TFN Number
-      | TFN No    | <MedSupTFN>       |
-      | TFN Xpath | <MedsuppTFNxpath> |
-    And user click on View Plan Details in MS plan
-      | Zip Code | <zipcode> |
-    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
-    Then the user validates PSC code
-      | PSC Code | <pscCode> |
-    Then the user validates source code
-      | sourceCode | <sourceCode> |
-    Then the user validates Fed TFN
-      | TFN No | <FedTFNNo> |
-    Then the user validates MedSup TFN
-      | TFN No | <MedSupTFNNo> |
-    Then the user validates TFN in Already an insured section
-      | TFN No | <MedSupStaticTFNNo> |
-    Then the user validates TFN Number
-      | TFN No    | <MedSupTFN>       |
-      | TFN Xpath | <MedsuppTFNxpath> |
-    And user click on Back to Plan in MS Plan Details
-      | Zip Code | <zipcode> |
-    And user clicks on Edit Your Information link and navigate back to micro form
-    And user updates Medsup form for user details
-    Then the user validates TFN in Already an insured section
-      | TFN No | <MedSupStaticTFNNo> |
-    When user selects medsup plans to compare
-    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
-    Then the user validates PSC code
-      | PSC Code | <pscCode> |
-    Then the user validates source code
-      | sourceCode | <sourceCode> |
-    Then the user validates Fed TFN
-      | TFN No | <FedTFNNo> |
-    Then the user validates MedSup TFN
-      | TFN No | <MedSupTFNNo> |
-    Then the user validates TFN in Already an insured section
-      | TFN No | <MedSupStaticTFNNo> |
-    Then the user validates TFN Number
-      | TFN No    | <MedSupTFN>       |
-      | TFN Xpath | <MedsuppTFNxpath> |
-    And user click on Start Application in MS plan compare page
-      | Zip Code | <zipcode> |
-    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
-    Then the user validates PSC code
-      | PSC Code | <pscCode> |
-    Then the user validates source code
-      | sourceCode | <sourceCode> |
-    Then the user validates Fed TFN
-      | TFN No | <FedTFNNo> |
-    Then the user validates MedSup TFN
-      | TFN No | <MedSupTFNNo> |
-
-    @Scenario_IS_TFN_E2E_Scenario_8_Medsup4.0 @campaignTFNStageMS
-    Examples: 
-      | scenario                                        | site   | zipcode | MS_Plan | MAplantype | MSPlantype | pscCode | state   | campaignUrl                                                                                                                       | medEdURL1                                        | medEdTFN                           | shoppagesUrl                        | shoppagesTFN                                                                        | userName          | password        | TFNNo          | TFNxpath                          | EnrollTFNxpath                    | ShopTFNxpath                      | FedTFNNo       | MedSupTFNNo    | sourceCode | MedSupStaticTFNNo | MedsuppTFNxpath                          |
-      | Scenerio IS_TFN_E2E_Scenario_8 - AMP Medsup 4.0 | ULayer |   90210 | Plan G  | MA         | MS4.0      | 8003076 | Alabama | health-plans.html?product=medsup&WT.mc_id=2YP&HASHID=2475451813&zipcode=90210&DOB=1952-03-18&EBRC=&mrcid=email_is_p#/plan-summary | medicare-education/medicare-advantage-plans.html | (//span[@class='heading-6']//u)[1] | shop/medicare-supplement-plans.html | //button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')] | TiggerOptumID3331 | FebruarY##123$! | 1-844-850-6592 | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[4] | 1-855-322-3402 | 1-844-230-1339 | 2YP        | 1-866-603-3424    | //span[contains(@class,'text-bold tel')] |
-
-    @Scenario_IS_TFN_E2E_Scenario_9_Medsup4.0 @campaignTFNStageMS
-    Examples: 
-      | scenario                                        | site   | zipcode | MS_Plan | MAplantype | MSPlantype | pscCode | state   | campaignUrl                                                                                                                                                                                                                                                                                                                                                     | medEdURL1                                        | medEdTFN                           | shoppagesUrl                        | shoppagesTFN                                                                        | userName          | password        | TFNNo          | TFNxpath                          | EnrollTFNxpath                    | ShopTFNxpath                      | FedTFNNo       | MedSupTFNNo    | sourceCode | MedSupStaticTFNNo | MedsuppTFNxpath                          |
-      | Scenerio IS_TFN_E2E_Scenario_9 - AMP Medsup 4.0 | ULayer |   90210 | Plan G  | MA         | MS4.0      | 8003077 | Alabama | health-plans.html?product=medsup&EBRC=https://www.aarpmedicaresupplement.com/medicare-information-guide.html&intref=AARPMedicareSupplement.com&adobe_mc=MCMID%3D44598998069175401371739591939441775859%7CMCORGID%3D92E102BE5330583D0A490D4C%2540AdobeOrg%7CTS%3D1645778514&zipcode=90210&WT.mc_id=8KH&state=TX&HASHID=2475451813&mrcid=email_is_p#/plan-summary | medicare-education/medicare-advantage-plans.html | (//span[@class='heading-6']//u)[1] | shop/medicare-supplement-plans.html | //button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')] | TiggerOptumID3331 | FebruarY##123$! | 1-844-850-6592 | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[4] | 1-855-322-3404 | 1-866-897-0688 | 8KH        | 1-866-603-3424    | //span[contains(@class,'text-bold tel')] |
-
-  #######################IS_Script 2: AMS referral traffic ########################################
-  @IS_TFN_E2E_Scenario_2 @UATRegression
-  Scenario Outline: <scenario> <zipcode>1.0  Verify TFN  show correctly from AMS Referral Traffic
-    Given the user Starts WebDriver
-    Given the user is on following acquisition site from Campaign Traffic
-      | Site         | <site>        |
-      | Campaign URL | <campaignUrl> |
-    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
-    Then the user validates PSC code
-      | PSC Code | <pscCode> |
-    Then the user validates source code
-      | sourceCode | <sourceCode> |
-    Then the user validates Fed TFN
-      | TFN No | <FedTFNNo> |
-    Then the user validates MedSup TFN
-      | TFN No | <MedSupTFNNo> |
-    Then the user enter zipcode in plan search page
-      | Zip Code  | <zipcode>    |
-      | Plan Type | <MSPlantype> |
-    And the user selects plan year
-      | Plan Year | <planyear> |
-    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN on VPP
-    Then the user validates PSC code
-      | PSC Code | <pscCode> |
-    Then the user validates source code
-      | sourceCode | <sourceCode> |
-    Then the user validates Fed TFN
-      | TFN No | <FedTFNNo> |
-    Then the user validates MedSup TFN
-      | TFN No | <MedSupTFNNo> |
-    Then the user validates TFN in Already an insured section
-      | TFN No | <MedSupStaticTFNNo> |
-    Then the user validates TFN Number
-      | TFN No    | <MedSupTFN>       |
-      | TFN Xpath | <MedsuppTFNxpath> |
-    And user click on View Plan Details in MS plan
-      | Zip Code | <zipcode> |
-    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
-    Then the user validates PSC code
-      | PSC Code | <pscCode> |
-    Then the user validates source code
-      | sourceCode | <sourceCode> |
-    Then the user validates Fed TFN
-      | TFN No | <FedTFNNo> |
-    Then the user validates MedSup TFN
-      | TFN No | <MedSupTFNNo> |
-    Then the user validates TFN in Already an insured section
-      | TFN No | <MedSupStaticTFNNo> |
-    Then the user validates TFN Number
-      | TFN No    | <MedSupTFN>       |
-      | TFN Xpath | <MedsuppTFNxpath> |
-    And user click on Back to Plan in MS Plan Details
-      | Zip Code | <zipcode> |
-    And user clicks on Edit Your Information link and navigate back to micro form
-    And user updates Medsup form for user details
-    Then the user validates TFN in Already an insured section
-      | TFN No | <MedSupStaticTFNNo> |
-    When user selects medsup plans to compare
-    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
-    Then the user validates PSC code
-      | PSC Code | <pscCode> |
-    Then the user validates source code
-      | sourceCode | <sourceCode> |
-    Then the user validates Fed TFN
-      | TFN No | <FedTFNNo> |
-    Then the user validates MedSup TFN
-      | TFN No | <MedSupTFNNo> |
-    Then the user validates TFN in Already an insured section
-      | TFN No | <MedSupStaticTFNNo> |
-    Then the user validates TFN Number
-      | TFN No    | <MedSupTFN>       |
-      | TFN Xpath | <MedsuppTFNxpath> |
-    And user click on Start Application in MS plan compare page
-      | Zip Code | <zipcode> |
-    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
-    Then the user validates PSC code
-      | PSC Code | <pscCode> |
-    Then the user validates source code
-      | sourceCode | <sourceCode> |
-    Then the user validates Fed TFN
-      | TFN No | <FedTFNNo> |
-    Then the user validates MedSup TFN
-      | TFN No | <MedSupTFNNo> |
-
-    @IS_TFN_E2E_Scenario_2 @campaignTFNStageMS @campaignTFNProdMS
-    Examples: 
-      | scenario                               | site   | zipcode | MAplantype | MSPlantype | pscCode | state   | campaignUrl                                                                                                                                                                                                                                                                                                                                               | medEdURL1                                        | medEdTFN                           | shoppagesUrl                        | shoppagesTFN                                                                        | userName          | password        | TFNNo          | TFNxpath                          | EnrollTFNxpath                    | ShopTFNxpath                      | FedTFNNo       | MedSupTFNNo    | sourceCode | MedSupStaticTFNNo | MedsuppTFNxpath                          |
-      | IS_TFN_E2E_Scenario_2 - AMP-Medsup 4.0 | ULayer |   90210 | MA         | MS4.0      | 8003077 | Alabama | health-plans.html?WT.mc_id=8KH&product=medsup&intref=AARPMedicareSupplement.com&EBRC=https%3A%2F%2Fwww.aarpmedicaresupplement.com%2Fmedicare-information-guide.html&state=TX&HASHID=2475451813&mrcid=email_is_p&adobe_mc=MCMID%3D44598998069175401371739591939441775859%7CMCORGID%3D92E102BE5330583D0A490D4C%2540AdobeOrg%7CTS%3D1645783090#/plan-summary | medicare-education/medicare-advantage-plans.html | (//span[@class='heading-6']//u)[1] | shop/medicare-supplement-plans.html | //button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')] | TiggerOptumID3331 | FebruarY##123$! | 1-844-850-6592 | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[4] | 1-855-322-3404 | 1-866-897-0688 | 8KH        | 1-866-603-3424    | //span[contains(@class,'text-bold tel')] |
-
-    @Scenario_IS_TFN_E2E_Scenario_2_Medsup4.0_23W @campaignTFNProdMS @campaignTFNStageMS
-    Examples: 
-      | scenario                                        | site   | zipcode | MS_Plan | MAplantype | MSPlantype | pscCode | state   | campaignUrl                                                                                                                                                                              | medEdURL1                                        | medEdTFN                           | shoppagesUrl                        | shoppagesTFN                                                                        | userName          | password        | TFNNo          | TFNxpath                          | EnrollTFNxpath                    | ShopTFNxpath                      | FedTFNNo       | MedSupTFNNo    | sourceCode | MedSupStaticTFNNo | MedsuppTFNxpath                          |
-      | Scenerio IS_TFN_E2E_Scenario_2 - AMP Medsup 4.0 | ULayer |   90210 | Plan G  | MA         | MS4.0      | 8003093 | Alabama | health-plans.html?product=medsup&EBRC=https://www.aarpmedicaresupplement.com/medicare-information-guide.html&intref=AARPMedicareSupplement.com&zipcode=90210&WT.mc_id=23W&#/plan-summary | medicare-education/medicare-advantage-plans.html | (//span[@class='heading-6']//u)[1] | shop/medicare-supplement-plans.html | //button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')] | TiggerOptumID3331 | FebruarY##123$! | 1-844-850-6592 | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[4] | 1-855-888-1640 | 1-866-242-0247 | 23W        | 1-866-603-3424    | //span[contains(@class,'text-bold tel')] |
-
+  
   
