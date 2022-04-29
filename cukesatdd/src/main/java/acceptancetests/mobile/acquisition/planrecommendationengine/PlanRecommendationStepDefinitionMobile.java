@@ -287,6 +287,39 @@ public class PlanRecommendationStepDefinitionMobile {
 		DrugMobilePage drugpage = new DrugMobilePage((AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		drugpage.skipDrugs(inputValues.get("Drug Selection"));
 	}
+	
+	@Then("^user save recommendation PlanType and PlanName to validate Browser back Functionality in results page$")
+   	public void save_Recom() {
+		EditResponseMobilePage preEditpage =  new EditResponseMobilePage((AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		checkpopup();
+		preEditpage.saveFirstRecom();
+	}
+	
+	@Then("^user validate edited recommendation PlanType and PlanName in results page$")
+   	public void edited_save_Recom() {
+		EditResponseMobilePage preEditpage =  new EditResponseMobilePage((AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		checkpopup();
+		preEditpage.editedFirstRecom();
+	}
+	
+	@Then("^user return to PRE-Result page using browser back in EditMyResponse page$")
+   	public void browserback_editResponse_page() {
+		EditResponseMobilePage preEditpage =  new EditResponseMobilePage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		preEditpage.browserBackResult();
+   	}
+	
+	@Then("^user adds SNP options in edit response page$")
+   	public void snp_editResponse_page(DataTable givenAttributes) {
+		readfeaturedataMobile(givenAttributes);
+		EditResponseMobilePage preEditpage =  new EditResponseMobilePage((AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		preEditpage.addSNPEditResponse(inputValues);
+   	}
+	
+	@When("^user navigate to Drug page using edit drugs from PREResult page$")
+   	public void edit_drugs_preResult_page() {
+		PlanRecommendationEngineResultsPageMobile planSelectorResultspage =  new PlanRecommendationEngineResultsPageMobile((AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorResultspage.usereditDrugsPREResult();
+   	}
 
 	@Then("^user selects add drug option in Drug page$")
 	public void add_drugs_page_mobile(DataTable givenAttributes) {
@@ -373,6 +406,13 @@ public class PlanRecommendationStepDefinitionMobile {
 		costpage.costpreferencepage();
 	}
 
+	@When("^user navigate to PRE using Homepage PRE widget$")
+	public void navigate_Homepage() {
+		HeaderFooterMobile headerAndFooter =  new HeaderFooterMobile((AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		checkpopup();
+		headerAndFooter.navigationToPREViaHomePageWidget();
+	}
+	
 	@Then("^user selects cost preferences option in cost preferences page$")
 	public void select_costPreferenceOption_costpreferences_page_mobile(DataTable givenAttributes) {
 		readfeaturedataMobile(givenAttributes);
@@ -436,6 +476,12 @@ public class PlanRecommendationStepDefinitionMobile {
 		ResultsMobilePage resultpage = new ResultsMobilePage((AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		resultpage.navigateVPP(inputValues);
 	}
+	
+	@When("^user navigate to Drug page to add drugs from PREResult page$")
+   	public void add_drugs_preResult_page() {
+		PlanRecommendationEngineResultsPageMobile planSelectorResultspage =  new PlanRecommendationEngineResultsPageMobile((AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorResultspage.useraddDrugsPREResult();
+   	}
 
 	@Then("^user adds Doctors in vpp summary page$")
 	public void add_providers_vpp_summary_page_mobile(DataTable givenAttributes) {

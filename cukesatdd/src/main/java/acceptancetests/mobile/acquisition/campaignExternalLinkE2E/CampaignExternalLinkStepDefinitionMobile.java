@@ -1253,6 +1253,12 @@ public void the_user_performs_plan_search_using_following_information_on_Morgan_
 		campaignExternalLinkspage.clickFindPlansinyourArea();
 	}
 	
+	@And("^the user closes the browser tab$")
+	public void closes_new_browser_tab() {
+		VPPPlanSummaryPageMobile plansummaryPage=(VPPPlanSummaryPageMobile)getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.closeBrowserTab();
+	}
+	
 	
 	}
 

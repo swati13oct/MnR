@@ -72,7 +72,7 @@ public class OLECommonPagesMobile extends UhcDriver{
 	@FindBy(xpath = "//*[@id='signInOptumID']")
 	private WebElement SignInHeader;
 
-	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/..//a[contains(text(),'Sign Out')]")
+	@FindBy(xpath = "(//*[@id='globalContentIdForSkipLink']/..//a[contains(text(),'Sign Out')])[2]")
 	private WebElement signOut;
 
 	@FindBy(xpath = "//*[@id='agreeButton']")

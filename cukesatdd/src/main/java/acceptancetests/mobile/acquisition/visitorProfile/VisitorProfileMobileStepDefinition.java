@@ -141,6 +141,39 @@ public class VisitorProfileMobileStepDefinition {
 		visitorProfile.deletePlans(planYear, savedPlanNames);
 	}
 	
+	@Then("^user click on save result option for PRE and signs in to VP$")
+    public void user_click_on_save_result_option_for_PRE_and_signs_in_to_VP(DataTable credentials) {
+        Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+        plannameAttributesMap = DataTableParser.readDataTableAsMaps(credentials);
+        String username = plannameAttributesMap.get("User Name");
+        String password = plannameAttributesMap.get("Password");
+        VisitorProfilePageMobile visitorProfile = (VisitorProfilePageMobile) getLoginScenario()
+                .getBean(PageConstants.VISITOR_PROFILE_PAGE);
+        visitorProfile.signInSaveResults(username, password);
+        getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfile);
+        getLoginScenario().saveBean(VisitorProfileCommonConstants.VP_USER_TYPE, username);
+    }
+	
+	@Then("^user validate plan recommendation plan card on visitor profile$")
+    public void user_validate_plan_recommendation_plan_card_on_visitor_profile(DataTable dataTable) {
+        Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+        plannameAttributesMap = DataTableParser.readDataTableAsMaps(dataTable);
+        String planName = plannameAttributesMap.get("PlanName");
+        String premium = plannameAttributesMap.get("Premium");
+        String plantype = plannameAttributesMap.get("PlanType");
+        VisitorProfilePageMobile visitorProfile = (VisitorProfilePageMobile) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+        visitorProfile.validatePREPlanCard(planName, premium, plantype);
+    }
+	
+	@Then("^user validate view Plan details on PRE plan card and check enroll or start application button$")
+    public void user_validate_view_Plan_details_on_PRE_plan_card_and_check_enroll_or_start_application_button(DataTable dataTable) {
+        Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+        plannameAttributesMap = DataTableParser.readDataTableAsMaps(dataTable);
+        String plantype = plannameAttributesMap.get("PlanType");
+        VisitorProfilePageMobile visitorProfile = (VisitorProfilePageMobile) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+        visitorProfile.PREPlanCardEnrollNDetails(plantype);
+    }
+	
 	@And("^the user clicks on the shopping cart icon$")
 	public void the_user_clicks_on_the_shopping_cart_icon_in_AARP_site() {
 		AcquisitionHomePageMobile acqHomePage = (AcquisitionHomePageMobile) getLoginScenario()

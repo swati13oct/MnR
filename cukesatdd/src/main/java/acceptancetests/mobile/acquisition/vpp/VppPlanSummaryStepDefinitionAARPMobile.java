@@ -913,6 +913,16 @@ public class VppPlanSummaryStepDefinitionAARPMobile {
 
 	}
 	
+	@And("^user clicks on add more plans for comparing$")
+	public void user_clicks_on_add_more_plans_for_comparing() throws Throwable {
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		boolean result = plansummaryPage.addTwoMorePlansForComparing();
+		// Assertion.assertTrue("User successfully add two more plans", result);
+		System.out.println("User successfully add two more plans");
+
+	}
+	
 	@Then("^user clicks on View plan button link and navigate back to vpp summary page of medsupp$")
 	public void user_clicks_on_View_plan_button_link_and_navigate_back_to_vpp_summary_page_of_medsupp()
 			throws Throwable {
@@ -1325,6 +1335,45 @@ public class VppPlanSummaryStepDefinitionAARPMobile {
 			Assertion.fail("Error Loading VPP plan summary page");
 		}
 
+	}
+	
+	@Then("^the site user clicks on continue application until confirmaion page for Other Pages$")
+	public void conitnue_application_until_confirmation_page_other_page(DataTable givenAttributes) throws Throwable {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 *
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
+		if (!(MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod"))) {
+			String Medicarenumber = memberAttributesMap.get("MedicareNumber");
+			String DateOfBirth = memberAttributesMap.get("DOB");
+			VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			String submitconfirmation = plansummaryPage.continueApplicationuntilSubmitOtherpages(Medicarenumber);
+			getLoginScenario().saveBean(VPPCommonConstants.SUBMITCONFIRMATION, submitconfirmation);
+		}
+	}
+	
+	@Then("^the user validate on medsupp plans confirmation page$")
+	public void User_validate_medsupp_plans_confirmation_page() throws Throwable {
+
+		if (!(MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod"))) {
+			VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+			// plansummaryPage.medsuppOLEPlanOvervieworOutlineCoverage();
+			// plansummaryPage.medsuppOLEBenefitsTable();
+			// plansummaryPage.medsuppOLERulesandDisclosures();
+			plansummaryPage.medsuppOLEHealthInsurance();
+			plansummaryPage.medsuppOLEAARPSupplementPlans();
+			// plansummaryPage.medsuppOLEPrintandSaveApplication();
+			plansummaryPage.medsuppOLEViewPrescriptionDrugPlans();
+
+		}
 	}
 
 	@When("^the user clicks on Find plans on vpp using following information$")

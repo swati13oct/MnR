@@ -46,7 +46,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	 @FindBy(xpath = "//div[@id='modal']//button[contains(text(),'Keep')]")
 	 private WebElement createProfilePopupPRE;
 
-	@FindBy(xpath = "//span[text()='ZIP Code']/following-sibling::span")
+	@FindBy(xpath = "//span[text()='Zip Code']/following-sibling::span")
 	public WebElement enrolledPlanZipcode;
 
 	@FindBy(xpath = "//span[text()='Monthly Premium']/following-sibling::span")
@@ -717,6 +717,41 @@ public class VisitorProfilePageMobile extends UhcDriver {
 
 	}
 	
+	public void PREPlanCardEnrollNDetails(String plantype) {
+        CommonUtility.checkPageIsReadyNew(driver);
+        WebElement viewDetailsPRECard = driver.findElement(By.xpath("(//div[contains(@class,'uhc-pre-card')]//a[contains(@class,'details')])[1]"));
+        validateNew(viewDetailsPRECard);
+        jsClickNew(viewDetailsPRECard);
+        sleepBySec(5);
+        CommonUtility.checkPageIsReadyNew(driver);
+        waitForPageLoadSafari();
+        sleepBySec(5);
+        //waitforElementNew(driver.findElement(By.xpath("//div[contains(@class,'plan-details')]")), 45);
+        if (plantype.trim().equalsIgnoreCase("MS")) {
+            sleepBySec(15);
+            Assert.assertTrue(validate(driver.findElement(By.xpath("//button[contains(@class,'start-app')]")) , 20) || validate(driver.findElement(By.xpath("(//a[contains(@class,'back-to-plans')])[1]")),20), "Plan Details page not opened");
+        } else {
+            Assert.assertTrue(validateNew(driver.findElement(By.xpath("//div[contains(@class,'plan-details')]"))), "Plan Details page not opened");
+        }
+        clickOnBackToProfile();
+        //gotoProfilePage();
+        CommonUtility.checkPageIsReadyNew(driver);
+        sleepBySec(4);
+        WebElement btnEnrollPRECard = driver.findElement(By.xpath("(//div[contains(@class,'uhc-pre-card')]//button[contains(@class,'enroll')])[1]"));
+        scrollToView(btnEnrollPRECard);
+        jsClickNew(btnEnrollPRECard);
+        sleepBySec(4);
+        CommonUtility.checkPageIsReadyNew(driver);
+        //clickOnBackToProfile()
+        if (!plantype.trim().equalsIgnoreCase("MS")) {
+            Assert.assertTrue(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Online Enrollment')]"))), "OLE Page not opened");
+        } else if (plantype.trim().equalsIgnoreCase("MS")) {
+            sleepBySec(10);
+            Assert.assertTrue(validateNew(driver.findElement(By.xpath("//h1[contains(@id,'startAppTitle')]")), 45), "Start Application Page not opened");
+            validateMSStartApplicationPage();
+        }
+    }
+	
 	public void validateNoAvgCostProfile() {
         CommonUtility.checkPageIsReady(driver);
         sleepBySec(3);
@@ -806,6 +841,28 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		}
 
 	}
+	
+	public void validatePREPlanCard(String planName, String premium, String plantype) {
+        CommonUtility.checkPageIsReadyNew(driver);
+        sleepBySec(3);
+        WebElement planCard = driver.findElement(By.xpath("(//div[contains(@class,'uhc-pre-card')])[1]"));
+        scrollToView(planCard);
+        Assert.assertTrue(validate(planCard), "Plan Card is not visible");
+        WebElement planNamePRECard = driver.findElement(By.xpath("(//div[contains(@class,'uhc-pre-card')]//h3[contains(text(),'" + planName + "')])[1]"));
+        Assert.assertTrue(validateNew(planNamePRECard), "Incorrect Plan Name Present: " + planNamePRECard.getText());
+        WebElement viewDetailsPRECard = driver.findElement(By.xpath("(//div[contains(@class,'uhc-pre-card')]//a[contains(@class,'details')])[1]"));
+        validateNew(viewDetailsPRECard);
+        WebElement editResponseLink = driver.findElement(By.xpath("//a[text()=' Edit Your Response ']"));
+        validateNew(editResponseLink);
+        if (!plantype.equalsIgnoreCase("MS")) {
+            if (!premium.isEmpty()) {
+                WebElement monthlyPremiumPRECard = driver.findElement(By.xpath("//div[contains(@class,'uhc-pre-card')]//h3/following::p[contains(text(),'Premium')]"));
+                Assert.assertTrue(monthlyPremiumPRECard.getText().contains(premium), "Monthly Premium is not matching");
+            }
+            WebElement btnEnrollPRECard = driver.findElement(By.xpath("(//div[contains(@class,'uhc-pre-card')]//button[contains(@class,'enroll')])[1]"));
+            validateNew(btnEnrollPRECard);
+        }
+    }
 	
 	public void validateChangePharmacyLink() {
         CommonUtility.checkPageIsReady(driver);
@@ -996,6 +1053,52 @@ public class VisitorProfilePageMobile extends UhcDriver {
 
 	}
 	
+	public void signInSaveResults(String username, String password) {
+        CommonUtility.checkPageIsReadyNew(driver);
+        sleepBySec(2);
+        WebElement btnsaveResultPRE = driver.findElement(By.xpath("//*[contains(@class,'saveResText')]"));
+        jsClickNew(btnsaveResultPRE);
+        sleepBySec(2);
+        WebElement signInPRE = driver.findElement(By.xpath("(//button[contains(text(),'Sign In')])"));
+
+        try {
+            jsClickNew(signInPRE);
+            Thread.sleep(3000);
+            waitForPageLoadSafari();
+            // driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
+            driver.findElement(By.xpath("//input[contains(@id,'userNameId_input')]")).sendKeys(username);
+            driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);
+            jsClickNew(driver.findElement(By.cssSelector("input#SignIn")));
+            waitForPageLoadSafari();
+            Thread.sleep(3000);
+            String Question = driver.findElement(By.cssSelector("span#challengeQuestionLabelId")).getText().trim();
+            WebElement securityAnswer = driver.findElement(By.cssSelector("input#UnrecognizedSecAns_input"));
+            waitforElement(securityAnswer);
+            if (Question.equalsIgnoreCase("What is your best friend's name?")) {
+                System.out.println("Question is related to friendname");
+                securityAnswer.sendKeys("name1");
+            } else if (Question.equalsIgnoreCase("What is your favorite color?")) {
+                System.out.println("Question is related to color");
+                securityAnswer.sendKeys("color1");
+            } else {
+                System.out.println("Question is related to phone");
+                securityAnswer.sendKeys("number1");
+            }
+            jsClickNew(driver.findElement(By.cssSelector("input#authQuesSubmitButton")));
+            waitForPageLoadSafari();
+            CommonUtility.checkPageIsReadyNew(driver);
+            sleepBySec(3);
+            if (driver.getCurrentUrl().contains("health-plans/estimate-drug-costs")) {
+                System.out.println("Redirect to DCE page is successful");
+                Assert.assertTrue(true);
+            } else {
+                System.out.println("Redirect to DCE page is not successful");
+            }
+        } catch (Exception e) {
+            Assertion.fail("###############Optum Id Sign In failed###############");
+        }
+    }
+	
 	public void validateChangedPharmacy(String pharmacy, String user_state) {
         CommonUtility.checkPageIsReady(driver);
         sleepBySec(2);
@@ -1052,15 +1155,13 @@ public class VisitorProfilePageMobile extends UhcDriver {
 			if (drugList.contains(",")) {
 				String[] drugs = drugList.split(",");
 				for (String drugName : drugs) {
-					driver.findElement(
-							By.xpath("//div[contains(text(),'" + drugName + "')]/following::button[text()='Remove']"))
-							.click();
+					jsClickNew(driver.findElement(
+							By.xpath("//div[contains(text(),'" + drugName + "')]/following::button[text()='Remove']")));
 					jsClickNew(removeDrugBtn);
 				}
 			} else {
-				driver.findElement(
-						By.xpath("//div[contains(text(),'" + drugList + "')]/following::button[text()='Remove']"))
-						.click();
+				jsClickNew(driver.findElement(
+						By.xpath("//div[contains(text(),'" + drugList + "')]/following::button[text()='Remove']")));
 				jsClickNew(removeDrugBtn);
 			}
 		}

@@ -864,6 +864,15 @@ public class VppPlanDetailMobile {
 		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, "UHC_ACQ");
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, plantype);
 	}
+	
+	@Then("^user saves more than two plans on summary page navigate to compare page and validate that saved plans are displayed$")
+	public void user_validate_saved_plans_on_compare() throws Throwable {
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		boolean result = plansummaryPage.verifyPlanSavedOnSummaryAreDisplayedOnCompare();
+		Assertion.assertTrue("Plans saved on summary page are displayed on compare page", result);
+		System.out.println("Plans saved on summary page are displayed on compare page");
+	}
 
 	@When("the user selects plan year for the UMS site$")
 	public void user_selects_plan_year(DataTable givenAttributes) throws InterruptedException {
@@ -2338,6 +2347,19 @@ public class VppPlanDetailMobile {
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.ResumeApplicationButton();
+
+	}
+	
+	@Then("^user clicks on compare plans link and validates plan name start application button and benefit link$")
+	public void user_clicks_on_compare_plans_link_and_validates_plan_name_start_application_button_and_benefit_link()
+			throws Throwable {
+		// Write code here that turns the phrase above into concrete actions
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		boolean result = plansummaryPage.validateFieldsOnPlanCompare();
+		Assertion.assertTrue("plan name start application button and benefit link are validated", result);
+		System.out.println("plan name start application button and benefit link are validated");
 
 	}
 

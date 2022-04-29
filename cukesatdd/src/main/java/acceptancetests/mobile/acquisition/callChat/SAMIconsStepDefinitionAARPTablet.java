@@ -7,6 +7,7 @@ import java.util.Map;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.acquisition.pharmacylocator.PharmacySearchCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.Assertion;
@@ -18,12 +19,15 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.PrivacyPolicyAARPPage;
 import pages.acquisition.commonpages.ShopForPlanNavigationPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.dceredesign.GetStartedPage;
+import pages.acquisition.pharmacyLocator.PharmacySearchPageNew;
 import pages.acquisition.tfn.CampaignTFNPage;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.CampaignTFNPageMobile;
+import pages.mobile.acquisition.commonpages.PrivacyPolicyAARPPageMobile;
 import pages.mobile.acquisition.commonpages.ShopForPlanNavigationPageMobile;
 
 public class SAMIconsStepDefinitionAARPTablet {
@@ -219,6 +223,13 @@ public class SAMIconsStepDefinitionAARPTablet {
 		aquisitionhomepage.navigateToPage(pagename);
 	}
 	
+	@Then("^the user validates SAM icons on the Pharmacy page$")
+	public void the_user_validates_SAM_icons_on_the_Pharmacy_page(DataTable givenAttributes) throws InterruptedException {
+
+		System.out.println("Skipping chat and number validations in mobile");
+
+	}
+	
 	@Then("^user validates whether chat Agent is not Available")
 	public void the_user_validates_whether_chat_Agent_is_not_visible() throws Throwable {
 	boolean flag= false;
@@ -341,6 +352,13 @@ public class SAMIconsStepDefinitionAARPTablet {
 	public void the_user_validates_SAM_icons_on_the_vpp_page(DataTable givenAttributes) throws InterruptedException {
 
 		System.out.println("Skipping chat validations in Mobile");
+
+	}
+	
+	@Then("^the user validates SAM icons on the Privacy page$")
+	public void the_user_validates_SAM_icons_on_the_Privacy_page(DataTable givenAttributes) throws InterruptedException {
+
+		System.out.println("Skipping mobile and chat validations in mobile");
 
 	}
 }

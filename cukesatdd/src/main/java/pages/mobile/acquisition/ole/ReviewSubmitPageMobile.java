@@ -567,8 +567,8 @@ public class ReviewSubmitPageMobile extends UhcDriver {
 
 	public OLEconfirmationPageMobile submitEnrollment() {
 		try {
-			scrollToView(ReviewEditSavechanges);
-			ReviewEditSavechanges.click();
+			if(ReviewEditSavechanges.isDisplayed())
+				ReviewEditSavechanges.click();
 		}catch (Exception e) {
 			// TODO: handle exception
 		}
