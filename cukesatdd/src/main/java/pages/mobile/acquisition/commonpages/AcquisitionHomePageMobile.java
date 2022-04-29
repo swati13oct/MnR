@@ -5052,7 +5052,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public VPPPlanSummaryPageMobile searchPlansWithOutCountyShopEnroll(String zipcode) throws InterruptedException {
 
 		validate(zipCodeShopField, 30);
-		scrollToView(zipCodeShopField);
+		scrollToView(ShopEnrollButton);
 		sendkeysMobile(zipCodeShopField, zipcode);
 		jsClickNew(ShopEnrollButton);
 		CommonUtility.checkPageIsReadyNew(driver);

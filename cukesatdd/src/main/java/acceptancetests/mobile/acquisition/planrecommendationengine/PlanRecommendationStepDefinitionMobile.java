@@ -314,6 +314,12 @@ public class PlanRecommendationStepDefinitionMobile {
 		EditResponseMobilePage preEditpage =  new EditResponseMobilePage((AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		preEditpage.addSNPEditResponse(inputValues);
    	}
+	
+	@When("^user navigate to Drug page using edit drugs from PREResult page$")
+   	public void edit_drugs_preResult_page() {
+		PlanRecommendationEngineResultsPageMobile planSelectorResultspage =  new PlanRecommendationEngineResultsPageMobile((AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorResultspage.usereditDrugsPREResult();
+   	}
 
 	@Then("^user selects add drug option in Drug page$")
 	public void add_drugs_page_mobile(DataTable givenAttributes) {
@@ -470,6 +476,12 @@ public class PlanRecommendationStepDefinitionMobile {
 		ResultsMobilePage resultpage = new ResultsMobilePage((AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		resultpage.navigateVPP(inputValues);
 	}
+	
+	@When("^user navigate to Drug page to add drugs from PREResult page$")
+   	public void add_drugs_preResult_page() {
+		PlanRecommendationEngineResultsPageMobile planSelectorResultspage =  new PlanRecommendationEngineResultsPageMobile((AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorResultspage.useraddDrugsPREResult();
+   	}
 
 	@Then("^user adds Doctors in vpp summary page$")
 	public void add_providers_vpp_summary_page_mobile(DataTable givenAttributes) {
